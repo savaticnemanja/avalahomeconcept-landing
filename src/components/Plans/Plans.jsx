@@ -20,7 +20,7 @@ const slides = [
       { name: "Kuhinja i trpezarija", size: "28,00 m2" },
       { name: "Ostava", size: "3 m2" },
     ],
-    image: "src/assets/plans/plan1.webp",
+    image: "assets/plans/plan1.webp",
   },
   {
     title: "Avala Home Concept",
@@ -40,7 +40,7 @@ const slides = [
       { name: "Kuhinja i trpezarija", size: "29,00 m2" },
       { name: "Ostava", size: "4 m2" },
     ],
-    image: "src/assets/plans/plan2.webp",
+    image: "assets/plans/plan2.webp",
   },
   {
     title: "Avala Home Concept",
@@ -60,7 +60,7 @@ const slides = [
       { name: "Kuhinja i trpezarija", size: "30,00 m2" },
       { name: "Ostava", size: "5 m2" },
     ],
-    image: "src/assets/plans/plan3.webp",
+    image: "assets/plans/plan3.webp",
   },
 ];
 

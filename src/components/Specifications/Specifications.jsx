@@ -4,67 +4,67 @@ const features = [
   {
     title: "Čvrsta gradnja",
     description: "Armirano betonska konstrukcija",
-    icon: "src/assets/specification/construction.svg",
+    icon: "assets/specification/construction.svg",
   },
   {
     title: "Thermo klima blok",
     description: "Broj 1. blok na tržištu",
-    icon: "src/assets/specification/brickwall.svg",
+    icon: "assets/specification/brickwall.svg",
   },
   {
     title: "Termoizolacija",
     description: "Austrotherm – debljina 10 cm, debljina zida 30 cm",
-    icon: "src/assets/specification/wall.svg",
+    icon: "assets/specification/wall.svg",
   },
   {
     title: "Sanitarije",
     description:
       "Geberit ugradni sistem uz prateću galanteriju, staklene tuš kabine",
-    icon: "src/assets/specification/bathroom.svg",
+    icon: "assets/specification/bathroom.svg",
   },
   {
     title: "Fasadna stolarija",
     description:
       "Aluminijumski prozori sa alu roletnama i dvostrukim staklom, punjeno argonom",
-    icon: "src/assets/specification/cube.svg",
+    icon: "assets/specification/cube.svg",
   },
   {
     title: "Staklo",
     description: 'Climaguard solar "Guardian" (4 godišnja doba)',
-    icon: "src/assets/specification/glass.svg",
+    icon: "assets/specification/glass.svg",
   },
   {
     title: "Grejanje",
     description:
       "Etažno, digitalni elektro kotao, skriveno radijatorsko grejanje. Toplotne pumpe (opciono)",
-    icon: "src/assets/specification/heat.svg",
+    icon: "assets/specification/heat.svg",
   },
   {
     title: "Unutrašnja vrata",
     description:
       "Medijapan presvučen CPL folijom sa dodatnim ojačanjima u štoku i krilu sa pervajz lajsnama",
-    icon: "src/assets/specification/open-door.svg",
+    icon: "assets/specification/open-door.svg",
   },
   {
     title: "Spoljna vrata",
     description: "Sigurnosna vrata sa zaključavanjem u 6 tačaka",
-    icon: "src/assets/specification/key.svg",
+    icon: "assets/specification/key.svg",
   },
   {
     title: "Fasada",
     description: "Prirodni materijali: drvo, keramika i kamen",
-    icon: "src/assets/specification/bricks.svg",
+    icon: "assets/specification/bricks.svg",
   },
   {
     title: "Plafon",
     description: "Visina 2,70–2,90 m",
-    icon: "src/assets/specification/ceiling-light.svg",
+    icon: "assets/specification/ceiling-light.svg",
   },
   {
     title: "Uređeno dvorište",
     description:
       "Svuda se postavlja seme premium trave visokog kvaliteta bočno ograđivanjem",
-    icon: "src/assets/specification/lawn-mower.svg",
+    icon: "assets/specification/lawn-mower.svg",
   },
 ];
 
