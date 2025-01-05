@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./Navigation.scss";
 
@@ -8,27 +9,24 @@ export const Navigation = () => {
         <img src={logo} className="logo" />
         <ul className="nav-links">
           <li>
-            <a href="#home">Početna</a>
+            <Link to="/">Početna</Link>
           </li>
           <li>
-            <a href="#aboutus">O nama</a>
+            <Link to="/about-us">O nama</Link>
           </li>
           <li>
-            <a href="#projects">Projekti</a>
+            <Link to="/projects">Projekti</Link>
           </li>
           <li>
-            <a href="#specifications">Specifikacije</a>
+            <Link to="/specifications">Specifikacije</Link>
           </li>
           <li>
-            <a href="#location">Lokacija</a>
-          </li>
-          <li>
-            <a href="#contact">Kontakt</a>
+            <Link to="/contact">Kontakt</Link>
           </li>
         </ul>
-        <a href="#contact">
+        <Link to="/contact">
           <button className="cta-button">ZAKAŽI POSETU</button>
-        </a>
+        </Link>
       </div>
     </nav>
   );

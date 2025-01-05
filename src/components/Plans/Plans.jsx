@@ -3,7 +3,6 @@ import "./Plans.scss";
 
 const slides = [
   {
-    title: "Avala Home Concept",
     highlightedWord: "Vila 1",
     rooms: [
       { name: "Predprostor", size: "10,00 m2" },

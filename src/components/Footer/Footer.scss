@@ -40,9 +40,10 @@
     flex: 1;
     padding: 0 2rem;
     border-right: 1px solid #bcd2d333;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     &:first-child {
       padding-left: 0;
+      font-size: 14px;
     }
     &:last-child {
       border-right: none;
@@ -89,7 +90,7 @@
   &__copyright {
     margin: 0 auto;
     max-width: 1290px;
-    padding: 2.5rem;
+    padding: 1.5rem;
     border-top: 1px solid #bcd2d333;
     text-align: center;
   }

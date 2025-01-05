@@ -1,6 +1,6 @@
 .specifications {
   max-width: 1290px;
-  margin: 0 auto;
+  margin: 0 auto 10rem auto;
   padding: 2rem 0 0 0;
 
   &__features {
@@ -44,6 +44,7 @@
 
 @media only screen and (max-width: 1024px) {
   .specifications {
+    margin: 0 auto;
     padding: 1rem;
 
     &__features {

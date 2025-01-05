@@ -3,6 +3,7 @@ import footer1 from "../../assets/1.webp";
 import footer2 from "../../assets/2.webp";
 import footer3 from "../../assets/3.webp";
 import { facebookIcon, instagramIcon, linkedInIcon } from "../../assets/icons";
+import { Link } from "react-router-dom";
 
 import "./Footer.scss";
 export const Footer = () => {
@@ -34,16 +35,16 @@ export const Footer = () => {
           <h3>Sitemap</h3>
           <ul>
             <li>
-              <a href="#">Home</a>
+              <Link to="/">Početna</Link>
             </li>
             <li>
-              <a href="#">About</a>
+              <Link to="/about-us">O nama</Link>
             </li>
             <li>
-              <a href="#">Services</a>
+              <Link to="/projects">Projekti</Link>
             </li>
             <li>
-              <a href="#">Contact</a>
+              <Link to="/contact">Kontakt</Link>
             </li>
           </ul>
         </div>
