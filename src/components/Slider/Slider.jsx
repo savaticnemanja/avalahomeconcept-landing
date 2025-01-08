@@ -1,45 +1,7 @@
 import { useState, useEffect } from "react";
-import {
-  sliderImage1,
-  sliderImage2,
-  sliderImage3,
-  sliderImage4,
-  sliderImage5,
-} from "../../assets";
+import { slides } from "./constants";
+import { arrowDown } from "../../assets";
 import "./Slider.scss";
-
-const slides = [
-  {
-    id: 1,
-    image: sliderImage1,
-    title: "Slide One",
-    subtitle: "This is the first slide",
-  },
-  {
-    id: 2,
-    image: sliderImage2,
-    title: "Slide Two",
-    subtitle: "This is the second slide",
-  },
-  {
-    id: 3,
-    image: sliderImage3,
-    title: "Slide Two",
-    subtitle: "This is the second slide",
-  },
-  {
-    id: 4,
-    image: sliderImage4,
-    title: "Slide Two",
-    subtitle: "This is the second slide",
-  },
-  {
-    id: 5,
-    image: sliderImage5,
-    title: "Slide Two",
-    subtitle: "This is the second slide",
-  },
-];
 
 export const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -92,6 +54,11 @@ export const Slider = () => {
         <p className="hero-slider__subtitle">
           20 minuta od Beograda, 10 minuta od Ikee
         </p>
+        <img
+          src={arrowDown}
+          alt="Arrow down"
+          className="hero-slider__arrow-down"
+        />
       </div>
     </div>
   );

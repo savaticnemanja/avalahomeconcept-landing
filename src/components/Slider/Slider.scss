@@ -24,7 +24,7 @@
 
   &__content {
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -73,6 +73,29 @@
       opacity: 1;
     }
   }
+
+  &__arrow-down {
+    margin-top: 14rem;
+    width: 60px;
+    height: 60px;
+    animation: bounce 3s infinite;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -82,6 +105,10 @@
     }
     &__subtitle {
       font-size: 1rem;
+    }
+    &__arrow-down {
+      width: 40px;
+      height: 40px;
     }
   }
 }
