@@ -1,6 +1,9 @@
 export { Navigation } from "./Navigation/Navigation";
 export { Slider } from "./Slider/Slider";
+export { Showcase } from "./Showcase/Showcase";
+export { ProjectShowcase } from "./ProjectShowcase/ProjectShowcase";
 export { Location } from "./Location/Location";
+export { PaymentDynamic } from "./PaymentDynamic/PaymentDynamic";
 export { Contact } from "./Contact/Contact";
 export { Partners } from "./Partners/Partners";
 export { Footer } from "./Footer/Footer";

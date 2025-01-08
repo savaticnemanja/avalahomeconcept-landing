@@ -1,4 +1,12 @@
-import { Slider, Location, Contact, Partners } from "../../components";
+import {
+  Slider,
+  Location,
+  Contact,
+  Partners,
+  PaymentDynamic,
+  ProjectShowcase,
+  Showcase,
+} from "../../components";
 import { slides } from "./constants";
 import "./Homepage.scss";
 
@@ -17,7 +25,10 @@ export const Homepage = () => {
           allowFullScreen
         ></iframe>
       </div>
+      <Showcase />
+      <ProjectShowcase />
       <Location />
+      <PaymentDynamic />
       <Contact />
       <Partners />
     </div>

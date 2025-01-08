@@ -1,67 +1,67 @@
 .contact-form {
+  background: #196366;
   display: flex;
   justify-content: center;
-  padding: 4rem 1rem;
-  background: #196366;
   margin: 4rem auto 0 auto;
+  padding: 4rem 1rem;
+
+  &__agent {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+
+    &-details {
+      &-info {
+        color: #333;
+        font-size: 0.9rem;
+      }
+
+      &-name {
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
+      }
+
+      &-title {
+        color: #f15a29;
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  &__button {
+    background-color: #f15a29;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.8rem;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #d14f24;
+    }
+  }
 
   &__container {
     display: flex;
-    justify-content: flex-start;
     gap: 4rem;
+    justify-content: flex-start;
     max-width: 1290px;
     width: 100%;
   }
 
-  &__left {
-    flex: 1;
-
-    &-image {
-      width: 100px;
-      height: 100px;
-    }
-  }
-
-  &__title {
-    width: 100%;
-    margin: 0 0 1rem 0;
-    padding: 1rem 0;
-    color: #bcd2d3;
-  }
-
   &__description {
-    font-size: 1rem;
     color: #bcd2d3;
+    font-size: 1rem;
     margin-bottom: 2rem;
   }
 
-  &__agent {
+  &__field-group {
     display: flex;
-    align-items: center;
     gap: 1rem;
-
-    &-details {
-      &-title {
-        color: #f15a29;
-        font-weight: bold;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-      }
-
-      &-name {
-        margin: 0.5rem 0;
-        font-size: 1.2rem;
-      }
-
-      &-info {
-        font-size: 0.9rem;
-        color: #333;
-      }
-    }
-  }
-
-  &__right {
-    flex: 1;
   }
 
   &__form {
@@ -70,37 +70,37 @@
     gap: 1rem;
   }
 
-  &__field-group {
-    display: flex;
-    gap: 1rem;
-  }
-
   &__input,
   &__textarea {
-    width: 100%;
-    padding: 0.8rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
+    padding: 0.8rem;
+    width: 100%;
+  }
+
+  &__left {
+    flex: 1;
+
+    &-image {
+      height: 100px;
+      width: 100px;
+    }
+  }
+
+  &__right {
+    flex: 1;
   }
 
   &__textarea {
     min-height: 100px;
   }
 
-  &__button {
-    background-color: #f15a29;
-    color: #fff;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: #d14f24;
-    }
+  &__title {
+    color: #bcd2d3;
+    margin: 0 0 1rem 0;
+    padding: 1rem 0;
+    width: 100%;
   }
 }
 

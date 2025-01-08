@@ -4,19 +4,19 @@
   position: relative;
 
   &__images-wrapper {
-    position: relative;
     margin: 0 auto;
     max-width: 1290px;
+    position: relative;
   }
 
   &__images {
     display: flex;
     flex-wrap: nowrap;
-    width: 100%;
+    left: 50%;
     margin: 0;
     position: absolute;
-    left: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
     img {
       cursor: pointer;
       transition: 0.3s ease;
@@ -27,39 +27,39 @@
   }
 
   &__sections {
-    padding-top: 10rem;
+    display: flex;
     margin: 0 auto;
     max-width: 1290px;
-    display: flex;
+    padding-top: 10rem;
     p {
       text-align: left;
     }
   }
 
   &__section {
-    flex: 1;
-    padding: 0 2rem;
     border-right: 1px solid #bcd2d333;
+    flex: 1;
     margin-bottom: 2rem;
+    padding: 0 2rem;
     &:first-child {
-      padding-left: 0;
       font-size: 14px;
+      padding-left: 0;
     }
     &:last-child {
       border-right: none;
       padding-right: 0;
     }
     h3 {
-      margin-bottom: 2rem;
       color: #fff;
+      margin-bottom: 2rem;
     }
     ul {
       list-style-type: none;
       li {
         margin: 0.5rem 0;
         a {
-          cursor: pointer;
           color: #bcd2d3;
+          cursor: pointer;
           text-decoration: none;
           transition: color 0.3s ease;
           &:hover {
@@ -69,29 +69,30 @@
       }
     }
   }
+
   &__logo {
     width: 150px;
   }
 
   &__social-icon {
-    margin: 0.2rem;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    padding: 0.8rem;
     background-color: #13565a;
+    border-radius: 50%;
     cursor: pointer;
+    height: 48px;
+    margin: 0.2rem;
+    padding: 0.8rem;
     transition: 0.2s;
+    width: 48px;
     &:hover {
       background-color: #f36e3d;
     }
   }
 
   &__copyright {
+    border-top: 1px solid #bcd2d333;
     margin: 0 auto;
     max-width: 1290px;
     padding: 1.5rem;
-    border-top: 1px solid #bcd2d333;
     text-align: center;
   }
 }
@@ -103,8 +104,8 @@
       padding-top: 0;
     }
     &__section {
-      padding: 1rem;
       margin-bottom: 1rem;
+      padding: 1rem;
       &:first-child {
         padding-left: 1rem;
       }
@@ -117,12 +118,12 @@
 
 @media (max-width: 1290px) {
   .footer {
+    &__images {
+      display: none;
+    }
     &__sections {
       flex-direction: column;
       padding-top: 0;
-    }
-    &__images {
-      display: none;
     }
   }
 }

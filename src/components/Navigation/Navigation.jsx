@@ -34,7 +34,7 @@ export const Navigation = () => {
           </li>
         </ul>
         <Link to="/contact">
-          <button className="cta-button">ZAKAŽI POSETU</button>
+          <button className="cta-button">Zatraži ponudu</button>
         </Link>
       </div>
     </nav>

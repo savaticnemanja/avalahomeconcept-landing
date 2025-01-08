@@ -9,6 +9,15 @@ export { default as sliderImage4 } from "./slider/slider-image-4.jpeg";
 export { default as sliderImage5 } from "./slider/slider-image-5.jpeg";
 export { default as arrowDown } from "./slider/arrow-down.svg";
 
+// showcase
+export { default as showcaseBackground } from "./showcase/background.png";
+export { default as showcaseFront } from "./showcase/showcase-front.png";
+// export { default as showcaseBack } from "./showcase/showcase-back.png";
+
+// map
+export { default as map } from "./location/map.webp";
+
+// partners
 export { default as astralLogo } from "./partners/astral-logo.png";
 export { default as bekamentLogo } from "./partners/bekament-logo.png";
 export { default as bracaMaricLogo } from "./partners/braca-maric-logo.png";
