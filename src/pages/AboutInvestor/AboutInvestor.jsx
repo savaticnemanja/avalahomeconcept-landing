@@ -1,10 +1,11 @@
+import { ciricGradnjaLogo, ciricHomeInvestLogo } from "../../assets";
 import "./AboutInvestor.scss";
 
 export const AboutInvestor = () => {
   return (
-    <section id="aboutus" className="about-us">
-      <div className="about-us__right">
-        <h1 className="about-us__title">O investitoru</h1>
+    <section id="aboutus" className="about-investor">
+      <div className="about-investor__left">
+        <h1 className="about-investor__title">O investitoru</h1>
         <p>
           Porodica Ćirić već 30 godina uspešno gradi i posluje na tržištu
           Srbije. Naše građevinske kompanije Ćirić Home Invest i Ćirić gradnja
@@ -14,6 +15,18 @@ export const AboutInvestor = () => {
           realizaciju svih vrsta građevinskih radova brzo, kvalitetno i po
           dogovoru.
         </p>
+      </div>
+      <div className="about-investor__right">
+        <img
+          src={ciricHomeInvestLogo}
+          alt="Ciric Gradnja"
+          className="about-investor__logo"
+        />
+        <img
+          src={ciricGradnjaLogo}
+          alt="Home Invest"
+          className="about-investor__logo"
+        />
       </div>
     </section>
   );

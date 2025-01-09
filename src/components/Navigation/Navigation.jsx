@@ -1,39 +1,36 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./Navigation.scss";
 
+const navLinks = [
+  { path: "/", label: "Početna" },
+  { path: "/about-us", label: "O nama" },
+  { path: "/projects", label: "Ponuda kuća" },
+  { path: "/specifications", label: "Specifikacije" },
+  { path: "/about-investor", label: "O investitoru" },
+  { path: "/gallery", label: "Galerija" },
+  { path: "/work-progress", label: "Napredak radova" },
+  { path: "/contact", label: "Kontakt" },
+];
+
 export const Navigation = () => {
+  const location = useLocation();
+
   return (
     <nav className="navigation">
       <div className="container safe-zone">
         <Link to="/">
-          <img src={logo} className="logo" />
+          <img src={logo} className="logo" alt="Logo" />
         </Link>
         <ul className="nav-links">
-          <li>
-            <Link to="/">Početna</Link>
-          </li>
-          <li>
-            <Link to="/about-us">O nama</Link>
-          </li>
-          <li>
-            <Link to="/projects">Ponuda kuća</Link>
-          </li>
-          <li>
-            <Link to="/specifications">Specifikacije</Link>
-          </li>
-          <li>
-            <Link to="/about-investor">O investitoru</Link>
-          </li>
-          <li>
-            <Link to="/gallery">Galerija</Link>
-          </li>
-          <li>
-            <Link to="/work-progress">Napredak radova</Link>
-          </li>
-          <li>
-            <Link to="/contact">Kontakt</Link>
-          </li>
+          {navLinks.map((link) => (
+            <li
+              key={link.path}
+              className={location.pathname === link.path ? "active" : ""}
+            >
+              <Link to={link.path}>{link.label}</Link>
+            </li>
+          ))}
         </ul>
         <Link to="/contact">
           <button className="cta-button">Zatraži ponudu</button>

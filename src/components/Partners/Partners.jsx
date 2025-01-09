@@ -1,69 +1,65 @@
+import Slider from "react-slick";
 import {
   astralLogo,
   bekamentLogo,
   bracaMaricLogo,
-  ciricGradnjaLogo,
+  ciricHomeInvestLogo,
   fluidraLogo,
   geberitLogo,
   wienerbergerLogo,
 } from "../../assets";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "./Partners.scss";
+import { useEffect, useState } from "react";
+
+const logos = [
+  { src: astralLogo, alt: "Partner 1" },
+  { src: bekamentLogo, alt: "Partner 2" },
+  { src: bracaMaricLogo, alt: "Partner 3" },
+  { src: ciricHomeInvestLogo, alt: "Partner 4" },
+  { src: fluidraLogo, alt: "Partner 5" },
+  { src: geberitLogo, alt: "Partner 6" },
+  { src: wienerbergerLogo, alt: "Partner 7" },
+];
 
 export const Partners = () => {
+  const [slidesToShow, setSlidesToShow] = useState(6);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setSlidesToShow(2);
+      } else {
+        setSlidesToShow(6);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const settings = {
+    infinite: true,
+    speed: 1000,
+    slidesToShow: slidesToShow,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    arrows: false,
+  };
+
   return (
     <section className="partners">
-      <div className="partners__safe-zone">
-        <div className="partners__scroll-container">
-          <div className="partners__logos">
-            <img src={astralLogo} alt="Partner 1" className="partners__logo" />
-            <img
-              src={bekamentLogo}
-              alt="Partner 2"
-              className="partners__logo"
-            />
-            <img
-              src={bracaMaricLogo}
-              alt="Partner 3"
-              className="partners__logo"
-            />
-            <img
-              src={ciricGradnjaLogo}
-              alt="Partner 4"
-              className="partners__logo"
-            />
-            <img src={fluidraLogo} alt="Partner 5" className="partners__logo" />
-            <img src={geberitLogo} alt="Partner 5" className="partners__logo" />
-            <img
-              src={wienerbergerLogo}
-              alt="Partner 5"
-              className="partners__logo"
-            />
-            <img src={astralLogo} alt="Partner 1" className="partners__logo" />
-            <img
-              src={bekamentLogo}
-              alt="Partner 2"
-              className="partners__logo"
-            />
-            <img
-              src={bracaMaricLogo}
-              alt="Partner 3"
-              className="partners__logo"
-            />
-            <img
-              src={ciricGradnjaLogo}
-              alt="Partner 4"
-              className="partners__logo"
-            />
-            <img src={fluidraLogo} alt="Partner 5" className="partners__logo" />
-            <img src={geberitLogo} alt="Partner 5" className="partners__logo" />
-            <img
-              src={wienerbergerLogo}
-              alt="Partner 5"
-              className="partners__logo"
-            />
+      <Slider {...settings}>
+        {logos.map((logo, index) => (
+          <div key={index} className="partners__logo-container">
+            <img src={logo.src} alt={logo.alt} className="partners__logo" />
           </div>
-        </div>
-      </div>
+        ))}
+      </Slider>
     </section>
   );
 };

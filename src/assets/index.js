@@ -1,5 +1,6 @@
 // logo
 export { default as logo } from "./logo.png";
+export { default as logoWhite } from "./logo-white.webp";
 
 // slider
 export { default as sliderImage1 } from "./slider/slider-image-1.jpeg";
@@ -11,8 +12,7 @@ export { default as arrowDown } from "./slider/arrow-down.svg";
 
 // showcase
 export { default as showcaseBackground } from "./showcase/background.png";
-export { default as showcaseFront } from "./showcase/showcase-front.png";
-// export { default as showcaseBack } from "./showcase/showcase-back.png";
+export { default as showcaseFront } from "./showcase/showcase-front.webp";
 
 // map
 export { default as map } from "./location/map.webp";
@@ -21,6 +21,7 @@ export { default as map } from "./location/map.webp";
 export { default as astralLogo } from "./partners/astral-logo.png";
 export { default as bekamentLogo } from "./partners/bekament-logo.png";
 export { default as bracaMaricLogo } from "./partners/braca-maric-logo.png";
+export { default as ciricHomeInvestLogo } from "./partners/ciric-home-invest-logo.png";
 export { default as ciricGradnjaLogo } from "./partners/ciric-gradnja-logo.png";
 export { default as fluidraLogo } from "./partners/fluidra-logo.png";
 export { default as geberitLogo } from "./partners/geberit-logo.png";
@@ -90,8 +91,3 @@ export { default as whatsappIcon } from "./contact/whatsapp.svg";
 export { default as facebookIcon } from "./icons/facebook-brands-solid.svg";
 export { default as instagramIcon } from "./icons/instagram-brands-solid.svg";
 export { default as linkedInIcon } from "./icons/linkedin-brands-solid.svg";
-export { default as footerImage1 } from "./footer/1.webp";
-export { default as footerImage2 } from "./footer/2.webp";
-export { default as footerImage3 } from "./footer/3.webp";
-// export { default as footerImage4 } from "./footer/4.webp";
-// export { default as footerImage5 } from "./footer/5.webp";

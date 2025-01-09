@@ -14,29 +14,33 @@ export const Slider = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const goToPrevious = () => {
+  const changeSlide = (direction) => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
+      (prevIndex) => (prevIndex + direction + slides.length) % slides.length
     );
-  };
-
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
   };
 
   return (
     <div className="hero-slider">
       <button
         className="hero-slider__arrow hero-slider__arrow--left"
-        onClick={goToPrevious}
+        onClick={() => changeSlide(-1)}
       >
-        &lt;
+        <img
+          src={arrowDown}
+          alt="Previous slide"
+          className="hero-slider__arrow-icon hero-slider__arrow-icon--left"
+        />
       </button>
       <button
         className="hero-slider__arrow hero-slider__arrow--right"
-        onClick={goToNext}
+        onClick={() => changeSlide(1)}
       >
-        &gt;
+        <img
+          src={arrowDown}
+          alt="Next slide"
+          className="hero-slider__arrow-icon hero-slider__arrow-icon--right"
+        />
       </button>
       {slides.map((slide, index) => (
         <div

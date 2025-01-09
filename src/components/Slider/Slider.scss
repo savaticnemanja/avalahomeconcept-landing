@@ -30,21 +30,22 @@
     text-align: center;
     color: white;
     width: 80%;
-    // add text shadow
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  &__title,
+  &__subtitle {
+    margin: 0;
+    text-transform: uppercase;
   }
 
   &__title {
     font-size: 3.5rem;
     font-weight: 500;
-    margin: 0;
-    text-transform: uppercase;
   }
 
   &__subtitle {
     font-size: 1.8rem;
-    margin: 0;
-    text-transform: uppercase;
   }
 
   &__arrow {
@@ -71,6 +72,20 @@
 
     &:hover {
       opacity: 1;
+    }
+
+    &-icon {
+      width: 20px;
+      height: 20px;
+      transform: rotate(90deg);
+
+      &--left {
+        transform: rotate(90deg);
+      }
+
+      &--right {
+        transform: rotate(-90deg);
+      }
     }
   }
 
