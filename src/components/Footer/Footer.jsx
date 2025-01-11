@@ -1,11 +1,5 @@
+import { facebookIcon, instagramIcon, linkedInIcon, logoWhite } from "@/assets";
 import { Link } from "react-router-dom";
-import {
-  logoWhite,
-  facebookIcon,
-  instagramIcon,
-  linkedInIcon,
-} from "../../assets";
-
 import "./Footer.scss";
 
 export const Footer = () => {

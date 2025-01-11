@@ -1,5 +1,5 @@
+import logo from "@/assets/logo.png";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../assets/logo.png";
 import "./Navigation.scss";
 
 const navLinks = [

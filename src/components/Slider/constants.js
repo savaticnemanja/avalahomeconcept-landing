@@ -4,7 +4,7 @@ import {
   sliderImage3,
   sliderImage4,
   sliderImage5,
-} from "../../assets";
+} from "@/assets";
 
 export const slides = [
   {

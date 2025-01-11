@@ -1,4 +1,4 @@
-import { phoneIcon, viberIcon, emailIcon, whatsappIcon } from "../../assets";
+import { emailIcon, phoneIcon, viberIcon, whatsappIcon } from "@/assets";
 import "./Contact.scss";
 
 const ContactIcon = ({ icon, text }) => (

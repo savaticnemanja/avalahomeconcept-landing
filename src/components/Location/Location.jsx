@@ -1,4 +1,4 @@
-import { map } from "../../assets";
+import { map } from "@/assets";
 import "./Location.scss";
 
 export const Location = () => {

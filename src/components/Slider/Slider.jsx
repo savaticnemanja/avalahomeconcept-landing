@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { arrowDown } from "@/assets";
+import { useEffect, useState } from "react";
 import { slides } from "./constants";
-import { arrowDown } from "../../assets";
 import "./Slider.scss";
 
 export const Slider = () => {

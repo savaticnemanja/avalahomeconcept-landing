@@ -1,18 +1,18 @@
-import { Routes, Route } from "react-router";
-import { Footer, Navigation } from "./components";
 import {
   AboutInvestor,
   AboutUs,
+  Contact,
   Gallery,
   Homepage,
+  Project1,
+  Project2,
   Projects,
   Specifications,
   WorkProgress,
-  Contact,
-  Project1,
-  Project2,
-} from "./pages";
+} from "@/pages";
+import { Route, Routes } from "react-router";
 import "./App.scss";
+import { Footer, Navigation } from "./components";
 
 function App() {
   return (

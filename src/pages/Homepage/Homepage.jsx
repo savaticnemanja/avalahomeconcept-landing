@@ -6,14 +6,13 @@ import {
   ProjectShowcase,
   Showcase,
   Slider,
-} from "../../components";
-import { slides } from "./constants";
+} from "@/components";
 import "./Homepage.scss";
 
 export const Homepage = () => {
   return (
     <div className="homepage">
-      <Slider slides={slides} />
+      <Slider />
       <div className="homepage__video-wrapper">
         <iframe
           className="homepage__video"

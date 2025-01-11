@@ -1,4 +1,4 @@
-import { plan2, showcaseFront } from "../../assets";
+import { plan2, showcaseFront } from "@/assets";
 import "./Showcase.scss";
 
 const descriptions = [

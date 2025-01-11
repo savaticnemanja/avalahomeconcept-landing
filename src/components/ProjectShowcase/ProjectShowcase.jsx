@@ -1,4 +1,4 @@
-import { plan1, plan2 } from "../../assets";
+import { plan1, plan2 } from "@/assets";
 import "./ProjectShowcase.scss";
 
 export const ProjectShowcase = () => {

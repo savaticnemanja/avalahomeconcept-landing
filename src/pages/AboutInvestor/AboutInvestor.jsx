@@ -1,4 +1,4 @@
-import { ciricGradnjaLogo, ciricHomeInvestLogo } from "../../assets";
+import { ciricGradnjaLogo, ciricHomeInvestLogo } from "@/assets";
 import "./AboutInvestor.scss";
 
 const InvestorCard = ({ logo, altText, phone, email, website }) => (

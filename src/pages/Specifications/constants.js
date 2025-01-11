@@ -11,7 +11,7 @@ import {
   lawnMower,
   openDoor,
   wall,
-} from "../../assets";
+} from "@/assets";
 
 export const specifications = [
   {

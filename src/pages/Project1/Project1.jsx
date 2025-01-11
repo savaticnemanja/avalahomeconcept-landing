@@ -1,10 +1,10 @@
 import {
   project1Main,
-  project1Spec1,
-  project1Spec3,
-  project1Spec2,
   project1Render,
-} from "../../assets";
+  project1Spec1,
+  project1Spec2,
+  project1Spec3,
+} from "@/assets";
 
 import "./Project1.scss";
 

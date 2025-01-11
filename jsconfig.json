@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    // … all other compiler options
+
+    // all paths defined here must match the configured path in `vite.config.ts`
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

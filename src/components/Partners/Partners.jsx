@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
 import {
   astralLogo,
   bekamentLogo,
@@ -10,7 +6,11 @@ import {
   fluidraLogo,
   geberitLogo,
   wienerbergerLogo,
-} from "../../assets";
+} from "@/assets";
+import { useEffect, useState } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import "./Partners.scss";
 
 const logos = [

@@ -1,13 +1,5 @@
 import {
   galleryImage1,
-  galleryImage2,
-  galleryImage3,
-  galleryImage4,
-  galleryImage5,
-  galleryImage6,
-  galleryImage7,
-  galleryImage8,
-  galleryImage9,
   galleryImage10,
   galleryImage11,
   galleryImage12,
@@ -18,13 +10,21 @@ import {
   galleryImage17,
   galleryImage18,
   galleryImage19,
+  galleryImage2,
   galleryImage20,
   galleryImage21,
   galleryImage22,
   galleryImage23,
   galleryImage24,
   galleryImage25,
-} from "../../assets";
+  galleryImage3,
+  galleryImage4,
+  galleryImage5,
+  galleryImage6,
+  galleryImage7,
+  galleryImage8,
+  galleryImage9,
+} from "@/assets";
 
 export const images = [
   galleryImage1,
