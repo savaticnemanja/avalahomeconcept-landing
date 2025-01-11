@@ -1,71 +1,25 @@
 .showcase {
-  max-width: 1290px;
-  margin: 2rem auto 10rem auto;
   display: flex;
+  flex-direction: row;
   gap: 2rem;
-  background: url("../../assets/showcase/background.png") no-repeat center
-    center;
-  background-size: cover;
-  background-position-x: 300px;
-  &__left {
-    position: relative;
-    width: 50%;
-    img {
-      width: 60%;
-      border: 5px solid #1a6366;
-    }
+  align-items: center;
+  margin: 2rem auto;
+  max-width: 1290px;
+
+  &__image {
+    width: auto;
+    height: 500px;
   }
-  &__bakside-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  &__frontside-image {
-    position: absolute;
-    top: 100px;
-    left: 200px;
-  }
-  &__right {
-    margin-top: 3rem;
+
+  &__descriptions {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
   }
-  &__description {
-    margin: 1rem 0;
-    text-align: left;
-    h2 {
-      font-size: 2rem;
-      color: #1a6366;
-    }
-    p {
-      font-size: 1.2rem;
-      color: #2a454e;
-    }
-  }
-}
 
-@media only screen and (max-width: 1024px) {
-  .showcase {
-    flex-direction: column;
-    align-items: center;
-    margin: 1rem;
-    &__left {
-      width: 100%;
-      img {
-        width: 100%;
-      }
-    }
-    &__right {
-      margin-top: 2rem;
-    }
-    &__frontside-image {
-      position: relative;
-      top: 0;
-      left: 0;
-    }
-    &__backside-image {
-      display: none;
-    }
+  &__description-item {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.5;
   }
 }

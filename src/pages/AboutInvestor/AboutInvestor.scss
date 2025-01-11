@@ -1,25 +1,26 @@
-.about-us {
+.about-investor {
   width: 100%;
   background-color: #f8f9fa;
-  padding: 1rem 0 0 0;
+  padding: 1rem 0;
   display: flex;
   justify-content: space-between;
   gap: 2rem;
   max-width: 1290px;
   margin: 2rem auto;
 
-  &__left {
+  &__left,
+  &__right {
     flex: 1;
   }
 
   &__right {
-    flex: 1;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    gap: 2rem;
+    justify-content: space-between;
     text-align: justify;
 
-    .about-us__card {
+    .about-investor__card {
+      width: 50%;
       margin-bottom: 2rem;
       padding: 1rem;
       background-color: #ffffff;
@@ -28,14 +29,13 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-      .about-us__logo {
-        width: 100%; /* Updated to take 100% width of parent */
-        height: auto;
+      .about-investor__logo {
+        height: 100px;
         margin: 0 auto;
         display: block;
       }
 
-      .about-us__contact {
+      .about-investor__contact {
         margin-top: 1rem;
         color: #2a454e;
         font-size: 0.9rem;
@@ -45,18 +45,15 @@
   }
 
   &__title {
-    width: 100%;
-    margin: 0 0 1rem 0;
+    margin: 0 0 1rem;
     padding: 1rem 0;
     color: #2a454e;
   }
 }
 
 @media only screen and (max-width: 1024px) {
-  .about-us {
-    margin: 0 auto;
+  .about-investor {
     flex-direction: column;
-    gap: 2rem;
     padding: 1rem;
 
     &__left {

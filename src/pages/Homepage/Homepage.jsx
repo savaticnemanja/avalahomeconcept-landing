@@ -1,11 +1,11 @@
 import {
-  Slider,
-  Location,
   Contact,
+  Location,
   Partners,
   PaymentDynamic,
   ProjectShowcase,
   Showcase,
+  Slider,
 } from "../../components";
 import { slides } from "./constants";
 import "./Homepage.scss";

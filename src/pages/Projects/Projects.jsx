@@ -1,0 +1,47 @@
+import {
+  project1Main,
+  project1Spec1,
+  project1Spec3,
+  project1Spec2,
+  project1Render,
+} from "../../assets";
+
+import "./Projects.scss";
+
+export const Projects = () => {
+  return (
+    <div className="projects">
+      <div className="projects__hero-image">
+        <img src={project1Render} alt="" />
+      </div>
+      <div className="projects__main">
+        <img className="projects__main-image" src={project1Main} alt="" />
+        <div className="projects__main-description">
+          Prostrana prizemna kuća od 139 metara kvadratnih. Ova moderno
+          dizajnirana kuća ima i dva parking mesta i odvojenu namensku
+          prostoriju pokraj bazena u koju možete smestiti letnju kuhinju. Čak
+          tri prozračne i komforne sobe prozicionirane su tako da primaju dosta
+          sunčeve svetlosti što će Vam svakog jutra uliti dodatno raspoloženje.
+          Vrata velikog dnevnog boravka otvaraju se na terasu koja pruža
+          veličanstven pogled na Avalaski toranj. Sa terase se stepenicama
+          spuštate na uređenu stazu koja Vas vodi do bazena i plaže.
+        </div>
+      </div>
+      <div className="projects__showcase-images">
+        <div className="projects__showcase-image">
+          <img src={project1Spec1} alt="" />
+        </div>
+        <div className="projects__showcase-image">
+          <img src={project1Spec2} alt="" />
+        </div>
+        <div className="projects__showcase-image">
+          <img src={project1Spec3} alt="" />
+        </div>
+      </div>
+      <div className="projects__surface">
+        <div className="projects__surface-title">Površina</div>
+        <div className="projects__surface-value">139m²</div>
+      </div>
+    </div>
+  );
+};
