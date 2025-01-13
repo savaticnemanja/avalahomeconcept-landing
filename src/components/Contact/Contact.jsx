@@ -101,6 +101,12 @@ export const Contact = () => {
             placeholder="Broj telefona"
             required
           />
+          <input
+            type="email"
+            name="contactEmail"
+            placeholder="Email adresa"
+            required
+          />
           <textarea
             name="message"
             placeholder="Vaša poruka"

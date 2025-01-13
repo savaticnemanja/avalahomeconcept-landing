@@ -1,11 +1,10 @@
 import { ciricGradnjaLogo, ciricHomeInvestLogo } from "@/assets";
 import "./AboutInvestor.scss";
 
-const InvestorCard = ({ logo, altText, phone, email, website }) => (
+const InvestorCard = ({ logo, altText, email, website }) => (
   <div className="about-investor__card">
     <img src={logo} alt={altText} className="about-investor__logo" />
     <div className="about-investor__contact">
-      <p>Phone: {phone}</p>
       <p>Email: {email}</p>
       <a href={website} target="_blank" rel="noopener noreferrer">
         Website
@@ -18,14 +17,12 @@ const investorData = [
   {
     logo: ciricHomeInvestLogo,
     altText: "Ciric Gradnja",
-    phone: "+381 11 1234567",
     email: "info@cirichomeinvest.com",
     website: "http://www.cirichomeinvest.com",
   },
   {
     logo: ciricGradnjaLogo,
     altText: "Home Invest",
-    phone: "+381 11 7654321",
     email: "info@ciricgradnja.com",
     website: "http://www.ciricgradnja.com",
   },
