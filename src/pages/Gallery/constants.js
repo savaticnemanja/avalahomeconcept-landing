@@ -28,7 +28,6 @@ import {
 
 export const images = [
   galleryImage1,
-  galleryImage2,
   galleryImage3,
   galleryImage4,
   galleryImage5,
@@ -52,4 +51,5 @@ export const images = [
   galleryImage26,
   galleryImage27,
   galleryImage28,
+  galleryImage2,
 ];
