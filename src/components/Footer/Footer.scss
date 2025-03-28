@@ -24,6 +24,29 @@
       }
     }
   }
+  &__signature {
+    color: #f36e3d;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    &:hover {
+      color: #bcd2d3;
+    }
+    &:visited {
+      color: #f36e3d;
+    }
+    &:active {
+      color: #f36e3d;
+    }
+    &:focus {
+      color: #f36e3d;
+    }
+    &:focus-visible {
+      color: #f36e3d;
+    }
+    &:focus-within {
+      color: #f36e3d;
+    }
+  }
 
   &__social-icons {
     display: flex;

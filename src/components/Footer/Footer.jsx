@@ -77,7 +77,7 @@ export const Footer = () => {
           </Link>
         ))}
       </div>
-      <p className="footer__copyright">Copyright &#169; Avala Home Concept</p>
+      <p className="footer__copyright">Copyright &#169; Avala Home Concept. Developed by <a href="https://nemanjas.dev" className="footer__signature">nemanjas.dev</a></p>
     </div>
   );
 };

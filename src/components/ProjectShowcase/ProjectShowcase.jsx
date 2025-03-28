@@ -22,9 +22,9 @@ const projectData1 = [
   {
     name: "12. Kuhinja i trpezarija",
     area: "27,00 m2",
-    link: "/project1/details",
+    link: "/project1",
   },
-  { name: "13. Ostava", area: "2 m2", link: "/project1/details" },
+  { name: "13. Ostava", area: "2 m2", link: "/project1" },
 ];
 
 const projectData2 = [
@@ -44,7 +44,7 @@ const projectData2 = [
   {
     name: "14. Tehnička prostorija",
     area: "4,00 m2",
-    link: "/project2/details",
+    link: "/project2",
   },
 ];
 
