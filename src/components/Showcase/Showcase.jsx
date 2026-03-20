@@ -9,10 +9,9 @@ const descriptions = [
   { title: "Brza konekcija na autoput" },
   { title: "Čvrsta gradnja" },
   { title: "Visok nivo završnih materijala" },
-  { title: "Uređena dvorišta" },
   { title: "Parking mesto" },
   { title: "Rampa na ulasku/izlasku" },
-  { title: "Najlepša lokacija sa pogledom na toranj Avala" },
+  { title: "Najlepša lokacija sa pogledom" },
 ];
 
 export const Showcase = () => {

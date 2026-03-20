@@ -46,7 +46,7 @@ export const projects = [
     heroImage: project2Render,
     mainImage: project2Main,
     description: `
-      Udobna porodična kuća od 147 m2 okružena prirodom i prijatnim ambijentom. Zakoračite u prostran dnevni boravk sa velikim staklenim vratima koja gledaju na predivno zelenilo Avalske planine. Ova moderno koncipirana porodična kuća ima čak tri spavaće sobe, dva odvojena kupatila, đakuzi (opciono) i veliku trpezariju koja je povezana sa dnevnim boravkom. Iz dnevne sobe izazite na balkon i spuštate se stepenicama koje Vas vode do dvorišta u kom se nalazi Vaš privatni bazen.`,
+      Udobna porodična kuća od 147 m2 okružena prirodom i prijatnim ambijentom. Zakoračite u prostran dnevni boravk sa velikim staklenim vratima koja gledaju na predivno zelenilo Avalske planine. Ova moderno koncipirana porodična kuća ima čak tri spavaće sobe, dva odvojena kupatila, đakuzi (opciono) i veliku trpezariju koja je povezana sa dnevnim boravkom. Iz dnevne sobe izazite na balkon i spuštate se stepenicama koje Vas vode do dvorišta u kom se nalazi Vaš privatni bazen (opciono).`,
     showcaseImages: [project2Spec1, project2Spec2, project2Spec3],
     surfaceArea: 147,
     netSurfaceArea: [

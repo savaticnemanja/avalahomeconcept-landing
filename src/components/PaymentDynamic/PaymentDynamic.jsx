@@ -3,7 +3,7 @@ import "./PaymentDynamic.scss";
 const paymentDetails = [
   { amount: "5000€", description: "Rezervacija" },
   { amount: "30%", description: "Prilikom overe ugovora" },
-  { amount: "70%", description: "Fazno na 6 mesečnih rata" },
+  { amount: "70%", description: "4 rate po završetku svake faze gradnje" },
 ];
 
 export const PaymentDynamic = () => {

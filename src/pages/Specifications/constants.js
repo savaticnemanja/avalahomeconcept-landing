@@ -26,7 +26,7 @@ export const specifications = [
   },
   {
     title: "Termoizolacija",
-    description: "Austrotherm – debljina 10 cm, debljina zida 30 cm",
+    description: "Debljina 10 cm, debljina zida 30 cm",
     icon: wall,
   },
   {
