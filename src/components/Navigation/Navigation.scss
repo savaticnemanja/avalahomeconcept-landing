@@ -1,7 +1,7 @@
 $primary-color: #f05a28;
 
 .navigation {
-  z-index: 2;
+  z-index: 100;
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
@@ -21,7 +21,7 @@ $primary-color: #f05a28;
       .nav-item-container {
         display: flex;
         align-items: center;
-        height: 50px;
+        min-height: 50px;
       }
 
       a {
@@ -151,17 +151,18 @@ $primary-color: #f05a28;
       flex-direction: column;
       width: 100%;
       position: absolute;
-      top: 60px;
+      top: 100%;
       left: 0;
       background: white;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      z-index: 99;
+      max-height: calc(100dvh - 70px);
+      overflow-y: auto;
 
       &.visible {
         display: flex;
-        height: 80lvh;
         background-color: #fff;
-        overflow-y: auto;
-        
+
         li {
           padding: 0.25rem 1rem;
           flex-direction: column;
@@ -177,6 +178,8 @@ $primary-color: #f05a28;
 
         .nav-item-container {
           justify-content: center;
+          min-height: auto;
+          padding: 0.5rem 0;
         }
 
         .dropdown {
@@ -185,21 +188,21 @@ $primary-color: #f05a28;
           margin-top: 0;
           padding: 0;
           display: none;
-          
+
           &.visible {
             display: block;
           }
         }
       }
     }
-    
+
     .mobile-menu-icon {
       display: block !important;
       filter: invert(53%) sepia(83%) saturate(7496%) hue-rotate(353deg);
       background: none;
       border: none;
       cursor: pointer;
-      
+
       img {
         width: 24px;
         height: 24px;
@@ -207,8 +210,8 @@ $primary-color: #f05a28;
       }
     }
 
-    .cta-button {
-      padding: 0.5rem 0.8rem;
+    .cta-link {
+      display: none;
     }
   }
 }

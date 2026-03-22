@@ -1,6 +1,6 @@
 import { arrowDown } from "@/assets";
 import logo from "@/assets/logo.png";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaQuestionCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./Navigation.scss";
@@ -26,6 +26,18 @@ const navLinks = [
 export const Navigation = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setMobileMenuVisible(false);
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const toggleDropdown = (label) => {
     setActiveDropdown(activeDropdown === label ? null : label);
@@ -52,7 +64,7 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className="navigation">
+    <nav className="navigation" ref={navRef}>
       <div className="container safe-zone">
         <Link to="/" onClick={closeMobileMenu}>
           <img src={logo} className="logo" alt="Logo" />
