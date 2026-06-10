@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+/* ─── Design tokens ─────────────────────────────────────────── */
+@theme {
+  --color-bg:           #F7F3EC;
+  --color-bg-alt:       #FFFFFF;
+  --color-bg-dark:      #1A1915;
+  --color-bg-mid:       #2C2B27;
+  --color-text:         #1A1915;
+  --color-text-muted:   #6B645A;
+  --color-text-light:   #F7F3EC;
+  --color-accent:       #C4975A;
+  --color-accent-hover: #A87C3E;
+  --color-border:       #E3DBCE;
+  --color-border-dark:  #3A3831;
+}
+
+/* ─── Base ──────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html { scroll-behavior: smooth; overflow-x: clip; }
+
+  body {
+    @apply bg-bg text-text antialiased;
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+    @apply font-normal leading-tight text-text;
+  }
+
+  em { font-style: italic; font-weight: 400; }
+  a  { @apply no-underline; }
+
+  button {
+    @apply cursor-pointer;
+    font-family: inherit;
+  }
+
+  img, video { @apply max-w-full; }
+
+  input, textarea {
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+    @apply outline-none;
+  }
+}
+
+/* ─── Components ────────────────────────────────────────────── */
+@layer components {
+
+  /* ── Layout ─────────────────────────────────────────────── */
+  .safe-zone { @apply max-w-[1290px] mx-auto px-2 md:px-6; }
+
+  /* ── Section header pattern ──────────────────────────────── */
+  .section-header {
+    @apply mb-8 md:mb-14;
+  }
+
+  .section-header-centered {
+    @apply mb-8 md:mb-14 text-center;
+  }
+
+  /* ── Overline ────────────────────────────────────────────── */
+  .overline {
+    @apply block text-[0.7rem] font-medium tracking-[0.2em] uppercase text-accent mb-3;
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+  }
+
+  .overline-bar {
+    @apply block w-8 h-px bg-accent mb-5;
+  }
+
+  .overline-bar-center {
+    @apply block w-8 h-px bg-accent mb-5 mx-auto;
+  }
+
+  /* ── Buttons ─────────────────────────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center gap-3 bg-accent text-white
+           text-[0.78rem] font-medium tracking-[0.14em] uppercase
+           px-8 py-3.5 no-underline cursor-pointer border-none
+           transition-all duration-250
+           hover:bg-accent-hover hover:-translate-y-px hover:shadow-[0_8px_24px_rgba(196,151,90,0.35)];
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-3 bg-transparent text-accent
+           border border-accent
+           text-[0.78rem] font-medium tracking-[0.14em] uppercase
+           px-8 py-3.5 no-underline cursor-pointer
+           transition-all duration-250
+           hover:bg-accent hover:text-white;
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+  }
+
+  .btn-outline-light {
+    @apply inline-flex items-center gap-3 bg-transparent text-text-light
+           border border-text-light/40
+           text-[0.78rem] font-medium tracking-[0.14em] uppercase
+           px-8 py-3.5 no-underline cursor-pointer
+           transition-all duration-250
+           hover:border-text-light/80 hover:bg-text-light/8;
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+  }
+
+  .btn-icon {
+    @apply inline-flex items-center justify-center w-11 h-11
+           border border-current rounded-full
+           transition-all duration-200
+           hover:bg-current hover:text-bg;
+  }
+
+  /* ── Cards ───────────────────────────────────────────────── */
+  .card {
+    @apply bg-bg-alt border border-border overflow-hidden
+           shadow-[0_1px_12px_rgba(26,25,21,0.06)]
+           transition-all duration-300
+           hover:shadow-[0_12px_40px_rgba(26,25,21,0.12)]
+           hover:-translate-y-1;
+  }
+
+  /* ── Form inputs ─────────────────────────────────────────── */
+  .input {
+    @apply w-full bg-transparent border-b border-border-dark
+           text-text-light placeholder-text-light/35
+           py-3 text-sm font-light
+           transition-colors duration-200
+           focus:border-accent;
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+  }
+
+  /* ── Divider ─────────────────────────────────────────────── */
+  .section-divider { @apply w-full h-px bg-border border-none; }
+
+  /* ── Accordion ───────────────────────────────────────────── */
+  .accordion-item { @apply border-b border-border; }
+  .accordion-item:first-child { @apply border-t border-border; }
+
+  .accordion-trigger {
+    @apply flex justify-between items-center w-full py-5
+           text-left bg-transparent border-none cursor-pointer
+           transition-colors duration-150 hover:text-accent;
+    font-family: var(--font-heading, 'Cormorant Garamond', Georgia, serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #1A1915;
+  }
+
+  .accordion-content {
+    @apply text-sm leading-[1.8] text-text-muted pb-5 font-light;
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+  }
+
+  /* ── Tabs ────────────────────────────────────────────────── */
+  .tab {
+    @apply pb-3 px-1 text-[0.78rem] font-medium tracking-[0.12em] uppercase
+           border-b-2 border-transparent text-text-muted bg-transparent
+           cursor-pointer transition-all duration-200
+           hover:text-text;
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+  }
+
+  .tab-active {
+    @apply pb-3 px-1 text-[0.78rem] font-medium tracking-[0.12em] uppercase
+           border-b-2 border-accent text-text bg-transparent
+           cursor-pointer;
+    font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
+  }
+}
+
+/* ── Scroll reveal ────────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Arrow button animation ───────────────────────────────────── */
+.group:hover .btn-arrow { transform: translateX(5px); }
+.btn-arrow { display: inline-flex; transition: transform 0.2s ease; }
+
+/* ─── Keyframes ─────────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes slide-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

@@ -1,83 +1,158 @@
-import { arrowDown } from "@/assets";
-import { useEffect, useState } from "react";
-import { slides } from "./constants";
-import "./Slider.scss";
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { LuChevronRight, LuPhone } from 'react-icons/lu';
+import sliderImage1 from '@/assets/slider/slider-image-1.jpeg';
+import sliderImage2 from '@/assets/slider/slider-image-2.webp';
+import sliderImage3 from '@/assets/slider/slider-image-3.webp';
+import sliderImage4 from '@/assets/slider/slider-image-4.webp';
+import sliderImage5 from '@/assets/slider/slider-image-5.webp';
+
+const slides = [
+  { id: 1, image: sliderImage1 },
+  { id: 2, image: sliderImage2 },
+  { id: 3, image: sliderImage3 },
+  { id: 4, image: sliderImage4 },
+  { id: 5, image: sliderImage5 },
+];
+
+const INTERVAL = 6000;
 
 export const Slider = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
+    const t = setInterval(() => setCurrent(p => (p + 1) % slides.length), INTERVAL);
+    return () => clearInterval(t);
   }, []);
 
-  const changeSlide = (direction) => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex + direction + slides.length) % slides.length
-    );
-  };
+  const go = (dir) => setCurrent(p => (p + dir + slides.length) % slides.length);
 
   return (
-    <div className="hero-slider">
-      <button
-        className="hero-slider__arrow hero-slider__arrow--left"
-        onClick={() => changeSlide(-1)}
-      >
-        <img
-          src={arrowDown}
-          alt="Previous slide"
-          className="hero-slider__arrow-icon hero-slider__arrow-icon--left"
-        />
-      </button>
-      <button
-        className="hero-slider__arrow hero-slider__arrow--right"
-        onClick={() => changeSlide(1)}
-      >
-        <img
-          src={arrowDown}
-          alt="Next slide"
-          className="hero-slider__arrow-icon hero-slider__arrow-icon--right"
-        />
-      </button>
-      {slides.map((slide, index) => (
+    <div className="relative h-screen min-h-[640px] overflow-hidden bg-bg-dark">
+
+      {/* Slides */}
+      {slides.map((slide, i) => (
         <div
           key={slide.id}
-          className={`hero-slider__slide ${
-            index === currentIndex ? "hero-slider__slide--active" : ""
-          }`}
+          className="absolute inset-0 transition-opacity duration-1000"
+          style={{ opacity: i === current ? 1 : 0 }}
         >
-          <img
+          <Image
             src={slide.image}
-            alt=""
-            className="hero-slider__slide-img"
-            fetchpriority={index === 0 ? "high" : undefined}
-            loading={index === 0 ? "eager" : "lazy"}
-            decoding={index === 0 ? "sync" : "async"}
+            alt="Avala Home Concept"
+            fill
+            className="object-cover"
+            priority={i === 0}
           />
         </div>
       ))}
-      <div className="hero-slider__content">
-        <h1 className="hero-slider__title">
-          Plac, kuća, bazen, uređeno dvorište
-        </h1>
-        <p className="hero-slider__subtitle">
-          20 minuta od Beograda, 10 minuta od Ikee
+
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/85 via-bg-dark/20 to-transparent" />
+      <div className="absolute inset-0 bg-bg-dark/15" />
+
+      {/* Content */}
+      <div
+        className="absolute inset-x-0 bottom-0 z-10 safe-zone pb-24 md:pb-32"
+        style={{ animation: 'fade-up 0.8s ease both' }}
+      >
+        <p
+          className="text-accent text-[0.7rem] font-medium tracking-[0.25em] uppercase mb-5"
+          style={{ fontFamily: 'var(--font-body)' }}
+        >
+          Avala Home Concept
         </p>
-        <a href="tel:+38163383393" className="hero-slider__cta">
-          <svg className="hero-slider__cta-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.36 11.36 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/>
-          </svg>
-          Pozovi nas
-        </a>
+        <h1
+          className="text-text-light mb-6 max-w-2xl"
+          style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'clamp(2.6rem, 6vw, 5.2rem)',
+            fontWeight: 400,
+            lineHeight: 1.04,
+          }}
+        >
+          Plac, kuća, bazen,{' '}
+          <em>uređeno dvorište</em>
+        </h1>
+        <p
+          className="text-text-light/65 mb-10 font-light"
+          style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(1rem, 1.8vw, 1.15rem)' }}
+        >
+          20 minuta od Beograda · 10 minuta od Ikee
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <a href="tel:+38163383393" className="btn-primary group">
+            <LuPhone className="w-4 h-4" />
+            Pozovite nas
+            <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
+          </a>
+          <Link href="/contact" className="btn-outline-light group">
+            Pošaljite upit
+            <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
+          </Link>
+        </div>
       </div>
-      <img
-        src={arrowDown}
-        alt="Arrow down"
-        className="hero-slider__arrow-down"
-      />
+
+      {/* Slide counter + indicators — bottom right */}
+      <div className="absolute right-7 bottom-10 z-10 flex flex-col items-end gap-4">
+        {/* Counter */}
+        <div className="flex items-baseline gap-1.5">
+          <span
+            style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: '2rem',
+              color: 'rgba(247,243,236,0.9)',
+              fontWeight: 400,
+              lineHeight: 1,
+            }}
+          >
+            {String(current + 1).padStart(2, '0')}
+          </span>
+          <span
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '0.75rem',
+              color: 'rgba(247,243,236,0.3)',
+              fontWeight: 300,
+            }}
+          >
+            / {String(slides.length).padStart(2, '0')}
+          </span>
+        </div>
+        {/* Line indicators */}
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            aria-label={`Slajd ${i + 1}`}
+            className="transition-all duration-300"
+          >
+            <span
+              className="block transition-all duration-300"
+              style={{
+                height: '2px',
+                width: i === current ? '28px' : '12px',
+                backgroundColor: i === current ? '#C4975A' : 'rgba(247,243,236,0.3)',
+              }}
+            />
+          </button>
+        ))}
+      </div>
+
+      {/* Auto-advance progress bar — resets on each slide change via key */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 h-[2px] bg-text-light/10">
+        <div
+          key={current}
+          style={{
+            height: '100%',
+            backgroundColor: 'var(--color-accent)',
+            width: '0%',
+            animation: `slide-progress ${INTERVAL}ms linear forwards`,
+          }}
+        />
+      </div>
     </div>
   );
 };
