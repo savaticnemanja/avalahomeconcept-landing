@@ -1,6 +1,7 @@
 import { emailIcon, phoneIcon, viberIcon, whatsappIcon } from "@/assets";
 import emailjs from "@emailjs/browser";
 import { useRef } from "react";
+import { useNavigate } from "react-router";
 import { Bounce, toast } from "react-toastify";
 import "./Contact.scss";
 
@@ -13,6 +14,7 @@ const ContactIcon = ({ icon, text, action }) => (
 
 export const Contact = () => {
   const form = useRef();
+  const navigate = useNavigate();
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -26,17 +28,7 @@ export const Contact = () => {
       )
       .then(
         () => {
-          toast.success("Vaša poruka je poslata.", {
-            position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-          });
+          navigate("/thank-you");
         },
         () => {
           toast.success(

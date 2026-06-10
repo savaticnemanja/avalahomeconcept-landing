@@ -6,4 +6,5 @@ export { Homepage } from "./Homepage/Homepage";
 export { Project } from "./Project/Project";
 export { SmallHouses } from "./SmallHouses/SmallHouses";
 export { Specifications } from "./Specifications/Specifications";
+export { ThankYou } from "./ThankYou/ThankYou";
 export { WorkProgress } from "./WorkProgress/WorkProgress";

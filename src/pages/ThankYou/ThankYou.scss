@@ -1,0 +1,37 @@
+.thank-you {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 60px 20px;
+  text-align: center;
+
+  &__content {
+    max-width: 560px;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 32px;
+    }
+  }
+
+  &__btn {
+    display: inline-block;
+    padding: 14px 32px;
+    background-color: #1a1a1a;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #444;
+    }
+  }
+}

@@ -14,6 +14,7 @@ const AboutInvestor = lazy(() => import("@/pages/AboutInvestor/AboutInvestor").t
 const Gallery       = lazy(() => import("@/pages/Gallery/Gallery").then(m => ({ default: m.Gallery })));
 const WorkProgress  = lazy(() => import("@/pages/WorkProgress/WorkProgress").then(m => ({ default: m.WorkProgress })));
 const ContactPage   = lazy(() => import("@/pages/ContactPage/ContactPage").then(m => ({ default: m.ContactPage })));
+const ThankYou      = lazy(() => import("@/pages/ThankYou/ThankYou").then(m => ({ default: m.ThankYou })));
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/work-progress" element={<WorkProgress />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/thank-you" element={<ThankYou />} />
         </Routes>
       </Suspense>
       <Footer />
