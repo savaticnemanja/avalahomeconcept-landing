@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { LuPhone, LuMessageSquare, LuMessageCircle, LuMail, LuMapPin } from 'react-icons/lu';
 import { FaFacebook, FaInstagram, FaLinkedinIn } from 'react-icons/fa6';
-import logoWhite from '@/assets/logo-white.webp';
+import logoWhite from '@/assets/logo2-dark.png';
 
 const pagesLinks = [
   { path: '/', label: 'Početna' },
@@ -38,7 +38,7 @@ export const Footer = () => (
         {/* Brand */}
         <div className="flex flex-col gap-5">
           <Link href="/">
-            <Image src={logoWhite} alt="Avala Home Concept logo" width={200} height={40} />
+            <Image src={logoWhite} alt="Avala Home Concept logo" width={225} height={40} />
           </Link>
           <p className="text-sm text-text-light/55 font-light leading-relaxed max-w-xs">
             Zatvoren kompleks porodičnih kuća na Avalskoj planini — 20 minuta od Beograda.

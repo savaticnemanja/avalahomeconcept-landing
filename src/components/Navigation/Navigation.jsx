@@ -4,8 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { LuArrowUpRight, LuChevronDown, LuPhone } from 'react-icons/lu';
-import logo from '@/assets/logo.webp';
-import logoWhite from '@/assets/logo-white.webp';
+import logo from '@/assets/logo2.png';
 
 const navLinks = [
   { path: '/', label: 'Početna' },
@@ -78,6 +77,16 @@ export const Navigation = () => {
 
   return (
     <>
+      {/* ── Top gradient shadow ──────────────────────────────── */}
+      <div
+        className="fixed top-0 left-0 right-0 pointer-events-none"
+        style={{
+          height: '20px',
+          zIndex: 49,
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%)',
+        }}
+      />
+
       {/* ── Full-screen mobile menu ──────────────────────────── */}
       <div
         className="fixed left-0 right-0 bottom-0 md:hidden flex flex-col overflow-y-auto"
@@ -202,7 +211,7 @@ export const Navigation = () => {
           <Link href="/" onClick={closeMobileMenu}>
             <Image
               src={logo}
-              className="h-10 w-auto"
+              className="h-20 w-auto"
               alt="Avala Home Concept logo"
               width={150}
               height={50}

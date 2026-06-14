@@ -40,6 +40,10 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: 'transparent',
+};
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
