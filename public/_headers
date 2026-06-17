@@ -1,6 +1,6 @@
 # Netlify / Cloudflare Pages cache rules
-# Vite hashes all filenames under /assets/ → safe to cache forever
-/assets/*
+# Next.js content-hashes all filenames under /_next/static/ → safe to cache forever
+/_next/static/*
   Cache-Control: public, max-age=31536000, immutable
 
 # HTML must revalidate on every request so new deploys are picked up immediately

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { LuPhone, LuMessageSquare, LuMessageCircle, LuMail, LuMapPin } from 'react-icons/lu';
 import { FaFacebook, FaInstagram, FaLinkedinIn } from 'react-icons/fa6';
-import logoWhite from '@/assets/brand/logo-dark.png';
+import logoWhite from '@/assets/brand/logo-old.webp';
 import { useI18n } from '@/i18n/I18nProvider';
 
 const socials = [

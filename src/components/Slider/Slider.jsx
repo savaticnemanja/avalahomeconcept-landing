@@ -4,21 +4,21 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { LuChevronRight, LuPhone } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
-import sliderImage1 from '@/assets/slider/slide-1.jpeg';
-import sliderImage2 from '@/assets/slider/slide-2.webp';
-import sliderImage3 from '@/assets/slider/slide-3.webp';
+import sliderImage1 from '@/assets/slider/slide-1.mov';
+import sliderImage2 from '@/assets/slider/slide-2.mov';
+import sliderImage3 from '@/assets/slider/slide-3.mov';
 import sliderImage4 from '@/assets/slider/slide-4.webp';
 import sliderImage5 from '@/assets/slider/slide-5.webp';
 
 const slides = [
-  { id: 1, image: sliderImage1 },
-  { id: 2, image: sliderImage2 },
-  { id: 3, image: sliderImage3 },
-  { id: 4, image: sliderImage4 },
-  { id: 5, image: sliderImage5 },
+  { id: 1, type: 'video', src: sliderImage1 },
+  { id: 2, type: 'video', src: sliderImage2 },
+  { id: 3, type: 'video', src: sliderImage3 },
+  { id: 4, type: 'image', src: sliderImage4 },
+  { id: 5, type: 'image', src: sliderImage5 },
 ];
 
-const INTERVAL = 6000;
+const INTERVAL = 3900;
 
 export const Slider = () => {
   const { t, href } = useI18n();
@@ -34,22 +34,34 @@ export const Slider = () => {
   return (
     <div className="relative h-screen min-h-[640px] overflow-hidden bg-bg-dark">
 
-      {/* Slides */}
-      {slides.map((slide, i) => (
-        <div
-          key={slide.id}
-          className="absolute inset-0 transition-opacity duration-1000"
-          style={{ opacity: i === current ? 1 : 0 }}
-        >
-          <Image
-            src={slide.image}
-            alt="Avala Home Concept"
-            fill
-            className="object-cover"
-            priority={i === 0}
-          />
-        </div>
-      ))}
+{/* Slides */}
+{slides.map((slide, i) => (
+  <div
+    key={slide.id}
+    className="absolute inset-0 transition-opacity duration-1000"
+    style={{ opacity: i === current ? 1 : 0 }}
+  >
+    {slide.type === 'video' ? (
+      <video
+        src={slide.src}
+        className="w-full h-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      />
+    ) : (
+      <Image
+        src={slide.src}
+        alt="Avala Home Concept"
+        fill
+        className="object-cover"
+        priority={i === 0}
+      />
+    )}
+  </div>
+))}
 
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/85 via-bg-dark/20 to-transparent" />

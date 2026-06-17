@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { LuArrowUpRight, LuChevronDown, LuPhone, LuGlobe } from 'react-icons/lu';
-import logo from '@/assets/brand/logo.png';
+import logo from '@/assets/brand/logo-old.webp';
 import { useI18n } from '@/i18n/I18nProvider';
 import { locales, localeNames } from '@/i18n/config';
 
@@ -218,12 +218,8 @@ export const Navigation = () => {
               </button>
             ))}
           </div>
-          <a
-            href="tel:+38163383393"
-            className="flex items-center gap-3 text-text-light/45 hover:text-text-light transition-colors duration-150 text-sm font-light"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
-            <LuPhone className="w-4 h-4 text-accent flex-shrink-0" />
+          <a href="tel:+38163383393" className="btn-ghost justify-center">
+            <LuPhone className="w-4 h-4 flex-shrink-0" />
             +381 63 383 393
           </a>
           <Link
@@ -324,8 +320,20 @@ export const Navigation = () => {
             ))}
           </ul>
 
-          {/* Desktop right side: language switcher + CTA */}
+          {/* Desktop right side: phone + CTA + language switcher */}
           <div className="hidden md:flex items-center gap-4">
+            {/* Phone CTA */}
+            <a href="tel:+38163383393" className="btn-ghost inline-flex">
+              <LuPhone className="w-4 h-4" />
+              +381 63 383 393
+            </a>
+
+            {/* Desktop CTA */}
+            <Link href={href('/contact')} className="btn-primary inline-flex group">
+              {t('nav.requestOffer')}
+              <LuArrowUpRight className="w-4 h-4" />
+            </Link>
+
             {/* Language switcher */}
             <div className="relative">
               <button
@@ -361,12 +369,6 @@ export const Navigation = () => {
                 ))}
               </ul>
             </div>
-
-            {/* Desktop CTA */}
-            <Link href={href('/contact')} className="btn-primary inline-flex group">
-              {t('nav.requestOffer')}
-              <LuArrowUpRight className="w-4 h-4" />
-            </Link>
           </div>
 
         </div>

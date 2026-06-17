@@ -29,37 +29,15 @@ export default async function HomePage({ params }) {
     <>
       {/* 1. Hero slider */}
       <Slider />
-
-      {/* CTA */}
-      <div className="py-10 md:py-20 bg-bg border-t border-border">
-        <div className="safe-zone flex flex-col items-center gap-5 text-center">
-          <h3
-            className="text-text italic max-w-lg"
-            style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem,3vw,2.4rem)', fontWeight: 400 }}
-          >
-            {dict.homeCta.title}
-          </h3>
-          <span className="overline">{dict.homeCta.eyebrow}</span>
-          <p className="text-text-muted text-sm font-light max-w-sm">
-            {dict.homeCta.text}
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center mt-2">
-            <Link href={withLocale(locale, '/contact')} className="btn-primary group">
-              {dict.homeCta.requestOffer}
-              <ArrowIcon />
-            </Link>
-            <a href="tel:+38163383393" className="btn-ghost group">
-              {dict.homeCta.callNow}
-            </a>
-          </div>
-        </div>
-      </div>
+          
+      {/* ProjectShowcase slider */}
+      <ProjectShowcase />
 
       {/* Showcase sa benefitima */}
       <Showcase />
 
-      {/* ProjectShowcase slider */}
-      <ProjectShowcase />
+      {/* Lokacija */}
+      <Location />
 
       {/* Specifikacije */}
       <section className="py-12 md:py-24 bg-bg-dark">
@@ -100,11 +78,39 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
-      {/* Lokacija */}
-      <Location />
-
       {/* Dinamika plaćanja */}
       <PaymentDynamic />
+
+      {/* CTA */}
+      <div className="py-10 md:py-20 bg-bg border-t border-border">
+        <div className="safe-zone flex flex-col items-center gap-5 text-center">
+          <h3
+            className="text-text italic max-w-lg"
+            style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem,3vw,2.4rem)', fontWeight: 400 }}
+          >
+            {dict.homeCta.title}
+          </h3>
+          <span className="overline">{dict.homeCta.eyebrow}</span>
+          <p className="text-text-muted text-sm font-light max-w-sm">
+            {dict.homeCta.text}
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center mt-2">
+            <Link href={withLocale(locale, '/contact')} className="btn-primary group">
+              {dict.homeCta.requestOffer}
+              <ArrowIcon />
+            </Link>
+            <a href="tel:+38163383393" className="btn-ghost group">
+              {dict.homeCta.callNow}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Kontakt */}
+      <Contact />
+
+      {/* Partneri */}
+      <Partners />
 
       {/* CTA ispod PaymentDynamic */}
       <div className="py-8 md:py-16 bg-bg border-t border-border">
@@ -121,12 +127,6 @@ export default async function HomePage({ params }) {
           </Link>
         </div>
       </div>
-
-      {/* Kontakt */}
-      <Contact />
-
-      {/* Partneri */}
-      <Partners />
     </>
   );
 }

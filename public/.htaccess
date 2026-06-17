@@ -1,15 +1,18 @@
-# Apache cache rules (cPanel / shared hosting)
-# Enable mod_expires and mod_headers
+# Apache rules (cPanel / shared hosting) for Next.js static export (output: 'export', trailingSlash: true)
+# Every route is a real directory/index.html, so NO SPA fallback is needed.
+
+DirectoryIndex index.html
+
 <IfModule mod_expires.c>
   ExpiresActive On
 
-  # Vite hashes all filenames in /assets/ → safe to cache for 1 year
-  <FilesMatch "^.+\.[0-9a-f]{8,}\.(js|css|webp|jpeg|jpg|png|svg|woff2|woff|ttf)$">
+  # Next.js content-hashed assets (/_next/static/...) → safe to cache for 1 year
+  <FilesMatch "^.+\.[0-9a-zA-Z_-]{8,}\.(js|css|webp|jpeg|jpg|png|svg|woff2|woff|ttf)$">
     ExpiresDefault "access plus 1 year"
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
-  # HTML — never cache (SPA entry point must always revalidate)
+  # HTML — never cache so new deploys are picked up immediately
   <FilesMatch "\.html$">
     ExpiresDefault "access plus 0 seconds"
     Header set Cache-Control "no-cache, no-store, must-revalidate"
@@ -33,12 +36,5 @@
   </FilesMatch>
 </IfModule>
 
-# SPA fallback — redirect all routes to index.html
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
-</IfModule>
+# Serve the static 404 page for unknown routes (NOT a redirect to index.html)
+ErrorDocument 404 /404.html
