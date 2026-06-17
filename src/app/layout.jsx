@@ -1,10 +1,9 @@
 import { Cormorant_Garamond, DM_Sans } from 'next/font/google';
 import './globals.css';
-import { Navigation } from '@/components/Navigation/Navigation';
-import { Footer } from '@/components/Footer/Footer';
 import { ToastProvider } from '@/components/ToastProvider/ToastProvider';
 import { ScrollToTop } from '@/components/ScrollToTop/ScrollToTop';
 import { RevealObserver } from '@/components/RevealObserver/RevealObserver';
+import { defaultLocale, SITE_URL } from '@/i18n/config';
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -22,21 +21,10 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://avalahomeconcept.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Avala Home Concept — Kuće na Avali, 20 min od Beograda',
+    default: 'Avala Home Concept',
     template: '%s | Avala Home Concept',
-  },
-  description: 'Plac, kuća, bazen, uređeno dvorište — 20 minuta od Beograda, 10 minuta od Ikee. Zatvoren kompleks porodičnih kuća na Avalskoj planini. Pozovite: 063/383-393',
-  keywords: ['kuće na Avali', 'nekretnine Beograd', 'kuća sa bazenom', 'stambeni kompleks Avala', 'Avala Home Concept'],
-  openGraph: {
-    siteName: 'Avala Home Concept',
-    locale: 'sr_RS',
-    type: 'website',
-    images: [{ url: '/web-app-manifest-512x512.png', width: 512, height: 512 }],
-  },
-  alternates: {
-    canonical: 'https://avalahomeconcept.com',
   },
 };
 
@@ -44,38 +32,12 @@ export const viewport = {
   themeColor: 'transparent',
 };
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'RealEstateAgent',
-  name: 'Avala Home Concept',
-  url: 'https://avalahomeconcept.com',
-  telephone: '+38163383393',
-  email: 'avalahomeconcept@gmail.com',
-  description: 'Zatvoren kompleks porodičnih kuća na Avalskoj planini, 20 minuta od Beograda.',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Beograd',
-    addressCountry: 'RS',
-  },
-  sameAs: [
-    'https://www.facebook.com/avalahomeconcept/',
-    'https://www.instagram.com/avala_homeconcept/',
-    'https://rs.linkedin.com/in/avala-home-concept-718984276',
-  ],
-};
-
 export default function RootLayout({ children }) {
   return (
-    <html lang="sr" className={`${cormorant.variable} ${dmSans.variable}`}>
+    <html lang={defaultLocale} className={`${cormorant.variable} ${dmSans.variable}`}>
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
         <ToastProvider>
-          <Navigation />
           {children}
-          <Footer />
           <ScrollToTop />
           <RevealObserver />
         </ToastProvider>

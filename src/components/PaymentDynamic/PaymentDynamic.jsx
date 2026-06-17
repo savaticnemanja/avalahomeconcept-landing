@@ -1,43 +1,35 @@
+'use client';
 import { LuKeyRound, LuFilePen, LuHouse } from 'react-icons/lu';
+import { useI18n } from '@/i18n/I18nProvider';
 
-const steps = [
-  {
-    number: '01',
-    amount: '5.000€',
-    label: 'Rezervacija',
-    detail: 'Rezervišite željenu kuću uz simboličan avans koji garantuje vašu poziciju u kompleksu.',
-    icon: LuKeyRound,
-  },
-  {
-    number: '02',
-    amount: '30%',
-    label: 'Overa ugovora',
-    detail: 'Potpisivanjem kupoprodajnog ugovora ulažete 30% ukupne vrednosti nekretnine.',
-    icon: LuFilePen,
-  },
-  {
-    number: '03',
-    amount: '70%',
-    label: '4 rate tokom gradnje',
-    detail: 'Preostali iznos plaćate u 4 jednake rate — po završetku svake faze izgradnje.',
-    icon: LuHouse,
-  },
+// Language-neutral data (number, amount, icon); label/detail from dict.payment.steps
+const stepData = [
+  { number: '01', amount: '5.000€', icon: LuKeyRound },
+  { number: '02', amount: '30%', icon: LuFilePen },
+  { number: '03', amount: '70%', icon: LuHouse },
 ];
 
-export const PaymentDynamic = () => (
+export const PaymentDynamic = () => {
+  const { t } = useI18n();
+  const steps = stepData.map((s, i) => ({
+    ...s,
+    label: t(`payment.steps.${i}.label`),
+    detail: t(`payment.steps.${i}.detail`),
+  }));
+
+  return (
   <section className="py-12 md:py-24 bg-bg">
     <div className="safe-zone">
 
       {/* Header */}
       <div className="section-header" data-reveal>
-        <span className="overline">Kako kupiti</span>
-        <div className="overline-bar" />
         <h2
           className="text-text"
           style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem,4vw,3.5rem)', fontWeight: 400 }}
         >
-          Dinamika plaćanja
+          {t('payment.title')}
         </h2>
+        <span className="overline">{t('payment.eyebrow')}</span>
       </div>
 
       {/* Steps */}
@@ -87,4 +79,5 @@ export const PaymentDynamic = () => (
 
     </div>
   </section>
-);
+  );
+};

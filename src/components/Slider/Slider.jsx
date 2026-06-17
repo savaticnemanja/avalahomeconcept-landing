@@ -3,11 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { LuChevronRight, LuPhone } from 'react-icons/lu';
-import sliderImage1 from '@/assets/slider/slider-image-1.jpeg';
-import sliderImage2 from '@/assets/slider/slider-image-2.webp';
-import sliderImage3 from '@/assets/slider/slider-image-3.webp';
-import sliderImage4 from '@/assets/slider/slider-image-4.webp';
-import sliderImage5 from '@/assets/slider/slider-image-5.webp';
+import { useI18n } from '@/i18n/I18nProvider';
+import sliderImage1 from '@/assets/slider/slide-1.jpeg';
+import sliderImage2 from '@/assets/slider/slide-2.webp';
+import sliderImage3 from '@/assets/slider/slide-3.webp';
+import sliderImage4 from '@/assets/slider/slide-4.webp';
+import sliderImage5 from '@/assets/slider/slide-5.webp';
 
 const slides = [
   { id: 1, image: sliderImage1 },
@@ -20,11 +21,12 @@ const slides = [
 const INTERVAL = 6000;
 
 export const Slider = () => {
+  const { t, href } = useI18n();
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setCurrent(p => (p + 1) % slides.length), INTERVAL);
-    return () => clearInterval(t);
+    const id = setInterval(() => setCurrent(p => (p + 1) % slides.length), INTERVAL);
+    return () => clearInterval(id);
   }, []);
 
   const go = (dir) => setCurrent(p => (p + dir + slides.length) % slides.length);
@@ -62,7 +64,7 @@ export const Slider = () => {
           className="text-accent text-[0.7rem] font-medium tracking-[0.25em] uppercase mb-5"
           style={{ fontFamily: 'var(--font-body)' }}
         >
-          Avala Home Concept
+          {t('slider.eyebrow')}
         </p>
         <h1
           className="text-text-light mb-6 max-w-2xl"
@@ -73,23 +75,23 @@ export const Slider = () => {
             lineHeight: 1.04,
           }}
         >
-          Plac, kuća, bazen,{' '}
-          <em>uređeno dvorište</em>
+          {t('slider.titleA')}{' '}
+          <em>{t('slider.titleEm')}</em>
         </h1>
         <p
           className="text-text-light/65 mb-10 font-light"
           style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(1rem, 1.8vw, 1.15rem)' }}
         >
-          20 minuta od Beograda · 10 minuta od Ikee
+          {t('slider.subtitle')}
         </p>
         <div className="flex flex-wrap gap-4">
           <a href="tel:+38163383393" className="btn-primary group">
             <LuPhone className="w-4 h-4" />
-            Pozovite nas
+            {t('slider.callUs')}
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
           </a>
-          <Link href="/contact" className="btn-outline-light group">
-            Pošaljite upit
+          <Link href={href('/contact')} className="btn-outline-light group">
+            {t('slider.sendInquiry')}
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
           </Link>
         </div>
@@ -126,7 +128,7 @@ export const Slider = () => {
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            aria-label={`Slajd ${i + 1}`}
+            aria-label={`${t('slider.slideLabel')} ${i + 1}`}
             className="transition-all duration-300"
           >
             <span

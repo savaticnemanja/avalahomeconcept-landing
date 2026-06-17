@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import astralLogo from '@/assets/partners/astral-logo.webp';
-import bekamentLogo from '@/assets/partners/bekament-logo.webp';
-import bracaMaricLogo from '@/assets/partners/braca-maric-logo.webp';
-import ciricHomeInvestLogo from '@/assets/partners/ciric-home-invest-logo.webp';
-import fluidraLogo from '@/assets/partners/fluidra-logo.webp';
-import geberitLogo from '@/assets/partners/geberit-logo.webp';
-import wienerbergerLogo from '@/assets/partners/wienerberger-logo.webp';
+import astralLogo from '@/assets/partners/astral.webp';
+import bekamentLogo from '@/assets/partners/bekament.webp';
+import bracaMaricLogo from '@/assets/partners/braca-maric.webp';
+import ciricHomeInvestLogo from '@/assets/partners/ciric-home-invest.webp';
+import fluidraLogo from '@/assets/partners/fluidra.webp';
+import geberitLogo from '@/assets/partners/geberit.webp';
+import wienerbergerLogo from '@/assets/partners/wienerberger.webp';
 
 const logos = [
   { src: astralLogo, alt: 'Astral' },

@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "siteName": "Avala Home Concept",
+    "ogDescription": "Zatvoren kompleks porodičnih kuća na Avalskoj planini, 20 minuta od Beograda.",
+    "jsonLdDescription": "Zatvoren kompleks porodičnih kuća na Avalskoj planini, 20 minuta od Beograda.",
+    "home": {
+      "title": "Avala Home Concept — Kuće na Avali, 20 min od Beograda",
+      "description": "Plac, kuća, bazen, uređeno dvorište — 20 minuta od Beograda, 10 minuta od Ikee. Zatvoren kompleks porodičnih kuća na Avalskoj planini. Pozovite: 063/383-393"
+    },
+    "about": {
+      "title": "O nama",
+      "description": "Avala Home Concept i Porodica Ćirić — 30 godina iskustva u građevinarstvu. Luksuzne kuće modernog dizajna na Avalskoj planini, 20 minuta od Beograda."
+    },
+    "gallery": {
+      "title": "Galerija",
+      "description": "Pogledajte fotografije kuća, dvorišta i enterijera Avala Home Concept — luksuzni stambeni kompleks na Avalskoj planini."
+    },
+    "project1": {
+      "title": "Projekat 1 — Prizemna kuća 139m²",
+      "description": "Prostrana prizemna kuća od 139m² sa tri svetle sobe, bazenom i terasom sa pogledom na Avalski toranj. Zatvoren kompleks 20 min od Beograda."
+    },
+    "project2": {
+      "title": "Projekat 2 — Porodična kuća 147m²",
+      "description": "Udobna porodična kuća od 147m² sa tri spavaće sobe, dva kupatila i opcionalnim džakuzijem, okružena zelenilom Avale."
+    },
+    "smallHouses": {
+      "title": "Kuće 80–100m²",
+      "description": "Kompaktne kuće od 80 do 100m² u mediteranskom stilu — energetski efikasne i povoljnije. Zatvoren kompleks na Avalskoj planini, 20 min od Beograda."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "description": "Kontaktirajte Avala Home Concept — pozovite nas, pošaljite poruku ili nas posetite. Telefon: +381 63 383393."
+    },
+    "thankYou": {
+      "title": "Hvala vam",
+      "description": "Vaša poruka je uspešno poslata. Kontaktiraćemo vas u najkraćem roku."
+    }
+  },
+  "nav": {
+    "home": "Početna",
+    "about": "O nama",
+    "offer": "Ponuda kuća",
+    "project1": "Projekat 1",
+    "project2": "Projekat 2",
+    "smallHouses": "Kuće 80-100m²",
+    "gallery": "Galerija",
+    "contact": "Kontakt",
+    "requestOffer": "Zatraži ponudu",
+    "openMenu": "Otvori meni",
+    "closeMenu": "Zatvori meni",
+    "language": "Jezik"
+  },
+  "slider": {
+    "eyebrow": "Avala Home Concept",
+    "titleA": "Plac, kuća, bazen,",
+    "titleEm": "uređeno dvorište",
+    "subtitle": "20 minuta od Beograda · 10 minuta od Ikee",
+    "callUs": "Pozovite nas",
+    "sendInquiry": "Pošaljite upit",
+    "slideLabel": "Slajd"
+  },
+  "homeCta": {
+    "title": "Zainteresovani za kompleks?",
+    "eyebrow": "Kontaktirajte nas",
+    "text": "Naš tim je na raspolaganju za sve informacije, obilaske i rezervacije.",
+    "requestOffer": "Zatražite ponudu",
+    "callNow": "Pozovite odmah"
+  },
+  "showcase": {
+    "titleA": "Vaš dom.",
+    "titleEm": "Vaša priroda.",
+    "eyebrow": "Zašto Avala Home Concept",
+    "requestOffer": "Zatraži ponudu",
+    "benefits": [
+      "Blizina autoputa",
+      "20 min od Autokomande, Vračara",
+      "Čvrsta gradnja (debljina zida 30 cm)",
+      "Granitna keramika",
+      "Bazen",
+      "2 parking mesta",
+      "Aluminijumska stolarija u antracit boji",
+      "Uređeno dvorište",
+      "Zatvoren kompleks",
+      "Optički internet",
+      "Parket",
+      "Podno grejanje",
+      "Smart Home priprema"
+    ]
+  },
+  "projectShowcase": {
+    "title": "Izaberite vaš projekat",
+    "eyebrow": "Naša ponuda",
+    "rooms": "sobe",
+    "terrace": "Terasa",
+    "detailSpecs": "Detaljne specifikacije",
+    "cards": [
+      {
+        "title": "Projekat 1",
+        "subtitle": "Prizemna kuća",
+        "badge": "Dostupno",
+        "highlights": ["Dnevni boravak 22m²", "Kuhinja + trpezarija 27m²", "Bazen i uređeno dvorište"]
+      },
+      {
+        "title": "Projekat 2",
+        "subtitle": "Porodična kuća",
+        "badge": "Dostupno",
+        "highlights": ["Garderober 8m²", "Džakuzi (opciono)", "Otvoreni trem 7m²"]
+      },
+      {
+        "title": "Kuće 80–100m²",
+        "subtitle": "Kompaktna kuća",
+        "badge": "Upitajte",
+        "highlights": ["Mediteranski stil", "Energetski efikasno", "Povoljnija cena"]
+      }
+    ]
+  },
+  "specifications": {
+    "title": "Specifikacije",
+    "eyebrow": "Kvalitet gradnje",
+    "items": [
+      { "title": "Čvrsta gradnja", "description": "Armirano betonska konstrukcija" },
+      { "title": "Thermo klima blok", "description": "Broj 1. blok na tržištu" },
+      { "title": "Termoizolacija", "description": "Debljina 10 cm, debljina zida 30 cm" },
+      { "title": "Sanitarije", "description": "Geberit ugradni sistem, staklene tuš kabine" },
+      { "title": "Fasadna stolarija", "description": "Aluminijumski prozori sa alu roletnama i dvostrukim staklom, punjeno argonom" },
+      { "title": "Staklo", "description": "Climaguard solar \"Guardian\" (4 godišnja doba)" },
+      { "title": "Grejanje", "description": "Etažno, digitalni elektro kotao, radijatorsko grejanje. Toplotne pumpe (opciono)" },
+      { "title": "Unutrašnja vrata", "description": "Medijapan presvučen CPL folijom sa pervajz lajsnama" },
+      { "title": "Spoljna vrata", "description": "Sigurnosna vrata sa zaključavanjem u 6 tačaka" },
+      { "title": "Fasada", "description": "Prirodni materijali: drvo, keramika i kamen" },
+      { "title": "Plafon", "description": "Visina 2,70–2,90 m" },
+      { "title": "Uređeno dvorište", "description": "Premium trava, ograda i instalacija za dvorišno osvetljenje" },
+      { "title": "Bazen", "description": "Bazen sa osnovnom opremom brenda Astral" }
+    ]
+  },
+  "location": {
+    "title": "Na 20 minuta od Beograda",
+    "eyebrow": "Lokacija",
+    "text": "Uživajte u tišini Avalske planine uz sve gradske pogodnosti na dohvat ruke."
+  },
+  "payment": {
+    "title": "Dinamika plaćanja",
+    "eyebrow": "Kako kupiti",
+    "steps": [
+      { "label": "Rezervacija", "detail": "Rezervišite željenu kuću uz simboličan avans koji garantuje vašu poziciju u kompleksu." },
+      { "label": "Overa ugovora", "detail": "Potpisivanjem kupoprodajnog ugovora ulažete 30% ukupne vrednosti nekretnine." },
+      { "label": "4 rate tokom gradnje", "detail": "Preostali iznos plaćate u 4 jednake rate — po završetku svake faze izgradnje." }
+    ]
+  },
+  "midCta": {
+    "text": "Rezervišite vašu kuću danas.",
+    "requestOffer": "Zatraži ponudu"
+  },
+  "contact": {
+    "titleA": "Razgovarajmo o",
+    "titleEm": "vašem domu",
+    "eyebrow": "Stupite u kontakt",
+    "availability": "Naš tim je dostupan radnim danima od 09–17h. Odgovorićemo u najkraćem roku.",
+    "methods": {
+      "phone": "Telefon",
+      "viber": "Viber",
+      "whatsapp": "WhatsApp",
+      "email": "Email",
+      "sendMessage": "Pošaljite poruku"
+    },
+    "form": {
+      "firstName": "Vaše ime",
+      "phone": "Broj telefona",
+      "email": "Email adresa",
+      "message": "Poruka",
+      "send": "Pošaljite poruku"
+    },
+    "errorToast": "Problem sa slanjem poruke. Pokušajte ponovo."
+  },
+  "footer": {
+    "tagline": "Zatvoren kompleks porodičnih kuća na Avalskoj planini — 20 minuta od Beograda.",
+    "pagesHeading": "Stranice",
+    "offerHeading": "Ponuda kuća",
+    "contactHeading": "Kontakt",
+    "location": "Avala, Beograd, Srbija",
+    "rights": "Sva prava zadržana.",
+    "developedBy": "Developed by",
+    "pages": {
+      "home": "Početna",
+      "about": "O nama",
+      "gallery": "Galerija",
+      "contact": "Kontakt"
+    },
+    "offer": {
+      "project1": "Projekat 1 — 139m²",
+      "project2": "Projekat 2 — 147m²",
+      "smallHouses": "Kuće 80–100m²"
+    }
+  },
+  "about": {
+    "title": "O nama",
+    "eyebrow": "Ko smo mi",
+    "paragraphs": [
+      "Dobrodošli u Avala Home Concept — vašu destinaciju za udobniji, kvalitetniji i zdraviji način života na prelepom području Avalske planine, nadomak Beograda. Naša misija je pružiti vam luksuzne kuće modernog dizajna koje će ispuniti sve vaše potrebe i omogućiti vam da uživate u životu okruženi predivnom prirodom.",
+      "Svaka kuća iz naše ponude pažljivo je osmišljena i izgrađena kako bi pružila maksimalan komfor i udobnost višečlanim porodicama. Naš tim stručnjaka radi sa strašću i posvećenošću kako bi svaka kuća bila izvanredno dizajnirana i opremljena najkvalitetnijim materijalima. Svaki detalj je pažljivo osmišljen kako bi stvorio harmoniju između enterijera i eksterijera, stvarajući prijatno okruženje za vas i vašu porodicu.",
+      "Nalazimo se na prelepom delu sa pogledom na veličanstveni Avalski toranj, pružajući vam privilegiju da svakog dana uživate u predivnom pejzažu i osećate mir i spokoj koji dolazi sa životom u prirodi. Naše kuće su koncipirane tako da vam pruže privatnost i intimnost, dok istovremeno omogućavaju lako povezivanje sa lokalnom zajednicom i svim pogodnostima koje grad pruža.",
+      "Verujemo u važnost zdravog načina života, stoga smo se pobrinuli da naše kuće budu energetski efikasne i održive. Koristimo napredne tehnologije i ekološki prihvatljive materijale kako bismo smanjili ekološki otisak i pružili vam prostor u kojem možete živeti sa svesti o važnosti očuvanja prirode."
+    ],
+    "stats": [
+      { "value": "30+", "label": "godina iskustva" },
+      { "value": "1000+", "label": "projekata" },
+      { "value": "20 min", "label": "od Beograda" },
+      { "value": "100+", "label": "zadovoljnih porodica" }
+    ],
+    "investorTitle": "Porodica Ćirić",
+    "investorEyebrow": "Investitor",
+    "investorText": "Porodica Ćirić već 30 godina uspešno gradi i posluje na tržištu Srbije. Naše građevinske kompanije iza sebe imaju više hiljada uspešno realizovanih projekata i zadovoljnih klijenata. Naše dugogodišnje iskustvo čini nas pouzdanim partnerom od poverenja koji ima znanje, stručnost i kadrove za realizaciju svih vrsta građevinskih radova brzo, kvalitetno i po dogovoru.",
+    "emailLabel": "Email:",
+    "website": "Website →"
+  },
+  "projectPage": {
+    "eyebrow": "Naša ponuda",
+    "netSurfaceLabel": "Neto površina",
+    "total": "Ukupno"
+  },
+  "projects": {
+    "project1": {
+      "title": "Projekat 1 — Prizemna kuća 139m²",
+      "description": "Prostrana prizemna kuća od 139 metara kvadratnih. Ova moderno dizajnirana kuća ima i dva parking mesta i odvojenu namensku prostoriju pokraj bazena u koju možete smestiti letnju kuhinju. Čak tri prozračne i komforne sobe pozicionirane su tako da primaju dosta sunčeve svetlosti što će Vam svakog jutra uliti dodatno raspoloženje. Vrata velikog dnevnog boravka otvaraju se na terasu koja pruža veličanstven pogled na Avalaski toranj. Sa terase se stepenicama spuštate na uređenu stazu koja Vas vodi do bazena i plaže.",
+      "rooms": ["Predprostor", "Tehnička prostorija", "Toalet", "Hodnik", "Terasa", "Soba 1", "Soba 2", "Soba 3", "Kupatilo", "Vešernica", "Dnevni boravak", "Kuhinja i trpezarija"]
+    },
+    "project2": {
+      "title": "Projekat 2 — Porodična kuća 147m²",
+      "description": "Udobna porodična kuća od 147 m² okružena prirodom i prijatnim ambijentom. Zakoračite u prostran dnevni boravak sa velikim staklenim vratima koja gledaju na predivno zelenilo Avalske planine. Ova moderno koncipirana porodična kuća ima čak tri spavaće sobe, dva odvojena kupatila, džakuzi (opciono) i veliku trpezariju koja je povezana sa dnevnim boravkom.",
+      "rooms": ["Predprostor", "Hodnik", "Toalet + vešeraj", "Soba 1", "Soba 2", "Soba 3", "Garderober", "Kupatilo", "Terasa", "Otvoreni trem", "Dnevni boravak", "Kuhinja", "Ostava", "Tehnička prostorija"]
+    }
+  },
+  "smallHouses": {
+    "title": "Kuće 80–100m²",
+    "eyebrow": "Naša ponuda"
+  },
+  "gallery": {
+    "title": "Galerija",
+    "eyebrow": "Vizuelni prikaz",
+    "tabs": {
+      "photos": "Fotografije",
+      "progress": "Napredak radova"
+    },
+    "photoAlt": "Avala Home Concept — galerija, fotografija",
+    "progressTitle": "Napredak radova"
+  },
+  "thankYou": {
+    "title": "Hvala vam!",
+    "text": "Vaša poruka je uspešno poslata. Kontaktiraćemo vas u najkraćem roku.",
+    "backHome": "Nazad na početnu"
+  },
+  "common": {
+    "close": "Zatvori",
+    "prev": "Prethodna",
+    "next": "Sledeća"
+  }
+}

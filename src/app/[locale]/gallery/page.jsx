@@ -3,7 +3,8 @@ import { useCallback, useState } from 'react';
 import Image from 'next/image';
 import { LuMaximize2 } from 'react-icons/lu';
 import { Lightbox } from '@/components';
-import { galleryImages } from '@/lib/gallery';
+import { gallerySources } from '@/lib/gallery';
+import { useI18n } from '@/i18n/I18nProvider';
 
 const workProgressVideos = [
   'https://www.youtube.com/embed/APZNvEz0K1U?si=_huoHPFO_dfWY0o1',
@@ -18,27 +19,35 @@ const workProgressVideos = [
 ];
 
 export default function GalleryPage() {
+  const { t, dict } = useI18n();
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeTab, setActiveTab] = useState('gallery');
   const close = useCallback(() => setActiveIndex(null), []);
+
+  const galleryImages = gallerySources.map((src, i) => ({
+    src,
+    alt: `${dict.gallery.photoAlt} ${i + 1}`,
+  }));
 
   return (
     <main className="pt-20">
       <section className="py-8 md:py-16 bg-bg">
         <div className="safe-zone">
-          <span className="overline">Vizuelni prikaz</span>
-          <h1
-            className="text-text leading-tight mb-10"
-            style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem,5vw,4rem)', fontWeight: 400 }}
-          >
-            Galerija
-          </h1>
+          <div className="mb-10">
+            <h1
+              className="text-text leading-tight"
+              style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem,5vw,4rem)', fontWeight: 400 }}
+            >
+              {t('gallery.title')}
+            </h1>
+            <span className="overline">{t('gallery.eyebrow')}</span>
+          </div>
 
           {/* Tabs */}
           <div className="flex gap-0 border border-border rounded-sm mb-10 max-w-xs overflow-hidden">
             {[
-              { key: 'gallery', label: 'Fotografije' },
-              { key: 'progress', label: 'Napredak radova' },
+              { key: 'gallery', label: t('gallery.tabs.photos') },
+              { key: 'progress', label: t('gallery.tabs.progress') },
             ].map((tab) => (
               <button
                 key={tab.key}
@@ -85,7 +94,7 @@ export default function GalleryPage() {
                 <div key={i} className="aspect-video rounded-[4px] overflow-hidden border border-border">
                   <iframe
                     src={url}
-                    title={`Napredak radova ${i + 1}`}
+                    title={`${dict.gallery.progressTitle} ${i + 1}`}
                     className="w-full h-full"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"

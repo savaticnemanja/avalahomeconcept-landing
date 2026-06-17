@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "siteName": "Avala Home Concept",
+    "ogDescription": "Geschlossener Komplex von Familienhäusern am Berg Avala, 20 Minuten von Belgrad entfernt.",
+    "jsonLdDescription": "Geschlossener Komplex von Familienhäusern am Berg Avala, 20 Minuten von Belgrad entfernt.",
+    "home": {
+      "title": "Avala Home Concept — Häuser auf der Avala, 20 Min. von Belgrad",
+      "description": "Grundstück, Haus, Pool, gepflegter Garten — 20 Minuten von Belgrad, 10 Minuten von Ikea. Ein geschlossener Komplex von Familienhäusern am Berg Avala. Anruf: +381 63 383-393"
+    },
+    "about": {
+      "title": "Über uns",
+      "description": "Avala Home Concept und die Familie Ćirić — 30 Jahre Erfahrung im Bauwesen. Luxuriöse Häuser modernen Designs am Berg Avala, 20 Minuten von Belgrad."
+    },
+    "gallery": {
+      "title": "Galerie",
+      "description": "Sehen Sie Fotos der Häuser, Gärten und Innenräume von Avala Home Concept — einem luxuriösen Wohnkomplex am Berg Avala."
+    },
+    "project1": {
+      "title": "Projekt 1 — Bungalow 139 m²",
+      "description": "Ein geräumiger Bungalow von 139 m² mit drei hellen Zimmern, einem Pool und einer Terrasse mit Blick auf den Avala-Turm. Geschlossener Komplex, 20 Min. von Belgrad."
+    },
+    "project2": {
+      "title": "Projekt 2 — Familienhaus 147 m²",
+      "description": "Ein komfortables Familienhaus von 147 m² mit drei Schlafzimmern, zwei Bädern und einem optionalen Whirlpool, umgeben vom Grün der Avala."
+    },
+    "smallHouses": {
+      "title": "Häuser 80–100 m²",
+      "description": "Kompakte Häuser von 80 bis 100 m² im mediterranen Stil — energieeffizient und günstiger. Geschlossener Komplex am Berg Avala, 20 Min. von Belgrad."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "description": "Kontaktieren Sie Avala Home Concept — rufen Sie uns an, schreiben Sie eine Nachricht oder besuchen Sie uns. Telefon: +381 63 383393."
+    },
+    "thankYou": {
+      "title": "Vielen Dank",
+      "description": "Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns so schnell wie möglich bei Ihnen."
+    }
+  },
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "offer": "Hausangebot",
+    "project1": "Projekt 1",
+    "project2": "Projekt 2",
+    "smallHouses": "Häuser 80-100 m²",
+    "gallery": "Galerie",
+    "contact": "Kontakt",
+    "requestOffer": "Angebot anfordern",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "language": "Sprache"
+  },
+  "slider": {
+    "eyebrow": "Avala Home Concept",
+    "titleA": "Grundstück, Haus, Pool,",
+    "titleEm": "gepflegter Garten",
+    "subtitle": "20 Minuten von Belgrad · 10 Minuten von Ikea",
+    "callUs": "Rufen Sie uns an",
+    "sendInquiry": "Anfrage senden",
+    "slideLabel": "Folie"
+  },
+  "homeCta": {
+    "title": "Interesse am Komplex?",
+    "eyebrow": "Kontaktieren Sie uns",
+    "text": "Unser Team steht Ihnen für alle Informationen, Besichtigungen und Reservierungen zur Verfügung.",
+    "requestOffer": "Angebot anfordern",
+    "callNow": "Jetzt anrufen"
+  },
+  "showcase": {
+    "titleA": "Ihr Zuhause.",
+    "titleEm": "Ihre Natur.",
+    "eyebrow": "Warum Avala Home Concept",
+    "requestOffer": "Angebot anfordern",
+    "benefits": [
+      "Nähe zur Autobahn",
+      "20 Min. von Autokomanda, Vračar",
+      "Solide Bauweise (Wandstärke 30 cm)",
+      "Granitkeramik",
+      "Swimmingpool",
+      "2 Parkplätze",
+      "Aluminiumelemente in Anthrazit",
+      "Gepflegter Garten",
+      "Geschlossener Komplex",
+      "Glasfaser-Internet",
+      "Parkett",
+      "Fußbodenheizung",
+      "Smart-Home-vorbereitet"
+    ]
+  },
+  "projectShowcase": {
+    "title": "Wählen Sie Ihr Projekt",
+    "eyebrow": "Unser Angebot",
+    "rooms": "Zimmer",
+    "terrace": "Terrasse",
+    "detailSpecs": "Detaillierte Spezifikationen",
+    "cards": [
+      {
+        "title": "Projekt 1",
+        "subtitle": "Bungalow",
+        "badge": "Verfügbar",
+        "highlights": ["Wohnzimmer 22 m²", "Küche + Esszimmer 27 m²", "Pool und gepflegter Garten"]
+      },
+      {
+        "title": "Projekt 2",
+        "subtitle": "Familienhaus",
+        "badge": "Verfügbar",
+        "highlights": ["Ankleidezimmer 8 m²", "Whirlpool (optional)", "Offene Veranda 7 m²"]
+      },
+      {
+        "title": "Häuser 80–100 m²",
+        "subtitle": "Kompaktes Haus",
+        "badge": "Anfragen",
+        "highlights": ["Mediterraner Stil", "Energieeffizient", "Günstigerer Preis"]
+      }
+    ]
+  },
+  "specifications": {
+    "title": "Spezifikationen",
+    "eyebrow": "Bauqualität",
+    "items": [
+      { "title": "Solide Bauweise", "description": "Stahlbetonkonstruktion" },
+      { "title": "Thermo-Klimablock", "description": "Block Nr. 1 auf dem Markt" },
+      { "title": "Wärmedämmung", "description": "10 cm dick, Wandstärke 30 cm" },
+      { "title": "Sanitär", "description": "Geberit-Unterputzsystem, Glas-Duschkabinen" },
+      { "title": "Fassadenelemente", "description": "Aluminiumfenster mit Aluminiumrollläden und Doppelverglasung, argongefüllt" },
+      { "title": "Glas", "description": "Climaguard Solar „Guardian“ (alle vier Jahreszeiten)" },
+      { "title": "Heizung", "description": "Etagenweiser digitaler Elektrokessel, Radiatorheizung. Wärmepumpen (optional)" },
+      { "title": "Innentüren", "description": "MDF mit CPL-Folie beschichtet, mit Zierleisten" },
+      { "title": "Außentüren", "description": "Sicherheitstüren mit 6-Punkt-Verriegelung" },
+      { "title": "Fassade", "description": "Natürliche Materialien: Holz, Keramik und Stein" },
+      { "title": "Decke", "description": "Höhe 2,70–2,90 m" },
+      { "title": "Gepflegter Garten", "description": "Premium-Rasen, Zaun und Verkabelung für die Gartenbeleuchtung" },
+      { "title": "Swimmingpool", "description": "Pool mit Grundausstattung der Marke Astral" }
+    ]
+  },
+  "location": {
+    "title": "20 Minuten von Belgrad",
+    "eyebrow": "Lage",
+    "text": "Genießen Sie die Ruhe des Berges Avala mit allen städtischen Annehmlichkeiten in Reichweite."
+  },
+  "payment": {
+    "title": "Zahlungsplan",
+    "eyebrow": "So kaufen Sie",
+    "steps": [
+      { "label": "Reservierung", "detail": "Reservieren Sie Ihr Wunschhaus mit einer symbolischen Anzahlung, die Ihre Position im Komplex sichert." },
+      { "label": "Vertragsunterzeichnung", "detail": "Mit der Unterzeichnung des Kaufvertrags investieren Sie 30 % des Gesamtwerts der Immobilie." },
+      { "label": "4 Raten während des Baus", "detail": "Den Restbetrag zahlen Sie in 4 gleichen Raten — nach Abschluss jeder Bauphase." }
+    ]
+  },
+  "midCta": {
+    "text": "Reservieren Sie Ihr Haus noch heute.",
+    "requestOffer": "Angebot anfordern"
+  },
+  "contact": {
+    "titleA": "Sprechen wir über",
+    "titleEm": "Ihr Zuhause",
+    "eyebrow": "Nehmen Sie Kontakt auf",
+    "availability": "Unser Team ist werktags von 09:00–17:00 Uhr erreichbar. Wir antworten so schnell wie möglich.",
+    "methods": {
+      "phone": "Telefon",
+      "viber": "Viber",
+      "whatsapp": "WhatsApp",
+      "email": "E-Mail",
+      "sendMessage": "Nachricht senden"
+    },
+    "form": {
+      "firstName": "Ihr Name",
+      "phone": "Telefonnummer",
+      "email": "E-Mail-Adresse",
+      "message": "Nachricht",
+      "send": "Nachricht senden"
+    },
+    "errorToast": "Beim Senden Ihrer Nachricht ist ein Problem aufgetreten. Bitte versuchen Sie es erneut."
+  },
+  "footer": {
+    "tagline": "Ein geschlossener Komplex von Familienhäusern am Berg Avala — 20 Minuten von Belgrad.",
+    "pagesHeading": "Seiten",
+    "offerHeading": "Hausangebot",
+    "contactHeading": "Kontakt",
+    "location": "Avala, Belgrad, Serbien",
+    "rights": "Alle Rechte vorbehalten.",
+    "developedBy": "Entwickelt von",
+    "pages": {
+      "home": "Startseite",
+      "about": "Über uns",
+      "gallery": "Galerie",
+      "contact": "Kontakt"
+    },
+    "offer": {
+      "project1": "Projekt 1 — 139 m²",
+      "project2": "Projekt 2 — 147 m²",
+      "smallHouses": "Häuser 80–100 m²"
+    }
+  },
+  "about": {
+    "title": "Über uns",
+    "eyebrow": "Wer wir sind",
+    "paragraphs": [
+      "Willkommen bei Avala Home Concept — Ihrem Ziel für ein komfortableres, hochwertigeres und gesünderes Leben in der wunderschönen Gegend des Berges Avala, nahe Belgrad. Unsere Mission ist es, Ihnen luxuriöse Häuser modernen Designs zu bieten, die all Ihre Bedürfnisse erfüllen und Ihnen ein Leben inmitten herrlicher Natur ermöglichen.",
+      "Jedes Haus in unserem Angebot ist sorgfältig konzipiert und gebaut, um größeren Familien maximalen Komfort und Annehmlichkeit zu bieten. Unser Expertenteam arbeitet mit Leidenschaft und Hingabe, damit jedes Haus außergewöhnlich gestaltet und mit den hochwertigsten Materialien ausgestattet ist. Jedes Detail ist sorgfältig durchdacht, um Harmonie zwischen Innen- und Außenbereich zu schaffen und so eine angenehme Umgebung für Sie und Ihre Familie zu bilden.",
+      "Wir befinden uns an einem wunderschönen Ort mit Blick auf den majestätischen Avala-Turm und geben Ihnen das Privileg, täglich eine herrliche Landschaft zu genießen und die Ruhe und Gelassenheit zu spüren, die das Leben in der Natur mit sich bringt. Unsere Häuser sind so konzipiert, dass sie Ihnen Privatsphäre und Geborgenheit bieten und gleichzeitig eine einfache Verbindung zur lokalen Gemeinschaft und allen Annehmlichkeiten der Stadt ermöglichen.",
+      "Wir glauben an die Bedeutung eines gesunden Lebensstils und haben daher dafür gesorgt, dass unsere Häuser energieeffizient und nachhaltig sind. Wir nutzen fortschrittliche Technologien und umweltfreundliche Materialien, um den ökologischen Fußabdruck zu verringern und Ihnen einen Raum zu bieten, in dem Sie im Bewusstsein der Bedeutung des Naturschutzes leben können."
+    ],
+    "stats": [
+      { "value": "30+", "label": "Jahre Erfahrung" },
+      { "value": "1000+", "label": "Projekte" },
+      { "value": "20 Min.", "label": "von Belgrad" },
+      { "value": "100+", "label": "zufriedene Familien" }
+    ],
+    "investorTitle": "Familie Ćirić",
+    "investorEyebrow": "Investor",
+    "investorText": "Die Familie Ćirić baut und wirtschaftet seit 30 Jahren erfolgreich auf dem serbischen Markt. Hinter unseren Bauunternehmen stehen Tausende erfolgreich realisierter Projekte und zufriedener Kunden. Unsere langjährige Erfahrung macht uns zu einem zuverlässigen, vertrauenswürdigen Partner mit dem Wissen, der Expertise und den Fachkräften, um alle Arten von Bauarbeiten schnell, hochwertig und wie vereinbart auszuführen.",
+    "emailLabel": "E-Mail:",
+    "website": "Website →"
+  },
+  "projectPage": {
+    "eyebrow": "Unser Angebot",
+    "netSurfaceLabel": "Nettofläche",
+    "total": "Gesamt"
+  },
+  "projects": {
+    "project1": {
+      "title": "Projekt 1 — Bungalow 139 m²",
+      "description": "Ein geräumiger Bungalow von 139 Quadratmetern. Dieses modern gestaltete Haus verfügt zudem über zwei Parkplätze und einen separaten Zweckraum neben dem Pool, in dem Sie eine Sommerküche einrichten können. Gleich drei luftige und komfortable Zimmer sind so positioniert, dass sie viel Sonnenlicht erhalten, was Ihnen jeden Morgen zusätzlich gute Laune bringt. Die Türen des großen Wohnzimmers öffnen sich zu einer Terrasse mit herrlichem Blick auf den Avala-Turm. Von der Terrasse führen Stufen hinunter zu einem gepflegten Weg, der Sie zum Pool und zum Strand bringt.",
+      "rooms": ["Eingangsbereich", "Technikraum", "Toilette", "Flur", "Terrasse", "Zimmer 1", "Zimmer 2", "Zimmer 3", "Badezimmer", "Waschraum", "Wohnzimmer", "Küche und Esszimmer"]
+    },
+    "project2": {
+      "title": "Projekt 2 — Familienhaus 147 m²",
+      "description": "Ein komfortables Familienhaus von 147 m², umgeben von Natur und angenehmem Ambiente. Betreten Sie ein geräumiges Wohnzimmer mit großen Glastüren, die auf das wunderschöne Grün des Berges Avala blicken. Dieses moderne Familienhaus verfügt über drei Schlafzimmer, zwei separate Bäder, einen Whirlpool (optional) und ein großes Esszimmer, das mit dem Wohnzimmer verbunden ist.",
+      "rooms": ["Eingangsbereich", "Flur", "Toilette + Waschraum", "Zimmer 1", "Zimmer 2", "Zimmer 3", "Ankleidezimmer", "Badezimmer", "Terrasse", "Offene Veranda", "Wohnzimmer", "Küche", "Speisekammer", "Technikraum"]
+    }
+  },
+  "smallHouses": {
+    "title": "Häuser 80–100 m²",
+    "eyebrow": "Unser Angebot"
+  },
+  "gallery": {
+    "title": "Galerie",
+    "eyebrow": "Visuelle Vorschau",
+    "tabs": {
+      "photos": "Fotos",
+      "progress": "Baufortschritt"
+    },
+    "photoAlt": "Avala Home Concept — Galerie, Foto",
+    "progressTitle": "Baufortschritt"
+  },
+  "thankYou": {
+    "title": "Vielen Dank!",
+    "text": "Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns so schnell wie möglich bei Ihnen.",
+    "backHome": "Zurück zur Startseite"
+  },
+  "common": {
+    "close": "Schließen",
+    "prev": "Zurück",
+    "next": "Weiter"
+  }
+}

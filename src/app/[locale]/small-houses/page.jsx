@@ -3,31 +3,38 @@ import { useCallback, useState } from 'react';
 import Image from 'next/image';
 import { Lightbox } from '@/components';
 import smallHousesMain from '@/assets/projects/small-houses/main.webp';
-import smallHousesInfo1 from '@/assets/projects/small-houses/smallHouseInfo1.webp';
-import smallHousesInfo2 from '@/assets/projects/small-houses/smallHouseInfo2.webp';
-import smallHousesGallery1 from '@/assets/projects/small-houses/1.webp';
-import smallHousesGallery2 from '@/assets/projects/small-houses/2.webp';
-import smallHousesGallery3 from '@/assets/projects/small-houses/3.webp';
-import smallHousesGallery4 from '@/assets/projects/small-houses/4.webp';
-import smallHousesGallery5 from '@/assets/projects/small-houses/5.webp';
-import smallHousesGallery6 from '@/assets/projects/small-houses/6.webp';
+import smallHousesInfo1 from '@/assets/projects/small-houses/info-1.webp';
+import smallHousesInfo2 from '@/assets/projects/small-houses/info-2.webp';
+import smallHousesGallery1 from '@/assets/projects/small-houses/view-1.webp';
+import smallHousesGallery2 from '@/assets/projects/small-houses/view-2.webp';
+import smallHousesGallery3 from '@/assets/projects/small-houses/view-3.webp';
+import smallHousesGallery4 from '@/assets/projects/small-houses/view-4.webp';
+import smallHousesGallery5 from '@/assets/projects/small-houses/view-5.webp';
+import smallHousesGallery6 from '@/assets/projects/small-houses/view-6.webp';
 import smallHousesVideo from '@/assets/projects/small-houses/video.mp4';
+import { useI18n } from '@/i18n/I18nProvider';
 
-const lightboxImages = [
-  { src: smallHousesMain,     alt: 'Avala Home Concept — kuće 80–100m², eksterijerni prikaz' },
-  { src: smallHousesInfo1,    alt: 'Kuće 80–100m² — informacije o tipu kuće, Avala Home Concept' },
-  { src: smallHousesInfo2,    alt: 'Kuće 80–100m² — detalji ponude i specifikacije' },
-  { src: smallHousesGallery1, alt: 'Avala Home Concept — kuće 80–100m², pogled 1' },
-  { src: smallHousesGallery2, alt: 'Avala Home Concept — kuće 80–100m², pogled 2' },
-  { src: smallHousesGallery3, alt: 'Avala Home Concept — kuće 80–100m², pogled 3' },
-  { src: smallHousesGallery4, alt: 'Avala Home Concept — kuće 80–100m², detalj dvorišta' },
-  { src: smallHousesGallery5, alt: 'Avala Home Concept — kuće 80–100m², detalj enterijera' },
-  { src: smallHousesGallery6, alt: 'Avala Home Concept — kuće 80–100m², pogled na okolinu' },
+const lightboxSources = [
+  smallHousesMain,
+  smallHousesInfo1,
+  smallHousesInfo2,
+  smallHousesGallery1,
+  smallHousesGallery2,
+  smallHousesGallery3,
+  smallHousesGallery4,
+  smallHousesGallery5,
+  smallHousesGallery6,
 ];
 
 export default function SmallHousesPage() {
+  const { t } = useI18n();
   const [activeIndex, setActiveIndex] = useState(null);
   const close = useCallback(() => setActiveIndex(null), []);
+
+  const lightboxImages = lightboxSources.map((src, i) => ({
+    src,
+    alt: `${t('smallHouses.title')} ${i + 1}`,
+  }));
 
   return (
     <main className="pt-20">
@@ -46,13 +53,13 @@ export default function SmallHousesPage() {
         <div className="absolute inset-0 bg-bg-dark/30" />
         <div className="absolute inset-0 flex items-end pb-12">
           <div className="safe-zone">
-            <span className="overline">Naša ponuda</span>
             <h1
               className="text-text-light leading-tight"
               style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem,5vw,4rem)', fontWeight: 400 }}
             >
-              Kuće 80–100m²
+              {t('smallHouses.title')}
             </h1>
+            <span className="overline">{t('smallHouses.eyebrow')}</span>
           </div>
         </div>
       </div>

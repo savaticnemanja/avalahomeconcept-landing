@@ -68,18 +68,10 @@
     @apply mb-8 md:mb-14 text-center;
   }
 
-  /* ── Overline ────────────────────────────────────────────── */
+  /* ── Overline (eyebrow — sits UNDER the heading) ─────────── */
   .overline {
-    @apply block text-[0.7rem] font-medium tracking-[0.2em] uppercase text-accent mb-3;
+    @apply block text-[0.72rem] font-medium tracking-[0.22em] uppercase text-accent mt-3;
     font-family: var(--font-body, 'DM Sans', system-ui, sans-serif);
-  }
-
-  .overline-bar {
-    @apply block w-8 h-px bg-accent mb-5;
-  }
-
-  .overline-bar-center {
-    @apply block w-8 h-px bg-accent mb-5 mx-auto;
   }
 
   /* ── Buttons ─────────────────────────────────────────────── */

@@ -3,21 +3,23 @@ import { useCallback, useState } from 'react';
 import Image from 'next/image';
 import { Lightbox } from '@/components';
 import { projects } from '@/lib/projects';
+import { useI18n } from '@/i18n/I18nProvider';
 
 const project = projects[1];
 
-const allImages = [
-  { src: project.heroImage, alt: `${project.seoTitle} — eksterijerni prikaz` },
-  { src: project.mainImage, alt: `${project.seoTitle} — osnova i plan kuće` },
-  ...project.showcaseImages.map((src, i) => ({
-    src,
-    alt: `${project.seoTitle} — fotografija ${i + 1}`,
-  })),
-];
-
 export default function Project2Page() {
+  const { t, dict } = useI18n();
+  const p = dict.projects.project2;
   const [activeIndex, setActiveIndex] = useState(null);
   const close = useCallback(() => setActiveIndex(null), []);
+
+  const allImages = [
+    { src: project.heroImage, alt: p.title },
+    { src: project.mainImage, alt: p.title },
+    ...project.showcaseImages.map((src, i) => ({ src, alt: `${p.title} ${i + 1}` })),
+  ];
+
+  const rooms = p.rooms.map((name, i) => ({ name, area: project.netAreas[i] }));
 
   return (
     <main className="pt-20">
@@ -36,13 +38,13 @@ export default function Project2Page() {
         <div className="absolute inset-0 bg-bg-dark/30" />
         <div className="absolute inset-0 flex items-end pb-12">
           <div className="safe-zone">
-            <span className="overline">Naša ponuda</span>
             <h1
               className="text-text-light leading-tight"
               style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem,5vw,4rem)', fontWeight: 400 }}
             >
-              {project.seoTitle}
+              {p.title}
             </h1>
+            <span className="overline">{t('projectPage.eyebrow')}</span>
           </div>
         </div>
       </div>
@@ -65,14 +67,14 @@ export default function Project2Page() {
               />
             </div>
             <div className="flex flex-col gap-6">
-              <p className="text-text-muted font-light leading-relaxed">{project.description}</p>
+              <p className="text-text-muted font-light leading-relaxed">{p.description}</p>
               <div className="border-t border-border pt-6">
                 <p className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-accent mb-4">
-                  Neto površina
+                  {t('projectPage.netSurfaceLabel')}
                 </p>
                 <table className="w-full text-sm border-collapse">
                   <tbody>
-                    {project.netSurfaceArea.map((row, i) => (
+                    {rooms.map((row, i) => (
                       <tr key={i} className="border-b border-border/50 last:border-0">
                         <td className="py-2 font-light text-text">{row.name}</td>
                         <td className="py-2 text-right text-text-muted font-light">{row.area}</td>
@@ -81,7 +83,7 @@ export default function Project2Page() {
                   </tbody>
                 </table>
                 <div className="mt-4 pt-4 border-t border-border flex justify-between items-center">
-                  <span className="text-sm font-medium text-text">Ukupno</span>
+                  <span className="text-sm font-medium text-text">{t('projectPage.total')}</span>
                   <span className="text-accent font-medium">{project.surfaceArea} m²</span>
                 </div>
               </div>

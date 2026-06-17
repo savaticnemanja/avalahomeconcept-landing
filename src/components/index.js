@@ -9,5 +9,4 @@ export { Partners } from './Partners/Partners';
 export { Footer } from './Footer/Footer';
 export { Lightbox } from './Lightbox/Lightbox';
 export { ToastProvider } from './ToastProvider/ToastProvider';
-export { FAQ } from './FAQ/FAQ';
 export { ScrollToTop } from './ScrollToTop/ScrollToTop';

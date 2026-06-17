@@ -1,12 +1,20 @@
-export const metadata = {
-  title: 'Projekat 1 — Prizemna kuća 139m²',
-  description: 'Prostrana prizemna kuća od 139m² sa tri svetle sobe, bazenom i terasom sa pogledom na Avalski toranj. Zatvoren kompleks 20 min od Beograda.',
-  openGraph: {
-    title: 'Projekat 1 — Prizemna kuća 139m² | Avala Home Concept',
-    description: 'Prostrana prizemna kuća od 139m² sa tri svetle sobe, bazenom i terasom sa pogledom na Avalski toranj.',
-    url: 'https://avalahomeconcept.com/project1',
-  },
-};
+import { getDictionary } from '@/i18n/getDictionary';
+import { buildAlternates, SITE_URL, withLocale } from '@/i18n/config';
+
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const dict = await getDictionary(locale);
+  return {
+    title: dict.meta.project1.title,
+    description: dict.meta.project1.description,
+    alternates: buildAlternates(locale, '/project1'),
+    openGraph: {
+      title: `${dict.meta.project1.title} | ${dict.meta.siteName}`,
+      description: dict.meta.project1.description,
+      url: `${SITE_URL}${withLocale(locale, '/project1')}/`,
+    },
+  };
+}
 
 export default function Layout({ children }) {
   return children;

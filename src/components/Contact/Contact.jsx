@@ -4,45 +4,47 @@ import { useRouter } from 'next/navigation';
 import emailjs from '@emailjs/browser';
 import { Bounce, toast } from 'react-toastify';
 import { LuPhone, LuMessageSquare, LuMessageCircle, LuMail, LuSend } from 'react-icons/lu';
-
-const contactMethods = [
-  {
-    icon: LuPhone,
-    label: 'Telefon',
-    value: '+381 63 383 393',
-    action: () => { window.location.href = 'tel:+38163383393'; },
-  },
-  {
-    icon: LuMessageSquare,
-    label: 'Viber',
-    value: 'Pošaljite poruku',
-    action: () => window.open('viber://contact/?number=+38163383393', '_blank'),
-  },
-  {
-    icon: LuMessageCircle,
-    label: 'WhatsApp',
-    value: 'Pošaljite poruku',
-    action: () => window.open('https://wa.me/38163383393', '_blank'),
-  },
-  {
-    icon: LuMail,
-    label: 'Email',
-    value: 'avalahomeconcept@gmail.com',
-    action: () => { window.location.href = 'mailto:avalahomeconcept@gmail.com'; },
-  },
-];
+import { useI18n } from '@/i18n/I18nProvider';
 
 export const Contact = () => {
+  const { t, href } = useI18n();
   const form = useRef();
   const router = useRouter();
+
+  const contactMethods = [
+    {
+      icon: LuPhone,
+      label: t('contact.methods.phone'),
+      value: '+381 63 383 393',
+      action: () => { window.location.href = 'tel:+38163383393'; },
+    },
+    {
+      icon: LuMessageSquare,
+      label: t('contact.methods.viber'),
+      value: t('contact.methods.sendMessage'),
+      action: () => window.open('viber://contact/?number=+38163383393', '_blank'),
+    },
+    {
+      icon: LuMessageCircle,
+      label: t('contact.methods.whatsapp'),
+      value: t('contact.methods.sendMessage'),
+      action: () => window.open('https://wa.me/38163383393', '_blank'),
+    },
+    {
+      icon: LuMail,
+      label: t('contact.methods.email'),
+      value: 'avalahomeconcept@gmail.com',
+      action: () => { window.location.href = 'mailto:avalahomeconcept@gmail.com'; },
+    },
+  ];
 
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
       .sendForm('service_479xn4w', 'template_f65leyq', form.current, 'yXqwmaxm-PpofwIqK')
       .then(
-        () => router.push('/thank-you'),
-        () => toast.error('Problem sa slanjem poruke. Pokušajte ponovo.', {
+        () => router.push(href('/thank-you')),
+        () => toast.error(t('contact.errorToast'), {
           position: 'bottom-center',
           autoClose: 5000,
           theme: 'light',
@@ -59,17 +61,16 @@ export const Contact = () => {
           {/* Left — info */}
           <div className="flex flex-col gap-10" data-reveal>
             <div>
-              <span className="overline">Stupite u kontakt</span>
-              <div className="overline-bar" />
               <h2
                 className="text-text-light"
                 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem,4vw,3.5rem)', fontWeight: 400 }}
               >
-                Razgovarajmo o{' '}
-                <em>vašem domu</em>
+                {t('contact.titleA')}{' '}
+                <em>{t('contact.titleEm')}</em>
               </h2>
+              <span className="overline">{t('contact.eyebrow')}</span>
               <p className="text-text-light/50 font-light text-sm leading-relaxed mt-5 max-w-sm">
-                Naš tim je dostupan radnim danima od 09–17h. Odgovorićemo u najkraćem roku.
+                {t('contact.availability')}
               </p>
             </div>
 
@@ -105,9 +106,9 @@ export const Contact = () => {
             <div className="border border-border-dark p-4 md:p-8 flex flex-col gap-5 md:gap-7">
 
               {[
-                { name: 'firstName',     type: 'text',  placeholder: 'Vaše ime' },
-                { name: 'contactNumber', type: 'tel',   placeholder: 'Broj telefona' },
-                { name: 'contactEmail',  type: 'email', placeholder: 'Email adresa' },
+                { name: 'firstName',     type: 'text',  placeholder: t('contact.form.firstName') },
+                { name: 'contactNumber', type: 'tel',   placeholder: t('contact.form.phone') },
+                { name: 'contactEmail',  type: 'email', placeholder: t('contact.form.email') },
               ].map((field) => (
                 <div key={field.name} className="relative">
                   <input
@@ -141,7 +142,7 @@ export const Contact = () => {
                   className="absolute left-0 top-3 text-text-light/35 text-sm font-light pointer-events-none transition-all duration-200 peer-focus:text-[0.7rem] peer-focus:-top-3 peer-focus:text-accent peer-[:not(:placeholder-shown)]:text-[0.7rem] peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-text-light/50"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
-                  Poruka
+                  {t('contact.form.message')}
                 </label>
               </div>
 
@@ -150,7 +151,7 @@ export const Contact = () => {
                 className="btn-primary group self-start mt-2"
               >
                 <LuSend className="w-4 h-4" />
-                Pošaljite poruku
+                {t('contact.form.send')}
                 <span className="btn-arrow"><svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd"/></svg></span>
               </button>
 
