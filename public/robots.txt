@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://avalahomeconcept.com/sitemap.xml
