@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
 import { LuKeyRound, LuFilePen, LuHouse, LuWallet } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 
@@ -11,14 +12,56 @@ const stepData = [
 
 export const PaymentDynamic = () => {
   const { t } = useI18n();
+  const stepsRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const steps = stepData.map((s, i) => ({
     ...s,
     label: t(`payment.steps.${i}.label`),
     detail: t(`payment.steps.${i}.detail`),
   }));
 
+  // Scroll-driven emphasis: as the steps grid travels through the viewport,
+  // sequentially highlight step 1, then 2, then 3 (mirrors the hover state).
+  useEffect(() => {
+    const el = stepsRef.current;
+    if (!el) return;
+    let raf = null;
+    const update = () => {
+      raf = null;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // Fully out of view → no emphasis
+      if (rect.bottom <= 0 || rect.top >= vh) {
+        setActiveIndex(-1);
+        return;
+      }
+      // Progress of the grid's center across the viewport (0 = entering bottom, 1 = leaving top)
+      const center = rect.top + rect.height / 2;
+      const progress = Math.min(Math.max((vh - center) / vh, 0), 1);
+      // Scroll thresholds per step; 3rd step is emphasized a little earlier (0.56 vs even 0.67)
+      const thresholds = [0, 0.34, 0.48];
+      let idx = 0;
+      for (let i = 0; i < thresholds.length; i++) {
+        if (progress >= thresholds[i]) idx = i;
+      }
+      setActiveIndex(idx);
+    };
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, [steps.length]);
+
   return (
-  <section className="py-12 md:py-24 bg-bg">
+  <section className="py-8 md:py-16 bg-bg">
     <div className="safe-zone">
 
       {/* Header */}
@@ -33,11 +76,13 @@ export const PaymentDynamic = () => {
       </div>
 
       {/* Steps */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border" data-reveal>
-        {steps.map(({ number, amount, label, detail, icon: Icon }, i) => (
+      <div ref={stepsRef} className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border" data-reveal>
+        {steps.map(({ number, amount, label, detail, icon: Icon }, i) => {
+          const active = i === activeIndex;
+          return (
           <div
             key={i}
-            className="bg-bg p-4 md:p-8 xl:p-12 flex flex-col gap-5 md:gap-6 group hover:bg-bg-alt transition-colors duration-200"
+            className={`p-4 md:p-8 xl:p-12 flex flex-col gap-5 md:gap-6 group transition-colors duration-300 hover:bg-bg-alt ${active ? 'bg-bg-alt' : 'bg-bg'}`}
           >
             {/* Number + icon row */}
             <div className="flex items-center justify-between">
@@ -48,7 +93,7 @@ export const PaymentDynamic = () => {
               >
                 {number}
               </span>
-              <span className="w-12 h-12 flex items-center justify-center border border-border rounded-full text-text-muted group-hover:border-accent group-hover:text-accent transition-all duration-200">
+              <span className={`w-12 h-12 flex items-center justify-center border rounded-full transition-all duration-300 group-hover:border-accent group-hover:text-accent ${active ? 'border-accent text-accent' : 'border-border text-text-muted'}`}>
                 <Icon className="w-5 h-5" />
               </span>
             </div>
@@ -74,7 +119,8 @@ export const PaymentDynamic = () => {
               {detail}
             </p>
           </div>
-        ))}
+          );
+        })}
       </div>
 
     </div>

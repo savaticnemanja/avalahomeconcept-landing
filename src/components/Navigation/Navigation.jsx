@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { LuArrowUpRight, LuChevronDown, LuPhone, LuGlobe } from 'react-icons/lu';
+import { LuArrowUpRight, LuChevronDown, LuPhone, LuGlobe, LuMenu, LuX } from 'react-icons/lu';
 import logo from '@/assets/brand/logo-old.webp';
 import { useI18n } from '@/i18n/I18nProvider';
 import { locales, localeNames } from '@/i18n/config';
@@ -107,26 +107,6 @@ export const Navigation = () => {
         }}
       />
 
-      {/* ── Scroll progress ──────────────────────────────────── */}
-      {/* Desktop: appears when the nav is collapsed. Mobile: always */}
-      {/* visible once scrolled (sits above the nav bar). */}
-      <div
-        className="fixed top-0 left-0 right-0 h-[3px] z-[51] pointer-events-none"
-        style={{
-          opacity:
-            !mobileMenuVisible && (isMobile ? scrollProgress > 0.001 : navHidden)
-              ? 1
-              : 0,
-          transition: 'opacity 0.3s ease',
-        }}
-        aria-hidden="true"
-      >
-        <div
-          className="h-full bg-accent origin-left"
-          style={{ transform: `scaleX(${scrollProgress})` }}
-        />
-      </div>
-
       {/* ── Full-screen mobile menu ──────────────────────────── */}
       <div
         className="fixed left-0 right-0 bottom-0 md:hidden flex flex-col overflow-y-auto"
@@ -142,7 +122,7 @@ export const Navigation = () => {
         aria-hidden={!mobileMenuVisible}
       >
         {/* Links */}
-        <nav className="flex-1 safe-zone pt-6">
+        <nav className="flex-1 safe-zone mx-0 pt-6">
           <ul>
             {navLinks.map((link, idx) => (
               <li key={link.label} className="border-b border-border-dark">
@@ -177,7 +157,7 @@ export const Navigation = () => {
         </nav>
 
         {/* Bottom bar */}
-        <div className="safe-zone py-6 border-t border-border-dark flex flex-col gap-4 flex-shrink-0">
+        <div className="safe-zone mx-0 py-6 border-t border-border-dark flex flex-col gap-4 flex-shrink-0">
           {/* Language switcher */}
           <div className="flex flex-wrap gap-2" aria-label={t('nav.language')}>
             {locales.map((l) => (
@@ -214,7 +194,7 @@ export const Navigation = () => {
       {/* ── Nav bar ─────────────────────────────────────────── */}
       <nav
         ref={navRef}
-        className="fixed top-0 left-0 right-0 z-50 bg-bg/95 backdrop-blur-md shadow-[0_1px_0_#E3DBCE]"
+        className="fixed top-0 left-0 right-0 z-50 bg-bg shadow-[0_1px_0_#E3DBCE]"
         style={{
           transform: (navHidden && !mobileMenuVisible) ? 'translateY(calc(-100% - 4px))' : 'translateY(0)',
           transition: 'transform 0.35s ease',
@@ -226,24 +206,42 @@ export const Navigation = () => {
           <Link href={href('/')} onClick={closeMobileMenu}>
             <Image
               src={logo}
-              className="h-10 md:h-12 w-auto"
+              className="h-12 md:h-14 w-auto"
               alt="Avala Home Concept logo"
               width={150}
               height={50}
             />
           </Link>
 
-          {/* Hamburger → X (mobile only) */}
-          <button
-            className="flex flex-col justify-center gap-1.5 p-2 w-10 h-10 md:hidden"
-            onClick={() => setMobileMenuVisible(!mobileMenuVisible)}
-            aria-label={mobileMenuVisible ? t('nav.closeMenu') : t('nav.openMenu')}
-            aria-expanded={mobileMenuVisible}
-          >
-            <span className={['block h-0.5 w-6 bg-text transition-all duration-250 origin-center', mobileMenuVisible ? 'rotate-45 translate-y-[7px]' : ''].join(' ')} />
-            <span className={['block h-0.5 w-6 bg-text transition-all duration-250',               mobileMenuVisible ? 'opacity-0 scale-x-0' : ''].join(' ')} />
-            <span className={['block h-0.5 w-6 bg-text transition-all duration-250 origin-center', mobileMenuVisible ? '-rotate-45 -translate-y-[7px]' : ''].join(' ')} />
-          </button>
+          {/* Mobile actions: CTA icon + hamburger */}
+          <div className="flex items-center gap-2 md:hidden">
+            {/* Phone CTA (pulsing) */}
+            <a
+              href="tel:+38163383393"
+              aria-label="+381 63 383 393"
+              className="group relative inline-flex items-center justify-center w-10 h-10"
+            >
+              <span className="absolute inset-0 m-auto w-8 h-8 bg-accent/50 animate-ping [animation-duration:2.5s] pointer-events-none" />
+              <span className="relative inline-flex items-center justify-center w-10 h-10 bg-bg border border-accent text-accent transition-all duration-250 active:bg-accent active:text-white">
+                <LuPhone className="w-4 h-4" />
+              </span>
+            </a>
+
+            {/* Menu ↔ Close */}
+            <button
+              className="relative w-10 h-10 flex items-center justify-center text-text hover:text-accent transition-colors duration-200"
+              onClick={() => setMobileMenuVisible(!mobileMenuVisible)}
+              aria-label={mobileMenuVisible ? t('nav.closeMenu') : t('nav.openMenu')}
+              aria-expanded={mobileMenuVisible}
+            >
+              <LuMenu
+                className={['absolute w-6 h-6 transition-all duration-300', mobileMenuVisible ? 'opacity-0 rotate-90 scale-75' : 'opacity-100 rotate-0 scale-100'].join(' ')}
+              />
+              <LuX
+                className={['absolute w-6 h-6 transition-all duration-300', mobileMenuVisible ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-75'].join(' ')}
+              />
+            </button>
+          </div>
 
           {/* Desktop nav links */}
           <ul className="hidden md:flex items-center gap-8">
@@ -252,7 +250,7 @@ export const Navigation = () => {
                 <Link
                   href={href(link.path)}
                   className={[
-                    'relative flex items-center h-16 md:h-20 text-[0.85rem] tracking-[0.04em] text-text transition-colors duration-200',
+                    'relative flex items-end pb-[18px] h-16 md:h-20 text-[0.85rem] tracking-[0.04em] text-text transition-colors duration-200',
                     'after:absolute after:-bottom-px after:left-0 after:h-[2px] after:w-0',
                     'after:bg-accent after:transition-[width] after:duration-200 hover:after:w-full',
                     isActive(link.path) ? 'after:w-full' : '',
@@ -273,7 +271,7 @@ export const Navigation = () => {
               title="+381 63 383 393"
               className="group relative inline-flex items-center justify-center w-11 h-11"
             >
-              <span className="absolute inset-0 m-auto w-11 h-11 bg-accent/50 animate-ping pointer-events-none" />
+              <span className="absolute inset-0 m-auto w-8 h-8 bg-accent/50 animate-ping [animation-duration:2.5s] pointer-events-none" />
               <span className="relative inline-flex items-center justify-center w-11 h-11 bg-bg border border-accent text-accent transition-all duration-250 group-hover:bg-accent group-hover:text-white">
                 <LuPhone className="w-4 h-4" />
               </span>
@@ -324,6 +322,27 @@ export const Navigation = () => {
 
         </div>
       </nav>
+
+      {/* ── Scroll progress ──────────────────────────────────── */}
+      {/* Rendered last (above the nav) so iOS Safari's backdrop-filter on the */}
+      {/* nav doesn't composite over it. Desktop: shows when nav collapsed. */}
+      {/* Mobile: shows whenever scrolled, independent of nav visibility. */}
+      <div
+        className="fixed top-0 left-0 right-0 h-[3px] z-[55] pointer-events-none"
+        style={{
+          opacity:
+            !mobileMenuVisible && (isMobile ? scrollProgress > 0.001 : navHidden)
+              ? 1
+              : 0,
+          transition: 'opacity 0.3s ease',
+        }}
+        aria-hidden="true"
+      >
+        <div
+          className="h-full bg-accent origin-left"
+          style={{ transform: `scaleX(${scrollProgress})` }}
+        />
+      </div>
     </>
   );
 };

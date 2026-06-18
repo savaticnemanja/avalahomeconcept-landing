@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { LuBadgeCheck, LuMail } from 'react-icons/lu';
+import { LuMail } from 'react-icons/lu';
 import ctaBg from '@/assets/cta/complex-sunset.jpeg';
 import {
   Contact,
@@ -10,8 +10,8 @@ import {
   ProjectShowcase,
   Showcase,
   Slider,
+  Specifications,
 } from '@/components';
-import { specificationIcons } from '@/lib/specifications';
 import { getDictionary } from '@/i18n/getDictionary';
 import { withLocale } from '@/i18n/config';
 
@@ -22,11 +22,6 @@ const ArrowIcon = () => (
 export default async function HomePage({ params }) {
   const { locale } = await params;
   const dict = await getDictionary(locale);
-  const specs = specificationIcons.map((icon, i) => ({
-    icon,
-    title: dict.specifications.items[i].title,
-    description: dict.specifications.items[i].description,
-  }));
 
   return (
     <>
@@ -43,43 +38,7 @@ export default async function HomePage({ params }) {
       <Location />
 
       {/* Specifikacije */}
-      <section className="py-12 md:py-24 bg-bg-dark">
-        <div className="safe-zone">
-          <div className="section-header-centered">
-            <span className="overline"><LuBadgeCheck />{dict.specifications.eyebrow}</span>
-            <h2
-              className="text-text-light leading-tight"
-              style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem,4vw,3.5rem)', fontWeight: 400 }}
-            >
-              {dict.specifications.title}
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px bg-border-dark">
-            {specs.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={i}
-                  className="bg-bg-dark flex flex-col gap-3 md:gap-4 p-4 md:p-7 group hover:bg-bg-mid transition-colors duration-200"
-                >
-                  <span className="w-10 h-10 flex items-center justify-center border border-border-dark rounded-full text-text-light/30 group-hover:border-accent/50 group-hover:text-accent transition-all duration-200">
-                    <Icon className="w-4 h-4" />
-                  </span>
-                  <h4
-                    className="text-text-light"
-                    style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 400 }}
-                  >
-                    {item.title}
-                  </h4>
-                  <p className="text-text-light/40 text-sm font-light leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <Specifications />
 
       {/* Dinamika plaćanja */}
       <PaymentDynamic />

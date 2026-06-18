@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { LuArrowRight, LuBed, LuMaximize2, LuSunrise, LuHouse } from 'react-icons/lu';
+import { LuArrowRight, LuBed, LuMaximize2, LuSunrise, LuHouse, LuChevronsRight } from 'react-icons/lu';
 import plan1 from '@/assets/projects/project-1/plan-card.webp';
 import plan2 from '@/assets/projects/project-2/plan-card.webp';
 import smallHousesMain from '@/assets/projects/small-houses/main.webp';
@@ -127,7 +127,7 @@ export const ProjectShowcase = () => {
   return (
   <section className="py-12 md:py-24 bg-bg overflow-hidden">
     {/* Header */}
-    <div className="safe-zone section-header mb-12" data-reveal>
+    <div className="safe-zone section-header mb-8 md:mb-12" data-reveal>
       <span className="overline"><LuHouse />{t('projectShowcase.eyebrow')}</span>
       <h2
         className="text-text"
@@ -135,6 +135,17 @@ export const ProjectShowcase = () => {
       >
         {t('projectShowcase.title')}
       </h2>
+
+      {/* Horizontal scroll hint */}
+      <div className="flex items-center gap-2 mt-4 text-text-muted lg:hidden">
+        <span
+          className="text-[0.7rem] font-medium tracking-[0.18em] uppercase"
+          style={{ fontFamily: 'var(--font-body)' }}
+        >
+          {t('projectShowcase.scrollHint')}
+        </span>
+        <LuChevronsRight className="w-5 h-5 text-accent scroll-hint-x" />
+      </div>
     </div>
 
     {/* Horizontal scroll strip */}
@@ -150,8 +161,28 @@ export const ProjectShowcase = () => {
         {projects.map((p, i) => (
           <ProjectCard key={i} project={p} t={t} href={href} />
         ))}
+
+        {/* Mobile: CTA lives at the end of the horizontal scroll */}
+        <div
+          className="md:hidden flex-shrink-0 flex items-center justify-center px-4"
+          style={{ width: '240px', scrollSnapAlign: 'start' }}
+        >
+          <Link href={href('/offer')} className="btn-primary inline-flex group">
+            {t('projectShowcase.viewAll')}
+            <LuArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
         {/* Spacer so last card isn't flush to edge on large screens */}
         <div className="flex-shrink-0 w-1" aria-hidden="true" />
+      </div>
+
+      {/* Desktop: CTA centered beneath the strip */}
+      <div className="hidden md:flex justify-center mt-8 md:mt-12" data-reveal>
+        <Link href={href('/offer')} className="btn-primary inline-flex group">
+          {t('projectShowcase.viewAll')}
+          <LuArrowRight className="w-4 h-4" />
+        </Link>
       </div>
     </div>
   </section>

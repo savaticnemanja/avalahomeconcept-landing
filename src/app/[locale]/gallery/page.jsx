@@ -32,7 +32,7 @@ export default function GalleryPage() {
 
   return (
     <main className="pt-20">
-      <section className="py-8 md:py-16 bg-bg">
+      <section className="py-12 md:py-16 bg-bg">
         <div className="safe-zone">
           <div className="mb-10">
             <span className="overline"><LuImages />{t('gallery.eyebrow')}</span>

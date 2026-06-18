@@ -97,6 +97,8 @@
     "rooms": "Zimmer",
     "terrace": "Terrasse",
     "detailSpecs": "Detaillierte Spezifikationen",
+    "viewAll": "Alle Hausangebote ansehen",
+    "scrollHint": "Wischen",
     "cards": [
       {
         "title": "Projekt 1",
@@ -228,6 +230,8 @@
       "sendMessage": "Nachricht senden"
     },
     "form": {
+      "heading": "Senden Sie uns eine Anfrage",
+      "subheading": "Hinterlassen Sie Ihre Daten und wir melden uns schnellstmöglich bei Ihnen.",
       "firstName": "Ihr Name",
       "phone": "Telefonnummer",
       "email": "E-Mail-Adresse",

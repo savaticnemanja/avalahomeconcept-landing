@@ -5,6 +5,7 @@ export { ProjectShowcase } from './ProjectShowcase/ProjectShowcase';
 export { ProjectDrawer } from './ProjectDrawer/ProjectDrawer';
 export { Location } from './Location/Location';
 export { PaymentDynamic } from './PaymentDynamic/PaymentDynamic';
+export { Specifications } from './Specifications/Specifications';
 export { Contact } from './Contact/Contact';
 export { Partners } from './Partners/Partners';
 export { Footer } from './Footer/Footer';

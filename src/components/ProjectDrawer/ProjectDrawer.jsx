@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { LuArrowUpRight, LuBed, LuMaximize2, LuSunrise, LuX, LuHouse } from 'react-icons/lu';
+import { LuArrowUpRight, LuBed, LuMaximize2, LuSunrise, LuX, LuZoomIn, LuPhone } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 
 // Full-screen image zoom layered above the drawer panel.
@@ -73,10 +73,12 @@ export const ProjectDrawer = ({ project, onClose }) => {
   const [active, setActive] = useState(project);
   const [visible, setVisible] = useState(false);
   const [zoom, setZoom] = useState(null);
+  const [activeImg, setActiveImg] = useState(0);
 
   useEffect(() => {
     if (project) {
       setActive(project);
+      setActiveImg(0);
       const id = requestAnimationFrame(() => setVisible(true));
       return () => cancelAnimationFrame(id);
     }
@@ -122,7 +124,7 @@ export const ProjectDrawer = ({ project, onClose }) => {
 
       {/* Panel */}
       <aside
-        className="fixed top-0 right-0 bottom-0 z-[60] w-full max-w-[640px] bg-bg flex flex-col shadow-[-8px_0_40px_rgba(26,25,21,0.18)]"
+        className="fixed top-0 right-0 bottom-0 z-[60] w-full max-w-[820px] bg-bg flex flex-col shadow-[-8px_0_40px_rgba(26,25,21,0.18)]"
         style={{
           transform: visible ? 'translateX(0)' : 'translateX(100%)',
           transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
@@ -135,9 +137,8 @@ export const ProjectDrawer = ({ project, onClose }) => {
         {active && (
           <>
             {/* Sticky header */}
-            <div className="flex items-center justify-between gap-4 px-5 md:px-8 h-16 md:h-20 border-b border-border flex-shrink-0 bg-bg/95 backdrop-blur-md">
+            <div className="flex items-center justify-between gap-4 px-2 md:px-6 h-16 md:h-20 border-b border-border flex-shrink-0 bg-bg/95 backdrop-blur-md">
               <div className="min-w-0">
-                <span className="overline"><LuHouse />{t('offer.eyebrow')}</span>
                 <h2
                   className="text-text truncate"
                   style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.2rem,2.5vw,1.7rem)', fontWeight: 400, lineHeight: 1.1 }}
@@ -154,93 +155,87 @@ export const ProjectDrawer = ({ project, onClose }) => {
               </button>
             </div>
 
-            {/* Scrollable body */}
-            <div className="flex-1 overflow-y-auto">
-              {/* Hero render */}
-              <button
-                className="relative block w-full h-[34vh] min-h-[220px] overflow-hidden group"
-                onClick={() => setZoom(0)}
-                aria-label={title}
-              >
-                <Image
-                  src={active.heroImage}
-                  alt={title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <span
-                  className="absolute top-4 right-4 px-3 py-1 text-[0.68rem] font-medium tracking-[0.15em] uppercase text-white"
-                  style={{ backgroundColor: 'rgba(196,151,90,0.92)', fontFamily: 'var(--font-body)', backdropFilter: 'blur(4px)' }}
+            {/* Body — fixed layout, no full-panel scroll */}
+            <div className="flex-1 min-h-0 flex flex-col">
+
+              {/* Featured image + thumbnail scroller */}
+              <div className="flex flex-col gap-3 px-2 md:px-6 py-4 flex-shrink-0">
+                {/* Active image (enlarged) */}
+                <button
+                  onClick={() => setZoom(activeImg)}
+                  className="relative w-full h-64 md:h-80 rounded-[4px] overflow-hidden border border-border group"
+                  aria-label={zoomImages[activeImg]?.alt}
                 >
-                  {t(`offer.cards.${active.cardIndex}.badge`)}
-                </span>
-              </button>
-
-              <div className="px-5 md:px-8 py-7 md:py-9 flex flex-col gap-9">
-                {/* Quick stats */}
-                <div className="flex flex-wrap items-end justify-between gap-4 -mt-1">
-                  <p
-                    className="text-text-muted text-[0.7rem] font-medium tracking-[0.15em] uppercase"
-                    style={{ fontFamily: 'var(--font-body)' }}
+                  <Image
+                    src={zoomImages[activeImg].src}
+                    alt={zoomImages[activeImg].alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    priority
+                  />
+                  <span
+                    className="absolute top-3 right-3 px-3 py-1 text-[0.68rem] font-medium tracking-[0.15em] uppercase text-white"
+                    style={{ backgroundColor: 'rgba(196,151,90,0.92)', fontFamily: 'var(--font-body)', backdropFilter: 'blur(4px)' }}
                   >
-                    {t(`offer.cards.${active.cardIndex}.subtitle`)}
-                  </p>
-                  <div className="text-right">
-                    <span
-                      className="text-accent"
-                      style={{ fontFamily: 'var(--font-heading)', fontSize: '2.4rem', fontWeight: 400, lineHeight: 1 }}
+                    {t(`offer.cards.${active.cardIndex}.badge`)}
+                  </span>
+                  {/* Zoom indicator */}
+                  <span className="absolute bottom-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-bg-dark/55 text-white backdrop-blur-sm transition-colors duration-200 group-hover:bg-accent">
+                    <LuZoomIn className="w-4 h-4" />
+                  </span>
+                </button>
+
+                {/* Thumbnails */}
+                <div
+                  className="flex gap-2 overflow-x-auto"
+                  style={{ scrollSnapType: 'x mandatory' }}
+                >
+                  {zoomImages.map((im, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveImg(i)}
+                      className={`relative flex-shrink-0 h-14 w-20 md:h-16 md:w-24 rounded-[3px] overflow-hidden border-2 transition-all duration-200 ${i === activeImg ? 'border-accent' : 'border-transparent opacity-60 hover:opacity-100'}`}
+                      style={{ scrollSnapAlign: 'start' }}
+                      aria-label={im.alt}
                     >
-                      {active.area}
-                    </span>
-                    <span className="text-text-muted text-sm"> m²</span>
-                  </div>
+                      <Image src={im.src} alt="" fill className="object-cover" loading="lazy" />
+                    </button>
+                  ))}
                 </div>
+              </div>
 
-                <div className="flex flex-wrap gap-5 py-4 border-y border-border">
-                  <span className="flex items-center gap-2 text-sm font-light text-text-muted">
-                    <LuBed className="w-4 h-4 text-accent" />
-                    {active.beds} {t('offer.rooms')}
+              {/* Property points */}
+              <div className="flex items-center gap-5 px-2 md:px-6 py-4 border-y border-border overflow-x-auto flex-shrink-0">
+                <p
+                  className="text-text-muted text-[0.7rem] font-medium tracking-[0.15em] uppercase whitespace-nowrap flex-shrink-0"
+                  style={{ fontFamily: 'var(--font-body)' }}
+                >
+                  {t(`offer.cards.${active.cardIndex}.subtitle`)}
+                </p>
+                <span className="flex items-center gap-2 text-sm font-light text-text-muted whitespace-nowrap flex-shrink-0">
+                  <LuBed className="w-4 h-4 text-accent" />
+                  {active.beds} {t('offer.rooms')}
+                </span>
+                {active.terrace && (
+                  <span className="flex items-center gap-2 text-sm font-light text-text-muted whitespace-nowrap flex-shrink-0">
+                    <LuSunrise className="w-4 h-4 text-accent" />
+                    {t('offer.terrace')} {active.terrace}
                   </span>
-                  {active.terrace && (
-                    <span className="flex items-center gap-2 text-sm font-light text-text-muted">
-                      <LuSunrise className="w-4 h-4 text-accent" />
-                      {t('offer.terrace')} {active.terrace}
-                    </span>
-                  )}
-                  <span className="flex items-center gap-2 text-sm font-light text-text-muted">
-                    <LuMaximize2 className="w-4 h-4 text-accent" />
-                    {active.area} m²
-                  </span>
-                </div>
+                )}
+                <span className="flex items-center gap-2 text-sm font-light text-text-muted whitespace-nowrap flex-shrink-0">
+                  <LuMaximize2 className="w-4 h-4 text-accent" />
+                  {active.area} m²
+                </span>
+              </div>
 
-                {/* Description */}
+              {/* Description + floor area (scrolls internally only if content overflows) */}
+              <div className="flex-1 min-h-0 overflow-y-auto px-2 md:px-6 py-4 flex flex-col gap-6">
                 {detail?.description && (
                   <p className="text-text-muted font-light leading-relaxed">{detail.description}</p>
                 )}
 
-                {/* Plan */}
-                <div className="flex flex-col gap-4">
-                  <p className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-accent">
-                    {t('offer.drawer.plan')}
-                  </p>
-                  <button
-                    className="block w-full rounded-[4px] overflow-hidden border border-border bg-bg-alt hover:shadow-lg transition-shadow duration-200"
-                    onClick={() => setZoom(1)}
-                  >
-                    <Image
-                      src={active.planImage}
-                      alt={`${title} — ${t('offer.drawer.plan')}`}
-                      width={700}
-                      height={500}
-                      className="w-full h-auto"
-                      loading="lazy"
-                    />
-                  </button>
-                </div>
-
-                {/* Square footage */}
                 {rooms && (
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-3">
                     <p className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-accent">
                       {t('projectPage.netSurfaceLabel')}
                     </p>
@@ -260,43 +255,26 @@ export const ProjectDrawer = ({ project, onClose }) => {
                     </div>
                   </div>
                 )}
-
-                {/* 3D renders */}
-                <div className="flex flex-col gap-4">
-                  <p className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-accent">
-                    {t('offer.drawer.renders')}
-                  </p>
-                  <div className="grid grid-cols-2 gap-3">
-                    {active.renderImages.map((img, i) => (
-                      <button
-                        key={i}
-                        className="rounded-[4px] overflow-hidden border border-border hover:-translate-y-[2px] hover:shadow-md transition-all duration-200"
-                        onClick={() => setZoom(i + 2)}
-                      >
-                        <Image
-                          src={img}
-                          alt={`${title} ${i + 1}`}
-                          width={400}
-                          height={300}
-                          className="w-full h-40 object-cover"
-                          loading="lazy"
-                        />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* CTA */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-1">
-                  <Link href={href('/contact')} className="btn-primary justify-center flex-1" onClick={onClose}>
-                    {t('offer.drawer.requestOffer')}
-                    <LuArrowUpRight className="w-4 h-4" />
-                  </Link>
-                  <a href="tel:+38163383393" className="btn-ghost justify-center">
-                    +381 63 383 393
-                  </a>
-                </div>
               </div>
+
+              {/* Fixed CTA footer */}
+              <div className="flex-shrink-0 border-t border-border px-2 md:px-6 py-4 bg-bg flex flex-row gap-3">
+                <a
+                  href="tel:+38163383393"
+                  aria-label="+381 63 383 393"
+                  className="group relative inline-flex items-stretch flex-shrink-0"
+                >
+                  <span className="absolute inset-0 m-auto w-8 h-8 bg-accent/50 animate-ping [animation-duration:2.5s] pointer-events-none" />
+                  <span className="relative inline-flex items-center justify-center px-4 bg-bg border border-accent text-accent transition-all duration-250 group-hover:bg-accent group-hover:text-white">
+                    <LuPhone className="w-4 h-4" />
+                  </span>
+                </a>
+                <Link href={href('/contact')} className="btn-primary justify-center flex-1" onClick={onClose}>
+                  {t('offer.drawer.requestOffer')}
+                  <LuArrowUpRight className="w-4 h-4" />
+                </Link>
+              </div>
+
             </div>
           </>
         )}

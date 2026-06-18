@@ -14,7 +14,7 @@ const socials = [
 
 const contacts = [
   { href: 'tel:+38163383393',                       Icon: LuPhone,         label: '+381 63 383393' },
-  { href: 'viber://contact/?number=+38163383393',   Icon: LuMessageSquare, label: 'Viber' },
+  { href: 'viber://chat?number=%2B38163383393',      Icon: LuMessageSquare, label: 'Viber' },
   { href: 'https://wa.me/38163383393',              Icon: LuMessageCircle, label: 'WhatsApp', external: true },
   { href: 'mailto:avalahomeconcept@gmail.com',      Icon: LuMail,          label: 'avalahomeconcept@gmail.com' },
 ];
@@ -30,11 +30,6 @@ export const Footer = () => {
     { path: '/contact', label: t('footer.pages.contact') },
   ];
 
-  const offerLinks = [
-    { path: '/offer#project1', label: t('footer.offer.project1') },
-    { path: '/offer#project2', label: t('footer.offer.project2') },
-    { path: '/offer#smallHouses', label: t('footer.offer.smallHouses') },
-  ];
 
   return (
   <footer className="bg-bg-dark text-text-light">
@@ -42,14 +37,14 @@ export const Footer = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
 
         {/* Brand */}
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 items-center text-center md:items-start md:text-left">
           <Link href={href('/')}>
             <Image src={logoWhite} alt="Avala Home Concept logo" width={225} height={40} />
           </Link>
-          <p className="text-sm text-text-light/55 font-light leading-relaxed max-w-xs">
+          <p className="text-sm text-text-light/55 font-light leading-relaxed max-w-xs mx-auto md:mx-0">
             {t('footer.tagline')}
           </p>
-          <div className="flex gap-3 mt-1">
+          <div className="flex gap-3 mt-1 justify-center md:justify-start">
             {socials.map(({ href, Icon, label }) => (
               <a
                 key={label}
@@ -65,42 +60,23 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Nav */}
-        <div className="grid grid-cols-2 gap-6 sm:gap-8 pt-8 border-t border-border-dark md:pt-0 md:border-t-0">
-          <div>
-            <p className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-accent mb-5">
-              {t('footer.pagesHeading')}
-            </p>
-            <ul className="flex flex-col gap-2.5">
-              {pagesLinks.map(({ path, label }) => (
-                <li key={path}>
-                  <Link
-                    href={href(path)}
-                    className="text-sm text-text-light/55 hover:text-text-light transition-colors duration-150 font-light"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-accent mb-5">
-              {t('footer.offerHeading')}
-            </p>
-            <ul className="flex flex-col gap-2.5">
-              {offerLinks.map(({ path, label }) => (
-                <li key={path}>
-                  <Link
-                    href={href(path)}
-                    className="text-sm text-text-light/55 hover:text-text-light transition-colors duration-150 font-light"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Pages */}
+        <div className="pt-8 border-t border-border-dark md:pt-0 md:border-t-0">
+          <p className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-accent mb-5">
+            {t('footer.pagesHeading')}
+          </p>
+          <ul className="flex flex-col gap-2.5">
+            {pagesLinks.map(({ path, label }) => (
+              <li key={path}>
+                <Link
+                  href={href(path)}
+                  className="text-sm text-text-light/55 hover:text-text-light transition-colors duration-150 font-light"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Contact */}
@@ -114,12 +90,14 @@ export const Footer = () => {
                 <a
                   href={href}
                   {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  className="flex items-center gap-3 text-sm font-light text-text-light/55 hover:text-text-light transition-colors duration-150 group"
+                  className="flex items-center gap-3 text-sm font-light text-text-light/55 hover:text-accent transition-colors duration-150 group"
                 >
                   <span className="w-7 h-7 flex items-center justify-center border border-border-dark text-text-light/30 group-hover:border-accent/50 group-hover:text-accent transition-all duration-200 flex-shrink-0">
                     <Icon className="w-3 h-3" />
                   </span>
-                  {label}
+                  <span className="underline decoration-1 underline-offset-4 decoration-text-light/25 group-hover:decoration-accent transition-colors duration-150">
+                    {label}
+                  </span>
                 </a>
               </li>
             ))}

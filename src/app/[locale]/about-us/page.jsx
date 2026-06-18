@@ -40,7 +40,7 @@ export default async function AboutUsPage({ params }) {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="py-12 md:py-24 bg-bg">
+      <section className="py-12 md:py-16 bg-bg">
         <div className="safe-zone">
           <div className="mb-6">
             <span className="overline"><LuUsers />{a.eyebrow}</span>
@@ -84,7 +84,7 @@ export default async function AboutUsPage({ params }) {
       </section>
 
       {/* Investor section */}
-      <section className="py-12 md:py-24 bg-bg-alt border-t border-border">
+      <section className="py-12 md:py-16 bg-bg-alt border-t border-border">
         <div className="safe-zone">
           <div className="mb-8">
             <span className="overline"><LuBriefcase />{a.investorEyebrow}</span>

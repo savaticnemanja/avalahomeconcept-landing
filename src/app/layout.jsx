@@ -3,6 +3,7 @@ import './globals.css';
 import { ToastProvider } from '@/components/ToastProvider/ToastProvider';
 import { ScrollToTop } from '@/components/ScrollToTop/ScrollToTop';
 import { RevealObserver } from '@/components/RevealObserver/RevealObserver';
+import { SmoothScroll } from '@/components/SmoothScroll/SmoothScroll';
 import { defaultLocale, SITE_URL } from '@/i18n/config';
 
 const notoSerif = Noto_Serif({
@@ -37,6 +38,7 @@ export default function RootLayout({ children }) {
     <html lang={defaultLocale} className={`${notoSerif.variable} ${manrope.variable}`}>
       <body>
         <ToastProvider>
+          <SmoothScroll />
           {children}
           <ScrollToTop />
           <RevealObserver />

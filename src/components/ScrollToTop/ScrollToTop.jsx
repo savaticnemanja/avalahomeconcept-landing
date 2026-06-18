@@ -13,7 +13,10 @@ export const ScrollToTop = () => {
 
   return (
     <button
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      onClick={() => {
+        if (window.__lenis) window.__lenis.scrollTo(0);
+        else window.scrollTo({ top: 0, behavior: 'smooth' });
+      }}
       aria-label="Nazad na vrh"
       style={{
         position: 'fixed',

@@ -25,6 +25,15 @@
 
   html { scroll-behavior: smooth; overflow-x: clip; }
 
+  /* Lenis smooth scroll (desktop only; see SmoothScroll component) */
+  html.lenis,
+  html.lenis body { height: auto; }
+  .lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+  .lenis [data-lenis-prevent],
+  .lenis [data-lenis-prevent-wheel],
+  .lenis [data-lenis-prevent-touch] { overscroll-behavior: contain; }
+  .lenis.lenis-smooth iframe { pointer-events: none; }
+
   body {
     @apply bg-bg text-text antialiased;
     font-family: var(--font-body, 'Manrope', system-ui, sans-serif);
@@ -211,6 +220,26 @@
   to   { opacity: 1; }
 }
 
+/* Attention pulse + enlargement for a CTA (scale + expanding glow ring) */
+@keyframes cta-pulse {
+  0%, 100% { transform: scale(1.06); box-shadow: 0 0 0 0 rgba(196, 151, 90, 0.5); }
+  50%      { transform: scale(1.11); box-shadow: 0 0 0 7px rgba(196, 151, 90, 0); }
+}
+.cta-pulse { animation: cta-pulse 1.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .cta-pulse { animation: none; }
+}
+
+/* Horizontal scroll hint nudge */
+@keyframes scroll-hint-x {
+  0%, 100% { transform: translateX(0); opacity: 0.55; }
+  50%      { transform: translateX(7px); opacity: 1; }
+}
+.scroll-hint-x { animation: scroll-hint-x 1.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint-x { animation: none; }
+}
+
 /* ─── Location map markers (MapLibre) ───────────────────────── */
 .ahc-marker {
   cursor: pointer;
@@ -223,6 +252,40 @@
   transition: transform 0.15s ease;
 }
 .ahc-marker:hover { transform: scale(1.25); }
+
+/* POI markers — descriptive icon badges / wordmark labels */
+.ahc-poi {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  box-shadow: 0 2px 8px rgba(26, 25, 21, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.ahc-poi:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(26, 25, 21, 0.38);
+}
+.ahc-poi svg { display: block; }
+
+.ahc-poi--label {
+  width: auto;
+  height: auto;
+  border-radius: 999px;
+  padding: 4px 11px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-bg-dark);
+  background: #fff;
+}
 
 .ahc-marker--home {
   width: 22px;

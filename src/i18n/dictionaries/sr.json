@@ -29,7 +29,7 @@
     },
     "contact": {
       "title": "Kontakt",
-      "description": "Kontaktirajte Avala Home Concept — pozovite nas, pošaljite poruku ili nas posetite. Telefon: +381 63 383393."
+      "description": "Kontaktirajte Avala Home Concept — pozovite nas, pošaljite upit ili nas posetite. Telefon: +381 63 383393."
     },
     "thankYou": {
       "title": "Hvala vam",
@@ -49,7 +49,7 @@
     "smallHouses": "Kuće 80-100m²",
     "gallery": "Galerija",
     "contact": "Kontakt",
-    "requestOffer": "Zatraži ponudu",
+    "requestOffer": "Pošaljite upit",
     "openMenu": "Otvori meni",
     "closeMenu": "Zatvori meni",
     "language": "Jezik"
@@ -67,14 +67,14 @@
     "title": "Zainteresovani za kompleks?",
     "eyebrow": "Kontaktirajte nas",
     "text": "Naš tim je na raspolaganju za sve informacije, obilaske i rezervacije.",
-    "requestOffer": "Zatražite ponudu",
+    "requestOffer": "Pošaljite upit",
     "callNow": "Pozovite odmah"
   },
   "showcase": {
     "titleA": "Vaš dom.",
     "titleEm": "Vaša priroda.",
     "eyebrow": "Zašto Avala Home Concept",
-    "requestOffer": "Zatraži ponudu",
+    "requestOffer": "Pošaljite upit",
     "benefits": [
       "Blizina autoputa",
       "20 min od Autokomande, Vračara",
@@ -97,6 +97,8 @@
     "rooms": "sobe",
     "terrace": "Terasa",
     "detailSpecs": "Detaljne specifikacije",
+    "viewAll": "Pogledajte ponudu kuća",
+    "scrollHint": "Prevucite",
     "cards": [
       {
         "title": "Projekat 1",
@@ -213,7 +215,7 @@
   },
   "midCta": {
     "text": "Rezervišite vašu kuću danas.",
-    "requestOffer": "Zatraži ponudu"
+    "requestOffer": "Pošalji upit"
   },
   "contact": {
     "titleA": "Razgovarajmo o",
@@ -228,6 +230,8 @@
       "sendMessage": "Pošaljite poruku"
     },
     "form": {
+      "heading": "Pošaljite nam upit",
+      "subheading": "Ostavite svoje podatke i javićemo vam se u najkraćem roku.",
       "firstName": "Vaše ime",
       "phone": "Broj telefona",
       "email": "Email adresa",
@@ -405,7 +409,7 @@
       "plan": "Osnova",
       "renders": "3D prikazi",
       "close": "Zatvori meni",
-      "requestOffer": "Zatraži ponudu"
+      "requestOffer": "Pošalji upit"
     },
     "sitePlan": {
       "eyebrow": "Interaktivni plan",

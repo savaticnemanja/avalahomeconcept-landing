@@ -97,6 +97,8 @@
     "rooms": "rooms",
     "terrace": "Terrace",
     "detailSpecs": "Detailed specifications",
+    "viewAll": "View all house offers",
+    "scrollHint": "Swipe",
     "cards": [
       {
         "title": "Project 1",
@@ -228,6 +230,8 @@
       "sendMessage": "Send a message"
     },
     "form": {
+      "heading": "Send us an inquiry",
+      "subheading": "Leave your details and we'll get back to you as soon as possible.",
       "firstName": "Your name",
       "phone": "Phone number",
       "email": "Email address",

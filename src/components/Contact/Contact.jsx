@@ -22,7 +22,7 @@ export const Contact = () => {
       icon: LuMessageSquare,
       label: t('contact.methods.viber'),
       value: t('contact.methods.sendMessage'),
-      action: () => window.open('viber://contact/?number=+38163383393', '_blank'),
+      action: () => window.open('viber://chat?number=%2B38163383393', '_blank'),
     },
     {
       icon: LuMessageCircle,
@@ -54,7 +54,7 @@ export const Contact = () => {
   };
 
   return (
-    <section className="py-12 md:py-24 bg-[#F8F3EC]">
+    <section className="py-12 md:py-16 bg-[#F8F3EC]">
       <div className="safe-zone">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 xl:gap-24 items-start">
 
@@ -92,7 +92,7 @@ export const Contact = () => {
                     >
                       {label}
                     </p>
-                    <p className="text-text text-sm font-light group-hover:text-accent transition-colors duration-150">
+                    <p className="text-text text-sm font-light underline decoration-1 underline-offset-4 decoration-border group-hover:text-accent group-hover:decoration-accent transition-colors duration-150">
                       {value}
                     </p>
                   </div>
@@ -104,6 +104,19 @@ export const Contact = () => {
           {/* Right — form */}
           <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-0" data-reveal>
             <div className="border border-border p-4 md:p-8 flex flex-col gap-5 md:gap-7">
+
+              {/* Polite call to action */}
+              <div className="flex flex-col gap-2">
+                <h3
+                  className="text-text"
+                  style={{ fontFamily: 'var(--font-heading)', fontSize: '1.6rem', fontWeight: 400 }}
+                >
+                  {t('contact.form.heading')}
+                </h3>
+                <p className="text-text-muted text-sm font-light leading-relaxed">
+                  {t('contact.form.subheading')}
+                </p>
+              </div>
 
               {[
                 { name: 'firstName',     type: 'text',  placeholder: t('contact.form.firstName') },
