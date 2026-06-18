@@ -54,7 +54,7 @@ export const Contact = () => {
   };
 
   return (
-    <section className="py-12 md:py-24 bg-bg-dark">
+    <section className="py-12 md:py-24 bg-[#F8F3EC]">
       <div className="safe-zone">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 xl:gap-24 items-start">
 
@@ -63,13 +63,13 @@ export const Contact = () => {
             <div>
               <span className="overline"><LuMessageCircle />{t('contact.eyebrow')}</span>
               <h2
-                className="text-text-light"
+                className="text-text"
                 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem,4vw,3.5rem)', fontWeight: 400 }}
               >
                 {t('contact.titleA')}{' '}
                 <em>{t('contact.titleEm')}</em>
               </h2>
-              <p className="text-text-light/50 font-light text-sm leading-relaxed mt-5 max-w-sm">
+              <p className="text-text-muted font-light text-sm leading-relaxed mt-5 max-w-sm">
                 {t('contact.availability')}
               </p>
             </div>
@@ -80,19 +80,19 @@ export const Contact = () => {
                 <button
                   key={i}
                   onClick={action}
-                  className="flex items-center gap-5 py-4 border-b border-border-dark text-left group hover:border-accent/40 transition-colors duration-150"
+                  className="flex items-center gap-5 py-4 border-b border-border text-left group hover:border-accent/40 transition-colors duration-150"
                 >
-                  <span className="w-10 h-10 flex items-center justify-center border border-border-dark rounded-full text-text-light/40 group-hover:border-accent group-hover:text-accent transition-all duration-200 flex-shrink-0">
+                  <span className="w-10 h-10 flex items-center justify-center border border-border rounded-full text-text-muted group-hover:border-accent group-hover:text-accent transition-all duration-200 flex-shrink-0">
                     <Icon className="w-4 h-4" />
                   </span>
                   <div>
                     <p
-                      className="text-text-light/35 text-[0.68rem] font-medium tracking-[0.15em] uppercase mb-0.5"
+                      className="text-text-muted text-[0.68rem] font-medium tracking-[0.15em] uppercase mb-0.5"
                       style={{ fontFamily: 'var(--font-body)' }}
                     >
                       {label}
                     </p>
-                    <p className="text-text-light/70 text-sm font-light group-hover:text-text-light transition-colors duration-150">
+                    <p className="text-text text-sm font-light group-hover:text-accent transition-colors duration-150">
                       {value}
                     </p>
                   </div>
@@ -103,7 +103,7 @@ export const Contact = () => {
 
           {/* Right — form */}
           <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-0" data-reveal>
-            <div className="border border-border-dark p-4 md:p-8 flex flex-col gap-5 md:gap-7">
+            <div className="border border-border p-4 md:p-8 flex flex-col gap-5 md:gap-7">
 
               {[
                 { name: 'firstName',     type: 'text',  placeholder: t('contact.form.firstName') },
@@ -120,7 +120,7 @@ export const Contact = () => {
                   />
                   <label
                     htmlFor={field.name}
-                    className="absolute left-0 top-3 text-text-light/35 text-sm font-light pointer-events-none transition-all duration-200 peer-focus:text-[0.7rem] peer-focus:-top-3 peer-focus:text-accent peer-[:not(:placeholder-shown)]:text-[0.7rem] peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-text-light/50"
+                    className="absolute left-0 top-3 text-text-muted text-sm font-light pointer-events-none transition-all duration-200 peer-focus:text-[0.7rem] peer-focus:-top-3 peer-focus:text-accent peer-[:not(:placeholder-shown)]:text-[0.7rem] peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-text-muted"
                     style={{ fontFamily: 'var(--font-body)' }}
                   >
                     {field.placeholder}
@@ -139,7 +139,7 @@ export const Contact = () => {
                 />
                 <label
                   htmlFor="message"
-                  className="absolute left-0 top-3 text-text-light/35 text-sm font-light pointer-events-none transition-all duration-200 peer-focus:text-[0.7rem] peer-focus:-top-3 peer-focus:text-accent peer-[:not(:placeholder-shown)]:text-[0.7rem] peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-text-light/50"
+                  className="absolute left-0 top-3 text-text-muted text-sm font-light pointer-events-none transition-all duration-200 peer-focus:text-[0.7rem] peer-focus:-top-3 peer-focus:text-accent peer-[:not(:placeholder-shown)]:text-[0.7rem] peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-text-muted"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
                   {t('contact.form.message')}

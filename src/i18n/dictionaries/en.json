@@ -219,7 +219,7 @@
     "titleA": "Let's talk about",
     "titleEm": "your home",
     "eyebrow": "Get in touch",
-    "availability": "Our team is available on weekdays from 09:00–17:00. We will reply as soon as possible.",
+    "availability": "Our team is available on weekdays and Saturdays from 8 to 16h. We will reply as soon as possible.",
     "methods": {
       "phone": "Phone",
       "viber": "Viber",
@@ -297,7 +297,7 @@
   "projects": {
     "project1": {
       "title": "Project 1 — Single-storey house 139m²",
-      "description": "A spacious single-storey house of 139 square metres. This modern-designed house also has two parking spaces and a separate purpose-built room next to the pool where you can set up a summer kitchen. As many as three airy, comfortable rooms are positioned to receive plenty of sunlight, which will lift your spirits every morning. The doors of the large living room open onto a terrace offering a magnificent view of the Avala Tower. From the terrace, steps lead down to a landscaped path that takes you to the pool and the beach.",
+      "description": "A spacious single-storey house of 139 square meters. This modernly designed house also features two parking spaces and a pool. As many as three airy and comfortable rooms are positioned to receive plenty of sunlight, giving you an extra lift of mood every morning. A large living room with an open-concept kitchen and dining area for family gatherings, with sliding doors that open onto a terrace overlooking the pool in your own yard.",
       "rooms": [
         "Entrance area",
         "Utility room",

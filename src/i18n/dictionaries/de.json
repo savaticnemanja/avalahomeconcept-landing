@@ -219,7 +219,7 @@
     "titleA": "Sprechen wir über",
     "titleEm": "Ihr Zuhause",
     "eyebrow": "Nehmen Sie Kontakt auf",
-    "availability": "Unser Team ist werktags von 09:00–17:00 Uhr erreichbar. Wir antworten so schnell wie möglich.",
+    "availability": "Unser Team ist werktags und samstags von 8 bis 16 Uhr erreichbar. Wir antworten so schnell wie möglich.",
     "methods": {
       "phone": "Telefon",
       "viber": "Viber",
@@ -297,7 +297,7 @@
   "projects": {
     "project1": {
       "title": "Projekt 1 — Bungalow 139 m²",
-      "description": "Ein geräumiger Bungalow von 139 Quadratmetern. Dieses modern gestaltete Haus verfügt zudem über zwei Parkplätze und einen separaten Zweckraum neben dem Pool, in dem Sie eine Sommerküche einrichten können. Gleich drei luftige und komfortable Zimmer sind so positioniert, dass sie viel Sonnenlicht erhalten, was Ihnen jeden Morgen zusätzlich gute Laune bringt. Die Türen des großen Wohnzimmers öffnen sich zu einer Terrasse mit herrlichem Blick auf den Avala-Turm. Von der Terrasse führen Stufen hinunter zu einem gepflegten Weg, der Sie zum Pool und zum Strand bringt.",
+      "description": "Ein geräumiges ebenerdiges Haus mit 139 Quadratmetern. Dieses modern gestaltete Haus verfügt zudem über zwei Parkplätze und einen Pool. Gleich drei luftige und komfortable Zimmer sind so positioniert, dass sie viel Sonnenlicht erhalten, was Ihnen jeden Morgen zusätzliche gute Laune verleiht. Ein großes Wohnzimmer mit offener Küche und Essbereich (Open Concept) für Familientreffen, mit Schiebetüren, die sich zur Terrasse mit Blick auf den Pool im eigenen Garten öffnen.",
       "rooms": [
         "Eingangsbereich",
         "Technikraum",

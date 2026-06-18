@@ -219,7 +219,7 @@
     "titleA": "Razgovarajmo o",
     "titleEm": "vašem domu",
     "eyebrow": "Stupite u kontakt",
-    "availability": "Naš tim je dostupan radnim danima od 09–17h. Odgovorićemo u najkraćem roku.",
+    "availability": "Naš tim je dostupan radnim danima i subotom od 8 do 16h. Odgovorićemo u najkraćem roku.",
     "methods": {
       "phone": "Telefon",
       "viber": "Viber",
@@ -297,7 +297,7 @@
   "projects": {
     "project1": {
       "title": "Projekat 1 — Prizemna kuća 139m²",
-      "description": "Prostrana prizemna kuća od 139 metara kvadratnih. Ova moderno dizajnirana kuća ima i dva parking mesta i odvojenu namensku prostoriju pokraj bazena u koju možete smestiti letnju kuhinju. Čak tri prozračne i komforne sobe pozicionirane su tako da primaju dosta sunčeve svetlosti što će Vam svakog jutra uliti dodatno raspoloženje. Vrata velikog dnevnog boravka otvaraju se na terasu koja pruža veličanstven pogled na Avalaski toranj. Sa terase se stepenicama spuštate na uređenu stazu koja Vas vodi do bazena i plaže.",
+      "description": "Prostrana prizemna kuća od 139 metara kvadratnih. Ova moderno dizajnirana kuća ima i dva parking mesta i bazen. Čak tri prozračne i komforne sobe pozicionirane su tako da primaju dosta sunčeve svetlosti što će Vam svakog jutra uliti dodatno raspoloženje. Veliki dnevni boravak sa kuhinjom i trpezarijom po principu open concept za porodična okupljanja sa kliznim vratima koja se otvaraju na terasu sa pogledom na bazen u sopstvenom dvorištu.",
       "rooms": [
         "Predprostor",
         "Tehnička prostorija",

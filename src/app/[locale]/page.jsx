@@ -1,5 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { LuBadgeCheck, LuMail } from 'react-icons/lu';
+import ctaBg from '@/assets/cta/complex-sunset.jpeg';
 import {
   Contact,
   Location,
@@ -83,16 +85,27 @@ export default async function HomePage({ params }) {
       <PaymentDynamic />
 
       {/* CTA */}
-      <div className="py-10 md:py-20 bg-bg border-t border-border">
-        <div className="safe-zone flex flex-col items-center gap-5 text-center">
+      <div className="relative py-16 md:py-28 overflow-hidden">
+        {/* Background image */}
+        <Image
+          src={ctaBg}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Dark overlay for contrast (AA-safe over the bright rooftops/sky) */}
+        <div className="absolute inset-0 bg-bg-dark/80" />
+
+        <div className="safe-zone relative flex flex-col items-center gap-5 text-center">
           <span className="overline"><LuMail />{dict.homeCta.eyebrow}</span>
           <h3
-            className="text-text italic max-w-lg"
+            className="text-text-light italic max-w-lg"
             style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem,3vw,2.4rem)', fontWeight: 400 }}
           >
             {dict.homeCta.title}
           </h3>
-          <p className="text-text-muted text-sm font-light max-w-sm">
+          <p className="text-text-light/85 text-sm font-light max-w-sm">
             {dict.homeCta.text}
           </p>
           <div className="flex flex-wrap gap-4 justify-center mt-2">
@@ -100,7 +113,7 @@ export default async function HomePage({ params }) {
               {dict.homeCta.requestOffer}
               <ArrowIcon />
             </Link>
-            <a href="tel:+38163383393" className="btn-ghost group">
+            <a href="tel:+38163383393" className="btn-outline-light group">
               {dict.homeCta.callNow}
             </a>
           </div>

@@ -37,7 +37,7 @@ export const Footer = () => {
   ];
 
   return (
-  <footer className="bg-bg-mid text-text-light">
+  <footer className="bg-bg-dark text-text-light">
     <div className="safe-zone py-10 md:py-16">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
 
