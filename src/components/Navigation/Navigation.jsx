@@ -93,6 +93,14 @@ export const Navigation = () => {
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuVisible]);
 
+  // Close the mobile menu on Escape (WCAG 2.1.2 / keyboard operability).
+  useEffect(() => {
+    if (!mobileMenuVisible) return;
+    const onKey = (e) => { if (e.key === 'Escape') setMobileMenuVisible(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [mobileMenuVisible]);
+
   const closeMobileMenu = () => setMobileMenuVisible(false);
 
   return (
@@ -131,11 +139,11 @@ export const Navigation = () => {
                   onClick={closeMobileMenu}
                   className={[
                     'flex items-center gap-5 py-5 group transition-colors duration-150',
-                    isActive(link.path) ? 'text-accent' : 'text-text-light hover:text-accent',
+                    isActive(link.path) ? 'text-accent-strong' : 'text-text-light hover:text-accent-strong',
                   ].join(' ')}
                 >
                   <span
-                    className="text-text-light/20 text-[0.68rem] font-medium tracking-[0.2em] flex-shrink-0 group-hover:text-accent/40 transition-colors duration-150"
+                    className="text-text-light/20 text-[0.68rem] font-medium tracking-[0.2em] flex-shrink-0 group-hover:text-accent-strong/40 transition-colors duration-150"
                     style={{ fontFamily: 'var(--font-body)' }}
                   >
                     {String(idx + 1).padStart(2, '0')}
@@ -167,7 +175,7 @@ export const Navigation = () => {
                 className={[
                   'px-3 py-1.5 text-sm border transition-colors duration-150',
                   l === locale
-                    ? 'border-accent text-accent'
+                    ? 'border-accent text-accent-strong'
                     : 'border-border-dark text-text-light/50 hover:text-text-light',
                 ].join(' ')}
                 style={{ fontFamily: 'var(--font-body)' }}
@@ -222,14 +230,14 @@ export const Navigation = () => {
               className="group relative inline-flex items-center justify-center w-10 h-10"
             >
               <span className="absolute inset-0 m-auto w-8 h-8 bg-accent/50 animate-ping [animation-duration:2.5s] pointer-events-none" />
-              <span className="relative inline-flex items-center justify-center w-10 h-10 bg-bg border border-accent text-accent transition-all duration-250 active:bg-accent active:text-white">
+              <span className="relative inline-flex items-center justify-center w-10 h-10 bg-bg border border-accent text-accent-strong transition-all duration-250 active:bg-accent-strong active:text-white">
                 <LuPhone className="w-4 h-4" />
               </span>
             </a>
 
             {/* Menu ↔ Close */}
             <button
-              className="relative w-10 h-10 flex items-center justify-center text-text hover:text-accent transition-colors duration-200"
+              className="relative w-10 h-10 flex items-center justify-center text-text hover:text-accent-strong transition-colors duration-200"
               onClick={() => setMobileMenuVisible(!mobileMenuVisible)}
               aria-label={mobileMenuVisible ? t('nav.closeMenu') : t('nav.openMenu')}
               aria-expanded={mobileMenuVisible}
@@ -272,7 +280,7 @@ export const Navigation = () => {
               className="group relative inline-flex items-center justify-center w-11 h-11"
             >
               <span className="absolute inset-0 m-auto w-8 h-8 bg-accent/50 animate-ping [animation-duration:2.5s] pointer-events-none" />
-              <span className="relative inline-flex items-center justify-center w-11 h-11 bg-bg border border-accent text-accent transition-all duration-250 group-hover:bg-accent group-hover:text-white">
+              <span className="relative inline-flex items-center justify-center w-11 h-11 bg-bg border border-accent text-accent-strong transition-all duration-250 group-hover:bg-accent-strong group-hover:text-white">
                 <LuPhone className="w-4 h-4" />
               </span>
             </a>
@@ -287,7 +295,7 @@ export const Navigation = () => {
             <div className="relative">
               <button
                 onClick={() => setLangOpen((o) => !o)}
-                className="flex items-center gap-1.5 py-2 text-[0.85rem] text-text hover:text-accent transition-colors duration-200"
+                className="flex items-center gap-1.5 py-2 text-[0.85rem] text-text hover:text-accent-strong transition-colors duration-200"
                 aria-label={t('nav.language')}
                 aria-expanded={langOpen}
               >
@@ -309,7 +317,7 @@ export const Navigation = () => {
                       onClick={() => switchLocale(l)}
                       className={[
                         'block w-full text-left px-4 py-2 text-[0.85rem] transition-colors duration-150',
-                        l === locale ? 'text-accent' : 'text-text hover:text-accent',
+                        l === locale ? 'text-accent-strong' : 'text-text hover:text-accent-strong',
                       ].join(' ')}
                     >
                       {localeNames[l]}

@@ -82,7 +82,7 @@ export const Contact = ({ headingTag: Heading = 'h2' } = {}) => {
                   onClick={action}
                   className="flex items-center gap-5 py-4 border-b border-border text-left group hover:border-accent/40 transition-colors duration-150"
                 >
-                  <span className="w-10 h-10 flex items-center justify-center border border-border rounded-full text-text-muted group-hover:border-accent group-hover:text-accent transition-all duration-200 flex-shrink-0">
+                  <span className="w-10 h-10 flex items-center justify-center border border-border rounded-full text-text-muted group-hover:border-accent group-hover:text-accent-strong transition-all duration-200 flex-shrink-0">
                     <Icon className="w-4 h-4" />
                   </span>
                   <div>
@@ -92,7 +92,7 @@ export const Contact = ({ headingTag: Heading = 'h2' } = {}) => {
                     >
                       {label}
                     </p>
-                    <p className="text-text text-sm font-light underline decoration-1 underline-offset-4 decoration-border group-hover:text-accent group-hover:decoration-accent transition-colors duration-150">
+                    <p className="text-text text-sm font-light underline decoration-1 underline-offset-4 decoration-border group-hover:text-accent-strong group-hover:decoration-accent transition-colors duration-150">
                       {value}
                     </p>
                   </div>
@@ -133,7 +133,7 @@ export const Contact = ({ headingTag: Heading = 'h2' } = {}) => {
                   />
                   <label
                     htmlFor={field.name}
-                    className="absolute left-0 top-3 text-text-muted text-sm font-light pointer-events-none transition-all duration-200 peer-focus:text-[0.7rem] peer-focus:-top-3 peer-focus:text-accent peer-[:not(:placeholder-shown)]:text-[0.7rem] peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-text-muted"
+                    className="absolute left-0 top-3 text-text-muted text-sm font-light pointer-events-none transition-all duration-200 peer-focus:text-[0.7rem] peer-focus:-top-3 peer-focus:text-accent-strong peer-[:not(:placeholder-shown)]:text-[0.7rem] peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-text-muted"
                     style={{ fontFamily: 'var(--font-body)' }}
                   >
                     {field.placeholder}
@@ -152,7 +152,7 @@ export const Contact = ({ headingTag: Heading = 'h2' } = {}) => {
                 />
                 <label
                   htmlFor="message"
-                  className="absolute left-0 top-3 text-text-muted text-sm font-light pointer-events-none transition-all duration-200 peer-focus:text-[0.7rem] peer-focus:-top-3 peer-focus:text-accent peer-[:not(:placeholder-shown)]:text-[0.7rem] peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-text-muted"
+                  className="absolute left-0 top-3 text-text-muted text-sm font-light pointer-events-none transition-all duration-200 peer-focus:text-[0.7rem] peer-focus:-top-3 peer-focus:text-accent-strong peer-[:not(:placeholder-shown)]:text-[0.7rem] peer-[:not(:placeholder-shown)]:-top-3 peer-[:not(:placeholder-shown)]:text-text-muted"
                   style={{ fontFamily: 'var(--font-body)' }}
                 >
                   {t('contact.form.message')}

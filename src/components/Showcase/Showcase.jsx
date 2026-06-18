@@ -122,7 +122,7 @@ export const Showcase = () => {
             key={i}
             className={`flex items-center gap-4 group p-4 rounded-[2px] border backdrop-blur-sm transition-all duration-300 hover:border-accent hover:bg-white/[0.1] hover:-translate-y-0.5 ${active ? 'border-accent bg-white/[0.1] -translate-y-0.5' : 'border-white/15 bg-white/[0.06]'}`}
           >
-            <span className={`flex-shrink-0 w-11 h-11 flex items-center justify-center border rounded-[2px] transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-white ${active ? 'border-accent bg-accent text-white' : 'border-white/25 text-accent'}`}>
+            <span className={`flex-shrink-0 w-11 h-11 flex items-center justify-center border rounded-[2px] transition-all duration-300 group-hover:border-accent group-hover:bg-accent-strong group-hover:text-white ${active ? 'border-accent bg-accent-strong text-white' : 'border-white/25 text-accent-strong'}`}>
               <Icon className="w-5 h-5" />
             </span>
             <span

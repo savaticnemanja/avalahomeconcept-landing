@@ -1,7 +1,12 @@
 'use client';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import { useI18n } from '@/i18n/I18nProvider';
 
 export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
+  const { t } = useI18n();
+  const closeRef = useRef(null);
+  const restoreFocusRef = useRef(null);
+
   const prev = useCallback(
     () => onSetIndex((i) => (i - 1 + images.length) % images.length),
     [images.length, onSetIndex]
@@ -21,6 +26,16 @@ export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose, prev, next]);
 
+  // Move focus into the dialog on open; restore it to the trigger on close.
+  useEffect(() => {
+    if (activeIndex === null) return;
+    restoreFocusRef.current = document.activeElement;
+    closeRef.current?.focus();
+    return () => {
+      if (restoreFocusRef.current instanceof HTMLElement) restoreFocusRef.current.focus();
+    };
+  }, [activeIndex]);
+
   if (activeIndex === null) return null;
 
   const { src, alt } = images[activeIndex];
@@ -30,18 +45,22 @@ export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
     <div
       className="fixed inset-0 z-50 bg-bg-dark/95 flex items-center justify-center"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={alt}
     >
       <button
-        className="absolute top-4 right-4 text-text-light text-3xl leading-none hover:text-accent transition-colors"
+        ref={closeRef}
+        className="absolute top-4 right-4 text-text-light text-3xl leading-none hover:text-accent-strong transition-colors"
         onClick={onClose}
-        aria-label="Zatvori"
+        aria-label={t('offer.drawer.close', 'Close')}
       >
         &#x2715;
       </button>
       <button
-        className="absolute left-4 top-1/2 -translate-y-1/2 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2"
+        className="absolute left-4 top-1/2 -translate-y-1/2 text-text-light text-5xl leading-none hover:text-accent-strong transition-colors p-2"
         onClick={(e) => { e.stopPropagation(); prev(); }}
-        aria-label="Prethodna"
+        aria-label={t('gallery.prev', 'Previous')}
       >
         &#8249;
       </button>
@@ -53,9 +72,9 @@ export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
         onClick={(e) => e.stopPropagation()}
       />
       <button
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2"
+        className="absolute right-4 top-1/2 -translate-y-1/2 text-text-light text-5xl leading-none hover:text-accent-strong transition-colors p-2"
         onClick={(e) => { e.stopPropagation(); next(); }}
-        aria-label="Sledeća"
+        aria-label={t('gallery.next', 'Next')}
       >
         &#8250;
       </button>

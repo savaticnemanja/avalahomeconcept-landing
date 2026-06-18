@@ -61,8 +61,16 @@ export default async function LocaleLayout({ children, params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:z-[100] focus:top-3 focus:left-3 focus:bg-bg focus:text-text focus:px-4 focus:py-2 focus:border focus:border-accent-strong focus:rounded-[2px]"
+      >
+        {dict.nav.skipToContent}
+      </a>
       <Navigation />
-      {children}
+      <div id="main" tabIndex={-1}>
+        {children}
+      </div>
       <Footer />
     </I18nProvider>
   );

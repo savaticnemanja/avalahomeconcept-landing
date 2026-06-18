@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { LuChevronRight, LuPhone } from 'react-icons/lu';
+import { LuChevronRight, LuPhone, LuPause, LuPlay } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 import sliderImage1 from '@/assets/slider/slide-1.mov';
 import sliderImage2 from '@/assets/slider/slide-2.mov';
@@ -23,11 +23,20 @@ const INTERVAL = 3900;
 export const Slider = () => {
   const { t, href } = useI18n();
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  // Respect reduced-motion: start paused so content doesn't auto-move.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setPaused(true);
+    }
+  }, []);
 
   useEffect(() => {
+    if (paused) return;
     const id = setInterval(() => setCurrent(p => (p + 1) % slides.length), INTERVAL);
     return () => clearInterval(id);
-  }, []);
+  }, [paused]);
 
   const go = (dir) => setCurrent(p => (p + dir + slides.length) % slides.length);
 
@@ -73,7 +82,7 @@ export const Slider = () => {
         style={{ animation: 'fade-up 0.8s ease both' }}
       >
         <p
-          className="text-accent text-[0.7rem] font-medium tracking-[0.25em] uppercase mb-5"
+          className="text-accent-strong text-[0.7rem] font-medium tracking-[0.25em] uppercase mb-5"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           {t('slider.eyebrow')}
@@ -111,6 +120,15 @@ export const Slider = () => {
 
       {/* Slide counter + indicators — bottom right */}
       <div className="absolute right-7 bottom-10 z-10 flex flex-col items-end gap-4">
+        {/* Pause / play (WCAG 2.2.2) */}
+        <button
+          type="button"
+          onClick={() => setPaused((p) => !p)}
+          aria-label={paused ? t('slider.play') : t('slider.pause')}
+          className="w-9 h-9 flex items-center justify-center border border-text-light/40 text-text-light/80 hover:border-accent hover:text-text-light transition-colors duration-200"
+        >
+          {paused ? <LuPlay className="w-4 h-4" /> : <LuPause className="w-4 h-4" />}
+        </button>
         {/* Counter */}
         <div className="flex items-baseline gap-1.5">
           <span
@@ -164,6 +182,7 @@ export const Slider = () => {
             backgroundColor: 'var(--color-accent)',
             width: '0%',
             animation: `slide-progress ${INTERVAL}ms linear forwards`,
+            animationPlayState: paused ? 'paused' : 'running',
           }}
         />
       </div>

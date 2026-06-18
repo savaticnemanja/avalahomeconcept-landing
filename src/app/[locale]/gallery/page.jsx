@@ -56,7 +56,7 @@ export default function GalleryPage() {
                 className={[
                   'flex-1 py-2.5 px-4 text-sm transition-colors duration-150',
                   activeTab === tab.key
-                    ? 'bg-accent text-white'
+                    ? 'bg-accent-strong text-white'
                     : 'text-text-muted hover:text-text',
                 ].join(' ')}
               >
@@ -68,9 +68,11 @@ export default function GalleryPage() {
           {activeTab === 'gallery' ? (
             <div className="columns-2 sm:columns-3 lg:columns-4 gap-3">
               {galleryImages.map(({ src, alt }, i) => (
-                <div
+                <button
                   key={i}
-                  className="break-inside-avoid mb-3 cursor-pointer overflow-hidden border border-border group relative"
+                  type="button"
+                  aria-label={alt}
+                  className="block w-full break-inside-avoid mb-3 cursor-pointer overflow-hidden border border-border group relative"
                   onClick={() => setActiveIndex(i)}
                 >
                   <Image
@@ -81,12 +83,12 @@ export default function GalleryPage() {
                     className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-bg-dark/0 group-hover:bg-bg-dark/35 transition-colors duration-300 flex items-center justify-center">
+                  <span className="absolute inset-0 bg-bg-dark/0 group-hover:bg-bg-dark/35 transition-colors duration-300 flex items-center justify-center">
                     <span className="w-10 h-10 flex items-center justify-center border border-transparent group-hover:border-text-light/60 text-transparent group-hover:text-text-light transition-all duration-300 rounded-full">
                       <LuMaximize2 className="w-4 h-4" />
                     </span>
-                  </div>
-                </div>
+                  </span>
+                </button>
               ))}
             </div>
           ) : (

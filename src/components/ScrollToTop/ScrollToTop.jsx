@@ -28,18 +28,18 @@ export const ScrollToTop = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'var(--color-accent)',
+        backgroundColor: 'var(--color-accent-strong)',
         color: '#fff',
         border: 'none',
         cursor: 'pointer',
-        boxShadow: '0 4px 16px rgba(196,151,90,0.4)',
+        boxShadow: '0 4px 16px rgba(138,101,38,0.4)',
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0)' : 'translateY(12px)',
         pointerEvents: visible ? 'auto' : 'none',
         transition: 'opacity 0.25s ease, transform 0.25s ease, background-color 0.15s ease',
       }}
-      onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'var(--color-accent-hover)'; }}
-      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'var(--color-accent)'; }}
+      onMouseEnter={e => { e.currentTarget.style.backgroundColor = 'var(--color-accent-strong-hover)'; }}
+      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'var(--color-accent-strong)'; }}
     >
       <LuArrowUp style={{ width: '16px', height: '16px' }} />
     </button>

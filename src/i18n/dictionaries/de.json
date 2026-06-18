@@ -52,7 +52,8 @@
     "requestOffer": "Angebot anfordern",
     "openMenu": "Menü öffnen",
     "closeMenu": "Menü schließen",
-    "language": "Sprache"
+    "language": "Sprache",
+    "skipToContent": "Zum Inhalt springen"
   },
   "slider": {
     "eyebrow": "Avala Home Concept",
@@ -61,7 +62,9 @@
     "subtitle": "20 Minuten von Belgrad · 10 Minuten von Ikea",
     "callUs": "Rufen Sie uns an",
     "sendInquiry": "Anfrage senden",
-    "slideLabel": "Folie"
+    "slideLabel": "Folie",
+    "pause": "Diashow pausieren",
+    "play": "Diashow abspielen"
   },
   "homeCta": {
     "title": "Interesse am Komplex?",
@@ -354,7 +357,9 @@
       "progress": "Baufortschritt"
     },
     "photoAlt": "Avala Home Concept — Galerie, Foto",
-    "progressTitle": "Baufortschritt"
+    "progressTitle": "Baufortschritt",
+    "prev": "Zurück",
+    "next": "Weiter"
   },
   "thankYou": {
     "title": "Vielen Dank!",

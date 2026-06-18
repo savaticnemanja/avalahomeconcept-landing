@@ -193,12 +193,12 @@ export const LocationMap = () => {
               ].join(' ')}
             >
               <div className="flex items-center gap-3">
-                <LuMapPin className={['w-3.5 h-3.5 flex-shrink-0 transition-colors', activeIndex === i ? 'text-accent' : 'text-accent/70'].join(' ')} />
+                <LuMapPin className={['w-3.5 h-3.5 flex-shrink-0 transition-colors', activeIndex === i ? 'text-accent-strong' : 'text-accent-strong/70'].join(' ')} />
                 <span className="text-text" style={{ fontFamily: 'var(--font-body)', fontSize: '0.9rem', fontWeight: activeIndex === i ? 600 : 300 }}>
                   {loc.name}
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 text-accent">
+              <div className="flex items-center gap-1.5 text-accent-strong">
                 <LuClock className="w-3 h-3 opacity-60" />
                 <span className="font-medium" style={{ fontFamily: 'var(--font-body)', fontSize: '0.85rem' }}>
                   {loc.time}
@@ -218,7 +218,7 @@ export const LocationMap = () => {
           <button
             type="button"
             onClick={resetView}
-            className="text-xs text-accent font-medium hover:underline flex-shrink-0"
+            className="text-xs text-accent-strong font-medium hover:underline flex-shrink-0"
           >
             Resetuj prikaz
           </button>

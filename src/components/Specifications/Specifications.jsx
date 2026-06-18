@@ -70,15 +70,15 @@ export const Specifications = () => {
                 key={i}
                 className={`flex flex-col gap-3 md:gap-4 p-4 md:p-7 group transition-colors duration-300 hover:bg-bg-mid ${active ? 'bg-bg-mid' : 'bg-bg-dark'}`}
               >
-                <span className={`w-10 h-10 flex items-center justify-center border rounded-full transition-all duration-300 group-hover:border-accent/50 group-hover:text-accent ${active ? 'border-accent/50 text-accent' : 'border-border-dark text-text-light/30'}`}>
+                <span className={`w-10 h-10 flex items-center justify-center border rounded-full transition-all duration-300 group-hover:border-accent/50 group-hover:text-accent-strong ${active ? 'border-accent/50 text-accent-strong' : 'border-border-dark text-text-light/30'}`}>
                   <Icon className="w-4 h-4" />
                 </span>
-                <h4
+                <h3
                   className="text-text-light"
                   style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 400 }}
                 >
                   {item.title}
-                </h4>
+                </h3>
                 <p className="text-text-light/40 text-sm font-light leading-relaxed">
                   {item.description}
                 </p>

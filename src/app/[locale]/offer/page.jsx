@@ -19,7 +19,7 @@ const SitePlanPin = ({ project, title, t, onOpen }) => (
     {/* Pulsing ring */}
     <span className="absolute inset-0 m-auto w-8 h-8 rounded-full bg-accent/50 animate-ping" />
     {/* Marker */}
-    <span className="relative flex items-center justify-center w-8 h-8 rounded-full bg-accent text-white border-2 border-white shadow-[0_3px_10px_rgba(26,25,21,0.45)] transition-transform duration-200 group-hover/pin:scale-110">
+    <span className="relative flex items-center justify-center w-8 h-8 rounded-full bg-accent-strong text-white border-2 border-white shadow-[0_3px_10px_rgba(26,25,21,0.45)] transition-transform duration-200 group-hover/pin:scale-110">
       <span className="text-[0.72rem] font-semibold" style={{ fontFamily: 'var(--font-body)' }}>
         {project.cardIndex + 1}
       </span>
@@ -30,7 +30,7 @@ const SitePlanPin = ({ project, title, t, onOpen }) => (
         <span className="block text-sm leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
           {title}
         </span>
-        <span className="block text-accent text-[0.72rem] font-medium tracking-[0.05em]" style={{ fontFamily: 'var(--font-body)' }}>
+        <span className="block text-accent-strong text-[0.72rem] font-medium tracking-[0.05em]" style={{ fontFamily: 'var(--font-body)' }}>
           {project.area} m²
         </span>
       </span>
@@ -58,7 +58,7 @@ const OfferCard = ({ project, title, t, onOpen }) => (
       />
       <span
         className="absolute top-4 left-4 px-3 py-1 text-[0.68rem] font-medium tracking-[0.15em] uppercase text-white"
-        style={{ backgroundColor: 'rgba(196,151,90,0.92)', fontFamily: 'var(--font-body)', backdropFilter: 'blur(4px)' }}
+        style={{ backgroundColor: 'rgba(138,101,38,0.95)', fontFamily: 'var(--font-body)', backdropFilter: 'blur(4px)' }}
       >
         {t(`offer.cards.${project.cardIndex}.badge`)}
       </span>
@@ -79,7 +79,7 @@ const OfferCard = ({ project, title, t, onOpen }) => (
           </h3>
         </div>
         <div className="text-right flex-shrink-0">
-          <span className="text-accent" style={{ fontFamily: 'var(--font-heading)', fontSize: '2.4rem', fontWeight: 400, lineHeight: 1 }}>
+          <span className="text-accent-strong" style={{ fontFamily: 'var(--font-heading)', fontSize: '2.4rem', fontWeight: 400, lineHeight: 1 }}>
             {project.area}
           </span>
           <span className="text-text-muted text-sm block">m²</span>
@@ -89,17 +89,17 @@ const OfferCard = ({ project, title, t, onOpen }) => (
       {/* Stats */}
       <div className="flex flex-wrap gap-5 py-4 border-y border-border">
         <span className="flex items-center gap-2 text-sm font-light text-text-muted">
-          <LuBed className="w-4 h-4 text-accent" />
+          <LuBed className="w-4 h-4 text-accent-strong" />
           {project.beds} {t('offer.rooms')}
         </span>
         {project.terrace && (
           <span className="flex items-center gap-2 text-sm font-light text-text-muted">
-            <LuSunrise className="w-4 h-4 text-accent" />
+            <LuSunrise className="w-4 h-4 text-accent-strong" />
             {t('offer.terrace')} {project.terrace}
           </span>
         )}
         <span className="flex items-center gap-2 text-sm font-light text-text-muted">
-          <LuMaximize2 className="w-4 h-4 text-accent" />
+          <LuMaximize2 className="w-4 h-4 text-accent-strong" />
           {project.area} m²
         </span>
       </div>
@@ -116,7 +116,7 @@ const OfferCard = ({ project, title, t, onOpen }) => (
 
       {/* CTA */}
       <span
-        className="flex items-center justify-between text-sm font-medium text-accent mt-1"
+        className="flex items-center justify-between text-sm font-medium text-accent-strong mt-1"
         style={{ fontFamily: 'var(--font-body)', letterSpacing: '0.05em' }}
       >
         {t('offer.viewDetails')}
@@ -183,7 +183,7 @@ export default function OfferPage() {
                 </h2>
               </div>
               <span className="hidden sm:flex items-center gap-2 text-sm font-light text-text-muted">
-                <LuMousePointerClick className="w-4 h-4 text-accent" />
+                <LuMousePointerClick className="w-4 h-4 text-accent-strong" />
                 {t('offer.sitePlan.hint')}
               </span>
             </div>
@@ -210,7 +210,7 @@ export default function OfferPage() {
 
               {/* Mobile hint badge */}
               <span className="sm:hidden absolute bottom-3 left-3 flex items-center gap-2 bg-bg-dark/80 backdrop-blur-sm text-text-light text-[0.72rem] font-light px-3 py-1.5 rounded-full">
-                <LuMousePointerClick className="w-3.5 h-3.5 text-accent" />
+                <LuMousePointerClick className="w-3.5 h-3.5 text-accent-strong" />
                 {t('offer.sitePlan.hint')}
               </span>
             </div>
