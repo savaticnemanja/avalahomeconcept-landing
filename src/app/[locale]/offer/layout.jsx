@@ -13,7 +13,6 @@ export default async function Layout({ children, params }) {
   const dict = await getDictionary(locale);
   const baseUrl = `${SITE_URL}${withLocale(locale, '/offer')}/`;
 
-  // ItemList of House offers → richer real-estate results in Google.
   const itemList = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',

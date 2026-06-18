@@ -1,7 +1,6 @@
 {
   "meta": {
     "siteName": "Avala Home Concept",
-    "ogDescription": "Zatvoren kompleks porodičnih kuća na Avalskoj planini, 20 minuta od Beograda.",
     "jsonLdDescription": "Zatvoren kompleks porodičnih kuća na Avalskoj planini, 20 minuta od Beograda.",
     "home": {
       "title": "Avala Home Concept — Kuće na Avali, 20 min od Beograda",
@@ -246,7 +245,6 @@
   "footer": {
     "tagline": "Zatvoren kompleks porodičnih kuća na Avalskoj planini — 20 minuta od Beograda.",
     "pagesHeading": "Stranice",
-    "offerHeading": "Ponuda kuća",
     "contactHeading": "Kontakt",
     "location": "Avala, Beograd, Srbija",
     "rights": "Sva prava zadržana.",
@@ -256,11 +254,6 @@
       "about": "O nama",
       "gallery": "Galerija",
       "contact": "Kontakt"
-    },
-    "offer": {
-      "project1": "Projekat 1 — 139m²",
-      "project2": "Projekat 2 — 147m²",
-      "smallHouses": "Kuće 80–100m²"
     }
   },
   "about": {
@@ -412,7 +405,6 @@
     ],
     "drawer": {
       "plan": "Osnova",
-      "renders": "3D prikazi",
       "close": "Zatvori meni",
       "requestOffer": "Pošalji upit"
     },

@@ -20,7 +20,6 @@ import {
 } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 
-// Icons only — order matches dict.showcase.benefits
 const benefitIcons = [
   LuMapPin,
   LuBuilding2,
@@ -44,8 +43,6 @@ export const Showcase = () => {
   const listRef = useRef(null);
   const [activeCount, setActiveCount] = useState(0);
 
-  // Scroll-driven cascade: as the benefits list travels through the viewport,
-  // highlight each item one after another in order.
   useEffect(() => {
     const el = listRef.current;
     if (!el) return;
@@ -60,7 +57,6 @@ export const Showcase = () => {
       raf = null;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      // 0 when the list top reaches 60% down the viewport, 1 once it has scrolled up past it.
       const progress = Math.min(Math.max((vh * 0.6 - rect.top) / rect.height, 0), 1);
       setActiveCount(Math.round(progress * benefits.length));
     };
@@ -88,7 +84,6 @@ export const Showcase = () => {
       backgroundAttachment: 'fixed',
     }}
   >
-    {/* Tamni overlay radi čitljivosti */}
     <div
       className="absolute inset-0"
       style={{ background: 'linear-gradient(180deg, rgba(20,28,22,0.82) 0%, rgba(20,28,22,0.72) 50%, rgba(20,28,22,0.86) 100%)' }}
@@ -97,7 +92,6 @@ export const Showcase = () => {
 
     <div className="relative safe-zone flex flex-col items-center">
 
-      {/* Naslov */}
       <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16" data-reveal>
         <span className="overline"><LuSparkles />{t('showcase.eyebrow')}</span>
         <h2
@@ -109,7 +103,6 @@ export const Showcase = () => {
         </h2>
       </div>
 
-      {/* Lista pogodnosti */}
       <ul
         ref={listRef}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-5 w-full max-w-5xl"

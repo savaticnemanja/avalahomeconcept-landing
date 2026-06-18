@@ -4,7 +4,6 @@ import { withLocale } from './config';
 
 const I18nContext = createContext(null);
 
-// Resolve a dotted path like 'faq.items.0.q' against the dictionary object.
 const resolve = (obj, path) => {
   const value = path
     .split('.')
@@ -18,7 +17,6 @@ export const I18nProvider = ({ locale, dictionary, children }) => {
     try {
       localStorage.setItem('locale', locale);
     } catch {
-      /* ignore */
     }
   }, [locale]);
 
@@ -32,7 +30,6 @@ export const I18nProvider = ({ locale, dictionary, children }) => {
       locale,
       dict: dictionary,
       t,
-      // locale-aware href helper
       href: (path) => withLocale(locale, path),
     };
   }, [locale, dictionary]);

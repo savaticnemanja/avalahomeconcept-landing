@@ -16,15 +16,12 @@ const SitePlanPin = ({ project, title, t, onOpen }) => (
     className="absolute group/pin -translate-x-1/2 -translate-y-1/2 z-10"
     style={{ top: project.pin.top, left: project.pin.left }}
   >
-    {/* Pulsing ring */}
     <span className="absolute inset-0 m-auto w-8 h-8 rounded-full bg-accent/50 animate-ping" />
-    {/* Marker */}
     <span className="relative flex items-center justify-center w-8 h-8 rounded-full bg-accent-strong text-white border-2 border-white shadow-[0_3px_10px_rgba(26,25,21,0.45)] transition-transform duration-200 group-hover/pin:scale-110">
       <span className="text-[0.72rem] font-semibold" style={{ fontFamily: 'var(--font-body)' }}>
         {project.cardIndex + 1}
       </span>
     </span>
-    {/* Hover tooltip */}
     <span className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-3 whitespace-nowrap opacity-0 translate-y-1 group-hover/pin:opacity-100 group-hover/pin:translate-y-0 group-focus-visible/pin:opacity-100 transition-all duration-200">
       <span className="block bg-bg-dark text-text-light px-3.5 py-2 rounded-[4px] shadow-[0_8px_24px_rgba(26,25,21,0.35)]">
         <span className="block text-sm leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
@@ -34,7 +31,6 @@ const SitePlanPin = ({ project, title, t, onOpen }) => (
           {project.area} m²
         </span>
       </span>
-      {/* caret */}
       <span className="block w-2.5 h-2.5 bg-bg-dark rotate-45 mx-auto -mt-1.5" />
     </span>
   </button>
@@ -47,7 +43,6 @@ const OfferCard = ({ project, title, t, onOpen }) => (
     className="card group flex flex-col text-left w-full"
     aria-label={title}
   >
-    {/* Image */}
     <div className="relative overflow-hidden" style={{ aspectRatio: '16/10' }}>
       <Image
         src={project.cardImage}
@@ -64,7 +59,6 @@ const OfferCard = ({ project, title, t, onOpen }) => (
       </span>
     </div>
 
-    {/* Body */}
     <div className="p-5 md:p-7 flex flex-col gap-4 md:gap-5 flex-1">
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -86,7 +80,6 @@ const OfferCard = ({ project, title, t, onOpen }) => (
         </div>
       </div>
 
-      {/* Stats */}
       <div className="flex flex-wrap gap-5 py-4 border-y border-border">
         <span className="flex items-center gap-2 text-sm font-light text-text-muted">
           <LuBed className="w-4 h-4 text-accent-strong" />
@@ -104,7 +97,6 @@ const OfferCard = ({ project, title, t, onOpen }) => (
         </span>
       </div>
 
-      {/* Highlights */}
       <ul className="flex flex-col gap-2 flex-1">
         {[0, 1, 2].map((h) => (
           <li key={h} className="flex items-center gap-2.5 text-sm font-light text-text-muted">
@@ -114,7 +106,6 @@ const OfferCard = ({ project, title, t, onOpen }) => (
         ))}
       </ul>
 
-      {/* CTA */}
       <span
         className="flex items-center justify-between text-sm font-medium text-accent-strong mt-1"
         style={{ fontFamily: 'var(--font-body)', letterSpacing: '0.05em' }}
@@ -132,8 +123,6 @@ export default function OfferPage() {
   const { t, dict, href } = useI18n();
   const [selected, setSelected] = useState(null);
 
-  // Deep-linking: /offer#project1 (etc.) opens the matching house drawer, so
-  // the individual projects are reachable directly without standalone pages.
   useEffect(() => {
     const openFromHash = () => {
       const key = window.location.hash.replace('#', '');
@@ -159,7 +148,6 @@ export default function OfferPage() {
     <main className="pt-20">
       <section className="py-12 md:py-16 bg-bg">
         <div className="safe-zone">
-          {/* Page heading */}
           <div className="mb-8 md:mb-12">
             <span className="overline"><LuHouse />{t('offer.eyebrow')}</span>
             <h1
@@ -170,7 +158,6 @@ export default function OfferPage() {
             </h1>
           </div>
 
-          {/* Interactive site plan */}
           <div>
             <div className="flex items-end justify-between gap-4 mb-4">
               <div>
@@ -195,7 +182,6 @@ export default function OfferPage() {
                 className="w-full h-auto select-none"
                 priority
               />
-              {/* Subtle gradient for pin contrast */}
               <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/30 via-transparent to-bg-dark/10 pointer-events-none" />
 
               {projects.map((p) => (
@@ -208,7 +194,6 @@ export default function OfferPage() {
                 />
               ))}
 
-              {/* Mobile hint badge */}
               <span className="sm:hidden absolute bottom-3 left-3 flex items-center gap-2 bg-bg-dark/80 backdrop-blur-sm text-text-light text-[0.72rem] font-light px-3 py-1.5 rounded-full">
                 <LuMousePointerClick className="w-3.5 h-3.5 text-accent-strong" />
                 {t('offer.sitePlan.hint')}
@@ -216,7 +201,6 @@ export default function OfferPage() {
             </div>
           </div>
 
-          {/* Catalog grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 md:mt-12">
             {projects.map((p) => (
               <OfferCard
@@ -231,7 +215,6 @@ export default function OfferPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <div className="py-8 md:py-16 bg-bg border-t border-border">
         <div className="safe-zone flex flex-col sm:flex-row items-center justify-between gap-6">
           <p

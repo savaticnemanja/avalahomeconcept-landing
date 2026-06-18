@@ -15,7 +15,6 @@ export async function generateMetadata({ params }) {
   const meta = await buildPageMetadata({ locale, path: '/', metaKey: 'home' });
   return {
     ...meta,
-    // Keep the title template so child pages render "<page> | Avala Home Concept".
     title: {
       default: dict.meta.home.title,
       template: `%s | ${dict.meta.siteName}`,
@@ -45,9 +44,7 @@ export default async function LocaleLayout({ children, params }) {
       addressLocality: 'Beograd',
       addressRegion: 'Beograd',
       addressCountry: 'RS',
-      // streetAddress + postalCode pending exact address
     },
-    // geo: { '@type': 'GeoCoordinates', latitude: …, longitude: … } pending coordinates
     sameAs: [
       'https://www.facebook.com/avalahomeconcept/',
       'https://www.instagram.com/avala_homeconcept/',
@@ -68,10 +65,12 @@ export default async function LocaleLayout({ children, params }) {
         {dict.nav.skipToContent}
       </a>
       <Navigation />
-      <div id="main" tabIndex={-1}>
-        {children}
+      <div className="min-h-screen flex flex-col">
+        <div id="main" tabIndex={-1} className="flex-1">
+          {children}
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </I18nProvider>
   );
 }

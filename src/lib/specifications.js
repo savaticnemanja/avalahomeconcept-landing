@@ -14,7 +14,6 @@ import {
   LuWaves,
 } from 'react-icons/lu';
 
-// Icons only — order MUST match dict.specifications.items
 export const specificationIcons = [
   LuHardHat,
   LuLayoutGrid,

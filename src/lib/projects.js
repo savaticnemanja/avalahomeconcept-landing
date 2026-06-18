@@ -20,18 +20,15 @@ import smallHousesView4 from '@/assets/projects/small-houses/view-4.webp';
 import smallHousesView5 from '@/assets/projects/small-houses/view-5.webp';
 import smallHousesView6 from '@/assets/projects/small-houses/view-6.webp';
 
-// Images + language-neutral values that drive both the offer catalog cards and
-// the detail drawer. Human-readable text (title, description, room names) lives
-// in dict.projects[dictKey]; catalog card copy lives in dict.offer.cards[cardIndex].
 export const projects = [
   {
     key: 'project1',
-    dictKey: 'project1',   // dict.projects.project1 → title / description / rooms
-    cardIndex: 0,          // dict.offer.cards[0] → subtitle / badge / highlights
+    dictKey: 'project1',
+    cardIndex: 0,
     area: '139',
     beds: 3,
     terrace: '11m²',
-    pin: { top: '34%', left: '72%' },   // position on the master-plan render
+    pin: { top: '34%', left: '72%' },
 
     cardImage: project1Plan,
     heroImage: project1Render,
@@ -40,7 +37,6 @@ export const projects = [
     showcaseImages: [project1Spec1, project1Spec2, project1Spec3],
     renderImages: [project1Render, project1Spec1, project1Spec2, project1Spec3],
     surfaceArea: 139,
-    // areas align by index with dict.projects.project1.rooms
     netAreas: [
       '10,00 m²',
       '3,00 m²',
@@ -114,7 +110,7 @@ export const projects = [
       smallHousesView5,
       smallHousesView6,
     ],
-    surfaceArea: null, // range project — shown via `area`, no fixed total / room table
+    surfaceArea: null,
     netAreas: null,
   },
 ];

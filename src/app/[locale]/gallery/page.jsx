@@ -44,7 +44,6 @@ export default function GalleryPage() {
             </h1>
           </div>
 
-          {/* Tabs */}
           <div className="flex gap-0 border border-border rounded-sm mb-10 max-w-xs overflow-hidden">
             {[
               { key: 'gallery', label: t('gallery.tabs.photos') },
@@ -110,7 +109,6 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <div className="py-8 md:py-16 bg-bg border-t border-border">
         <div className="safe-zone flex flex-col sm:flex-row items-center justify-between gap-6">
           <p

@@ -58,7 +58,6 @@ export const Contact = ({ headingTag: Heading = 'h2' } = {}) => {
       <div className="safe-zone">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 xl:gap-24 items-start">
 
-          {/* Left — info */}
           <div className="flex flex-col gap-10" data-reveal>
             <div>
               <span className="overline"><LuMessageCircle />{t('contact.eyebrow')}</span>
@@ -74,7 +73,6 @@ export const Contact = ({ headingTag: Heading = 'h2' } = {}) => {
               </p>
             </div>
 
-            {/* Contact methods */}
             <div className="flex flex-col gap-1">
               {contactMethods.map(({ icon: Icon, label, value, action }, i) => (
                 <button
@@ -101,11 +99,9 @@ export const Contact = ({ headingTag: Heading = 'h2' } = {}) => {
             </div>
           </div>
 
-          {/* Right — form */}
           <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-0" data-reveal>
             <div className="border border-border p-4 md:p-8 flex flex-col gap-5 md:gap-7">
 
-              {/* Polite call to action */}
               <div className="flex flex-col gap-2">
                 <h3
                   className="text-text"

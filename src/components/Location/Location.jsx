@@ -10,7 +10,6 @@ export const Location = () => {
     <section className="py-12 md:py-24 bg-bg-alt">
       <div className="safe-zone">
 
-        {/* Header */}
         <div className="section-header" data-reveal>
           <span className="overline"><LuMapPin />{t('location.eyebrow')}</span>
           <h2

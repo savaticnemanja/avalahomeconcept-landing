@@ -21,7 +21,6 @@ export const RevealObserver = () => {
 
     observe();
 
-    // Re-observe on dynamic DOM changes (tabs, etc.)
     const mutation = new MutationObserver(observe);
     mutation.observe(document.body, { childList: true, subtree: true });
 

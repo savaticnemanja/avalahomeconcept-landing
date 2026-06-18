@@ -36,10 +36,9 @@ export const Navigation = () => {
     try {
       localStorage.setItem('locale', next);
     } catch {
-      /* ignore */
     }
     const segments = pathname.split('/');
-    segments[1] = next; // replace locale segment
+    segments[1] = next;
     router.push(segments.join('/') || `/${next}`);
     setLangOpen(false);
     setMobileMenuVisible(false);
@@ -93,7 +92,6 @@ export const Navigation = () => {
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuVisible]);
 
-  // Close the mobile menu on Escape (WCAG 2.1.2 / keyboard operability).
   useEffect(() => {
     if (!mobileMenuVisible) return;
     const onKey = (e) => { if (e.key === 'Escape') setMobileMenuVisible(false); };
@@ -105,7 +103,6 @@ export const Navigation = () => {
 
   return (
     <>
-      {/* ── Top gradient shadow ──────────────────────────────── */}
       <div
         className="fixed top-0 left-0 right-0 pointer-events-none"
         style={{
@@ -115,7 +112,6 @@ export const Navigation = () => {
         }}
       />
 
-      {/* ── Full-screen mobile menu ──────────────────────────── */}
       <div
         className="fixed left-0 right-0 bottom-0 md:hidden flex flex-col overflow-y-auto"
         style={{
@@ -129,7 +125,6 @@ export const Navigation = () => {
         }}
         aria-hidden={!mobileMenuVisible}
       >
-        {/* Links */}
         <nav className="flex-1 safe-zone mx-0 pt-6">
           <ul>
             {navLinks.map((link, idx) => (
@@ -164,9 +159,7 @@ export const Navigation = () => {
           </ul>
         </nav>
 
-        {/* Bottom bar */}
         <div className="safe-zone mx-0 py-6 border-t border-border-dark flex flex-col gap-4 flex-shrink-0">
-          {/* Language switcher */}
           <div className="flex flex-wrap gap-2" aria-label={t('nav.language')}>
             {locales.map((l) => (
               <button
@@ -199,7 +192,6 @@ export const Navigation = () => {
         </div>
       </div>
 
-      {/* ── Nav bar ─────────────────────────────────────────── */}
       <nav
         ref={navRef}
         className="fixed top-0 left-0 right-0 z-50 bg-bg shadow-[0_1px_0_#E3DBCE]"
@@ -210,7 +202,6 @@ export const Navigation = () => {
       >
         <div className="safe-zone flex items-center justify-between h-16 md:h-20">
 
-          {/* Logo */}
           <Link href={href('/')} onClick={closeMobileMenu}>
             <Image
               src={logo}
@@ -221,9 +212,7 @@ export const Navigation = () => {
             />
           </Link>
 
-          {/* Mobile actions: CTA icon + hamburger */}
           <div className="flex items-center gap-2 md:hidden">
-            {/* Phone CTA (pulsing) */}
             <a
               href="tel:+38163383393"
               aria-label="+381 63 383 393"
@@ -235,7 +224,6 @@ export const Navigation = () => {
               </span>
             </a>
 
-            {/* Menu ↔ Close */}
             <button
               className="relative w-10 h-10 flex items-center justify-center text-text hover:text-accent-strong transition-colors duration-200"
               onClick={() => setMobileMenuVisible(!mobileMenuVisible)}
@@ -251,7 +239,6 @@ export const Navigation = () => {
             </button>
           </div>
 
-          {/* Desktop nav links */}
           <ul className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <li key={link.label} className="relative flex">
@@ -270,9 +257,7 @@ export const Navigation = () => {
             ))}
           </ul>
 
-          {/* Desktop right side: phone + CTA + language switcher */}
           <div className="hidden md:flex items-center gap-4">
-            {/* Phone CTA (icon only, pulsing) */}
             <a
               href="tel:+38163383393"
               aria-label="+381 63 383 393"
@@ -285,13 +270,11 @@ export const Navigation = () => {
               </span>
             </a>
 
-            {/* Desktop CTA */}
             <Link href={href('/contact')} className="btn-primary inline-flex group">
               {t('nav.requestOffer')}
               <LuArrowUpRight className="w-4 h-4" />
             </Link>
 
-            {/* Language switcher */}
             <div className="relative">
               <button
                 onClick={() => setLangOpen((o) => !o)}
@@ -331,10 +314,6 @@ export const Navigation = () => {
         </div>
       </nav>
 
-      {/* ── Scroll progress ──────────────────────────────────── */}
-      {/* Rendered last (above the nav) so iOS Safari's backdrop-filter on the */}
-      {/* nav doesn't composite over it. Desktop: shows when nav collapsed. */}
-      {/* Mobile: shows whenever scrolled, independent of nav visibility. */}
       <div
         className="fixed top-0 left-0 right-0 h-[3px] z-[55] pointer-events-none"
         style={{

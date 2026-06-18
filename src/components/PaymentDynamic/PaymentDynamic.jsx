@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react';
 import { LuKeyRound, LuFilePen, LuHouse, LuWallet } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 
-// Language-neutral data (number, amount, icon); label/detail from dict.payment.steps
 const stepData = [
   { number: '01', amount: '5.000€', icon: LuKeyRound },
   { number: '02', amount: '30%', icon: LuFilePen },
@@ -20,8 +19,6 @@ export const PaymentDynamic = () => {
     detail: t(`payment.steps.${i}.detail`),
   }));
 
-  // Scroll-driven emphasis: as the steps grid travels through the viewport,
-  // sequentially highlight step 1, then 2, then 3 (mirrors the hover state).
   useEffect(() => {
     const el = stepsRef.current;
     if (!el) return;
@@ -30,15 +27,12 @@ export const PaymentDynamic = () => {
       raf = null;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      // Fully out of view → no emphasis
       if (rect.bottom <= 0 || rect.top >= vh) {
         setActiveIndex(-1);
         return;
       }
-      // Progress of the grid's center across the viewport (0 = entering bottom, 1 = leaving top)
       const center = rect.top + rect.height / 2;
       const progress = Math.min(Math.max((vh - center) / vh, 0), 1);
-      // Scroll thresholds per step; 3rd step is emphasized a little earlier (0.56 vs even 0.67)
       const thresholds = [0, 0.34, 0.48];
       let idx = 0;
       for (let i = 0; i < thresholds.length; i++) {
@@ -64,7 +58,6 @@ export const PaymentDynamic = () => {
   <section className="py-8 md:py-16 bg-bg">
     <div className="safe-zone">
 
-      {/* Header */}
       <div className="section-header" data-reveal>
         <span className="overline"><LuWallet />{t('payment.eyebrow')}</span>
         <h2
@@ -75,7 +68,6 @@ export const PaymentDynamic = () => {
         </h2>
       </div>
 
-      {/* Steps */}
       <div ref={stepsRef} className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border" data-reveal>
         {steps.map(({ number, amount, label, detail, icon: Icon }, i) => {
           const active = i === activeIndex;
@@ -84,7 +76,6 @@ export const PaymentDynamic = () => {
             key={i}
             className={`p-4 md:p-8 xl:p-12 flex flex-col gap-5 md:gap-6 group transition-colors duration-300 hover:bg-bg-alt ${active ? 'bg-bg-alt' : 'bg-bg'}`}
           >
-            {/* Number + icon row */}
             <div className="flex items-center justify-between">
               <span
                 className="text-border"
@@ -98,7 +89,6 @@ export const PaymentDynamic = () => {
               </span>
             </div>
 
-            {/* Amount */}
             <div>
               <p
                 className="text-accent-strong"
@@ -114,7 +104,6 @@ export const PaymentDynamic = () => {
               </p>
             </div>
 
-            {/* Detail */}
             <p className="text-text-muted text-sm font-light leading-relaxed border-t border-border pt-5">
               {detail}
             </p>

@@ -14,15 +14,8 @@ import {
   LuBusFront,
 } from 'react-icons/lu';
 
-// Free, no-token vector tiles (OpenFreeMap) — "liberty" is the colorful basemap
-// (blue water, green parks, colored roads); includes building data for 3D.
 const STYLE_URL = 'https://tiles.openfreemap.org/styles/liberty';
 
-/**
- * ⚠️ APPROXIMATE COORDINATES — replace with real values.
- * Order is [longitude, latitude]. The DEVELOPMENT pin is the anchor; the
- * camera opens here and "Resetuj prikaz" returns to it.
- */
 const DEVELOPMENT = { name: 'Avala Home Concept', coords: [20.516, 44.692] };
 
 const locations = [
@@ -63,7 +56,6 @@ export const LocationMap = () => {
     map.scrollZoom.disable();
 
     map.on('load', () => {
-      // ── 3D extruded buildings ─────────────────────────────────
       const firstSymbol = map.getStyle().layers.find((l) => l.type === 'symbol')?.id;
       if (!map.getLayer('3d-buildings')) {
         map.addLayer(
@@ -74,7 +66,6 @@ export const LocationMap = () => {
             type: 'fill-extrusion',
             minzoom: 13,
             paint: {
-              // Neutral tones that blend with the basemap, with subtle height shading.
               'fill-extrusion-color': [
                 'interpolate',
                 ['linear'],
@@ -94,7 +85,6 @@ export const LocationMap = () => {
       setReady(true);
     });
 
-    // ── Development marker (large, accent) ──────────────────────
     const devEl = document.createElement('div');
     devEl.className = 'ahc-marker ahc-marker--home';
     new maplibregl.Marker({ element: devEl, anchor: 'bottom' })
@@ -104,15 +94,12 @@ export const LocationMap = () => {
       ))
       .addTo(map);
 
-    // ── POI markers ─────────────────────────────────────────────
     markersRef.current = locations.map((loc, i) => {
       const el = document.createElement('div');
       if (loc.label) {
-        // Wordmark badge for named places (e.g. IKEA, Ava)
         el.className = 'ahc-poi ahc-poi--label';
         el.textContent = loc.label;
       } else {
-        // Descriptive category icon
         el.className = 'ahc-poi';
         el.innerHTML = renderToStaticMarkup(<loc.icon size={15} strokeWidth={2.25} />);
       }
@@ -162,7 +149,6 @@ export const LocationMap = () => {
   return (
     <div className="relative w-full overflow-hidden border border-border" style={{ borderRadius: '2px' }}>
 
-      {/* Map — full width */}
       <div ref={containerRef} className="w-full h-[440px] md:h-[600px]" />
       {!ready && (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-bg-alt">
@@ -170,7 +156,6 @@ export const LocationMap = () => {
         </div>
       )}
 
-      {/* Glassy ivory selection panel overlaid on the map */}
       <div
         className="absolute z-10 flex flex-col inset-x-3 bottom-3 max-h-[42%] md:inset-x-auto md:right-4 md:top-4 md:bottom-4 md:w-[340px] md:max-h-none rounded-[4px] border border-white/70 shadow-[0_8px_30px_rgba(26,25,21,0.18)] overflow-hidden"
         style={{

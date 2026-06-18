@@ -26,7 +26,6 @@ export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose, prev, next]);
 
-  // Move focus into the dialog on open; restore it to the trigger on close.
   useEffect(() => {
     if (activeIndex === null) return;
     restoreFocusRef.current = document.activeElement;

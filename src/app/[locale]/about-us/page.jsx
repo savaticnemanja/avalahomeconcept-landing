@@ -34,7 +34,6 @@ export default async function AboutUsPage({ params }) {
 
   return (
     <main className="pt-20">
-      {/* Hero */}
       <section className="py-12 md:py-16 bg-bg">
         <div className="safe-zone">
           <div className="mb-6">
@@ -54,7 +53,6 @@ export default async function AboutUsPage({ params }) {
         </div>
       </section>
 
-      {/* Stats strip */}
       <section className="border-t border-border bg-bg-alt">
         <div className="safe-zone">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
@@ -78,7 +76,6 @@ export default async function AboutUsPage({ params }) {
         </div>
       </section>
 
-      {/* Investor section */}
       <section className="py-12 md:py-16 bg-bg-alt border-t border-border">
         <div className="safe-zone">
           <div className="mb-8">

@@ -2,7 +2,6 @@ import { locales, hreflang, routes, SITE_URL, withLocale } from '@/i18n/config';
 
 export const dynamic = 'force-static';
 
-// Representative image per route (Google image sitemap extension).
 const ROUTE_IMAGE = {
   '/': '/og/home.jpg',
   '/about-us': '/og/about.jpg',
@@ -11,8 +10,6 @@ const ROUTE_IMAGE = {
   '/contact': '/og/contact.jpg',
 };
 
-// One entry per route × locale, each with hreflang alternates → richer sitemap.
-// /thank-you is excluded (noindex).
 export default function sitemap() {
   const indexable = routes.filter((r) => r !== '/thank-you');
   const entries = [];

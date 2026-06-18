@@ -1,7 +1,6 @@
 {
   "meta": {
     "siteName": "Avala Home Concept",
-    "ogDescription": "Gated complex of family houses on Mount Avala, 20 minutes from Belgrade.",
     "jsonLdDescription": "Gated complex of family houses on Mount Avala, 20 minutes from Belgrade.",
     "home": {
       "title": "Avala Home Concept — Houses on Avala, 20 min from Belgrade",
@@ -246,7 +245,6 @@
   "footer": {
     "tagline": "A gated complex of family houses on Mount Avala — 20 minutes from Belgrade.",
     "pagesHeading": "Pages",
-    "offerHeading": "House offer",
     "contactHeading": "Contact",
     "location": "Avala, Belgrade, Serbia",
     "rights": "All rights reserved.",
@@ -256,11 +254,6 @@
       "about": "About us",
       "gallery": "Gallery",
       "contact": "Contact"
-    },
-    "offer": {
-      "project1": "Project 1 — 139m²",
-      "project2": "Project 2 — 147m²",
-      "smallHouses": "Houses 80–100m²"
     }
   },
   "about": {
@@ -412,7 +405,6 @@
     ],
     "drawer": {
       "plan": "Floor plan",
-      "renders": "3D renders",
       "close": "Close menu",
       "requestOffer": "Request an offer"
     },

@@ -15,8 +15,6 @@ export const Specifications = () => {
   const gridRef = useRef(null);
   const [activeCount, setActiveCount] = useState(0);
 
-  // Scroll-driven cascade: as the grid travels through the viewport, the
-  // hover-style emphasis sweeps across the items one after another, left to right.
   useEffect(() => {
     const el = gridRef.current;
     if (!el) return;
@@ -31,7 +29,6 @@ export const Specifications = () => {
       raf = null;
       const rect = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      // 0 when the grid top reaches 60% down the viewport, 1 once it has scrolled up past it.
       const progress = Math.min(Math.max((vh * 0.6 - rect.top) / rect.height, 0), 1);
       setActiveCount(Math.round(progress * specs.length));
     };

@@ -25,27 +25,19 @@ export default async function HomePage({ params }) {
 
   return (
     <>
-      {/* 1. Hero slider */}
       <Slider />
           
-      {/* ProjectShowcase slider */}
       <ProjectShowcase />
 
-      {/* Showcase sa benefitima */}
       <Showcase />
 
-      {/* Lokacija */}
       <Location />
 
-      {/* Specifikacije */}
       <Specifications />
 
-      {/* Dinamika plaćanja */}
       <PaymentDynamic />
 
-      {/* CTA */}
       <div className="relative py-16 md:py-28 overflow-hidden">
-        {/* Background image */}
         <Image
           src={ctaBg}
           alt=""
@@ -53,7 +45,6 @@ export default async function HomePage({ params }) {
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Dark overlay for contrast (AA-safe over the bright rooftops/sky) */}
         <div className="absolute inset-0 bg-bg-dark/80" />
 
         <div className="safe-zone relative flex flex-col items-center gap-5 text-center">
@@ -79,10 +70,8 @@ export default async function HomePage({ params }) {
         </div>
       </div>
 
-      {/* Kontakt */}
       <Contact />
 
-      {/* Partneri */}
       <Partners />
     </>
   );

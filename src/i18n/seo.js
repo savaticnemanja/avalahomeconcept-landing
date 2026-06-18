@@ -1,8 +1,6 @@
 import { getDictionary } from './getDictionary';
 import { buildAlternates, SITE_URL, withLocale, hreflang, locales } from './config';
 
-// Per-route 1200×630 share image (files live under /public/og — next/image
-// bundles src/assets with hashed names, so OG images must be in /public).
 const OG_IMAGE = {
   '/': '/og/home.jpg',
   '/offer': '/og/offer.jpg',
@@ -12,10 +10,6 @@ const OG_IMAGE = {
   '/thank-you': '/og/home.jpg',
 };
 
-/**
- * Build a complete metadata object (title, description, canonical + hreflang,
- * Open Graph, Twitter card) for a route. Keeps every page consistent.
- */
 export async function buildPageMetadata({ locale, path, metaKey, robots }) {
   const dict = await getDictionary(locale);
   const m = dict.meta[metaKey];

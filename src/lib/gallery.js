@@ -25,7 +25,6 @@ import g24 from '@/assets/gallery/gallery-24.webp';
 import g25 from '@/assets/gallery/gallery-25.webp';
 import g26 from '@/assets/gallery/gallery-26.webp';
 
-// Image sources only — alt text is built per-locale in the component.
 export const gallerySources = [
   g1, g2, g3, g4, g5, g6, g7, g8, g9, g10,
   g11, g12, g13, g14, g15, g16, g17, g18, g19, g20,

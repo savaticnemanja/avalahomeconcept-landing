@@ -1,7 +1,6 @@
 {
   "meta": {
     "siteName": "Avala Home Concept",
-    "ogDescription": "Geschlossener Komplex von Familienhäusern am Berg Avala, 20 Minuten von Belgrad entfernt.",
     "jsonLdDescription": "Geschlossener Komplex von Familienhäusern am Berg Avala, 20 Minuten von Belgrad entfernt.",
     "home": {
       "title": "Avala Home Concept — Häuser auf der Avala, 20 Min. von Belgrad",
@@ -246,7 +245,6 @@
   "footer": {
     "tagline": "Ein geschlossener Komplex von Familienhäusern am Berg Avala — 20 Minuten von Belgrad.",
     "pagesHeading": "Seiten",
-    "offerHeading": "Hausangebot",
     "contactHeading": "Kontakt",
     "location": "Avala, Belgrad, Serbien",
     "rights": "Alle Rechte vorbehalten.",
@@ -256,11 +254,6 @@
       "about": "Über uns",
       "gallery": "Galerie",
       "contact": "Kontakt"
-    },
-    "offer": {
-      "project1": "Projekt 1 — 139 m²",
-      "project2": "Projekt 2 — 147 m²",
-      "smallHouses": "Häuser 80–100 m²"
     }
   },
   "about": {
@@ -412,7 +405,6 @@
     ],
     "drawer": {
       "plan": "Grundriss",
-      "renders": "3D-Visualisierungen",
       "close": "Menü schließen",
       "requestOffer": "Angebot anfordern"
     },

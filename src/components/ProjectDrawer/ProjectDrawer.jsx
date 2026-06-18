@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { LuArrowUpRight, LuBed, LuMaximize2, LuSunrise, LuX, LuZoomIn, LuPhone } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 
-// Full-screen image zoom layered above the drawer panel.
 const ZoomViewer = ({ images, index, onClose, onSetIndex }) => {
   const prev = useCallback(
     () => onSetIndex((i) => (i - 1 + images.length) % images.length),
@@ -69,7 +68,6 @@ const ZoomViewer = ({ images, index, onClose, onSetIndex }) => {
 
 export const ProjectDrawer = ({ project, onClose }) => {
   const { t, dict, href } = useI18n();
-  // Keep the last project mounted while the panel animates out.
   const [active, setActive] = useState(project);
   const [visible, setVisible] = useState(false);
   const [zoom, setZoom] = useState(null);
@@ -103,7 +101,6 @@ export const ProjectDrawer = ({ project, onClose }) => {
     ? detail.rooms.map((name, i) => ({ name, area: active.netAreas[i] }))
     : null;
 
-  // Zoomable set: hero render → plan → render gallery.
   const zoomImages = active
     ? [
         { src: active.heroImage, alt: title },
@@ -114,7 +111,6 @@ export const ProjectDrawer = ({ project, onClose }) => {
 
   return (
     <>
-      {/* Backdrop */}
       <div
         className="fixed inset-0 z-[60] bg-bg-dark/50 backdrop-blur-[2px] transition-opacity duration-300"
         style={{ opacity: visible ? 1 : 0, pointerEvents: project ? 'auto' : 'none' }}
@@ -122,7 +118,6 @@ export const ProjectDrawer = ({ project, onClose }) => {
         aria-hidden="true"
       />
 
-      {/* Panel */}
       <aside
         className="fixed top-0 right-0 bottom-0 z-[60] w-full max-w-[820px] bg-bg flex flex-col shadow-[-8px_0_40px_rgba(26,25,21,0.18)]"
         style={{
@@ -136,7 +131,6 @@ export const ProjectDrawer = ({ project, onClose }) => {
       >
         {active && (
           <>
-            {/* Sticky header */}
             <div className="flex items-center justify-between gap-4 px-2 md:px-6 h-16 md:h-20 border-b border-border flex-shrink-0 bg-bg/95 backdrop-blur-md">
               <div className="min-w-0">
                 <h2
@@ -155,12 +149,9 @@ export const ProjectDrawer = ({ project, onClose }) => {
               </button>
             </div>
 
-            {/* Body — fixed layout, no full-panel scroll */}
             <div className="flex-1 min-h-0 flex flex-col">
 
-              {/* Featured image + thumbnail scroller */}
               <div className="flex flex-col gap-3 px-2 md:px-6 py-4 flex-shrink-0">
-                {/* Active image (enlarged) */}
                 <button
                   onClick={() => setZoom(activeImg)}
                   className="relative w-full h-64 md:h-80 rounded-[4px] overflow-hidden border border-border group"
@@ -179,13 +170,11 @@ export const ProjectDrawer = ({ project, onClose }) => {
                   >
                     {t(`offer.cards.${active.cardIndex}.badge`)}
                   </span>
-                  {/* Zoom indicator */}
                   <span className="absolute bottom-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-bg-dark/55 text-white backdrop-blur-sm transition-colors duration-200 group-hover:bg-accent-strong">
                     <LuZoomIn className="w-4 h-4" />
                   </span>
                 </button>
 
-                {/* Thumbnails */}
                 <div
                   className="flex gap-2 overflow-x-auto"
                   style={{ scrollSnapType: 'x mandatory' }}
@@ -204,7 +193,6 @@ export const ProjectDrawer = ({ project, onClose }) => {
                 </div>
               </div>
 
-              {/* Property points */}
               <div className="flex items-center gap-5 px-2 md:px-6 py-4 border-y border-border overflow-x-auto flex-shrink-0">
                 <p
                   className="text-text-muted text-[0.7rem] font-medium tracking-[0.15em] uppercase whitespace-nowrap flex-shrink-0"
@@ -228,7 +216,6 @@ export const ProjectDrawer = ({ project, onClose }) => {
                 </span>
               </div>
 
-              {/* Description + floor area (scrolls internally only if content overflows) */}
               <div className="flex-1 min-h-0 overflow-y-auto px-2 md:px-6 py-4 flex flex-col gap-6">
                 {detail?.description && (
                   <p className="text-text-muted font-light leading-relaxed">{detail.description}</p>
@@ -257,7 +244,6 @@ export const ProjectDrawer = ({ project, onClose }) => {
                 )}
               </div>
 
-              {/* Fixed CTA footer */}
               <div className="flex-shrink-0 border-t border-border px-2 md:px-6 py-4 bg-bg flex flex-row gap-3">
                 <a
                   href="tel:+38163383393"

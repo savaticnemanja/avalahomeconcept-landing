@@ -25,7 +25,6 @@ export const Slider = () => {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
 
-  // Respect reduced-motion: start paused so content doesn't auto-move.
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setPaused(true);
@@ -38,12 +37,10 @@ export const Slider = () => {
     return () => clearInterval(id);
   }, [paused]);
 
-  const go = (dir) => setCurrent(p => (p + dir + slides.length) % slides.length);
 
   return (
     <div className="relative h-screen min-h-[640px] overflow-hidden bg-bg-dark">
 
-{/* Slides */}
 {slides.map((slide, i) => (
   <div
     key={slide.id}
@@ -72,11 +69,9 @@ export const Slider = () => {
   </div>
 ))}
 
-      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/85 via-bg-dark/20 to-transparent" />
       <div className="absolute inset-0 bg-bg-dark/15" />
 
-      {/* Content */}
       <div
         className="absolute inset-x-0 bottom-0 z-10 safe-zone pb-24 md:pb-32"
         style={{ animation: 'fade-up 0.8s ease both' }}
@@ -118,9 +113,7 @@ export const Slider = () => {
         </div>
       </div>
 
-      {/* Slide counter + indicators — bottom right */}
       <div className="absolute right-7 bottom-10 z-10 flex flex-col items-end gap-4">
-        {/* Pause / play (WCAG 2.2.2) */}
         <button
           type="button"
           onClick={() => setPaused((p) => !p)}
@@ -129,7 +122,6 @@ export const Slider = () => {
         >
           {paused ? <LuPlay className="w-4 h-4" /> : <LuPause className="w-4 h-4" />}
         </button>
-        {/* Counter */}
         <div className="flex items-baseline gap-1.5">
           <span
             style={{
@@ -153,7 +145,6 @@ export const Slider = () => {
             / {String(slides.length).padStart(2, '0')}
           </span>
         </div>
-        {/* Line indicators */}
         {slides.map((_, i) => (
           <button
             key={i}
@@ -173,7 +164,6 @@ export const Slider = () => {
         ))}
       </div>
 
-      {/* Auto-advance progress bar — resets on each slide change via key */}
       <div className="absolute bottom-0 left-0 right-0 z-10 h-[2px] bg-text-light/10">
         <div
           key={current}

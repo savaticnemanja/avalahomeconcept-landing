@@ -30,13 +30,11 @@ export const Footer = () => {
     { path: '/contact', label: t('footer.pages.contact') },
   ];
 
-
   return (
   <footer className="bg-bg-dark text-text-light">
     <div className="safe-zone py-10 md:py-16">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
 
-        {/* Brand */}
         <div className="flex flex-col gap-5 items-center text-center md:items-start md:text-left">
           <Link href={href('/')}>
             <Image src={logoWhite} alt="Avala Home Concept logo" width={225} height={40} />
@@ -60,7 +58,6 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Pages */}
         <div className="pt-8 border-t border-border-dark md:pt-0 md:border-t-0">
           <p className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-accent-strong mb-5">
             {t('footer.pagesHeading')}
@@ -79,7 +76,6 @@ export const Footer = () => {
           </ul>
         </div>
 
-        {/* Contact */}
         <div className="pt-8 border-t border-border-dark md:pt-0 md:border-t-0">
           <p className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-accent-strong mb-5">
             {t('footer.contactHeading')}

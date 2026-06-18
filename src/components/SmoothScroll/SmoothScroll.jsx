@@ -1,9 +1,6 @@
 'use client';
 import { useEffect } from 'react';
 
-// Desktop-only smooth (inertia) wheel scrolling for the whole app.
-// Touch devices keep their native scrolling; reduced-motion users are respected.
-// Lenis is imported dynamically so it never enters the server/prerender bundle.
 export const SmoothScroll = () => {
   useEffect(() => {
     const finePointer = window.matchMedia('(pointer: fine)').matches;
@@ -27,7 +24,6 @@ export const SmoothScroll = () => {
       });
       window.__lenis = lenis;
 
-      // Lenis handles smoothing itself; avoid double-animating programmatic scrolls.
       document.documentElement.style.scrollBehavior = 'auto';
 
       const raf = (time) => {
