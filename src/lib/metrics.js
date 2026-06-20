@@ -154,7 +154,7 @@ const projectLeads = async (days, take = 5) => {
       name: { contains: 'offer' },
     },
     _count: { _all: true },
-    orderBy: { _count: { _all: 'desc' } },
+    orderBy: { _count: { name: 'desc' } },
     take,
   });
   return rows.map((r) => ({ name: r.name, leads: r._count._all }));

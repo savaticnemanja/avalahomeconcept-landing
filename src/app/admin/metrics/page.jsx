@@ -1,4 +1,4 @@
-import { LuUsers, LuMousePointerClick, LuPhoneCall, LuActivity, LuHome } from 'react-icons/lu';
+import { LuUsers, LuMousePointerClick, LuPhoneCall, LuActivity, LuHouse } from 'react-icons/lu';
 import { getMetricsOverview } from '@/lib/metrics';
 import { LOCALE_LABELS } from '@/lib/admin/constants';
 import { TrendChart } from './TrendChart';
@@ -96,7 +96,7 @@ export default async function AdminMetricsPage() {
       {/* Top projects by leads (contact/offer CTA clicks). */}
       <div className="bg-bg-alt border border-border rounded-[6px] p-5 mb-8">
         <div className="flex items-center gap-2 mb-4">
-          <LuHome className="w-4 h-4 text-accent" />
+          <LuHouse className="w-4 h-4 text-accent" />
           <h2 className="text-sm text-text" style={{ fontFamily: 'var(--font-heading)' }}>
             Najveće interesovanje (30 dana)
           </h2>
