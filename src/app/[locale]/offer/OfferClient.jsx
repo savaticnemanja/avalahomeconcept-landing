@@ -1,9 +1,9 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as LuIcons from 'react-icons/lu';
-import { LuArrowRight, LuMousePointerClick, LuMap, LuHouse } from 'react-icons/lu';
+import { LuArrowRight } from 'react-icons/lu';
 import { ProjectDrawer } from '@/components';
 import { useI18n } from '@/i18n/I18nProvider';
 import { imageUrl } from '@/lib/imageUrl';
@@ -15,9 +15,6 @@ const Hl = ({ name, className }) => {
   return <Cmp className={className} />;
 };
 
-// Cards/pins are real links to the project page (crawlable, OG-shareable),
-// but a plain click opens the drawer instead of navigating. Modifier- or
-// middle-clicks fall through so "open in new tab" still works.
 const openOrNavigate = (onOpen) => (e) => {
   if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
   e.preventDefault();
@@ -29,7 +26,8 @@ const coverOf = (project) => {
   return (cover ?? project.images[0])?.filename ?? null;
 };
 
-const SitePlanPin = ({ project, title, to, onOpen }) => {
+// --- Map Pin ---
+const SitePlanPin = ({ project, title, to, onOpen, isActive }) => {
   if (!project.sitePlanTop || !project.sitePlanLeft) return null;
   return (
     <Link
@@ -39,13 +37,27 @@ const SitePlanPin = ({ project, title, to, onOpen }) => {
       className="absolute group/pin -translate-x-1/2 -translate-y-1/2 z-10"
       style={{ top: project.sitePlanTop, left: project.sitePlanLeft }}
     >
-      <span className="absolute inset-0 m-auto w-8 h-8 rounded-full bg-accent/50 animate-ping" />
-      <span className="relative flex items-center justify-center w-8 h-8 rounded-full bg-accent text-white border-2 border-white shadow-[0_3px_10px_rgba(26,25,21,0.45)] transition-transform duration-200 group-hover/pin:scale-110">
+      {isActive && (
+        <span className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-accent/35 animate-ping" />
+      )}
+      <span
+        className={`relative flex items-center justify-center rounded-full text-white border-2 border-white shadow-[0_3px_14px_rgba(26,25,21,0.5)] transition-all duration-300 ${
+          isActive
+            ? 'w-11 h-11 bg-accent ring-4 ring-accent/30'
+            : 'w-8 h-8 bg-accent/65 group-hover/pin:bg-accent group-hover/pin:scale-110'
+        }`}
+      >
         <span className="text-[0.72rem] font-semibold" style={{ fontFamily: 'var(--font-body)' }}>
           {project.order + 1}
         </span>
       </span>
-      <span className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-3 whitespace-nowrap opacity-0 translate-y-1 group-hover/pin:opacity-100 group-hover/pin:translate-y-0 group-focus-visible/pin:opacity-100 transition-all duration-200">
+      <span
+        className={`pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-3 whitespace-nowrap transition-all duration-200 ${
+          isActive
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-1 group-hover/pin:opacity-100 group-hover/pin:translate-y-0 group-focus-visible/pin:opacity-100'
+        }`}
+      >
         <span className="block bg-bg-dark text-text-light px-3.5 py-2 rounded-[4px] shadow-[0_8px_24px_rgba(26,25,21,0.35)]">
           <span className="block text-sm leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
             {title}
@@ -62,85 +74,122 @@ const SitePlanPin = ({ project, title, to, onOpen }) => {
   );
 };
 
-const OfferCard = ({ project, locale, t, to, onOpen }) => {
+// --- Compact Catalog Card ---
+const CatalogCard = ({ project, locale, t, isActive, onHover, to, onOpen }) => {
   const title = pick(project, 'title', locale);
   const subtitle = pick(project, 'subtitle', locale);
   const badge = pick(project, 'badge', locale);
   const cover = coverOf(project);
 
   return (
-    <Link href={to} onClick={openOrNavigate(onOpen)} className="card group flex flex-col text-left w-full" aria-label={title}>
-      <div className="relative overflow-hidden" style={{ aspectRatio: '16/10' }}>
-        {cover && (
+    <Link
+      href={to}
+      onClick={openOrNavigate(onOpen)}
+      onMouseEnter={onHover}
+      data-project-id={project.id}
+      aria-label={title}
+      className={`group block border-b border-border transition-colors duration-200 border-l-[3px] ${
+        isActive ? 'bg-bg-alt border-l-accent' : 'border-l-transparent hover:bg-bg-alt/60'
+      }`}
+    >
+      <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
+        {cover ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={imageUrl(cover)}
             alt={title}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
+        ) : (
+          <div className="w-full h-full bg-bg-alt" />
         )}
+        <span className="absolute top-3 left-3 w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center text-xs font-semibold shadow">
+          {project.order + 1}
+        </span>
         {badge && (
           <span
-            className="absolute top-4 left-4 px-3 py-1 text-[0.68rem] font-medium tracking-[0.15em] uppercase text-white"
-            style={{ backgroundColor: 'rgba(196,151,90,0.92)', fontFamily: 'var(--font-body)', backdropFilter: 'blur(4px)' }}
+            className="absolute top-3 right-3 px-2.5 py-0.5 text-[0.62rem] font-medium tracking-[0.15em] uppercase text-white"
+            style={{ backgroundColor: 'rgba(196,151,90,0.92)', fontFamily: 'var(--font-body)' }}
           >
             {badge}
           </span>
         )}
       </div>
 
-      <div className="p-5 md:p-7 flex flex-col gap-4 md:gap-5 flex-1">
-        <div className="flex items-start justify-between gap-4">
-          <div>
+      <div className="p-4 flex flex-col gap-2">
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
             {subtitle && (
-              <p className="text-text-muted text-[0.7rem] font-medium tracking-[0.15em] uppercase mb-1" style={{ fontFamily: 'var(--font-body)' }}>
+              <p className="text-text-muted text-[0.62rem] font-medium tracking-[0.15em] uppercase mb-0.5" style={{ fontFamily: 'var(--font-body)' }}>
                 {subtitle}
               </p>
             )}
-            <h3 className="text-text" style={{ fontFamily: 'var(--font-heading)', fontSize: '1.6rem', fontWeight: 400 }}>
+            <h3 className="text-text leading-snug" style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', fontWeight: 400 }}>
               {title}
             </h3>
           </div>
           {project.totalAreaM2 != null && (
             <div className="text-right flex-shrink-0">
-              <span className="text-accent" style={{ fontFamily: 'var(--font-heading)', fontSize: '2.4rem', fontWeight: 400, lineHeight: 1 }}>
+              <span className="text-accent" style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 400, lineHeight: 1 }}>
                 {project.totalAreaM2}
               </span>
-              <span className="text-text-muted text-sm block">m²</span>
+              <span className="block text-text-muted text-xs">m²</span>
             </div>
           )}
         </div>
 
         {project.highlights.length > 0 && (
-          <ul className="flex flex-col gap-2 flex-1 py-4 border-y border-border">
-            {project.highlights.map((h) => (
-              <li key={h.id} className="flex items-center gap-2.5 text-sm font-light text-text-muted">
-                <Hl name={h.icon} className="w-4 h-4 text-accent flex-shrink-0" />
+          <ul className="flex flex-wrap gap-x-3 gap-y-1 py-2 border-t border-border">
+            {project.highlights.slice(0, 4).map((h) => (
+              <li key={h.id} className="flex items-center gap-1 text-[0.7rem] text-text-muted">
+                <Hl name={h.icon} className="w-3 h-3 text-accent flex-shrink-0" />
                 {pick(h, 'label', locale)}{h.value ? ` ${h.value}` : ''}
               </li>
             ))}
           </ul>
         )}
 
-        <span className="flex items-center justify-between text-sm font-medium text-accent mt-1" style={{ fontFamily: 'var(--font-body)', letterSpacing: '0.05em' }}>
+        <span className="flex items-center gap-1 text-xs text-accent font-medium" style={{ fontFamily: 'var(--font-body)', letterSpacing: '0.05em' }}>
           {t('offer.viewDetails')}
-          <span className="btn-arrow flex items-center">
-            <LuArrowRight className="w-4 h-4" />
-          </span>
+          <LuArrowRight className="w-3 h-3" />
         </span>
       </div>
     </Link>
   );
 };
 
+// --- Map Panel ---
+const MapPanel = ({ projects, locale, href, activeId, openProject }) => (
+  <div className="relative w-full h-full overflow-hidden">
+    <Image
+      src={sitePlanImage}
+      alt="Plan lokacije"
+      fill
+      className="object-cover"
+      priority
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/25 via-transparent to-bg-dark/10 pointer-events-none" />
+    {projects.map((p) => (
+      <SitePlanPin
+        key={p.id}
+        project={p}
+        title={pick(p, 'title', locale)}
+        to={href(`/offer/${p.slug}`)}
+        onOpen={() => openProject(p)}
+        isActive={activeId === p.id}
+      />
+    ))}
+  </div>
+);
+
+// --- Main ---
 export default function OfferClient({ projects }) {
   const { t, locale, href } = useI18n();
   const [selected, setSelected] = useState(null);
-  const basePath = href('/offer'); // e.g. "/sr/offer"
+  const [activeId, setActiveId] = useState(projects[0]?.id ?? null);
+  const catalogRef = useRef(null);
+  const basePath = href('/offer');
 
-  // Keep the drawer in sync with the address bar so the back/forward buttons
-  // work and the URL is the real, shareable project path (not a #hash).
   useEffect(() => {
     const syncFromPath = () => {
       const path = window.location.pathname.replace(/\/$/, '');
@@ -152,16 +201,14 @@ export default function OfferClient({ projects }) {
     return () => window.removeEventListener('popstate', syncFromPath);
   }, [projects, basePath]);
 
-  const openProject = (p) => {
+  const openProject = useCallback((p) => {
     const url = `${basePath}/${p.slug}`;
-    // Switching between projects shouldn't stack history entries.
     if (selected) window.history.replaceState(null, '', url);
     else window.history.pushState(null, '', url);
     setSelected(p);
-  };
+  }, [selected, basePath]);
 
   const closeProject = () => {
-    // Pop the entry we pushed so Back behaves naturally; popstate closes the drawer.
     if (window.location.pathname.replace(/\/$/, '') !== basePath) {
       window.history.back();
     } else {
@@ -169,67 +216,60 @@ export default function OfferClient({ projects }) {
     }
   };
 
+  // Scroll-based active sync
+  useEffect(() => {
+    const root = catalogRef.current;
+    if (!root) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible.length) setActiveId(Number(visible[0].target.dataset.projectId));
+      },
+      { root, threshold: [0.3, 0.5, 0.7] },
+    );
+    root.querySelectorAll('[data-project-id]').forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, [projects]);
+
+  const catalogCards = projects.map((p) => (
+    <CatalogCard
+      key={p.id}
+      project={p}
+      locale={locale}
+      t={t}
+      isActive={activeId === p.id}
+      onHover={() => setActiveId(p.id)}
+      to={href(`/offer/${p.slug}`)}
+      onOpen={() => openProject(p)}
+    />
+  ));
+
   return (
-    <main className="pt-20">
-      <section className="py-12 md:py-16 bg-bg">
-        <div className="safe-zone">
-          <div className="mb-8 md:mb-12">
-            <span className="overline"><LuHouse />{t('offer.eyebrow')}</span>
-            <h1 className="text-text leading-tight" style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem,5vw,4rem)', fontWeight: 400 }}>
-              {t('nav.offer')}
-            </h1>
-          </div>
-
-          <div>
-            <div className="flex items-end justify-between gap-4 mb-4">
-              <div>
-                <span className="overline"><LuMap />{t('offer.sitePlan.eyebrow')}</span>
-                <h2 className="text-text" style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.4rem,2.6vw,2.1rem)', fontWeight: 400 }}>
-                  {t('offer.sitePlan.title')}
-                </h2>
-              </div>
-              <span className="hidden sm:flex items-center gap-2 text-sm font-light text-text-muted">
-                <LuMousePointerClick className="w-4 h-4 text-accent" />
-                {t('offer.sitePlan.hint')}
-              </span>
-            </div>
-
-            <div className="relative rounded-[6px] overflow-hidden border border-border shadow-[0_12px_40px_rgba(26,25,21,0.12)] ring-1 ring-accent/10">
-              <Image src={sitePlanImage} alt={t('offer.sitePlan.title')} className="w-full h-auto select-none" priority />
-              <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/30 via-transparent to-bg-dark/10 pointer-events-none" />
-
-              {projects.map((p) => (
-                <SitePlanPin key={p.id} project={p} title={pick(p, 'title', locale)} to={href(`/offer/${p.slug}`)} onOpen={() => openProject(p)} />
-              ))}
-
-              <span className="sm:hidden absolute bottom-3 left-3 flex items-center gap-2 bg-bg-dark/80 backdrop-blur-sm text-text-light text-[0.72rem] font-light px-3 py-1.5 rounded-full">
-                <LuMousePointerClick className="w-3.5 h-3.5 text-accent" />
-                {t('offer.sitePlan.hint')}
-              </span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 md:mt-12">
-            {projects.map((p) => (
-              <OfferCard key={p.id} project={p} locale={locale} t={t} to={href(`/offer/${p.slug}`)} onOpen={() => openProject(p)} />
-            ))}
-          </div>
+    <>
+      {/* Mobile: stacked */}
+      <div className="lg:hidden flex flex-col pt-20">
+        <div className="relative w-full" style={{ height: 'min(45vw, 320px)' }}>
+          <MapPanel projects={projects} locale={locale} href={href} activeId={activeId} openProject={openProject} />
         </div>
-      </section>
+        <div>{catalogCards}</div>
+      </div>
 
-      <div className="py-8 md:py-16 bg-bg border-t border-border">
-        <div className="safe-zone flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-text italic" style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.2rem,2.5vw,1.8rem)', fontWeight: 400 }}>
-            {t('midCta.text')}
-          </p>
-          <Link href={href('/contact')} className="btn-primary group flex-shrink-0">
-            {t('midCta.requestOffer')}
-            <span className="btn-arrow flex items-center"><LuArrowRight className="w-4 h-4" /></span>
-          </Link>
+      {/* Desktop: fixed split */}
+      <div className="hidden lg:flex" style={{ marginTop: '5rem', height: 'calc(100svh - 5rem)' }}>
+        <div
+          ref={catalogRef}
+          className="w-[360px] xl:w-[400px] flex-shrink-0 overflow-y-auto border-r border-border bg-bg"
+        >
+          {catalogCards}
+        </div>
+        <div className="flex-1 relative">
+          <MapPanel projects={projects} locale={locale} href={href} activeId={activeId} openProject={openProject} />
         </div>
       </div>
 
       <ProjectDrawer project={selected} onClose={closeProject} />
-    </main>
+    </>
   );
 }

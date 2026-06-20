@@ -1,5 +1,5 @@
 import { Navigation } from '@/components/Navigation/Navigation';
-import { Footer } from '@/components/Footer/Footer';
+import { FooterConditional } from '@/components/FooterConditional';
 import { PageTracker } from '@/components/Analytics/PageTracker';
 import { ClickTracker } from '@/components/Analytics/ClickTracker';
 import { I18nProvider } from '@/i18n/I18nProvider';
@@ -73,7 +73,7 @@ export default async function LocaleLayout({ children, params }) {
         <div id="main" tabIndex={-1} className="flex-1">
           {children}
         </div>
-        <Footer />
+        <FooterConditional />
       </div>
     </I18nProvider>
   );
