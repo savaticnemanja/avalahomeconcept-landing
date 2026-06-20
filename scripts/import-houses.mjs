@@ -26,8 +26,10 @@ async function main() {
   mkdirSync(UPLOAD_DIR, { recursive: true });
 
   const slugs = HOUSES.map((h) => h.slug);
-  const deleted = await prisma.project.deleteMany({ where: { slug: { in: slugs } } });
-  console.log(`Removed ${deleted.count} existing project(s): ${slugs.join(', ')}`);
+  const legacySlugs = HOUSES.map((h) => h.filePrefix);
+  const allSlugs = [...new Set([...slugs, ...legacySlugs])];
+  const deleted = await prisma.project.deleteMany({ where: { slug: { in: allSlugs } } });
+  console.log(`Removed ${deleted.count} existing project(s): ${allSlugs.join(', ')}`);
 
   await createHouses(prisma, copyAsset);
   console.log(`Imported ${HOUSES.length} houses from PDF content.`);

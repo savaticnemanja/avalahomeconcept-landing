@@ -138,10 +138,12 @@ export async function createProject(formData) {
 export async function updateProject(formData) {
   await requireSession();
   const id = Number(formData.get('id'));
+  const titles = localeFields(formData, 'title');
   await prisma.project.update({
     where: { id },
     data: {
-      ...localeFields(formData, 'title'),
+      slug: slugify(titles.titleSr),
+      ...titles,
       ...localeFields(formData, 'subtitle'),
       ...localeFields(formData, 'badge'),
       ...localeFields(formData, 'description'),

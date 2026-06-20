@@ -82,7 +82,8 @@ const bullets = (living, terrace) => [
 
 export const HOUSES = [
   {
-    slug: 'project1',
+    slug: 'kuca-1-prizemna-kuca-128-m2',
+    filePrefix: 'project1',
     folder: 'project-1',
     cover: 'floorplan.webp',
     images: ['floorplan.webp', 'main.webp', 'render.webp', 'view-1.webp', 'view-2.webp', 'view-3.webp'],
@@ -117,7 +118,8 @@ export const HOUSES = [
     ],
   },
   {
-    slug: 'project2',
+    slug: 'kuca-2-prizemna-kuca-139-m2',
+    filePrefix: 'project2',
     folder: 'project-2',
     cover: 'floorplan.webp',
     images: ['floorplan.webp', 'main.webp', 'render.webp', 'view-1.webp', 'view-2.webp', 'view-3.webp'],
@@ -152,7 +154,8 @@ export const HOUSES = [
     ],
   },
   {
-    slug: 'small-houses',
+    slug: 'kuca-3-prizemna-kuca-142-m2',
+    filePrefix: 'small-houses',
     folder: 'small-houses',
     cover: 'floorplan.webp',
     images: ['floorplan.webp', 'main.webp', 'view-1.webp', 'view-2.webp', 'view-3.webp', 'view-4.webp', 'view-5.webp', 'view-6.webp'],
@@ -205,13 +208,13 @@ export async function createHouses(prisma, copyAsset, startOrder = 0) {
         totalAreaM2: h.totalAreaM2,
         sitePlanTop: h.pin.top,
         sitePlanLeft: h.pin.left,
-        coverFilename: `seed-${h.slug}-${h.cover}`,
+        coverFilename: `seed-${h.filePrefix}-${h.cover}`,
       },
     });
 
     let imgOrder = 0;
     for (const file of h.images) {
-      const filename = copyAsset(`src/assets/projects/${h.folder}/${file}`, `seed-${h.slug}-${file}`);
+      const filename = copyAsset(`src/assets/projects/${h.folder}/${file}`, `seed-${h.filePrefix}-${file}`);
       await prisma.projectImage.create({ data: { projectId: project.id, filename, order: imgOrder++ } });
     }
 
