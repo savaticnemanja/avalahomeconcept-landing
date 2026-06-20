@@ -1,7 +1,6 @@
 import { getDictionary } from './getDictionary';
 import { buildAlternates, SITE_URL, withLocale, hreflang, locales } from './config';
 import { pick } from '@/lib/localize';
-import { imageUrl } from '@/lib/imageUrl';
 
 const OG_IMAGE = {
   '/': '/og/home.jpg',
@@ -56,8 +55,9 @@ export async function buildPageMetadata({ locale, path, metaKey, robots }) {
   };
 }
 
-// Per-project metadata: dedicated OG tags driven by the project's own
-// title/description and its cover photo. `project` must include `images`.
+// Per-project metadata. The og:image / twitter:image are supplied by the
+// generated card in opengraph-image.jsx (the file-based convention), so we
+// deliberately omit `images` here to avoid overriding it.
 export async function buildProjectMetadata({ locale, project }) {
   const dict = await getDictionary(locale);
   const path = `/offer/${project.slug}`;
@@ -72,17 +72,6 @@ export async function buildProjectMetadata({ locale, project }) {
   const ogTitle = clamp(fullTitle, OG_TITLE_MAX);
   const ogDescription = clamp(rawDesc, OG_DESC_MAX);
 
-  const cover =
-    project.images?.find((i) => i.filename === project.coverFilename) ??
-    project.images?.[0];
-  const image = cover
-    ? `${SITE_URL}${imageUrl(cover.filename)}`
-    : `${SITE_URL}${OG_IMAGE['/offer']}`;
-  const dims =
-    cover && cover.width > 0 && cover.height > 0
-      ? { width: cover.width, height: cover.height }
-      : { width: 1200, height: 630 };
-
   return {
     title,
     description: clamp(rawDesc, META_DESC_MAX),
@@ -95,13 +84,11 @@ export async function buildProjectMetadata({ locale, project }) {
       url,
       title: ogTitle,
       description: ogDescription,
-      images: [{ url: image, ...dims, alt: ogTitle }],
     },
     twitter: {
       card: 'summary_large_image',
       title: ogTitle,
       description: ogDescription,
-      images: [image],
     },
   };
 }
