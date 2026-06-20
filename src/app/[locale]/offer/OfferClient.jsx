@@ -137,26 +137,36 @@ const OfferCard = ({ project, locale, t, to, onOpen }) => {
 export default function OfferClient({ projects }) {
   const { t, locale, href } = useI18n();
   const [selected, setSelected] = useState(null);
+  const basePath = href('/offer'); // e.g. "/sr/offer"
 
+  // Keep the drawer in sync with the address bar so the back/forward buttons
+  // work and the URL is the real, shareable project path (not a #hash).
   useEffect(() => {
-    const openFromHash = () => {
-      const slug = window.location.hash.replace('#', '');
-      const match = projects.find((p) => p.slug === slug);
-      if (match) setSelected(match);
+    const syncFromPath = () => {
+      const path = window.location.pathname.replace(/\/$/, '');
+      const slug = path.startsWith(`${basePath}/`) ? path.slice(basePath.length + 1) : '';
+      setSelected(projects.find((p) => p.slug === slug) ?? null);
     };
-    openFromHash();
-    window.addEventListener('hashchange', openFromHash);
-    return () => window.removeEventListener('hashchange', openFromHash);
-  }, [projects]);
+    syncFromPath();
+    window.addEventListener('popstate', syncFromPath);
+    return () => window.removeEventListener('popstate', syncFromPath);
+  }, [projects, basePath]);
 
   const openProject = (p) => {
+    const url = `${basePath}/${p.slug}`;
+    // Switching between projects shouldn't stack history entries.
+    if (selected) window.history.replaceState(null, '', url);
+    else window.history.pushState(null, '', url);
     setSelected(p);
-    window.history.replaceState(null, '', `#${p.slug}`);
   };
 
   const closeProject = () => {
-    setSelected(null);
-    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    // Pop the entry we pushed so Back behaves naturally; popstate closes the drawer.
+    if (window.location.pathname.replace(/\/$/, '') !== basePath) {
+      window.history.back();
+    } else {
+      setSelected(null);
+    }
   };
 
   return (
