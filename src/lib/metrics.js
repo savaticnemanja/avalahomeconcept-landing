@@ -144,9 +144,25 @@ const clickInsights = async (days, totalVisits) => {
   };
 };
 
+// Top projects by lead clicks (clicks on contact/offer CTAs within project context).
+const projectLeads = async (days, take = 5) => {
+  const rows = await prisma.pageView.groupBy({
+    by: ['name'],
+    where: {
+      type: 'click',
+      createdAt: { gte: since(days) },
+      name: { contains: 'offer' },
+    },
+    _count: { _all: true },
+    orderBy: { _count: { _all: 'desc' } },
+    take,
+  });
+  return rows.map((r) => ({ name: r.name, leads: r._count._all }));
+};
+
 // Everything the dashboard needs, for a given window (default 30 days).
 export const getMetricsOverview = async (days = 30) => {
-  const [today, last7, last30, insights, entryPages, byLocale, referrers, byDevice, total] =
+  const [today, last7, last30, insights, entryPages, byLocale, referrers, byDevice, total, topProjects] =
     await Promise.all([
       visitsInWindow(1),
       visitsInWindow(7),
@@ -157,6 +173,7 @@ export const getMetricsOverview = async (days = 30) => {
       topVisits('referrer', days, 8, { referrer: { not: '' } }),
       topVisits('device', days),
       prisma.pageView.count({ where: { type: 'visit' } }),
+      projectLeads(days),
     ]);
 
   // Clicks (CTR, engagement, conversions) are measured against visits in the window.
@@ -176,5 +193,6 @@ export const getMetricsOverview = async (days = 30) => {
     ctr,
     engagement,
     conversions,
+    topProjects,
   };
 };
