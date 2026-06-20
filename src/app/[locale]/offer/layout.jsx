@@ -33,7 +33,7 @@ export default async function Layout({ children, params }) {
           name: pick(p, 'title', locale),
           description: pick(p, 'description', locale),
           ...(beds ? { numberOfRooms: Number(beds) || beds } : {}),
-          url: `${baseUrl}#${p.slug}`,
+          url: `${baseUrl}${p.slug}/`,
           ...(p.totalAreaM2
             ? { floorSize: { '@type': 'QuantitativeValue', value: p.totalAreaM2, unitCode: 'MTK' } }
             : {}),
