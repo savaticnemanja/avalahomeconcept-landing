@@ -1,6 +1,7 @@
 import { randomBytes } from 'node:crypto';
 import { mkdir, writeFile, unlink } from 'node:fs/promises';
 import path from 'node:path';
+import sharp from 'sharp';
 
 // Where uploaded files live on disk. Served statically from /uploads/<file>.
 export const UPLOAD_DIR = process.env.UPLOAD_DIR
@@ -8,77 +9,62 @@ export const UPLOAD_DIR = process.env.UPLOAD_DIR
   : path.join(process.cwd(), 'public', 'uploads');
 
 export const ALLOWED_TYPES = ['image/webp', 'image/jpeg', 'image/png', 'image/avif'];
-export const MAX_BYTES = 12 * 1024 * 1024; // 12 MB
+export const MAX_BYTES = 12 * 1024 * 1024; // 12 MB (raw upload limit)
 
-const EXT_BY_TYPE = {
-  'image/webp': 'webp',
-  'image/jpeg': 'jpg',
-  'image/png': 'png',
-  'image/avif': 'avif',
-};
+// Every upload is normalised to an optimised WebP: best size/quality ratio
+// with universal modern-browser support. Tune these three knobs as needed.
+const MAX_EDGE = 2560; // px — longest side; bigger images are scaled down
+const WEBP_QUALITY = 88; // visually lossless for photos at a fraction of the size
+const WEBP_EFFORT = 6; // 0–6; higher = smaller file, slower encode
 
-// Best-effort intrinsic-size sniffing without an image library.
-const readDimensions = (buf, type) => {
-  try {
-    if (type === 'image/png') {
-      return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
-    }
-    if (type === 'image/jpeg') {
-      let offset = 2;
-      while (offset < buf.length) {
-        if (buf[offset] !== 0xff) { offset += 1; continue; }
-        const marker = buf[offset + 1];
-        if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
-          return { height: buf.readUInt16BE(offset + 5), width: buf.readUInt16BE(offset + 7) };
-        }
-        offset += 2 + buf.readUInt16BE(offset + 2);
-      }
-    }
-    if (type === 'image/webp') {
-      // VP8X / VP8L / VP8 chunks.
-      const fourcc = buf.toString('ascii', 12, 16);
-      if (fourcc === 'VP8X') {
-        const w = 1 + (buf[24] | (buf[25] << 8) | (buf[26] << 16));
-        const h = 1 + (buf[27] | (buf[28] << 8) | (buf[29] << 16));
-        return { width: w, height: h };
-      }
-      if (fourcc === 'VP8L') {
-        const b = buf.subarray(21);
-        const w = 1 + (((b[1] & 0x3f) << 8) | b[0]);
-        const h = 1 + (((b[3] & 0x0f) << 10) | (b[2] << 2) | ((b[1] & 0xc0) >> 6));
-        return { width: w, height: h };
-      }
-      if (fourcc === 'VP8 ') {
-        return { width: buf.readUInt16LE(26) & 0x3fff, height: buf.readUInt16LE(28) & 0x3fff };
-      }
-    }
-  } catch {
-    // fall through
-  }
-  return { width: 0, height: 0 };
-};
-
-// Save a File/Blob to the upload dir; returns { filename, width, height }.
+// Save a File/Blob to the upload dir, re-encoded to an optimised WebP.
+// Returns { filename, width, height } of the stored (processed) image.
 export const saveUpload = async (file) => {
   if (!file || typeof file.arrayBuffer !== 'function') {
     throw new Error('No file provided.');
   }
-  const type = file.type;
-  if (!ALLOWED_TYPES.includes(type)) {
+  if (!ALLOWED_TYPES.includes(file.type)) {
     throw new Error('Unsupported file type. Use WebP, JPEG, PNG or AVIF.');
   }
   if (file.size > MAX_BYTES) {
     throw new Error('File too large (max 12 MB).');
   }
 
-  const buf = Buffer.from(await file.arrayBuffer());
-  const { width, height } = readDimensions(buf, type);
-  const filename = `${Date.now()}-${randomBytes(6).toString('hex')}.${EXT_BY_TYPE[type]}`;
+  const input = Buffer.from(await file.arrayBuffer());
 
+  let data;
+  let info;
+  try {
+    const meta = await sharp(input).metadata();
+    const oversized = meta.width > MAX_EDGE || meta.height > MAX_EDGE;
+
+    ({ data, info } = await sharp(input)
+      .rotate() // bake in EXIF orientation, then metadata is dropped on output
+      .resize({ width: MAX_EDGE, height: MAX_EDGE, fit: 'inside', withoutEnlargement: true })
+      .webp({ quality: WEBP_QUALITY, effort: WEBP_EFFORT })
+      .toBuffer({ resolveWithObject: true }));
+
+    // Re-encoding an already-optimised WebP can inflate it (and adds a
+    // generation of lossy loss). If it didn't need resizing or re-orienting,
+    // keep the smaller original bytes instead.
+    if (
+      file.type === 'image/webp' &&
+      !oversized &&
+      (!meta.orientation || meta.orientation === 1) &&
+      data.length >= input.length
+    ) {
+      data = input;
+      info = { width: meta.width, height: meta.height };
+    }
+  } catch {
+    throw new Error('Could not process image. The file may be corrupt or unsupported.');
+  }
+
+  const filename = `${Date.now()}-${randomBytes(6).toString('hex')}.webp`;
   await mkdir(UPLOAD_DIR, { recursive: true });
-  await writeFile(path.join(UPLOAD_DIR, filename), buf);
+  await writeFile(path.join(UPLOAD_DIR, filename), data);
 
-  return { filename, width, height };
+  return { filename, width: info.width, height: info.height };
 };
 
 // Remove an uploaded file by its stored filename (best effort).
