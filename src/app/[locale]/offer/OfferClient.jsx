@@ -8,7 +8,7 @@ import { ProjectDrawer } from '@/components';
 import { useI18n } from '@/i18n/I18nProvider';
 import { imageUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
-import sitePlanImage from '@/assets/gallery/gallery-23.webp';
+import sitePlanImage from '@/assets/gallery/complex-aerial.webp';
 
 const Hl = ({ name, className }) => {
   const Cmp = LuIcons[name] ?? LuIcons.LuDot;
