@@ -1,14 +1,15 @@
 'use client';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { LuChevronRight, LuPhone, LuPause, LuPlay } from 'react-icons/lu';
+import { LuChevronRight, LuPhone, LuPause, LuPlay, LuX } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 import sliderImage1 from '@/assets/slider/slide-1.mov';
 import sliderImage2 from '@/assets/slider/slide-2.mov';
 import sliderImage3 from '@/assets/slider/slide-3.mov';
 import sliderImage4 from '@/assets/slider/slide-4.webp';
 import sliderImage5 from '@/assets/slider/slide-5.webp';
+import promoVideo from '@/assets/promo/promo.mp4';
+import promoPoster from '@/assets/promo/promo-poster.webp';
 
 const slides = [
   { id: 1, type: 'video', src: sliderImage1 },
@@ -21,15 +22,27 @@ const slides = [
 const INTERVAL = 3900;
 
 export const Slider = () => {
-  const { t, href } = useI18n();
+  const { t } = useI18n();
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [videoOpen, setVideoOpen] = useState(false);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setPaused(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (!videoOpen) return;
+    const onKey = (e) => { if (e.key === 'Escape') setVideoOpen(false); };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [videoOpen]);
 
   useEffect(() => {
     if (paused) return;
@@ -106,10 +119,11 @@ export const Slider = () => {
             {t('slider.callUs')}
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
           </a>
-          <Link href={href('/contact')} className="btn-outline-light group">
-            {t('slider.sendInquiry')}
+          <button type="button" onClick={() => setVideoOpen(true)} className="btn-outline-light group">
+            <LuPlay className="w-4 h-4" />
+            {t('slider.watchVideo')}
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
-          </Link>
+          </button>
         </div>
       </div>
 
@@ -176,6 +190,32 @@ export const Slider = () => {
           }}
         />
       </div>
+
+      {videoOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-bg-dark/95 p-4 md:p-8"
+          style={{ animation: 'fade-up 0.3s ease both' }}
+          onClick={() => setVideoOpen(false)}
+        >
+          <button
+            type="button"
+            onClick={() => setVideoOpen(false)}
+            aria-label={t('slider.closeVideo')}
+            className="absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center border border-text-light/40 text-text-light/80 transition-colors duration-200 hover:border-accent hover:text-text-light"
+          >
+            <LuX className="h-5 w-5" />
+          </button>
+          <video
+            src={promoVideo}
+            poster={promoPoster}
+            className="max-h-full max-w-full object-contain shadow-2xl"
+            controls
+            autoPlay
+            playsInline
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 };
