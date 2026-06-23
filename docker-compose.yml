@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    image: ghcr.io/savaticnemanja/avalahomeconcept-landing:latest
     ports:
       - "127.0.0.1:8083:3000"
     environment:
