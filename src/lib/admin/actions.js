@@ -138,6 +138,17 @@ export async function updateProject(formData) {
       ...localeFields(formData, 'badge'),
       ...localeFields(formData, 'description'),
       totalAreaM2: formData.get('totalAreaM2') ? Number(formData.get('totalAreaM2')) : null,
+    },
+  });
+  refresh();
+}
+
+export async function updateProjectPin(formData) {
+  await requireSession();
+  const id = Number(formData.get('id'));
+  await prisma.project.update({
+    where: { id },
+    data: {
       sitePlanTop: (formData.get('sitePlanTop') ?? '').toString().trim() || null,
       sitePlanLeft: (formData.get('sitePlanLeft') ?? '').toString().trim() || null,
     },

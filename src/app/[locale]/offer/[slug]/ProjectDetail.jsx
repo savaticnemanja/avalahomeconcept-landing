@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import * as LuIcons from 'react-icons/lu';
-import { LuArrowUpRight, LuArrowLeft, LuZoomIn, LuPhone } from 'react-icons/lu';
+import { LuMail, LuArrowLeft, LuArrowRight, LuZoomIn, LuPhone } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 import { imageUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
@@ -76,9 +76,9 @@ export default function ProjectDetail({ project }) {
   }));
 
   return (
-    <main className="pt-20">
-      <section className="py-10 md:py-14 bg-bg">
-        <div className="safe-zone max-w-[960px]">
+    <main className="pt-16 md:pt-20">
+      <section className="pt-0 pb-28 md:pt-14 bg-bg">
+        <div className="safe-zone">
           <Link
             href={href('/offer')}
             className="inline-flex items-center gap-2 text-sm font-medium text-text-muted hover:text-accent transition-colors mb-6"
@@ -88,8 +88,8 @@ export default function ProjectDetail({ project }) {
             {t('nav.offer')}
           </Link>
 
-          <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
-            <div>
+          <header className="flex flex-row items-end justify-between gap-4 mb-6">
+            <div className="min-w-0">
               {subtitle && (
                 <p className="text-text-muted text-[0.7rem] font-medium tracking-[0.15em] uppercase mb-2" style={{ fontFamily: 'var(--font-body)' }}>
                   {subtitle}
@@ -100,7 +100,7 @@ export default function ProjectDetail({ project }) {
               </h1>
             </div>
             {project.totalAreaM2 != null && (
-              <div className="flex-shrink-0 text-left sm:text-right">
+              <div className="flex-shrink-0 text-right">
                 <span className="text-accent" style={{ fontFamily: 'var(--font-heading)', fontSize: '2.6rem', fontWeight: 400, lineHeight: 1 }}>
                   {project.totalAreaM2}
                 </span>
@@ -188,20 +188,36 @@ export default function ProjectDetail({ project }) {
             )}
           </div>
 
-          <div className="flex flex-row gap-3 mt-10 pt-8 border-t border-border">
-            <a href="tel:+38163383393" aria-label="+381 63 383 393" className="group relative inline-flex items-stretch flex-shrink-0">
-              <span className="absolute inset-0 m-auto w-8 h-8 bg-accent/50 animate-ping [animation-duration:2.5s] pointer-events-none" />
-              <span className="relative inline-flex items-center justify-center px-4 bg-bg border border-accent text-accent transition-all duration-250 group-hover:bg-accent group-hover:text-white">
-                <LuPhone className="w-4 h-4" />
-              </span>
-            </a>
-            <Link href={href('/contact')} className="btn-primary justify-center sm:flex-none">
-              {t('offer.drawer.requestOffer')}
-              <LuArrowUpRight className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
       </section>
+
+      <div className="py-8 md:py-16 bg-bg border-t border-border">
+        <div className="safe-zone flex flex-col sm:flex-row items-center justify-between gap-6">
+          <p className="text-text italic" style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.2rem,2.5vw,1.8rem)', fontWeight: 400 }}>
+            {t('midCta.text')}
+          </p>
+          <Link href={href('/contact')} className="btn-primary group flex-shrink-0">
+            {t('midCta.requestOffer')}
+            <span className="btn-arrow flex items-center"><LuArrowRight className="w-4 h-4" /></span>
+          </Link>
+        </div>
+      </div>
+
+      <div className="fixed bottom-4 right-4 z-40 flex flex-row gap-3">
+        <a href="tel:+38163383393" aria-label="+381 63 383 393" className="group relative inline-flex items-stretch flex-shrink-0 shadow-[0_6px_20px_rgba(26,25,21,0.28)]">
+          <span className="absolute inset-0 m-auto w-8 h-8 bg-accent/50 animate-ping [animation-duration:2.5s] pointer-events-none" />
+          <span className="relative inline-flex items-center justify-center px-4 bg-bg border border-accent text-accent transition-all duration-250 group-hover:bg-accent group-hover:text-white">
+            <LuPhone className="w-4 h-4" />
+          </span>
+        </a>
+        <Link
+          href={href('/contact')}
+          aria-label={t('offer.drawer.requestOffer')}
+          className="btn-primary justify-center shadow-[0_6px_20px_rgba(26,25,21,0.28)]"
+        >
+          <LuMail className="w-4 h-4" />
+        </Link>
+      </div>
 
       <ZoomViewer images={images} index={zoom} onClose={() => setZoom(null)} onSetIndex={setZoom} />
     </main>

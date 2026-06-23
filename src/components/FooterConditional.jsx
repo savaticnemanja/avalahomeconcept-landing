@@ -4,6 +4,8 @@ import { Footer } from './Footer/Footer';
 
 export function FooterConditional() {
   const pathname = usePathname();
-  if (pathname && /\/offer/.test(pathname)) return null;
+  // Hide the footer only on the full-screen catalog (/offer), not on the
+  // individual project pages (/offer/<slug>).
+  if (pathname && /\/offer\/?$/.test(pathname)) return null;
   return <Footer />;
 }

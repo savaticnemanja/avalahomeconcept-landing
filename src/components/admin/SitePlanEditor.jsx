@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import sitePlanImage from '@/assets/gallery/gallery-23.webp';
+import sitePlanImage from '@/assets/gallery/complex-aerial.webp';
 
 const labelClass = 'text-xs font-medium uppercase tracking-wide text-text-muted';
 

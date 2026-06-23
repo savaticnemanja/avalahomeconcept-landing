@@ -1,8 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { LuArrowUp } from 'react-icons/lu';
 
 export const ScrollToTop = () => {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -10,6 +12,9 @@ export const ScrollToTop = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Hidden on /offer routes — those pages use their own floating CTA bottom-right.
+  if (pathname && /\/offer(\/|$)/.test(pathname)) return null;
 
   return (
     <button

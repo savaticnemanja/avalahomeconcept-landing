@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { LuArrowLeft, LuTrash2, LuSave, LuPlus, LuStar, LuImage } from 'react-icons/lu';
 import { imageUrl } from '@/lib/imageUrl';
-import { HIGHLIGHT_ICONS } from '@/lib/admin/constants';
+import { HIGHLIGHT_ICONS, HIGHLIGHT_ICON_LABELS } from '@/lib/admin/constants';
 import { LocaleFields } from '@/components/admin/LocaleFields';
 import { SitePlanEditor } from '@/components/admin/SitePlanEditor';
 import { ImageUploader } from '@/components/admin/ImageUploader';
@@ -11,6 +11,7 @@ import { SubmitButton } from '@/components/admin/SubmitButton';
 import { Sortable, SortableItem, DragHandle } from '@/components/admin/Sortable';
 import {
   updateProject,
+  updateProjectPin,
   deleteProject,
   createProjectImage,
   updateProjectImage,
@@ -115,9 +116,9 @@ function HighlightRow({ highlight }) {
         <DragHandle />
         <form action={updateHighlight} className="flex-1 min-w-0 flex items-center gap-2">
           <input type="hidden" name="id" value={highlight.id} />
-          <select name="icon" defaultValue={highlight.icon} className={`${input} max-w-[6.5rem]`} aria-label="Ikonica">
+          <select name="icon" defaultValue={highlight.icon} className={`${input} max-w-[9rem]`} aria-label="Ikonica">
             {HIGHLIGHT_ICONS.map((ic) => (
-              <option key={ic} value={ic}>{ic.replace('Lu', '')}</option>
+              <option key={ic} value={ic}>{HIGHLIGHT_ICON_LABELS[ic] ?? ic.replace('Lu', '')}</option>
             ))}
           </select>
           <input name="value" defaultValue={highlight.value} placeholder="139 m²" className={`${input} max-w-[6rem]`} />
@@ -184,9 +185,10 @@ export function ProjectEditor({ project }) {
         {project.titleSr || project.slug}
       </h1>
 
-      {/* Row 1 — basic data | images */}
+      {/* basic data + bullets + area  |  images + site plan */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
-        <Section title="Osnovni podaci">
+        <div className="flex flex-col gap-5">
+          <Section title="Osnovni podaci">
             <form action={updateProject} className="flex flex-col gap-4">
               <input type="hidden" name="id" value={project.id} />
               <LocaleFields base="title" label="Naslov" values={project} required />
@@ -199,46 +201,12 @@ export function ProjectEditor({ project }) {
                 <input name="totalAreaM2" type="number" step="0.01" defaultValue={project.totalAreaM2 ?? ''} placeholder="139" className={input} />
               </div>
 
-              <div className="flex flex-col gap-2 pt-1 border-t border-border">
-                <span className={`${label} pt-3`}>Plan lokacije (pin)</span>
-                <SitePlanEditor top={project.sitePlanTop} left={project.sitePlanLeft} order={project.order} />
-              </div>
-
               <SubmitButton className={`${btnAccent} self-end`} pendingText="Čuvanje…">
                 <LuSave className="w-4 h-4" /> Sačuvaj podatke
               </SubmitButton>
             </form>
           </Section>
 
-          <Section
-            title="Slike"
-            desc="Prva ili obeležena slika je naslovna. Prevucite za redosled."
-            actions={
-              <ImageUploader
-                onUploaded={(data) =>
-                  createProjectImage({ projectId: project.id, ...data, isCover: !project.coverFilename })
-                }
-              />
-            }
-          >
-            {project.images.length === 0 ? (
-              <p className="text-sm text-text-muted flex items-center gap-2">
-                <LuImage className="w-4 h-4" /> Nema slika. Otpremite prvu.
-              </p>
-            ) : (
-              <Sortable ids={project.images.map((i) => i.id)} onReorder={(ids) => reorderProjectImages(ids)} layout="grid">
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {project.images.map((img) => (
-                    <ImageCard key={img.id} image={img} isCover={project.coverFilename === img.filename} />
-                  ))}
-                </div>
-              </Sortable>
-            )}
-          </Section>
-      </div>
-
-      {/* Row 2 — highlights | area table */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
           <Section
             title="Izdvojeno (bullets)"
             desc="Npr. neto površina, broj soba, bazen."
@@ -288,6 +256,46 @@ export function ProjectEditor({ project }) {
               </Sortable>
             )}
           </Section>
+        </div>
+
+          <div className="flex flex-col gap-5">
+            <Section
+              title="Slike"
+              desc="Prva ili obeležena slika je naslovna. Prevucite za redosled."
+              actions={
+                <ImageUploader
+                  onUploaded={(data) =>
+                    createProjectImage({ projectId: project.id, ...data, isCover: !project.coverFilename })
+                  }
+                />
+              }
+            >
+              {project.images.length === 0 ? (
+                <p className="text-sm text-text-muted flex items-center gap-2">
+                  <LuImage className="w-4 h-4" /> Nema slika. Otpremite prvu.
+                </p>
+              ) : (
+                <Sortable ids={project.images.map((i) => i.id)} onReorder={(ids) => reorderProjectImages(ids)} layout="grid">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    {project.images.map((img) => (
+                      <ImageCard key={img.id} image={img} isCover={project.coverFilename === img.filename} />
+                    ))}
+                  </div>
+                </Sortable>
+              )}
+            </Section>
+
+            {/* Site plan pin — beneath images, same column */}
+            <Section title="Plan lokacije (pin)" desc="Pozicija pina na planu lokacije (offer stranica).">
+              <form action={updateProjectPin} className="flex flex-col gap-4 max-w-md">
+                <input type="hidden" name="id" value={project.id} />
+                <SitePlanEditor top={project.sitePlanTop} left={project.sitePlanLeft} order={project.order} />
+                <SubmitButton className={`${btnAccent} self-end`} pendingText="Čuvanje…">
+                  <LuSave className="w-4 h-4" /> Sačuvaj poziciju
+                </SubmitButton>
+              </form>
+            </Section>
+          </div>
       </div>
     </div>
   );

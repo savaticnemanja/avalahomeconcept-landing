@@ -1,6 +1,5 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import * as LuIcons from 'react-icons/lu';
 import { LuArrowRight, LuMap, LuList } from 'react-icons/lu';
@@ -93,8 +92,8 @@ const CatalogCard = ({ project, locale, t, isActive, onHover, to, onOpen }) => {
       onMouseEnter={onHover}
       data-project-id={project.id}
       aria-label={title}
-      className={`group block border-b border-border transition-colors duration-200 border-l-[3px] ${
-        isActive ? 'bg-bg-alt border-l-accent' : 'border-l-transparent hover:bg-bg-alt/60'
+      className={`group block shrink-0 rounded-[6px] overflow-hidden border transition-all duration-200 ${
+        isActive ? 'bg-bg-alt border-accent ring-1 ring-accent shadow-sm' : 'border-border hover:bg-bg-alt/60 hover:border-accent/40'
       }`}
     >
       <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
@@ -174,25 +173,29 @@ const CatalogCard = ({ project, locale, t, isActive, onHover, to, onOpen }) => {
 };
 
 const MapPanel = ({ projects, locale, href, activeId, openProject }) => (
-  <div className="relative w-full h-full overflow-hidden">
-    <Image
-      src={sitePlanImage}
-      alt="Plan lokacije"
-      fill
-      className="object-cover"
-      priority
-    />
-    <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/25 via-transparent to-bg-dark/10 pointer-events-none" />
-    {projects.map((p) => (
-      <SitePlanPin
-        key={p.id}
-        project={p}
-        title={pick(p, 'title', locale)}
-        to={href(`/offer/${p.slug}`)}
-        onOpen={() => openProject(p)}
-        isActive={activeId === p.id}
+  <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-bg-alt">
+    {/* Below 1720px the plan is stretched to fill the panel (object-fill, no
+        gaps); from 1720px up it keeps its aspect ratio (object-contain). The
+        frame matches the panel/image box so pins, positioned in %, stay aligned. */}
+    <div className="relative w-full h-full min-[1720px]:h-auto min-[1720px]:max-h-full min-[1720px]:aspect-[1122/1402]">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={sitePlanImage.src}
+        alt="Plan lokacije"
+        className="block w-full h-full object-fill min-[1720px]:object-contain"
       />
-    ))}
+      <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/25 via-transparent to-bg-dark/10 pointer-events-none" />
+      {projects.map((p) => (
+        <SitePlanPin
+          key={p.id}
+          project={p}
+          title={pick(p, 'title', locale)}
+          to={href(`/offer/${p.slug}`)}
+          onOpen={() => openProject(p)}
+          isActive={activeId === p.id}
+        />
+      ))}
+    </div>
   </div>
 );
 
@@ -216,9 +219,20 @@ export default function OfferClient({ projects }) {
   const [selected, setSelected] = useState(null);
   const [activeId, setActiveId] = useState(projects[0]?.id ?? null);
   const [mobileView, setMobileView] = useState('map');
+  const [isDesktop, setIsDesktop] = useState(false);
   const catalogRef = useRef(null);
   const mobileCatalogRef = useRef(null);
   const basePath = href('/offer');
+
+  // Desktop docks the detail panel inline (always open); mobile uses the modal
+  // drawer. Gate which one mounts so their effects (body-lock etc.) don't clash.
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => {
     const syncFromPath = () => {
@@ -245,6 +259,12 @@ export default function OfferClient({ projects }) {
       setSelected(null);
     }
   };
+
+  // Keep the highlighted pin/card in sync with the open project (click, deep
+  // link, back/forward), not just with scroll/hover.
+  useEffect(() => {
+    if (selected) setActiveId(selected.id);
+  }, [selected]);
 
   useEffect(() => setupIO(catalogRef.current, setActiveId), [projects]);
 
@@ -280,56 +300,62 @@ export default function OfferClient({ projects }) {
     <>
       <div
         className="lg:hidden flex flex-col"
-        style={{ marginTop: '5rem', height: 'calc(100svh - 5rem)' }}
+        style={{ marginTop: '5rem', height: 'calc(100vh - 5rem)' }}
       >
         <div className="flex-1 relative overflow-hidden">
           {mobileView === 'map' ? (
             <div className="absolute inset-0">{mapPanel}</div>
           ) : (
-            <div ref={mobileCatalogRef} className="absolute inset-0 overflow-y-auto bg-bg">
+            <div ref={mobileCatalogRef} className="absolute inset-0 overflow-y-auto bg-bg p-3 pb-24 flex flex-col gap-3">
               {catalogCards}
             </div>
           )}
+
+          {/* Floating view toggle — icons only, no bar, right side. */}
+          <div className="absolute right-4 bottom-4 z-20 flex flex-col gap-2">
+            <button
+              type="button"
+              onClick={() => setMobileView('map')}
+              aria-label={t('offer.mapView')}
+              aria-pressed={mobileView === 'map'}
+              className={`w-11 h-11 flex items-center justify-center rounded-full backdrop-blur-sm shadow-[0_2px_12px_rgba(26,25,21,0.3)] transition-colors duration-150 ${
+                mobileView === 'map' ? 'bg-accent text-white' : 'bg-bg-dark/45 text-white'
+              }`}
+            >
+              <LuMap className="w-5 h-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setMobileView('list')}
+              aria-label={t('offer.listView')}
+              aria-pressed={mobileView === 'list'}
+              className={`w-11 h-11 flex items-center justify-center rounded-full backdrop-blur-sm shadow-[0_2px_12px_rgba(26,25,21,0.3)] transition-colors duration-150 ${
+                mobileView === 'list' ? 'bg-accent text-white' : 'bg-bg-dark/45 text-white'
+              }`}
+            >
+              <LuList className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
-        <div className="flex-shrink-0 flex border-t border-border bg-bg" style={{ height: '3.25rem' }}>
-          <button
-            type="button"
-            onClick={() => setMobileView('map')}
-            className={`flex-1 flex items-center justify-center gap-2 text-sm font-medium transition-colors duration-150 ${
-              mobileView === 'map' ? 'text-accent border-t-2 border-accent -mt-px' : 'text-text-muted'
-            }`}
-          >
-            <LuMap className="w-4 h-4" />
-            {t('offer.mapView')}
-          </button>
-          <button
-            type="button"
-            onClick={() => setMobileView('list')}
-            className={`flex-1 flex items-center justify-center gap-2 text-sm font-medium transition-colors duration-150 ${
-              mobileView === 'list' ? 'text-accent border-t-2 border-accent -mt-px' : 'text-text-muted'
-            }`}
-          >
-            <LuList className="w-4 h-4" />
-            {t('offer.listView')}
-          </button>
-        </div>
+        {!isDesktop && <ProjectDrawer project={selected} onClose={closeProject} />}
       </div>
 
-      <div className="hidden lg:flex" style={{ marginTop: '5rem', height: 'calc(100svh - 5rem)' }}>
+      <div className="hidden lg:flex" style={{ marginTop: '5rem', height: 'calc(100vh - 5rem)' }}>
         <div
           ref={catalogRef}
           data-lenis-prevent
-          className="w-[360px] xl:w-[400px] flex-shrink-0 overflow-y-auto border-r border-border bg-bg"
+          className="w-[380px] xl:w-[440px] flex-shrink-0 overflow-y-auto border-r border-border bg-bg p-4 flex flex-col gap-4"
         >
           {catalogCards}
         </div>
-        <div className="flex-1 relative">
+        <div className="flex-1 relative min-w-0">
           {mapPanel}
         </div>
+        <div className="w-[480px] xl:w-[600px] flex-shrink-0 border-l border-border bg-bg">
+          {isDesktop && <ProjectDrawer project={selected ?? projects[0] ?? null} inline />}
+        </div>
       </div>
-
-      <ProjectDrawer project={selected} onClose={closeProject} />
     </>
   );
 }
