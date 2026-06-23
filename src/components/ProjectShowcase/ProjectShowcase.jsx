@@ -16,14 +16,21 @@ const coverOf = (project) => {
   return (cover ?? project.images[0])?.filename ?? null;
 };
 
+// The next image after the cover, revealed on hover.
+const secondOf = (project) => {
+  const rest = project.images.filter((i) => i.filename !== project.coverFilename);
+  return rest[0]?.filename ?? null;
+};
+
 const ProjectCard = ({ project, locale, t, href }) => {
   const title = pick(project, 'title', locale);
   const subtitle = pick(project, 'subtitle', locale);
   const badge = pick(project, 'badge', locale);
   const cover = coverOf(project);
+  const second = secondOf(project);
 
   return (
-    <div className="card flex-shrink-0 flex flex-col" style={{ width: '380px', scrollSnapAlign: 'start' }}>
+    <div className="card group flex-shrink-0 flex flex-col cursor-pointer" style={{ width: '380px', scrollSnapAlign: 'start' }}>
       <div className="relative overflow-hidden" style={{ aspectRatio: '16/10' }}>
         {cover && (
           // eslint-disable-next-line @next/next/no-img-element
@@ -31,6 +38,16 @@ const ProjectCard = ({ project, locale, t, href }) => {
             src={imageUrl(cover)}
             alt={title}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+        )}
+        {second && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={imageUrl(second)}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
             loading="lazy"
           />
         )}

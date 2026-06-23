@@ -26,6 +26,12 @@ const coverOf = (project) => {
   return (cover ?? project.images[0])?.filename ?? null;
 };
 
+// The next image after the cover, revealed on hover.
+const secondOf = (project) => {
+  const rest = project.images.filter((i) => i.filename !== project.coverFilename);
+  return rest[0]?.filename ?? null;
+};
+
 const SitePlanPin = ({ project, title, to, onOpen, isActive }) => {
   if (!project.sitePlanTop || !project.sitePlanLeft) return null;
   return (
@@ -78,6 +84,7 @@ const CatalogCard = ({ project, locale, t, isActive, onHover, to, onOpen }) => {
   const subtitle = pick(project, 'subtitle', locale);
   const badge = pick(project, 'badge', locale);
   const cover = coverOf(project);
+  const second = secondOf(project);
 
   return (
     <Link
@@ -100,6 +107,16 @@ const CatalogCard = ({ project, locale, t, isActive, onHover, to, onOpen }) => {
           />
         ) : (
           <div className="w-full h-full bg-bg-alt" />
+        )}
+        {second && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={imageUrl(second)}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            loading="lazy"
+          />
         )}
         <span className="absolute top-3 left-3 w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center text-xs font-semibold shadow">
           {project.order + 1}
