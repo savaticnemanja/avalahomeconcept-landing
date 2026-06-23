@@ -6,13 +6,12 @@ on:
   pull_request:
     branches: [main]
 
-concurrency:
-  group: build-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    concurrency:
+      group: build-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
 
@@ -23,11 +22,17 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          DATABASE_URL: file:/tmp/build.db
+          SESSION_SECRET: build-check-placeholder-min-16-chars
 
   deploy:
     needs: build
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
     steps:
       - name: Trigger webhook deploy
         env:
