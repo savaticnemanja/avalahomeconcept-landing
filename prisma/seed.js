@@ -42,6 +42,11 @@ const GALLERY_CATEGORIES = [
 ];
 
 async function main() {
+  if (process.env.NODE_ENV === 'production') {
+    console.log('Seed skipped: NODE_ENV is production.');
+    return;
+  }
+
   mkdirSync(UPLOAD_DIR, { recursive: true });
 
   const existingCats = await prisma.galleryCategory.count();
