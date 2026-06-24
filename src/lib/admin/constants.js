@@ -33,7 +33,7 @@ export const HIGHLIGHT_ICON_LABELS = {
   LuBath: 'Kupatilo',
   LuSunrise: 'Terasa',
   LuWaves: 'Bazen',
-  LuCar: 'Parking / garaža',
+  LuCar: 'Parking',
   LuTrees: 'Dvorište',
   LuSofa: 'Dnevni boravak',
   LuUtensils: 'Kuhinja',

@@ -110,13 +110,17 @@ function ImageCard({ image, isCover }) {
 }
 
 function HighlightRow({ highlight }) {
+  // Controlled select: React 19 auto-resets the form after the server action,
+  // and an uncontrolled <select defaultValue> would snap back to "Tačka" (LuDot)
+  // until a page refresh. Controlling it keeps the chosen icon after saving.
+  const [icon, setIcon] = useState(highlight.icon);
   return (
     <SortableItem id={highlight.id} className={`${cardClass} p-2.5`}>
       <div className="flex items-center gap-2">
         <DragHandle />
         <form action={updateHighlight} className="flex-1 min-w-0 flex items-center gap-2">
           <input type="hidden" name="id" value={highlight.id} />
-          <select name="icon" defaultValue={highlight.icon} className={`${input} max-w-[9rem]`} aria-label="Ikonica">
+          <select name="icon" value={icon} onChange={(e) => setIcon(e.target.value)} className={`${input} max-w-[9rem]`} aria-label="Ikonica">
             {HIGHLIGHT_ICONS.map((ic) => (
               <option key={ic} value={ic}>{HIGHLIGHT_ICON_LABELS[ic] ?? ic.replace('Lu', '')}</option>
             ))}

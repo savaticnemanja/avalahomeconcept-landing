@@ -174,15 +174,17 @@ const CatalogCard = ({ project, locale, t, isActive, onHover, to, onOpen }) => {
 
 const MapPanel = ({ projects, locale, href, activeId, openProject }) => (
   <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-bg-alt">
-    {/* Below 1720px the plan is stretched to fill the panel (object-fill, no
-        gaps); from 1720px up it keeps its aspect ratio (object-contain). The
-        frame matches the panel/image box so pins, positioned in %, stay aligned. */}
-    <div className="relative w-full h-full min-[1720px]:h-auto min-[1720px]:max-h-full min-[1720px]:aspect-[1122/1402]">
+    {/* The plan is stretched to fill the panel (object-fill). Because object-fill
+        maps image content-% linearly onto the box, a pin placed at top/left-% in
+        the admin (where the image is shown at its natural ratio) lands on the same
+        spot here regardless of the panel's aspect ratio. Do NOT use object-contain:
+        the letterbox gaps would shift the pins relative to the image. */}
+    <div className="relative w-full h-full">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={sitePlanImage.src}
         alt="Plan lokacije"
-        className="block w-full h-full object-fill min-[1720px]:object-contain"
+        className="block w-full h-full object-fill"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/25 via-transparent to-bg-dark/10 pointer-events-none" />
       {projects.map((p) => (
