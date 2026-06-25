@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/db';
 import { requireSession } from '@/lib/auth';
 import { deleteUpload } from '@/lib/uploads';
+import { parseYouTubeId } from '@/lib/youtube';
 import { LOCALES } from '@/lib/admin/constants';
 
 const refresh = () => {
@@ -63,9 +64,9 @@ export async function updateGalleryCategory(formData) {
 export async function deleteGalleryCategory(formData) {
   await requireSession();
   const id = Number(formData.get('id'));
-  const images = await prisma.galleryImage.findMany({ where: { categoryId: id }, select: { filename: true } });
+  const images = await prisma.galleryImage.findMany({ where: { categoryId: id }, select: { filename: true, poster: true } });
   await prisma.galleryCategory.delete({ where: { id } });
-  await Promise.all(images.map((i) => deleteUpload(i.filename)));
+  await Promise.all(images.flatMap((i) => [deleteUpload(i.filename), i.poster && deleteUpload(i.poster)]));
   refresh();
 }
 
@@ -77,14 +78,32 @@ export async function reorderGalleryCategories(ids) {
   refresh();
 }
 
-export async function createGalleryImage({ categoryId, filename, width, height }) {
+export async function createGalleryImage({ categoryId, kind, filename, poster, width, height }) {
   await requireSession();
   await prisma.galleryImage.create({
     data: {
       categoryId,
+      kind: kind === 'video' ? 'video' : 'image',
       filename,
+      poster: poster ?? '',
       width: width ?? 0,
       height: height ?? 0,
+      order: await nextOrder('galleryImage', { categoryId }),
+    },
+  });
+  refresh();
+}
+
+export async function createGalleryYoutube(formData) {
+  await requireSession();
+  const categoryId = Number(formData.get('categoryId'));
+  const id = parseYouTubeId(formData.get('url'));
+  if (!id) throw new Error('Neispravan YouTube link.');
+  await prisma.galleryImage.create({
+    data: {
+      categoryId,
+      kind: 'youtube',
+      filename: id,
       order: await nextOrder('galleryImage', { categoryId }),
     },
   });
@@ -102,7 +121,10 @@ export async function deleteGalleryImage(formData) {
   await requireSession();
   const id = Number(formData.get('id'));
   const img = await prisma.galleryImage.delete({ where: { id } });
-  await deleteUpload(img.filename);
+  if (img.kind !== 'youtube') {
+    await deleteUpload(img.filename);
+    if (img.poster) await deleteUpload(img.poster);
+  }
   refresh();
 }
 

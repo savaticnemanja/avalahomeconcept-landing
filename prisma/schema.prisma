@@ -30,7 +30,9 @@ model GalleryImage {
   category   GalleryCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId Int
   order      Int             @default(0)
+  kind       String          @default("image") // "image" | "video"
   filename   String
+  poster     String          @default("") // poster frame filename, videos only
   width      Int             @default(0)
   height     Int             @default(0)
   captionSr  String          @default("")

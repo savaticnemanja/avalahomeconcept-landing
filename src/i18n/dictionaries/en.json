@@ -351,6 +351,12 @@
     "prev": "Previous",
     "next": "Next"
   },
+  "galleryPreview": {
+    "eyebrow": "Visual preview",
+    "title": "See how it looks",
+    "text": "Take a look inside the world of Avala Home Concept — from interiors to landscaped yards with pools.",
+    "cta": "Reserve now"
+  },
   "thankYou": {
     "title": "Thank you!",
     "text": "Your message has been sent successfully. We will get back to you as soon as possible.",

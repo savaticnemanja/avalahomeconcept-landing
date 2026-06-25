@@ -2,6 +2,7 @@ export { Navigation } from './Navigation/Navigation';
 export { Slider } from './Slider/Slider';
 export { Showcase } from './Showcase/Showcase';
 export { ProjectShowcase } from './ProjectShowcase/ProjectShowcase';
+export { GalleryPreview } from './GalleryPreview/GalleryPreview';
 export { ProjectDrawer } from './ProjectDrawer/ProjectDrawer';
 export { Location } from './Location/Location';
 export { PaymentDynamic } from './PaymentDynamic/PaymentDynamic';

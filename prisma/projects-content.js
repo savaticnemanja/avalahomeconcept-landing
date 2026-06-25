@@ -1,7 +1,8 @@
-// Multilingual content for the three offered houses (Kuća 1/2/3). Single source
-// of truth shared by prisma/seed.js (fresh installs) and scripts/import-houses.mjs
-// (refreshing an existing DB). This file is an explicit snapshot of the live
-// content — regenerate it from the database when the admin-managed data changes.
+// Multilingual content for the three offered single-storey houses (128.26 /
+// 138.55 / 141.78 m²). Single source of truth shared by prisma/seed.js (fresh
+// installs) and scripts/import-houses.mjs (refreshing an existing DB). This file
+// is an explicit snapshot of the live content at avalahomeconcept.com —
+// regenerate it from the live data when the admin-managed content changes.
 
 const LOCALES = ['sr', 'en', 'ru', 'de'];
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -15,25 +16,24 @@ export const loc = (base, obj) => {
 
 export const HOUSES = [
   {
-    slug: "kuca-1",
+    slug: "prizemna-kuca-128-26-m2",
     filePrefix: "project1",
     folder: "project-1",
     cover: "cover.webp",
     images: ["cover.webp","photo-1.webp","photo-2.webp"],
-    pin: {"top":"34%","left":"72%"},
-    totalAreaM2: 128,
-    title: {"sr":"Kuća 1","en":"House 1 — Single-storey house 128 m²","ru":"Дом 1 — Одноэтажный дом 128 м²","de":"Haus 1 — Einstöckiges Haus 128 m²"},
+    pin: {"top":"54%","left":"31%"},
+    totalAreaM2: 128.26,
+    title: {"sr":"Prizemna kuća 128.26 m²","en":"Single-storey house 128.26 m²","ru":"Одноэтажный дом 128.26 м²","de":"Einstöckiges Haus 128.26 m²"},
     subtitle: {"sr":"Prizemna kuća","en":"Single-storey house","ru":"Одноэтажный дом","de":"Einstöckiges Haus"},
     badge: {"sr":"Dostupno","en":"Available","ru":"Доступно","de":"Verfügbar"},
-    description: {"sr":"Prizemna porodična kuća površine 128 m² sa tri spavaće sobe, dva kupatila i garderobom. Prostran otvoreni prostor kuhinje, trpezarije i dnevnog boravka od 44 m² izlazi na natkrivenu terasu i uređeno dvorište. Deo zatvorenog kompleksa na Avali, 20 minuta od Beograda.","en":"A single-storey family house of 128 m² with three bedrooms, two bathrooms and a dressing room. A spacious open-plan kitchen, dining and living area of 44 m² opens onto a covered terrace and a landscaped yard. Part of a gated complex on Mount Avala, 20 minutes from Belgrade.","ru":"Одноэтажный семейный дом площадью 128 м² с тремя спальнями, двумя ванными комнатами и гардеробной. Просторная объединённая кухня-столовая-гостиная 44 м² выходит на крытую террасу и благоустроенный двор. Часть закрытого комплекса на Авале, в 20 минутах от Белграда.","de":"Einstöckiges Familienhaus mit 128 m², drei Schlafzimmern, zwei Badezimmern und einem Ankleidezimmer. Der großzügige offene Wohn-, Ess- und Küchenbereich von 44 m² öffnet sich zur überdachten Terrasse und zum angelegten Garten. Teil einer geschlossenen Wohnanlage am Berg Avala, 20 Minuten von Belgrad."},
+    description: {"sr":"Prizemna porodična kuća površine 128.26 m² sa tri spavaće sobe, dva kupatila i garderobom. Prostran otvoreni prostor kuhinje, trpezarije i dnevnog boravka od 44 m² izlazi na terasu i uređeno dvorište. Deo zatvorenog kompleksa na Avali, 20 minuta od Beograda.","en":"A single-storey family house of 128.26 m² with three bedrooms, two bathrooms and a dressing room. A spacious open-plan kitchen, dining and living area of 44 m² opens onto a covered terrace and a landscaped yard. Part of a gated complex on Mount Avala, 20 minutes from Belgrade.","ru":"Одноэтажный семейный дом площадью 128.26 м² с тремя спальнями, двумя ванными комнатами и гардеробной. Просторная объединённая кухня-столовая-гостиная 44 м² выходит на крытую террасу и благоустроенный двор. Часть закрытого комплекса на Авале, в 20 минутах от Белграда.","de":"Einstöckiges Familienhaus mit 128.26 m², drei Schlafzimmern, zwei Badezimmern und einem Ankleidezimmer. Der großzügige offene Wohn-, Ess- und Küchenbereich von 44 m² öffnet sich zur überdachten Terrasse und zum angelegten Garten. Teil einer geschlossenen Wohnanlage am Berg Avala, 20 Minuten von Belgrad."},
     highlights: [
       {"icon":"LuBed","value":"3","label":{"sr":"Sobe","en":"Bedrooms","ru":"Спальни","de":"Schlafzimmer"}},
       {"icon":"LuBath","value":"2","label":{"sr":"Kupatila","en":"Bathrooms","ru":"Ванные","de":"Badezimmer"}},
-      {"icon":"LuSunrise","value":"20 m²","label":{"sr":"Terasa","en":"Terrace","ru":"Терраса","de":"Terrasse"}},
-      {"icon":"LuMaximize2","value":"128 m²","label":{"sr":"Površina","en":"Area","ru":"Площадь","de":"Fläche"}},
-      {"icon":"LuDot","value":"","label":{"sr":"Kuhinja, trpezarija i dnevni boravak 44 m²","en":"Open-plan kitchen, dining & living 44 m²","ru":"Кухня, столовая и гостиная 44 м²","de":"Offener Wohn-, Ess- und Küchenbereich 44 m²"}},
-      {"icon":"LuDot","value":"","label":{"sr":"Dva kupatila i garderoba","en":"Two bathrooms and a dressing room","ru":"Две ванные комнаты и гардеробная","de":"Zwei Badezimmer und ein Ankleidezimmer"}},
-      {"icon":"LuDot","value":"","label":{"sr":"Natkrivena terasa 20 m²","en":"Covered terrace 20 m²","ru":"Крытая терраса 20 м²","de":"Überdachte Terrasse 20 m²"}},
+      {"icon":"LuSofa","value":"","label":{"sr":"Kuhinja, trpezarija i dnevni boravak 44 m²","en":"Open-plan kitchen, dining & living 44 m²","ru":"Кухня, столовая и гостиная 44 м²","de":"Offener Wohn-, Ess- und Küchenbereich 44 m²"}},
+      {"icon":"LuCar","value":"","label":{"sr":"Dva parking mesta 2,5 x 5 m","en":"Two parking spaces 2,5 x 5 m","ru":"Два парковочных места 2,5 x 5 м","de":"Zwei Stellplätze 2,5 x 5 m"}},
+      {"icon":"LuWaves","value":"","label":{"sr":"Bazen 8 x 4 m","en":"Pool 8 x 4 m","ru":"Бассейн 8 x 4 м","de":"Pool 8 x 4 m"}},
+      {"icon":"LuMaximize2","value":"128.26 m²","label":{"sr":"Površina","en":"Area","ru":"Площадь","de":"Fläche"}},
     ],
     rooms: [
       {"area":"6,53 m²","name":{"sr":"Ulazni hol","en":"Entrance hall","ru":"Входной холл","de":"Eingangshalle"}},
@@ -50,25 +50,24 @@ export const HOUSES = [
     ],
   },
   {
-    slug: "kuca-2",
+    slug: "prizemna-kuca-138-55-m2",
     filePrefix: "project2",
     folder: "project-2",
     cover: "cover.webp",
     images: ["cover.webp","photo-1.webp","photo-2.webp"],
-    pin: {"top":"40%","left":"43%"},
-    totalAreaM2: 138,
-    title: {"sr":"Kuća 2","en":"House 2 — Single-storey house 139 m²","ru":"Дом 2 — Одноэтажный дом 139 м²","de":"Haus 2 — Einstöckiges Haus 139 m²"},
+    pin: {"top":"86%","left":"29%"},
+    totalAreaM2: 138.55,
+    title: {"sr":"Prizemna kuća 138.55 m²","en":"Single-storey house 138.55 m²","ru":"Одноэтажный дом 138.55 м²","de":"Einstöckiges Haus 138.55 m²"},
     subtitle: {"sr":"Prizemna kuća","en":"Single-storey house","ru":"Одноэтажный дом","de":"Einstöckiges Haus"},
     badge: {"sr":"Dostupno","en":"Available","ru":"Доступно","de":"Verfügbar"},
-    description: {"sr":"Prizemna porodična kuća površine 138 m² sa tri spavaće sobe, dva kupatila i garderobom. Centralni otvoreni prostor kuhinje, trpezarije i dnevnog boravka od 49 m² povezuje se sa natkrivenom terasom i dvorištem. Deo zatvorenog kompleksa na Avali, 20 minuta od Beograda.","en":"A single-storey family house of 139 m² with three bedrooms, two bathrooms and a dressing room. A central open-plan kitchen, dining and living area of 49 m² connects to a covered terrace and the yard. Part of a gated complex on Mount Avala, 20 minutes from Belgrade.","ru":"Одноэтажный семейный дом площадью 139 м² с тремя спальнями, двумя ванными комнатами и гардеробной. Центральная объединённая кухня-столовая-гостиная 49 м² соединяется с крытой террасой и двором. Часть закрытого комплекса на Авале, в 20 минутах от Белграда.","de":"Einstöckiges Familienhaus mit 139 m², drei Schlafzimmern, zwei Badezimmern und einem Ankleidezimmer. Der zentrale offene Wohn-, Ess- und Küchenbereich von 49 m² verbindet sich mit der überdachten Terrasse und dem Garten. Teil einer geschlossenen Wohnanlage am Berg Avala, 20 Minuten von Belgrad."},
+    description: {"sr":"Prizemna porodična kuća površine 138.55 m² sa tri spavaće sobe, dva kupatila i garderobom. Centralni otvoreni prostor kuhinje, trpezarije i dnevnog boravka od 49 m² povezuje se sa terasom i dvorištem. Deo zatvorenog kompleksa na Avali, 20 minuta od Beograda.","en":"A single-storey family house of 138.55 m² with three bedrooms, two bathrooms and a dressing room. A central open-plan kitchen, dining and living area of 49 m² connects to a covered terrace and the yard. Part of a gated complex on Mount Avala, 20 minutes from Belgrade.","ru":"Одноэтажный семейный дом площадью 138.55 м² с тремя спальнями, двумя ванными комнатами и гардеробной. Центральная объединённая кухня-столовая-гостиная 49 м² соединяется с крытой террасой и двором. Часть закрытого комплекса на Авале, в 20 минутах от Белграда.","de":"Einstöckiges Familienhaus mit 138.55 m², drei Schlafzimmern, zwei Badezimmern und einem Ankleidezimmer. Der zentrale offene Wohn-, Ess- und Küchenbereich von 49 m² verbindet sich mit der überdachten Terrasse und dem Garten. Teil einer geschlossenen Wohnanlage am Berg Avala, 20 Minuten von Belgrad."},
     highlights: [
       {"icon":"LuBed","value":"3","label":{"sr":"Sobe","en":"Bedrooms","ru":"Спальни","de":"Schlafzimmer"}},
       {"icon":"LuBath","value":"2","label":{"sr":"Kupatila","en":"Bathrooms","ru":"Ванные","de":"Badezimmer"}},
-      {"icon":"LuSunrise","value":"21 m²","label":{"sr":"Terasa","en":"Terrace","ru":"Терраса","de":"Terrasse"}},
-      {"icon":"LuMaximize2","value":"139 m²","label":{"sr":"Površina","en":"Area","ru":"Площадь","de":"Fläche"}},
-      {"icon":"LuDot","value":"","label":{"sr":"Kuhinja, trpezarija i dnevni boravak 49 m²","en":"Open-plan kitchen, dining & living 49 m²","ru":"Кухня, столовая и гостиная 49 м²","de":"Offener Wohn-, Ess- und Küchenbereich 49 m²"}},
-      {"icon":"LuDot","value":"","label":{"sr":"Dva kupatila i garderoba","en":"Two bathrooms and a dressing room","ru":"Две ванные комнаты и гардеробная","de":"Zwei Badezimmer und ein Ankleidezimmer"}},
-      {"icon":"LuDot","value":"","label":{"sr":"Natkrivena terasa 21 m²","en":"Covered terrace 21 m²","ru":"Крытая терраса 21 м²","de":"Überdachte Terrasse 21 m²"}},
+      {"icon":"LuSofa","value":"","label":{"sr":"Kuhinja, trpezarija i dnevni boravak 49 m²","en":"Open-plan kitchen, dining & living 49 m²","ru":"Кухня, столовая и гостиная 49 м²","de":"Offener Wohn-, Ess- und Küchenbereich 49 m²"}},
+      {"icon":"LuCar","value":"","label":{"sr":"Dva parking mesta 2,5 x 5 m","en":"Two parking spaces 2,5 x 5 m","ru":"Два парковочных места 2,5 x 5 м","de":"Zwei Stellplätze 2,5 x 5 m"}},
+      {"icon":"LuWaves","value":"","label":{"sr":"Bazen 8 x 4 m","en":"Pool 8 x 4 m","ru":"Бассейн 8 x 4 м","de":"Pool 8 x 4 m"}},
+      {"icon":"LuMaximize2","value":"138.55 m²","label":{"sr":"Površina","en":"Area","ru":"Площадь","de":"Fläche"}},
     ],
     rooms: [
       {"area":"6,53 m²","name":{"sr":"Ulazni hol","en":"Entrance hall","ru":"Входной холл","de":"Eingangshalle"}},
@@ -85,25 +84,24 @@ export const HOUSES = [
     ],
   },
   {
-    slug: "kuca-3",
+    slug: "prizemna-kuca-141-78-m2",
     filePrefix: "small-houses",
-    folder: "small-houses",
+    folder: "project-3",
     cover: "cover.webp",
     images: ["cover.webp","photo-1.webp","photo-2.webp"],
-    pin: {"top":"20%","left":"24%"},
-    totalAreaM2: 141,
-    title: {"sr":"Kuća 3","en":"House 3 — Single-storey house 142 m²","ru":"Дом 3 — Одноэтажный дом 142 м²","de":"Haus 3 — Einstöckiges Haus 142 m²"},
+    pin: {"top":"58%","left":"80%"},
+    totalAreaM2: 141.78,
+    title: {"sr":"Prizemna kuća 141.78 m²","en":"Single-storey house 141.78 m²","ru":"Одноэтажный дом 141.78 м²","de":"Einstöckiges Haus 141.78 m²"},
     subtitle: {"sr":"Prizemna kuća","en":"Single-storey house","ru":"Одноэтажный дом","de":"Einstöckiges Haus"},
     badge: {"sr":"Dostupno","en":"Available","ru":"Доступно","de":"Verfügbar"},
-    description: {"sr":"Najprostranija prizemna kuća u kompleksu, površine 141 m², sa tri spavaće sobe, dva kupatila i garderobom. Dnevna zona kuhinje, trpezarije i dnevnog boravka od 48 m² otvara se na veliku terasu i dvorište. Deo zatvorenog kompleksa na Avali, 20 minuta od Beograda.","en":"The most spacious single-storey house in the complex at 142 m², with three bedrooms, two bathrooms and a dressing room. The 48 m² open-plan kitchen, dining and living zone opens onto a large terrace and yard. Part of a gated complex on Mount Avala, 20 minutes from Belgrade.","ru":"Самый просторный одноэтажный дом в комплексе, 142 м², с тремя спальнями, двумя ванными комнатами и гардеробной. Объединённая кухня-столовая-гостиная 48 м² открывается на большую террасу и двор. Часть закрытого комплекса на Авале, в 20 минутах от Белграда.","de":"Das geräumigste einstöckige Haus der Anlage mit 142 m², drei Schlafzimmern, zwei Badezimmern und einem Ankleidezimmer. Der 48 m² große offene Wohn-, Ess- und Küchenbereich öffnet sich zu einer großen Terrasse und dem Garten. Teil einer geschlossenen Wohnanlage am Berg Avala, 20 Minuten von Belgrad."},
+    description: {"sr":"Najprostranija prizemna kuća u kompleksu, površine 141.78 m², sa tri spavaće sobe, dva kupatila i garderobom. Dnevna zona kuhinje, trpezarije i dnevnog boravka od 48 m² otvara se na veliku terasu i dvorište. Deo zatvorenog kompleksa na Avali, 20 minuta od Beograda.","en":"The most spacious single-storey house in the complex at 141.78 m², with three bedrooms, two bathrooms and a dressing room. The 48 m² open-plan kitchen, dining and living zone opens onto a large terrace and yard. Part of a gated complex on Mount Avala, 20 minutes from Belgrade.","ru":"Самый просторный одноэтажный дом в комплексе, 141.78 м², с тремя спальнями, двумя ванными комнатами и гардеробной. Объединённая кухня-столовая-гостиная 48 м² открывается на большую террасу и двор. Часть закрытого комплекса на Авале, в 20 минутах от Белграда.","de":"Das geräumigste einstöckige Haus der Anlage mit 141.78 m², drei Schlafzimmern, zwei Badezimmern und einem Ankleidezimmer. Der 48 m² große offene Wohn-, Ess- und Küchenbereich öffnet sich zu einer großen Terrasse und dem Garten. Teil einer geschlossenen Wohnanlage am Berg Avala, 20 Minuten von Belgrad."},
     highlights: [
       {"icon":"LuBed","value":"3","label":{"sr":"Sobe","en":"Bedrooms","ru":"Спальни","de":"Schlafzimmer"}},
       {"icon":"LuBath","value":"2","label":{"sr":"Kupatila","en":"Bathrooms","ru":"Ванные","de":"Badezimmer"}},
-      {"icon":"LuSunrise","value":"21 m²","label":{"sr":"Terasa","en":"Terrace","ru":"Терраса","de":"Terrasse"}},
-      {"icon":"LuMaximize2","value":"142 m²","label":{"sr":"Površina","en":"Area","ru":"Площадь","de":"Fläche"}},
-      {"icon":"LuDot","value":"","label":{"sr":"Kuhinja, trpezarija i dnevni boravak 48 m²","en":"Open-plan kitchen, dining & living 48 m²","ru":"Кухня, столовая и гостиная 48 м²","de":"Offener Wohn-, Ess- und Küchenbereich 48 m²"}},
-      {"icon":"LuDot","value":"","label":{"sr":"Dva kupatila i garderoba","en":"Two bathrooms and a dressing room","ru":"Две ванные комнаты и гардеробная","de":"Zwei Badezimmer und ein Ankleidezimmer"}},
-      {"icon":"LuDot","value":"","label":{"sr":"Natkrivena terasa 21 m²","en":"Covered terrace 21 m²","ru":"Крытая терраса 21 м²","de":"Überdachte Terrasse 21 m²"}},
+      {"icon":"LuSofa","value":"","label":{"sr":"Kuhinja, trpezarija i dnevni boravak 48 m²","en":"Open-plan kitchen, dining & living 48 m²","ru":"Кухня, столовая и гостиная 48 м²","de":"Offener Wohn-, Ess- und Küchenbereich 48 m²"}},
+      {"icon":"LuCar","value":"","label":{"sr":"Dva parking mesta 2,5 x 5 m","en":"Two parking spaces 2,5 x 5 m","ru":"Два парковочных места 2,5 x 5 м","de":"Zwei Stellplätze 2,5 x 5 m"}},
+      {"icon":"LuWaves","value":"","label":{"sr":"Bazen 8 x 4 m","en":"Pool 8 x 4 m","ru":"Бассейн 8 x 4 м","de":"Pool 8 x 4 m"}},
+      {"icon":"LuMaximize2","value":"141.78 m²","label":{"sr":"Površina","en":"Area","ru":"Площадь","de":"Fläche"}},
     ],
     rooms: [
       {"area":"6,68 m²","name":{"sr":"Ulazni hol","en":"Entrance hall","ru":"Входной холл","de":"Eingangshalle"}},
@@ -144,7 +142,7 @@ export async function createHouses(prisma, copyAsset, startOrder = 0) {
 
     let imgOrder = 0;
     for (const file of h.images) {
-      const filename = copyAsset(`src/assets/projects/${h.folder}/${file}`, `seed-${h.filePrefix}-${file}`);
+      const filename = copyAsset(`scripts/assets/projects/${h.folder}/${file}`, `seed-${h.filePrefix}-${file}`);
       await prisma.projectImage.create({ data: { projectId: project.id, filename, order: imgOrder++ } });
     }
 

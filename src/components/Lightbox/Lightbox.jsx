@@ -37,8 +37,9 @@ export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
 
   if (activeIndex === null) return null;
 
-  const { src, alt } = images[activeIndex];
+  const { src, alt, kind, poster } = images[activeIndex];
   const imgSrc = typeof src === 'string' ? src : src.src;
+  const isVideo = kind === 'video';
 
   return (
     <div
@@ -63,13 +64,40 @@ export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
       >
         &#8249;
       </button>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={imgSrc}
-        alt={alt}
-        className="max-h-[90vh] max-w-[90vw] object-contain rounded-[4px]"
-        onClick={(e) => e.stopPropagation()}
-      />
+      {kind === 'youtube' ? (
+        <div
+          className="relative w-[90vw] max-w-5xl aspect-video"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <iframe
+            src={`${imgSrc}${imgSrc.includes('?') ? '&' : '?'}autoplay=1`}
+            title={alt}
+            className="absolute inset-0 w-full h-full rounded-[4px]"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
+      ) : isVideo ? (
+        // eslint-disable-next-line jsx-a11y/media-has-caption
+        <video
+          src={imgSrc}
+          poster={poster || undefined}
+          controls
+          autoPlay
+          playsInline
+          className="max-h-[90vh] max-w-[90vw] object-contain rounded-[4px]"
+          onClick={(e) => e.stopPropagation()}
+        />
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={imgSrc}
+          alt={alt}
+          className="max-h-[90vh] max-w-[90vw] object-contain rounded-[4px]"
+          onClick={(e) => e.stopPropagation()}
+        />
+      )}
       <button
         className="absolute right-4 top-1/2 -translate-y-1/2 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2"
         onClick={(e) => { e.stopPropagation(); next(); }}

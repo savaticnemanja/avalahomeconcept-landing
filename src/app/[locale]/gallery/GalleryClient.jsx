@@ -1,42 +1,36 @@
 'use client';
 import { useCallback, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { LuMaximize2, LuImages, LuArrowRight } from 'react-icons/lu';
+import { LuMaximize2, LuImages, LuArrowRight, LuPlay } from 'react-icons/lu';
 import { Lightbox } from '@/components';
 import { useI18n } from '@/i18n/I18nProvider';
 import { imageUrl } from '@/lib/imageUrl';
+import { youtubeEmbedUrl, youtubeThumb } from '@/lib/youtube';
 import { pick } from '@/lib/localize';
-
-const workProgressVideos = [
-  'https://www.youtube.com/embed/APZNvEz0K1U?si=_huoHPFO_dfWY0o1',
-  'https://www.youtube.com/embed/USzbMmEXM48?si=aTB0OQtqQH5T4vOA',
-  'https://www.youtube.com/embed/wSy8XczE-IM?si=ibxFNR5POWpet43C',
-  'https://www.youtube.com/embed/8wPYRIy59ac?si=tNgM9mGcVorJRDDr',
-  'https://www.youtube.com/embed/_AX9OHlOVYE?si=QO2nHlRQaBSxr7bV',
-  'https://www.youtube.com/embed/GpmCIWb33GU?si=9RyKJqFK4B8ato-z',
-  'https://www.youtube.com/embed/0Zra97sopNE?si=MV8SPKezbncroaMR',
-  'https://www.youtube.com/embed/GTXHQjdQa24?si=H_hl9xX1lRBfI0Y4',
-  'https://www.youtube.com/embed/26808Oq5tMk?si=K0KMhf7T_tof2r-6',
-];
-
-const PROGRESS_TAB = '__progress__';
 
 export default function GalleryClient({ categories }) {
   const { t, dict, locale, href } = useI18n();
   const [activeIndex, setActiveIndex] = useState(null);
 
   const tabs = useMemo(() => categories.filter((c) => c.images.length > 0), [categories]);
-  const [activeTab, setActiveTab] = useState(() => (tabs[0]?.slug ?? PROGRESS_TAB));
+  const [activeTab, setActiveTab] = useState(() => tabs[0]?.slug ?? null);
 
   const close = useCallback(() => setActiveIndex(null), []);
 
-  const activeCategory = tabs.find((c) => c.slug === activeTab);
-  const images = (activeCategory?.images ?? []).map((img, i) => ({
-    src: imageUrl(img.filename),
-    alt: pick(img, 'caption', locale) || `${dict.gallery.photoAlt} ${i + 1}`,
-  }));
-
-  const showProgress = activeTab === PROGRESS_TAB;
+  const activeCategory = tabs.find((c) => c.slug === activeTab) ?? tabs[0];
+  const items = (activeCategory?.images ?? []).map((img, i) => {
+    const kind = img.kind === 'video' || img.kind === 'youtube' ? img.kind : 'image';
+    const alt = pick(img, 'caption', locale) || `${dict.gallery.photoAlt} ${i + 1}`;
+    if (kind === 'youtube') {
+      return { kind, src: youtubeEmbedUrl(img.filename), poster: youtubeThumb(img.filename), alt };
+    }
+    return {
+      kind,
+      src: imageUrl(img.filename),
+      poster: img.poster ? imageUrl(img.poster) : null,
+      alt,
+    };
+  });
 
   return (
     <main className="pt-20">
@@ -49,35 +43,30 @@ export default function GalleryClient({ categories }) {
             </h1>
           </div>
 
-          <div className="flex flex-wrap gap-2 mb-10">
-            {tabs.map((cat) => (
-              <button
-                key={cat.slug}
-                onClick={() => { setActiveTab(cat.slug); setActiveIndex(null); }}
-                className={[
-                  'py-2.5 px-5 text-sm rounded-sm border transition-colors duration-150',
-                  activeTab === cat.slug
-                    ? 'bg-accent text-white border-accent'
-                    : 'text-text-muted border-border hover:text-text',
-                ].join(' ')}
-              >
-                {pick(cat, 'name', locale)}
-              </button>
-            ))}
-            <button
-              onClick={() => { setActiveTab(PROGRESS_TAB); setActiveIndex(null); }}
-              className={[
-                'py-2.5 px-5 text-sm rounded-sm border transition-colors duration-150',
-                showProgress ? 'bg-accent text-white border-accent' : 'text-text-muted border-border hover:text-text',
-              ].join(' ')}
-            >
-              {t('gallery.tabs.progress')}
-            </button>
-          </div>
+          {tabs.length > 1 && (
+            <div className="flex flex-wrap gap-2 mb-10">
+              {tabs.map((cat) => (
+                <button
+                  key={cat.slug}
+                  onClick={() => { setActiveTab(cat.slug); setActiveIndex(null); }}
+                  className={[
+                    'py-2.5 px-5 text-sm rounded-sm border transition-colors duration-150',
+                    activeCategory?.slug === cat.slug
+                      ? 'bg-accent text-white border-accent'
+                      : 'text-text-muted border-border hover:text-text',
+                  ].join(' ')}
+                >
+                  {pick(cat, 'name', locale)}
+                </button>
+              ))}
+            </div>
+          )}
 
-          {!showProgress ? (
-            <div className="columns-2 sm:columns-3 lg:columns-4 gap-3">
-              {images.map(({ src, alt }, i) => (
+          <div className="columns-2 sm:columns-3 lg:columns-4 gap-3">
+            {items.map(({ kind, src, poster, alt }, i) => {
+              const playable = kind === 'video' || kind === 'youtube';
+              const thumb = playable ? poster : src;
+              return (
                 <button
                   key={i}
                   type="button"
@@ -85,37 +74,34 @@ export default function GalleryClient({ categories }) {
                   className="block w-full break-inside-avoid mb-3 cursor-pointer overflow-hidden border border-border group relative"
                   onClick={() => setActiveIndex(i)}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={src}
-                    alt={alt}
-                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                    loading="lazy"
-                  />
+                  {thumb ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={thumb}
+                      alt={alt}
+                      className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      loading="lazy"
+                    />
+                  ) : (
+                    // eslint-disable-next-line jsx-a11y/media-has-caption
+                    <video src={src} className="w-full h-auto object-cover" muted preload="metadata" />
+                  )}
                   <span className="absolute inset-0 bg-bg-dark/0 group-hover:bg-bg-dark/35 transition-colors duration-300 flex items-center justify-center">
                     <span className="w-10 h-10 flex items-center justify-center border border-transparent group-hover:border-text-light/60 text-transparent group-hover:text-text-light transition-all duration-300 rounded-full">
                       <LuMaximize2 className="w-4 h-4" />
                     </span>
                   </span>
+                  {playable && (
+                    <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <span className="w-12 h-12 flex items-center justify-center rounded-full bg-black/55 text-white group-hover:bg-accent transition-colors duration-300">
+                        <LuPlay className="w-5 h-5 translate-x-0.5" />
+                      </span>
+                    </span>
+                  )}
                 </button>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {workProgressVideos.map((url, i) => (
-                <div key={i} className="aspect-video rounded-[4px] overflow-hidden border border-border">
-                  <iframe
-                    src={url}
-                    title={`${dict.gallery.progressTitle} ${i + 1}`}
-                    className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -131,9 +117,7 @@ export default function GalleryClient({ categories }) {
         </div>
       </div>
 
-      {!showProgress && (
-        <Lightbox images={images} activeIndex={activeIndex} onClose={close} onSetIndex={setActiveIndex} />
-      )}
+      <Lightbox images={items} activeIndex={activeIndex} onClose={close} onSetIndex={setActiveIndex} />
     </main>
   );
 }
