@@ -16,7 +16,9 @@ CREATE TABLE "GalleryImage" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "categoryId" INTEGER NOT NULL,
     "order" INTEGER NOT NULL DEFAULT 0,
+    "kind" TEXT NOT NULL DEFAULT 'image',
     "filename" TEXT NOT NULL,
+    "poster" TEXT NOT NULL DEFAULT '',
     "width" INTEGER NOT NULL DEFAULT 0,
     "height" INTEGER NOT NULL DEFAULT 0,
     "captionSr" TEXT NOT NULL DEFAULT '',
@@ -49,7 +51,6 @@ CREATE TABLE "Project" (
     "descriptionEn" TEXT NOT NULL DEFAULT '',
     "descriptionRu" TEXT NOT NULL DEFAULT '',
     "descriptionDe" TEXT NOT NULL DEFAULT '',
-    "areaLabel" TEXT NOT NULL DEFAULT '',
     "totalAreaM2" REAL,
     "sitePlanTop" TEXT,
     "sitePlanLeft" TEXT,
@@ -100,6 +101,19 @@ CREATE TABLE "ProjectRoom" (
     CONSTRAINT "ProjectRoom_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "PageView" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "type" TEXT NOT NULL DEFAULT 'visit',
+    "name" TEXT NOT NULL DEFAULT '',
+    "path" TEXT NOT NULL DEFAULT '',
+    "locale" TEXT NOT NULL DEFAULT '',
+    "referrer" TEXT NOT NULL DEFAULT '',
+    "device" TEXT NOT NULL DEFAULT '',
+    "visitorHash" TEXT NOT NULL DEFAULT '',
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "GalleryCategory_slug_key" ON "GalleryCategory"("slug");
 
@@ -117,3 +131,12 @@ CREATE INDEX "ProjectHighlight_projectId_idx" ON "ProjectHighlight"("projectId")
 
 -- CreateIndex
 CREATE INDEX "ProjectRoom_projectId_idx" ON "ProjectRoom"("projectId");
+
+-- CreateIndex
+CREATE INDEX "PageView_createdAt_idx" ON "PageView"("createdAt");
+
+-- CreateIndex
+CREATE INDEX "PageView_type_idx" ON "PageView"("type");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "PageView_visitorHash_type_name_key" ON "PageView"("visitorHash", "type", "name");
