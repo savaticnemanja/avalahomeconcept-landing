@@ -257,109 +257,81 @@
   .scroll-hint-x { animation: none; }
 }
 
-/* ─── Location map markers (MapLibre) ───────────────────────── */
-.ahc-marker {
-  cursor: pointer;
-  width: 16px;
-  height: 16px;
+/* ─── Location map (MapLibre + OpenStreetMap) ───────────────── */
+/* Static, non-interactive map — no grab cursor, no focus ring. */
+.ahc-map .maplibregl-canvas,
+.ahc-map .maplibregl-marker { cursor: default; }
+.ahc-map .maplibregl-canvas:focus { outline: none; }
+
+/* Amenity label pills — dot + name + drive time, drawn on the map. */
+.ahc-poi-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px 4px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 8px rgba(26, 25, 21, 0.16);
+  font-family: var(--font-body);
+  white-space: nowrap;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.ahc-poi-pill .dot {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--color-accent);
-  border: 2px solid #fff;
-  box-shadow: 0 2px 6px rgba(26, 25, 21, 0.3);
-  transition: transform 0.15s ease;
+  flex: none;
 }
-.ahc-marker:hover { transform: scale(1.25); }
+.ahc-poi-pill .nm { font-size: 0.72rem; font-weight: 500; color: var(--color-text); }
+.ahc-poi-pill .tm { font-size: 0.68rem; font-weight: 600; color: var(--color-accent); }
 
-/* POI markers — descriptive icon badges / wordmark labels */
-.ahc-poi {
-  cursor: pointer;
+/* Development pill — stronger, dark; name + within-300m amenities. */
+.ahc-home-pill {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #fff;
-  border: 2px solid var(--color-accent);
-  color: var(--color-accent);
-  box-shadow: 0 2px 8px rgba(26, 25, 21, 0.3);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.ahc-poi:hover {
-  transform: scale(1.15);
-  box-shadow: 0 4px 12px rgba(26, 25, 21, 0.38);
-}
-.ahc-poi svg { display: block; }
-
-.ahc-poi--label {
-  width: auto;
-  height: auto;
-  border-radius: 999px;
-  padding: 4px 11px;
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--color-bg-dark);
-  background: #fff;
-}
-
-/* Phase area labels (centered on each polygon) */
-.ahc-phase-label {
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1px;
-  padding: 5px 12px;
-  border-radius: 3px;
-  font-family: var(--font-body);
-  line-height: 1.1;
-  text-align: center;
-  color: #fff;
-  background: var(--phase-color, var(--color-accent));
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 10px rgba(26, 25, 21, 0.4);
-  transition: transform 0.15s ease;
-}
-.ahc-phase-label:hover { transform: scale(1.08); }
-.ahc-phase-label strong {
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-}
-.ahc-phase-label span {
-  font-size: 0.62rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  opacity: 0.92;
-}
-
-.ahc-marker--home {
-  width: 22px;
-  height: 22px;
+  gap: 8px;
+  max-width: 234px;
+  padding: 7px 13px 7px 10px;
+  border-radius: 13px;
   background: var(--color-bg-dark);
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 5px rgba(196, 151, 90, 0.25), 0 3px 8px rgba(26, 25, 21, 0.4);
+  box-shadow: 0 4px 14px rgba(26, 25, 21, 0.35);
+  font-family: var(--font-heading);
+}
+.ahc-home-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ahc-home-pill .nm {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-text-light);
+  white-space: nowrap;
+}
+.ahc-home-pill .sub {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--color-accent);
+}
+.ahc-home-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex: none;
+  box-shadow: 0 0 0 4px rgba(196, 151, 90, 0.3);
 }
 
-.maplibregl-popup-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 8px 12px;
-  border-radius: 2px;
-  font-family: var(--font-body);
-  box-shadow: 0 4px 20px rgba(26, 25, 21, 0.12);
-}
-.maplibregl-popup-content strong {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--color-text);
-}
-.maplibregl-popup-content span {
-  font-size: 0.75rem;
-  color: var(--color-accent);
-  font-weight: 500;
+/* Mobile: shrink the pills so every pin + label stays inside the narrow,
+   height-constrained viewport without overlapping. */
+@media (max-width: 767px) {
+  .ahc-poi-pill { gap: 5px; padding: 3px 8px 3px 6px; }
+  .ahc-poi-pill .nm { font-size: 0.66rem; }
+  .ahc-poi-pill .tm { font-size: 0.62rem; }
+  .ahc-home-pill { max-width: 168px; gap: 7px; padding: 6px 11px 6px 9px; }
+  .ahc-home-pill .nm { font-size: 0.72rem; }
+  .ahc-home-pill .sub { font-size: 0.56rem; line-height: 1.25; }
+  .ahc-home-dot { width: 9px; height: 9px; box-shadow: 0 0 0 3px rgba(196, 151, 90, 0.3); }
 }
