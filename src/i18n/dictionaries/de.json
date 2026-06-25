@@ -351,6 +351,12 @@
     "prev": "Zurück",
     "next": "Weiter"
   },
+  "galleryPreview": {
+    "eyebrow": "Visuelle Vorschau",
+    "title": "Sehen Sie, wie es aussieht",
+    "text": "Werfen Sie einen Blick in die Welt von Avala Home Concept — von Innenräumen bis zu gepflegten Gärten mit Pool.",
+    "cta": "Jetzt reservieren"
+  },
   "thankYou": {
     "title": "Vielen Dank!",
     "text": "Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns so schnell wie möglich bei Ihnen.",

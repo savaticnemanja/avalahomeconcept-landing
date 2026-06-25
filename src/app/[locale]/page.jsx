@@ -4,6 +4,7 @@ import { LuMail } from 'react-icons/lu';
 import ctaBg from '@/assets/cta/complex-sunset.jpeg';
 import {
   Contact,
+  GalleryPreview,
   Location,
   Partners,
   PaymentDynamic,
@@ -15,6 +16,7 @@ import {
 import { getDictionary } from '@/i18n/getDictionary';
 import { withLocale } from '@/i18n/config';
 import { prisma } from '@/lib/db';
+import { imageUrl } from '@/lib/imageUrl';
 
 export const dynamic = 'force-dynamic';
 
@@ -35,11 +37,22 @@ export default async function HomePage({ params }) {
     },
   });
 
+  // First gallery album's media (posters for videos) feeds the home preview grid.
+  const firstAlbum = await prisma.galleryCategory.findFirst({
+    orderBy: { order: 'asc' },
+    include: { images: { orderBy: { order: 'asc' }, take: 9 } },
+  });
+  const galleryPreviewImages = (firstAlbum?.images ?? [])
+    .map((img) => imageUrl(img.kind === 'video' ? img.poster : img.filename))
+    .filter(Boolean);
+
   return (
     <>
       <Slider />
 
       <ProjectShowcase projects={projects} />
+
+      <GalleryPreview images={galleryPreviewImages} />
 
       <Showcase />
 

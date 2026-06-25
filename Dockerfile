@@ -31,8 +31,10 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
-# src is needed by the seed script (copies original assets + reads dictionaries).
+# src is needed by the seed script (reads dictionaries); scripts holds the seed
+# source assets (gallery/ + projects/) and the manual import-houses script.
 COPY --from=builder /app/src ./src
+COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/next.config.js ./next.config.js
 COPY docker-entrypoint.sh ./docker-entrypoint.sh

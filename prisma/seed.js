@@ -34,16 +34,22 @@ const copyAsset = (srcRel, destName) => {
 };
 
 // --- gallery categories text -------------------------------------------------
+// `count` seeds gallery-NN.webp photos; `youtube` seeds referenced YouTube ids.
+const PROGRESS_YOUTUBE = [
+  'APZNvEz0K1U', 'USzbMmEXM48', 'wSy8XczE-IM', '8wPYRIy59ac', '_AX9OHlOVYE',
+  'GpmCIWb33GU', '0Zra97sopNE', 'GTXHQjdQa24', '26808Oq5tMk',
+];
+
 const GALLERY_CATEGORIES = [
   { slug: 'photos', name: { sr: 'Fotografije', en: 'Photos', ru: 'Фотографии', de: 'Fotos' }, count: 26 },
-  { slug: '3d-renders', name: { sr: '3D renderi', en: '3D Renders', ru: '3D-рендеры', de: '3D-Renderings' }, count: 0 },
-  { slug: 'interior', name: { sr: 'Enterijer', en: 'Interior', ru: 'Интерьер', de: 'Innenraum' }, count: 0 },
-  { slug: 'progress', name: { sr: 'Napredak radova', en: 'Work Progress', ru: 'Ход работ', de: 'Baufortschritt' }, count: 0 },
+  { slug: 'progress', name: { sr: 'Napredak radova', en: 'Work Progress', ru: 'Ход работ', de: 'Baufortschritt' }, count: 0, youtube: PROGRESS_YOUTUBE },
 ];
 
 async function main() {
-  if (process.env.NODE_ENV === 'production') {
-    console.log('Seed skipped: NODE_ENV is production.');
+  // Opt-out only. Seeding is otherwise safe in every environment: it self-skips
+  // below when content already exists, so it never clobbers managed data.
+  if (process.env.SEED_DISABLE === '1' || process.env.SEED_DISABLE === 'true') {
+    console.log('Seed skipped: SEED_DISABLE is set.');
     return;
   }
 
@@ -62,11 +68,17 @@ async function main() {
     const created = await prisma.galleryCategory.create({
       data: { slug: cat.slug, order: catOrder++, ...loc('name', (l) => cat.name[l]) },
     });
+    let order = 0;
     for (let i = 1; i <= cat.count; i += 1) {
       const num = String(i).padStart(2, '0');
-      const filename = copyAsset(`src/assets/gallery/gallery-${num}.webp`, `seed-gallery-${num}.webp`);
+      const filename = copyAsset(`scripts/assets/gallery/gallery-${num}.webp`, `seed-gallery-${num}.webp`);
       await prisma.galleryImage.create({
-        data: { categoryId: created.id, filename, order: i - 1 },
+        data: { categoryId: created.id, filename, order: order++ },
+      });
+    }
+    for (const id of cat.youtube ?? []) {
+      await prisma.galleryImage.create({
+        data: { categoryId: created.id, kind: 'youtube', filename: id, order: order++ },
       });
     }
   }

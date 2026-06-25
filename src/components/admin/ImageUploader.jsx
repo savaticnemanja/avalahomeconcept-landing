@@ -2,7 +2,12 @@
 import { useRef, useState } from 'react';
 import { LuUpload, LuLoader } from 'react-icons/lu';
 
-export const ImageUploader = ({ onUploaded, label = 'Dodaj slike', multiple = true }) => {
+export const ImageUploader = ({
+  onUploaded,
+  label = 'Dodaj slike',
+  multiple = true,
+  accept = 'image/webp,image/jpeg,image/png,image/avif',
+}) => {
   const inputRef = useRef(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
@@ -42,7 +47,7 @@ export const ImageUploader = ({ onUploaded, label = 'Dodaj slike', multiple = tr
       <input
         ref={inputRef}
         type="file"
-        accept="image/webp,image/jpeg,image/png,image/avif"
+        accept={accept}
         multiple={multiple}
         className="hidden"
         onChange={(e) => handleFiles(e.target.files)}

@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 import { getSession } from '@/lib/auth';
-import { saveUpload } from '@/lib/uploads';
+import { saveUpload, saveVideoUpload, isVideoType } from '@/lib/uploads';
 
 export const runtime = 'nodejs';
+// Transcoding large videos can take a while; allow a generous budget.
+export const maxDuration = 300;
 
 export async function POST(request) {
   if (!(await getSession())) {
@@ -13,7 +15,9 @@ export async function POST(request) {
   const file = form?.get('file');
 
   try {
-    const result = await saveUpload(file);
+    const result = isVideoType(file?.type)
+      ? await saveVideoUpload(file)
+      : await saveUpload(file);
     return NextResponse.json(result);
   } catch (err) {
     return NextResponse.json({ error: err.message ?? 'Upload failed.' }, { status: 400 });

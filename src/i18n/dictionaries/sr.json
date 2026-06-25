@@ -351,6 +351,12 @@
     "prev": "Prethodna",
     "next": "Sledeća"
   },
+  "galleryPreview": {
+    "eyebrow": "Vizuelni prikaz",
+    "title": "Pogledajte kako izgleda",
+    "text": "Zavirite u svet Avala Home Concept-a — od enterijera do uređenog dvorišta sa bazenom.",
+    "cta": "Rezervišite sada"
+  },
   "thankYou": {
     "title": "Hvala vam!",
     "text": "Vaša poruka je uspešno poslata. Kontaktiraćemo vas u najkraćem roku.",

@@ -1,7 +1,8 @@
 'use client';
 import { useState } from 'react';
-import { LuPlus, LuTrash2, LuChevronDown, LuSave } from 'react-icons/lu';
+import { LuPlus, LuTrash2, LuChevronDown, LuSave, LuPlay, LuYoutube } from 'react-icons/lu';
 import { imageUrl } from '@/lib/imageUrl';
+import { youtubeThumb } from '@/lib/youtube';
 import { LocaleFields } from '@/components/admin/LocaleFields';
 import { ImageUploader } from '@/components/admin/ImageUploader';
 import { SubmitButton } from '@/components/admin/SubmitButton';
@@ -12,6 +13,7 @@ import {
   deleteGalleryCategory,
   reorderGalleryCategories,
   createGalleryImage,
+  createGalleryYoutube,
   updateGalleryImage,
   deleteGalleryImage,
   reorderGalleryImages,
@@ -31,11 +33,30 @@ const btnDanger =
 
 function ImageCard({ image }) {
   const [open, setOpen] = useState(false);
+  const isVideo = image.kind === 'video';
+  const isYoutube = image.kind === 'youtube';
+  const thumbSrc = isYoutube
+    ? youtubeThumb(image.filename)
+    : isVideo
+      ? (image.poster ? imageUrl(image.poster) : null)
+      : imageUrl(image.filename);
   return (
     <SortableItem id={image.id} className={`${cardClass} overflow-hidden`}>
       <div className="relative">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={imageUrl(image.filename)} alt="" className="w-full h-32 object-cover" />
+        {thumbSrc ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={thumbSrc} alt="" className="w-full h-32 object-cover" />
+        ) : (
+          // eslint-disable-next-line jsx-a11y/media-has-caption
+          <video src={imageUrl(image.filename)} className="w-full h-32 object-cover" muted preload="metadata" />
+        )}
+        {(isVideo || isYoutube) && (
+          <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span className="bg-black/55 text-white rounded-full p-2">
+              <LuPlay className="w-5 h-5" />
+            </span>
+          </span>
+        )}
         <DragHandle className="absolute top-1.5 left-1.5 bg-white/85 rounded p-1" />
       </div>
       <div className="p-2 flex items-center justify-between gap-2">
@@ -97,8 +118,30 @@ function CategoryCard({ category }) {
         </form>
       )}
 
-      <div className="mb-3">
-        <ImageUploader onUploaded={(data) => createGalleryImage({ categoryId: category.id, ...data })} />
+      <div className="mb-3 flex flex-col gap-3">
+        <div>
+          <ImageUploader
+            label="Dodaj slike / video"
+            accept="image/webp,image/jpeg,image/png,image/avif,video/mp4,video/quicktime,video/webm,video/x-matroska"
+            onUploaded={(data) => createGalleryImage({ categoryId: category.id, ...data })}
+          />
+          <p className="mt-1 text-xs text-text-muted">Video se automatski optimizuje (H.264, do 1080p).</p>
+        </div>
+
+        <form action={createGalleryYoutube} className="flex flex-wrap items-center gap-2">
+          <input type="hidden" name="categoryId" value={category.id} />
+          <LuYoutube className="w-5 h-5 text-red-600 flex-shrink-0" />
+          <input
+            type="url"
+            name="url"
+            required
+            placeholder="YouTube link (npr. https://youtu.be/…)"
+            className="flex-1 min-w-[200px] text-sm px-3 py-1.5 rounded-[3px] border border-border bg-bg focus:border-accent outline-none"
+          />
+          <SubmitButton className={btnGhost} pendingText="Dodavanje…">
+            <LuPlus className="w-3.5 h-3.5" /> Dodaj video
+          </SubmitButton>
+        </form>
       </div>
 
       {orderedImages.length > 0 && (
