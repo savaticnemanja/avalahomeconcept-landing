@@ -136,7 +136,7 @@ export const LocationMap = () => {
           // High cap: let fitBounds zoom to actually fill wide desktops. It
           // can't clip — every label/card sits inside the padding reserved
           // below, so framing the dots within the padding keeps them on-screen.
-          maxZoom: window.innerWidth < 768 ? 13.5 : 15,
+          maxZoom: window.innerWidth < 768 ? 13.5 : 115,
           duration: 0,
         });
 

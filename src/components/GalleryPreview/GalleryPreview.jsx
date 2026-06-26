@@ -29,7 +29,7 @@ export const GalleryPreview = ({ images = [] }) => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-3 items-stretch" data-reveal>
-          <div className="relative overflow-hidden aspect-[4/5] lg:aspect-auto lg:h-full">
+          <div className="relative overflow-hidden self-start aspect-[4/5] lg:self-stretch lg:aspect-auto lg:h-full">
             <Image
               src={promo}
               alt={t('galleryPreview.title')}
