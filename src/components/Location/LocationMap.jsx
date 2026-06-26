@@ -55,19 +55,19 @@ const REGIONAL = [
 const BELOW_DESKTOP = new Set(['Avala Home Concept', 'IKEA · TC Ava', 'Autokomanda']);
 const BELOW_MOBILE = new Set(['Avala Home Concept', 'Autoput']);
 
-// CARTO Positron — a clean, minimal light basemap (free raster tiles, no API
-// key). Lightly warmed toward the site palette: a touch of transparency lets
-// the cream container colour show through, and markers stay crisp above it.
+// CARTO Voyager — a colourful Google-Maps-style basemap (free raster tiles, no
+// API key): green parks/landcover, blue water, soft roads. Rendered at full
+// opacity with natural saturation so the greens read true.
 const MAP_STYLE = {
   version: 8,
   sources: {
     basemap: {
       type: 'raster',
       tiles: [
-        'https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-        'https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-        'https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-        'https://d.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+        'https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
+        'https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
+        'https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
+        'https://d.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
       ],
       tileSize: 256,
       maxzoom: 20,
@@ -80,8 +80,7 @@ const MAP_STYLE = {
       type: 'raster',
       source: 'basemap',
       paint: {
-        'raster-opacity': 0.92,
-        'raster-saturation': -0.1,
+        'raster-opacity': 1,
       },
     },
   ],
