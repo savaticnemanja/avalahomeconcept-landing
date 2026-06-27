@@ -343,15 +343,39 @@
   box-shadow: 0 0 0 3px rgba(196, 151, 90, 0.3);
 }
 
-/* Development uses the very same pin — a subtle accent outline + slightly
-   larger dot keep it reading as the focal point without changing the shape. */
-.ahc-poi-pin.is-home .lbl {
-  box-shadow: 0 0 0 1.5px var(--color-accent), 0 2px 8px rgba(26, 25, 21, 0.28);
+/* Development — a true map-pin (teardrop): a rounded head carrying the brand
+   logo, tapering to a tip that lands on the exact coordinate. */
+.ahc-home-mark {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* lift the tip's drop-shadow above neighbouring dots */
+  filter: drop-shadow(0 3px 8px rgba(26, 25, 21, 0.3));
 }
-.ahc-poi-pin.is-home .dot {
-  width: 11px;
-  height: 11px;
-  box-shadow: 0 0 0 4px rgba(196, 151, 90, 0.35);
+.ahc-home-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 14px;
+  border-radius: 12px;
+  background: var(--color-bg, #fff);
+  border: 2px solid var(--color-accent);
+}
+.ahc-home-logo {
+  display: block;
+  height: 26px;
+  width: auto;
+}
+/* Tip — a triangle bridging the head's bottom edge down to the coordinate. It
+   overlaps the head by 1px so the seam reads as one continuous shape. */
+.ahc-home-tip {
+  margin-top: -1px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 12px solid var(--color-accent);
 }
 
 /* Mobile: shrink the pills so every pin + label stays inside the narrow,
@@ -361,7 +385,9 @@
   .ahc-poi-inner .lbl .ico { width: 11px; height: 11px; }
   .ahc-poi-inner .line { height: 11px; }
   .ahc-poi-inner .dot { width: 8px; height: 8px; }
-  .ahc-poi-pin.is-home .dot { width: 10px; height: 10px; }
+  .ahc-home-head { padding: 7px 11px; border-radius: 10px; }
+  .ahc-home-logo { height: 21px; }
+  .ahc-home-tip { border-left-width: 7px; border-right-width: 7px; border-top-width: 10px; }
   .ahc-poi-info { margin-top: 6px; padding: 5px 8px; }
   .ahc-poi-info .row { font-size: 0.56rem; gap: 9px; }
 }

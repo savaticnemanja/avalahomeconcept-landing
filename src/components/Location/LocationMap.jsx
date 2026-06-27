@@ -1,6 +1,11 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import logoDark from '@/assets/brand/logo-dark.webp';
+
+// Static URL for the brand mark — the markers are built via innerHTML (not
+// React), so we use the imported asset's resolved `.src` rather than <Image>.
+const LOGO_SRC = logoDark.src;
 
 // ─── Map data ───────────────────────────────────────────────────────
 // Coordinates are [lng, lat]. The development uses the same floating-label
@@ -50,10 +55,10 @@ const REGIONAL = [
 // Which labels sit BELOW their dot (vs the default above). The desktop map is
 // rotated ~54° and the mobile map is north-up, so their tight clusters differ —
 // each breakpoint gets its own set, tuned so no two labels overlap. Keyed by
-// pin name; the development ('Avala Home Concept') is always below so its
-// amenity card hangs downward.
-const BELOW_DESKTOP = new Set(['Avala Home Concept', 'IKEA · TC Ava', 'Autokomanda']);
-const BELOW_MOBILE = new Set(['Avala Home Concept', 'Autoput']);
+// pin name. (The development is exempt — it uses the teardrop pin, anchored at
+// its tip with the amenity card always hanging below.)
+const BELOW_DESKTOP = new Set(['IKEA · TC Ava', 'Autokomanda']);
+const BELOW_MOBILE = new Set(['Autoput']);
 
 // CARTO Voyager — a colourful Google-Maps-style basemap (free raster tiles, no
 // API key): green parks/landcover, blue water, soft roads. Rendered at full
@@ -140,18 +145,17 @@ export const LocationMap = () => {
           duration: 0,
         });
 
-      // One pin style for every place — a floating label tag (icon + name)
-      // connected by a thin line to a dot at the exact point. The dot is the
-      // anchor; `below` flips the label under the dot so close neighbours don't
-      // collide. The development gets the same pin, marked by `is-home`.
+      // Regional places use a floating label tag (icon + name) connected by a
+      // thin line to a dot at the exact point. The dot is the anchor; `below`
+      // flips the label under the dot so close neighbours don't collide.
+      //
+      // The development (`is-home`) instead gets a true map-pin: a rounded head
+      // carrying the brand logo, tapering to a tip that sits exactly on the
+      // coordinate. Its amenities hang beneath as a small card.
       const addPin = (loc, below, extra = '') => {
-        const time = loc.time ? `<span class="tm">${loc.time}</span>` : '';
-        const label = `<span class="lbl">${svgIcon(loc.icon)}<span class="t">${loc.name}</span>${time}</span>`;
-        const parts = below
-          ? '<span class="dot"></span><span class="line"></span>' + label
-          : label + '<span class="line"></span><span class="dot"></span>';
-        // Optional amenity card — absolutely positioned beneath the dot so it
-        // hangs below the pin without shifting the dot off its coordinate.
+        const isHome = extra.includes('is-home');
+        // Optional amenity card — absolutely positioned beneath the pin so it
+        // hangs below without shifting the anchor off its coordinate.
         const info = loc.amenities
           ? '<div class="ahc-poi-info">' +
             loc.amenities
@@ -162,10 +166,29 @@ export const LocationMap = () => {
               .join('') +
             '</div>'
           : '';
+
+        let parts;
+        if (isHome) {
+          // Teardrop pin: logo-bearing head + a tip pointing to the exact point.
+          parts =
+            '<div class="ahc-home-mark">' +
+            `<div class="ahc-home-head"><img class="ahc-home-logo" src="${LOGO_SRC}" alt="${loc.name}" /></div>` +
+            '<span class="ahc-home-tip"></span>' +
+            '</div>';
+        } else {
+          const time = loc.time ? `<span class="tm">${loc.time}</span>` : '';
+          const label = `<span class="lbl">${svgIcon(loc.icon)}<span class="t">${loc.name}</span>${time}</span>`;
+          parts = below
+            ? '<span class="dot"></span><span class="line"></span>' + label
+            : label + '<span class="line"></span><span class="dot"></span>';
+        }
+
         const el = document.createElement('div');
         el.className = `ahc-poi-pin${extra}`;
         el.innerHTML = `<div class="ahc-poi-inner">${parts}${info}</div>`;
-        return new maplibregl.Marker({ element: el, anchor: below ? 'top' : 'bottom' })
+        // Home pin is anchored at its tip (bottom); regional dots flip with `below`.
+        const anchor = isHome ? 'bottom' : below ? 'top' : 'bottom';
+        return new maplibregl.Marker({ element: el, anchor })
           .setLngLat(loc.coords)
           .addTo(map);
       };
