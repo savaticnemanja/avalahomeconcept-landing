@@ -87,7 +87,7 @@ export const Slider = () => {
             {t('slider.watchVideo')}
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
           </button>
-          <a href="/brosura.pdf" download className="btn-outline-light group">
+          <a href="/brosura.pdf" target="_blank" rel="noopener noreferrer" className="btn-outline-light group">
             <LuDownload className="w-4 h-4" />
             {t('slider.brochure')}
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
