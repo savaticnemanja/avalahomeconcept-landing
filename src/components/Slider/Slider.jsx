@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { LuChevronRight, LuPhone, LuPlay, LuX } from 'react-icons/lu';
+import { LuChevronRight, LuPhone, LuPlay, LuDownload, LuX } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 import heroVideo from '@/assets/slider/avala16_9.mp4';
 import promoVideo from '@/assets/promo/promo.mp4';
@@ -87,6 +87,11 @@ export const Slider = () => {
             {t('slider.watchVideo')}
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
           </button>
+          <a href="/brosura.pdf" download className="btn-outline-light group">
+            <LuDownload className="w-4 h-4" />
+            {t('slider.brochure')}
+            <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
+          </a>
         </div>
       </div>
 
