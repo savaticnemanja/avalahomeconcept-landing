@@ -11,8 +11,16 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const form = await request.formData().catch(() => null);
-  const file = form?.get('file');
+  let form;
+  try {
+    form = await request.formData();
+  } catch (err) {
+    return NextResponse.json(
+      { error: `Could not read upload. ${err?.message ?? 'Malformed request body.'}` },
+      { status: 400 },
+    );
+  }
+  const file = form.get('file');
 
   try {
     const result = isVideoType(file?.type)
