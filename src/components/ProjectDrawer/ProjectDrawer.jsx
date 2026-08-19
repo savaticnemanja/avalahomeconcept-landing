@@ -274,6 +274,10 @@ export const ProjectDrawer = ({ project, onClose, inline = false }) => {
                       </button>
                     ))}
                   </div>
+
+                  <p className="text-text-muted text-[0.68rem] font-light leading-snug">
+                    {t('projectPage.mediaDisclaimer')}
+                  </p>
                 </div>
               )}
 

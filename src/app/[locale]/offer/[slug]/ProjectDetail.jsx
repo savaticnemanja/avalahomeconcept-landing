@@ -144,6 +144,10 @@ export default function ProjectDetail({ project }) {
                   ))}
                 </div>
               )}
+
+              <p className="text-text-muted text-xs font-light leading-snug">
+                {t('projectPage.mediaDisclaimer')}
+              </p>
             </div>
           )}
 
