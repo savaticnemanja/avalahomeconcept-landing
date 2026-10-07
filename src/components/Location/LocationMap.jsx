@@ -60,36 +60,10 @@ const REGIONAL = [
 const BELOW_DESKTOP = new Set(['IKEA · TC Ava', 'Autokomanda']);
 const BELOW_MOBILE = new Set(['Autoput']);
 
-// CARTO Voyager — a colourful Google-Maps-style basemap (free raster tiles, no
-// API key): green parks/landcover, blue water, soft roads. Rendered at full
-// opacity with natural saturation so the greens read true.
-const MAP_STYLE = {
-  version: 8,
-  sources: {
-    basemap: {
-      type: 'raster',
-      tiles: [
-        'https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-        'https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-        'https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-        'https://d.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-      ],
-      tileSize: 256,
-      maxzoom: 20,
-      attribution: '© OpenStreetMap contributors © CARTO',
-    },
-  },
-  layers: [
-    {
-      id: 'basemap',
-      type: 'raster',
-      source: 'basemap',
-      paint: {
-        'raster-opacity': 1,
-      },
-    },
-  ],
-};
+// OpenFreeMap "Liberty" — a colourful OSM-based vector style (free, no API
+// key). CARTO's basemaps used to be keyless but now serve an "API KEY
+// REQUIRED" watermark tile instead of the map.
+const MAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
 
 // Padding chosen so no pin OR its label/card clips on either breakpoint.
 // Desktop is tighter (rotated + zoomed in to fill the frame); the wider sides
@@ -256,7 +230,7 @@ export const LocationMap = () => {
         className="absolute bottom-1.5 right-2 z-10 text-[0.6rem] text-text-muted/70 pointer-events-none select-none"
         style={{ fontFamily: 'var(--font-body)' }}
       >
-        © OpenStreetMap · © CARTO
+        © OpenFreeMap · © OpenStreetMap
       </span>
     </div>
   );
