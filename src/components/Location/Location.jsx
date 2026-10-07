@@ -1,7 +1,6 @@
 'use client';
 import { LuMapPin } from 'react-icons/lu';
 import { LocationMap } from './LocationMap';
-import { LocationPhases } from './LocationPhases';
 import { useI18n } from '@/i18n/I18nProvider';
 
 export const Location = () => {
@@ -25,7 +24,6 @@ export const Location = () => {
         </div>
 
         <LocationMap />
-        <LocationPhases />
       </div>
     </section>
   );
