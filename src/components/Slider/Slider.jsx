@@ -94,6 +94,11 @@ export const Slider = () => {
             {t('slider.brochure')}
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
           </a>
+          <Link href={href('/gallery?tab=progress')} className="btn-outline-light group">
+            <LuHardHat className="w-4 h-4" />
+            {t('gallery.tabs.progress')}
+            <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
+          </Link>
         </div>
       </div>
 
