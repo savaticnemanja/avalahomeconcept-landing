@@ -21,11 +21,11 @@ export const Panorama = () => {
           </h2>
         </div>
 
-        <figure className="relative max-w-6xl mx-auto overflow-hidden border border-white/15" data-reveal>
+        <figure className="relative overflow-hidden border border-white/15" data-reveal>
           <Image
             src={complexDusk}
             alt={t('panorama.alt')}
-            sizes="(min-width: 1152px) 1152px, 100vw"
+            sizes="(min-width: 1290px) 1242px, 100vw"
             className="w-full h-auto"
             placeholder="blur"
           />
