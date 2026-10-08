@@ -5,7 +5,7 @@ import { HighlightIcon as Hl } from '@/components/HighlightIcon/HighlightIcon';
 import { LuArrowRight, LuMap, LuList } from 'react-icons/lu';
 import { ProjectDrawer } from '@/components';
 import { useI18n } from '@/i18n/I18nProvider';
-import { imageUrl } from '@/lib/imageUrl';
+import { thumbSrcSet, thumbUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
 import sitePlanImage from '@/assets/offer/complex-aerial.webp';
 
@@ -95,7 +95,9 @@ const CatalogCard = ({ project, locale, t, isActive, onHover, to, onOpen }) => {
         {cover ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={imageUrl(cover)}
+            src={thumbUrl(cover, 960)}
+            srcSet={thumbSrcSet(cover)}
+            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 380px, 100vw"
             alt={title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
@@ -105,7 +107,9 @@ const CatalogCard = ({ project, locale, t, isActive, onHover, to, onOpen }) => {
         {second && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={imageUrl(second)}
+            src={thumbUrl(second, 960)}
+            srcSet={thumbSrcSet(second)}
+            sizes="(min-width: 1280px) 440px, (min-width: 1024px) 380px, 100vw"
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { HighlightIcon as Hl } from '@/components/HighlightIcon/HighlightIcon';
 import { LuMail, LuX, LuZoomIn, LuPhone } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
-import { imageUrl } from '@/lib/imageUrl';
+import { imageUrl, thumbUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
 
 const ZoomViewer = ({ images, index, onClose, onSetIndex }) => {
@@ -175,6 +175,7 @@ export const ProjectDrawer = ({ project, onClose, inline = false }) => {
 
   const zoomImages = orderedImages.map((im, i) => ({
     src: imageUrl(im.filename),
+    thumb: thumbUrl(im.filename),
     alt: pick(im, 'caption', locale) || `${title} ${i + 1}`,
   }));
 
@@ -350,7 +351,7 @@ export const ProjectDrawer = ({ project, onClose, inline = false }) => {
                         aria-label={im.alt}
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={im.src} alt="" className="w-full h-full object-cover" loading="lazy" />
+                        <img src={im.thumb} alt="" className="w-full h-full object-cover" loading="lazy" />
                       </button>
                     ))}
                   </div>

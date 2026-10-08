@@ -5,6 +5,7 @@ import { mkdir, writeFile, unlink, readFile, mkdtemp, rm } from 'node:fs/promise
 import os from 'node:os';
 import path from 'node:path';
 import sharp from 'sharp';
+import { THUMB_WIDTHS } from '@/lib/imageUrl';
 
 export const UPLOAD_DIR = process.env.UPLOAD_DIR
   ? path.resolve(process.env.UPLOAD_DIR)
@@ -194,12 +195,15 @@ export const saveVideoUpload = async (file) => {
   }
 };
 
+// Cached downscaled copy of an upload (see src/app/thumbs/[w]/[file]/route.js).
+export const thumbPath = (filename, width) =>
+  path.join(UPLOAD_DIR, 'thumbs', String(width), path.basename(filename).replace(/\.\w+$/, '.webp'));
+
 export const deleteUpload = async (filename) => {
   if (!filename) return;
   const safe = path.basename(filename);
-  try {
-    await unlink(path.join(UPLOAD_DIR, safe));
-  } catch {
-    // already gone — ignore
-  }
+  const targets = [path.join(UPLOAD_DIR, safe), ...THUMB_WIDTHS.map((w) => thumbPath(safe, w))];
+  await Promise.all(
+    targets.map((p) => unlink(p).catch(() => {})), // already gone / never generated — ignore
+  );
 };

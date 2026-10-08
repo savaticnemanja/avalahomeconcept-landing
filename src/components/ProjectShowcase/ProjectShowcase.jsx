@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { HighlightIcon as Hl } from '@/components/HighlightIcon/HighlightIcon';
 import { LuArrowRight, LuHouse, LuChevronsRight } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
-import { imageUrl } from '@/lib/imageUrl';
+import { thumbSrcSet, thumbUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
 
 const coverOf = (project) => {
@@ -30,7 +30,9 @@ const ProjectCard = ({ project, locale, t, href }) => {
         {cover && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={imageUrl(cover)}
+            src={thumbUrl(cover, 960)}
+            srcSet={thumbSrcSet(cover)}
+            sizes="380px"
             alt={title}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
@@ -39,7 +41,9 @@ const ProjectCard = ({ project, locale, t, href }) => {
         {second && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={imageUrl(second)}
+            src={thumbUrl(second, 960)}
+            srcSet={thumbSrcSet(second)}
+            sizes="380px"
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
