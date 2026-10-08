@@ -1,16 +1,11 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import * as LuIcons from 'react-icons/lu';
+import { HighlightIcon as Hl } from '@/components/HighlightIcon/HighlightIcon';
 import { LuMail, LuArrowLeft, LuArrowRight, LuZoomIn, LuPhone } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 import { imageUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
-
-const Hl = ({ name, className }) => {
-  const Cmp = LuIcons[name] ?? LuIcons.LuDot;
-  return <Cmp className={className} />;
-};
 
 const ZoomViewer = ({ images, index, onClose, onSetIndex }) => {
   const prev = useCallback(

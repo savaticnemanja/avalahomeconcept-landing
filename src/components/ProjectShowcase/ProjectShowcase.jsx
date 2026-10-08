@@ -1,15 +1,10 @@
 'use client';
 import Link from 'next/link';
-import * as LuIcons from 'react-icons/lu';
+import { HighlightIcon as Hl } from '@/components/HighlightIcon/HighlightIcon';
 import { LuArrowRight, LuHouse, LuChevronsRight } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 import { imageUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
-
-const Hl = ({ name, className }) => {
-  const Cmp = LuIcons[name] ?? LuIcons.LuDot;
-  return <Cmp className={className} />;
-};
 
 const coverOf = (project) => {
   const cover = project.images.find((i) => i.filename === project.coverFilename);

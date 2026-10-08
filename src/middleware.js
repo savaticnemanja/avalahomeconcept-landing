@@ -18,8 +18,19 @@ const verify = async (token) => {
   }
 };
 
+// The root layout renders <html> above the [locale] segment, so it can't read
+// the locale param; pass it down as a request header for <html lang>.
+const LOCALE_RE = /^\/(sr|en|ru|de)(?:\/|$)/;
+
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
+
+  if (!pathname.startsWith('/admin') && !pathname.startsWith('/api/admin')) {
+    const headers = new Headers(request.headers);
+    headers.set('x-locale', LOCALE_RE.exec(pathname)?.[1] ?? '');
+    return NextResponse.next({ request: { headers } });
+  }
+
   const token = request.cookies.get(COOKIE_NAME)?.value;
   const authed = await verify(token);
 
@@ -55,5 +66,10 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/api/admin/:path*'],
+  matcher: [
+    '/admin/:path*',
+    '/api/admin/:path*',
+    // Pages only — skip Next internals, API routes, uploads and static files.
+    '/((?!_next/|api/|uploads/|.*\\..*).*)',
+  ],
 };

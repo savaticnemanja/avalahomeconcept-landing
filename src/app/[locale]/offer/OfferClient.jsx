@@ -1,18 +1,13 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import * as LuIcons from 'react-icons/lu';
+import { HighlightIcon as Hl } from '@/components/HighlightIcon/HighlightIcon';
 import { LuArrowRight, LuMap, LuList } from 'react-icons/lu';
 import { ProjectDrawer } from '@/components';
 import { useI18n } from '@/i18n/I18nProvider';
 import { imageUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
 import sitePlanImage from '@/assets/offer/complex-aerial.webp';
-
-const Hl = ({ name, className }) => {
-  const Cmp = LuIcons[name] ?? LuIcons.LuDot;
-  return <Cmp className={className} />;
-};
 
 const openOrNavigate = (onOpen) => (e) => {
   if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;

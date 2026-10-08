@@ -73,7 +73,9 @@ export async function buildProjectMetadata({ locale, project }) {
   const ogDescription = clamp(rawDesc, OG_DESC_MAX);
 
   return {
-    title,
+    // `absolute`: the /offer layout sets a plain-string title, which drops the
+    // brand template for its children, so add the brand here explicitly.
+    title: { absolute: fullTitle },
     description: clamp(rawDesc, META_DESC_MAX),
     alternates: buildAlternates(locale, path),
     openGraph: {
