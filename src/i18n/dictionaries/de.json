@@ -420,5 +420,12 @@
       "title": "Lageplan",
       "hint": "Klicken Sie auf eine Markierung, um die Hausdetails zu sehen"
     }
+  },
+  "panorama": {
+    "eyebrow": "Die Anlage",
+    "titleA": "Am Fuße des",
+    "titleEm": "Avala.",
+    "caption": "Eine geschlossene Anlage von Häusern mit Pools, umgeben von Grün, mit Blick auf den Avala-Turm.",
+    "alt": "Luftaufnahme der Anlage Avala Home Concept in der Dämmerung, im Hintergrund der Avala-Turm"
   }
 }

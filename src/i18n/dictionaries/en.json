@@ -420,5 +420,12 @@
       "title": "Site plan",
       "hint": "Click a marker to view the house details"
     }
+  },
+  "panorama": {
+    "eyebrow": "The complex",
+    "titleA": "At the foot of",
+    "titleEm": "Mount Avala.",
+    "caption": "A gated complex of houses with private pools, surrounded by greenery, overlooking the Avala Tower.",
+    "alt": "Aerial view of the Avala Home Concept complex at dusk, with the Avala Tower in the background"
   }
 }
