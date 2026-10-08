@@ -33,7 +33,8 @@ export const Slider = () => {
   }, [videoOpen]);
 
   return (
-    <div className="relative h-screen min-h-[640px] overflow-hidden bg-bg-dark">
+    <div className="relative h-[100svh] md:h-screen min-h-[640px] flex flex-col bg-bg-dark">
+      <div className="relative flex-1 overflow-hidden">
       <video
         key={isMobile ? 'mobile' : 'desktop'}
         src={isMobile ? promoVideo : heroVideo}
@@ -49,7 +50,7 @@ export const Slider = () => {
       <div className="absolute inset-0 bg-bg-dark/15" />
 
       <div
-        className="absolute inset-x-0 bottom-0 z-10 safe-zone pb-24 md:pb-32"
+        className="absolute inset-x-0 bottom-0 z-10 safe-zone pb-8 md:pb-32"
         style={{ animation: 'fade-up 0.8s ease both' }}
       >
         <p
@@ -71,12 +72,12 @@ export const Slider = () => {
           <em>{t('slider.titleEm')}</em>
         </h1>
         <p
-          className="text-text-light/65 mb-10 font-light"
+          className="text-text-light/65 md:mb-10 font-light"
           style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(1rem, 1.8vw, 1.15rem)' }}
         >
           {t('slider.subtitle')}
         </p>
-        <div className="flex flex-wrap gap-4">
+        <div className="hidden md:flex flex-wrap gap-4">
           <a href="tel:+38163383393" className="btn-primary group">
             <LuPhone className="w-4 h-4" />
             {t('slider.callUs')}
@@ -93,6 +94,35 @@ export const Slider = () => {
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
           </a>
         </div>
+      </div>
+
+      </div>
+
+      {/* Mobile: actions sit in a bar under the video instead of covering it. */}
+      <div className="md:hidden grid grid-cols-3 border-t border-text-light/10">
+        <a
+          href="tel:+38163383393"
+          className="flex flex-col items-center justify-center gap-1.5 py-3.5 px-1 bg-accent text-white text-[0.68rem] font-medium tracking-[0.1em] uppercase text-center leading-tight"
+        >
+          <LuPhone className="w-5 h-5" />
+          {t('slider.callUs')}
+        </a>
+        <button
+          type="button"
+          onClick={() => setVideoOpen(true)}
+          className="flex flex-col items-center justify-center gap-1.5 py-3.5 px-1 text-text-light text-[0.68rem] font-medium tracking-[0.1em] uppercase text-center leading-tight border-r border-text-light/10"
+        >
+          <LuPlay className="w-5 h-5 text-accent" />
+          {t('slider.watchVideo')}
+        </button>
+        <a
+          href="/brosura.pdf"
+          download
+          className="flex flex-col items-center justify-center gap-1.5 py-3.5 px-1 text-text-light text-[0.68rem] font-medium tracking-[0.1em] uppercase text-center leading-tight"
+        >
+          <LuDownload className="w-5 h-5 text-accent" />
+          {t('slider.brochure')}
+        </a>
       </div>
 
       {videoOpen && (
