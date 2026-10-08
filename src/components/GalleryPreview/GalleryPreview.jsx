@@ -5,8 +5,8 @@ import { LuImages, LuArrowRight } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 import promo from '@/assets/promo/revolucija-stanovanja.webp';
 
-// `images` — up to 9 src strings from the first gallery album (server-resolved,
-// posters used for videos). Renders nothing when the album has no media.
+// `images` — up to 9 { src, alt } from the first gallery album (server-resolved
+// thumbs, posters used for videos). Renders nothing when the album has no media.
 export const GalleryPreview = ({ images = [] }) => {
   const { t, href } = useI18n();
   const gridImages = images.slice(0, 9);
@@ -40,7 +40,7 @@ export const GalleryPreview = ({ images = [] }) => {
           </div>
 
           <div className="grid grid-cols-3 gap-2 md:gap-3">
-            {gridImages.map((src, i) => (
+            {gridImages.map(({ src, alt }, i) => (
               <Link
                 key={i}
                 href={href('/gallery')}
@@ -49,8 +49,7 @@ export const GalleryPreview = ({ images = [] }) => {
               >
                 <Image
                   src={src}
-                  alt=""
-                  aria-hidden="true"
+                  alt={alt}
                   fill
                   sizes="(max-width: 1024px) 33vw, 16vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"

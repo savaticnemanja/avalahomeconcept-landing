@@ -18,6 +18,7 @@ import { getDictionary } from '@/i18n/getDictionary';
 import { withLocale } from '@/i18n/config';
 import { prisma } from '@/lib/db';
 import { thumbUrl } from '@/lib/imageUrl';
+import { pick } from '@/lib/localize';
 
 export const dynamic = 'force-dynamic';
 
@@ -44,8 +45,11 @@ export default async function HomePage({ params }) {
     include: { images: { orderBy: { order: 'asc' }, take: 9 } },
   });
   const galleryPreviewImages = (firstAlbum?.images ?? [])
-    .map((img) => thumbUrl(img.kind === 'video' ? img.poster : img.filename))
-    .filter(Boolean);
+    .map((img, i) => ({
+      src: thumbUrl(img.kind === 'video' ? img.poster : img.filename),
+      alt: pick(img, 'caption', locale) || `${dict.gallery.photoAlt} ${i + 1}`,
+    }))
+    .filter((img) => img.src);
 
   return (
     <>
@@ -100,7 +104,7 @@ export default async function HomePage({ params }) {
 
       <Contact />
 
-      <Partners />
+      <Partners label={dict.common.partners} />
     </>
   );
 }

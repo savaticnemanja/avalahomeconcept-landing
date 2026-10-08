@@ -53,7 +53,7 @@ export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
         ref={closeRef}
         className="absolute top-4 right-4 text-text-light text-3xl leading-none hover:text-accent transition-colors"
         onClick={onClose}
-        aria-label={t('offer.drawer.close', 'Close')}
+        aria-label={t('common.close', 'Close')}
       >
         &#x2715;
       </button>

@@ -238,7 +238,8 @@
       "message": "Message",
       "send": "Send message"
     },
-    "errorToast": "There was a problem sending your message. Please try again."
+    "errorToast": "There was a problem sending your message. Please try again.",
+    "spamToast": "Your inquiry was not sent. Please wait a few seconds and try again."
   },
   "footer": {
     "tagline": "A gated complex of family houses on Mount Avala — 20 minutes from Belgrade.",
@@ -367,7 +368,8 @@
   "common": {
     "close": "Close",
     "prev": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "partners": "Our partners"
   },
   "offer": {
     "title": "House offer",
@@ -415,7 +417,8 @@
       "close": "Close menu",
       "requestOffer": "Request an offer",
       "tabDescription": "Description",
-      "tabRooms": "Floor areas"
+      "tabRooms": "Floor areas",
+      "call": "Call"
     },
     "sitePlan": {
       "eyebrow": "Interactive plan",
@@ -429,5 +432,18 @@
     "titleEm": "Mount Avala.",
     "caption": "A gated complex of houses with private pools, surrounded by greenery, overlooking the Avala Tower.",
     "alt": "Aerial view of the Avala Home Concept complex at dusk, with the Avala Tower in the background"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you are looking for does not exist or has been moved. Browse our houses or get in touch.",
+    "home": "Home",
+    "offer": "House offer",
+    "contact": "Contact"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "text": "There was a problem loading this page. Please try again or go back to the home page.",
+    "retry": "Try again",
+    "home": "Home"
   }
 }

@@ -19,8 +19,8 @@ const logos = [
 
 const doubled = [...logos, ...logos];
 
-export const Partners = () => (
-  <section className="overflow-hidden py-6 md:py-12 border-y border-border" aria-label="Naši partneri">
+export const Partners = ({ label }) => (
+  <section className="overflow-hidden py-6 md:py-12 border-y border-border" aria-label={label}>
     <div className="flex animate-[marquee_30s_linear_infinite]">
       {doubled.map((logo, i) => (
         <div

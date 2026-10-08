@@ -3,9 +3,18 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { LuArrowUp } from 'react-icons/lu';
 
+// Rendered by the root layout, outside the I18nProvider, so the label is picked
+// from <html lang> (set per locale) rather than the dictionaries.
+const LABELS = { sr: 'Nazad na vrh', en: 'Back to top', ru: 'Наверх', de: 'Nach oben' };
+
 export const ScrollToTop = () => {
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
+  const [label, setLabel] = useState(LABELS.sr);
+
+  useEffect(() => {
+    setLabel(LABELS[document.documentElement.lang] ?? LABELS.sr);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 500);
@@ -22,7 +31,7 @@ export const ScrollToTop = () => {
         if (window.__lenis) window.__lenis.scrollTo(0);
         else window.scrollTo({ top: 0, behavior: 'smooth' });
       }}
-      aria-label="Nazad na vrh"
+      aria-label={label}
       style={{
         position: 'fixed',
         bottom: '1.5rem',
