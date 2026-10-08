@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { LuChevronRight, LuPhone, LuPlay, LuDownload, LuX, LuHardHat } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 import heroVideo from '@/assets/slider/avala16_9.mp4';
+import heroMobileVideo from '@/assets/slider/hero-mobile.mp4';
 import promoVideo from '@/assets/promo/promo.mp4';
 import promoPoster from '@/assets/promo/promo-poster.webp';
 
@@ -75,8 +76,10 @@ export const Slider = () => {
         tabIndex={-1}
       >
         {/* On mobile the 16:9 hero leaves big letterbox bars, so use the portrait
-            promo clip (the one behind "Pogledaj video") which fills a 9:16 screen. */}
-        <source src={promoVideo} type="video/mp4" media={MOBILE_MQ} />
+            promo clip (the one behind "Pogledaj video") which fills a 9:16 screen —
+            as a silent, lower-bitrate re-encode (1.7 MB vs 4.3 MB); the modal
+            below keeps the original with sound. */}
+        <source src={heroMobileVideo} type="video/mp4" media={MOBILE_MQ} />
         <source src={heroVideo} type="video/mp4" />
       </video>
 

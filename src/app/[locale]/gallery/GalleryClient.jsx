@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { LuMaximize2, LuImages, LuArrowRight, LuPlay } from 'react-icons/lu';
 import { Lightbox } from '@/components';
 import { useI18n } from '@/i18n/I18nProvider';
-import { imageUrl } from '@/lib/imageUrl';
+import { imageUrl, thumbSrcSet, thumbUrl } from '@/lib/imageUrl';
 import { youtubeEmbedUrl, youtubeThumb } from '@/lib/youtube';
 import { pick } from '@/lib/localize';
 
@@ -30,6 +30,8 @@ export default function GalleryClient({ categories, initialTab }) {
       kind,
       src: imageUrl(img.filename),
       poster: img.poster ? imageUrl(img.poster) : null,
+      // Grid tiles use downscaled copies; the lightbox keeps the originals.
+      thumb: kind === 'image' ? img.filename : img.poster,
       alt,
     };
   });
@@ -65,9 +67,9 @@ export default function GalleryClient({ categories, initialTab }) {
           )}
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {items.map(({ kind, src, poster, alt }, i) => {
+            {items.map(({ kind, src, poster, thumb: thumbFile, alt }, i) => {
               const playable = kind === 'video' || kind === 'youtube';
-              const thumb = playable ? poster : src;
+              const thumb = kind === 'youtube' ? poster : thumbUrl(thumbFile);
               return (
                 <button
                   key={i}
@@ -80,6 +82,8 @@ export default function GalleryClient({ categories, initialTab }) {
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={thumb}
+                      srcSet={kind === 'youtube' ? undefined : thumbSrcSet(thumbFile)}
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                       alt={alt}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                       loading="lazy"

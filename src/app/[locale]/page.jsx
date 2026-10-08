@@ -17,7 +17,7 @@ import {
 import { getDictionary } from '@/i18n/getDictionary';
 import { withLocale } from '@/i18n/config';
 import { prisma } from '@/lib/db';
-import { imageUrl } from '@/lib/imageUrl';
+import { thumbUrl } from '@/lib/imageUrl';
 
 export const dynamic = 'force-dynamic';
 
@@ -44,7 +44,7 @@ export default async function HomePage({ params }) {
     include: { images: { orderBy: { order: 'asc' }, take: 9 } },
   });
   const galleryPreviewImages = (firstAlbum?.images ?? [])
-    .map((img) => imageUrl(img.kind === 'video' ? img.poster : img.filename))
+    .map((img) => thumbUrl(img.kind === 'video' ? img.poster : img.filename))
     .filter(Boolean);
 
   return (
