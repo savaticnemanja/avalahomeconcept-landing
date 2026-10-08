@@ -391,3 +391,14 @@
   .ahc-poi-info { margin-top: 6px; padding: 5px 8px; }
   .ahc-poi-info .row { font-size: 0.56rem; gap: 9px; }
 }
+
+/* Hero background video: never show the native play/start overlay (iOS shows
+   it when autoplay is deferred, e.g. Low Power Mode). */
+.hero-video::-webkit-media-controls,
+.hero-video::-webkit-media-controls-panel,
+.hero-video::-webkit-media-controls-overlay-play-button,
+.hero-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0 !important;
+}
