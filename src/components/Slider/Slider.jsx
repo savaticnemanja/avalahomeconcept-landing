@@ -1,13 +1,14 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { LuChevronRight, LuPhone, LuPlay, LuDownload, LuX } from 'react-icons/lu';
+import Link from 'next/link';
+import { LuChevronRight, LuPhone, LuPlay, LuDownload, LuX, LuHardHat } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 import heroVideo from '@/assets/slider/avala16_9.mp4';
 import promoVideo from '@/assets/promo/promo.mp4';
 import promoPoster from '@/assets/promo/promo-poster.webp';
 
 export const Slider = () => {
-  const { t } = useI18n();
+  const { t, href } = useI18n();
   const [videoOpen, setVideoOpen] = useState(false);
   // On mobile the 16:9 hero leaves big letterbox bars, so use the portrait
   // promo clip (the one behind "Pogledaj video") which fills a 9:16 screen.
@@ -123,6 +124,14 @@ export const Slider = () => {
           <LuDownload className="w-5 h-5 text-accent" />
           {t('slider.brochure')}
         </a>
+        <Link
+          href={href('/gallery?tab=progress')}
+          className="col-span-3 flex items-center justify-center gap-2.5 py-3 px-4 text-text-light text-[0.68rem] font-medium tracking-[0.1em] uppercase border-t border-text-light/10"
+        >
+          <LuHardHat className="w-4 h-4 text-accent" />
+          {t('gallery.tabs.progress')}
+          <LuChevronRight className="w-4 h-4 text-text-light/50" />
+        </Link>
       </div>
 
       {videoOpen && (

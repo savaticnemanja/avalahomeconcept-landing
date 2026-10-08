@@ -8,12 +8,14 @@ import { imageUrl } from '@/lib/imageUrl';
 import { youtubeEmbedUrl, youtubeThumb } from '@/lib/youtube';
 import { pick } from '@/lib/localize';
 
-export default function GalleryClient({ categories }) {
+export default function GalleryClient({ categories, initialTab }) {
   const { t, dict, locale, href } = useI18n();
   const [activeIndex, setActiveIndex] = useState(null);
 
   const tabs = useMemo(() => categories.filter((c) => c.images.length > 0), [categories]);
-  const [activeTab, setActiveTab] = useState(() => tabs[0]?.slug ?? null);
+  const [activeTab, setActiveTab] = useState(
+    () => tabs.find((c) => c.slug === initialTab)?.slug ?? tabs[0]?.slug ?? null,
+  );
 
   const close = useCallback(() => setActiveIndex(null), []);
 
