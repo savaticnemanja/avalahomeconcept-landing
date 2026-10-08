@@ -413,7 +413,9 @@
     "drawer": {
       "plan": "Grundriss",
       "close": "Menü schließen",
-      "requestOffer": "Angebot anfordern"
+      "requestOffer": "Angebot anfordern",
+      "tabDescription": "Beschreibung",
+      "tabRooms": "Flächen"
     },
     "sitePlan": {
       "eyebrow": "Interaktiver Plan",

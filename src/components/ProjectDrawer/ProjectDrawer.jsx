@@ -129,6 +129,8 @@ export const ProjectDrawer = ({ project, onClose, inline = false }) => {
   const [visible, setVisible] = useState(false);
   const [zoom, setZoom] = useState(null);
   const [activeImg, setActiveImg] = useState(0);
+  const [tab, setTab] = useState('description');
+  const scrollRef = useRef(null);
   const swipeStartX = useRef(null);
   const swiped = useRef(false);
 
@@ -137,6 +139,8 @@ export const ProjectDrawer = ({ project, onClose, inline = false }) => {
       setActive(project);
       // Open on the 2nd image when available (matches the card hover preview).
       setActiveImg(project.images.length > 1 ? 1 : 0);
+      setTab('description');
+      scrollRef.current?.scrollTo(0, 0);
       if (inline) return undefined;
       const id = requestAnimationFrame(() => setVisible(true));
       return () => cancelAnimationFrame(id);
@@ -192,6 +196,87 @@ export const ProjectDrawer = ({ project, onClose, inline = false }) => {
       stepImg(dx < 0 ? 1 : -1);
     }
   };
+
+  const descriptionBlock = (
+    <>
+      {description && (
+        <p className="text-text-muted font-light leading-relaxed whitespace-pre-line">{description}</p>
+      )}
+
+      {(subtitle || highlights.length > 0) && (
+        <div className="flex flex-col gap-3">
+          {subtitle && (
+            <p
+              className="text-text-muted text-[0.7rem] font-medium tracking-[0.15em] uppercase"
+              style={{ fontFamily: 'var(--font-body)' }}
+            >
+              {subtitle}
+            </p>
+          )}
+          {highlights.length > 0 && (
+            <div className="grid grid-cols-2 gap-x-5 gap-y-2 auto-rows-fr">
+              {highlights.map((h) => (
+                <span key={h.id} className="flex items-center gap-2 text-sm font-light text-text-muted h-full">
+                  <Hl name={h.icon} className="w-4 h-4 text-accent flex-shrink-0" />
+                  {pick(h, 'label', locale)}{h.value ? ` ${h.value}` : ''}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </>
+  );
+
+  const roomsBlock = rooms.length > 0 && (
+    <div className="flex flex-col gap-3">
+      <p className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-accent">
+        {t('projectPage.netSurfaceLabel')}
+      </p>
+      <table className="w-full text-sm border-collapse">
+        <tbody>
+          {rooms.map((row) => (
+            <tr key={row.id} className="border-b border-border/50 last:border-0">
+              <td className="py-2 font-light text-text">{pick(row, 'name', locale)}</td>
+              <td className="py-2 text-right text-text-muted font-light">{row.area}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {active.totalAreaM2 != null && (
+        <div className="pt-3 border-t border-border flex justify-between items-center">
+          <span className="text-sm font-medium text-text">{t('projectPage.total')}</span>
+          <span className="text-accent font-medium">{active.totalAreaM2} m²</span>
+        </div>
+      )}
+    </div>
+  );
+
+  const hasDescription = Boolean(description || subtitle || highlights.length > 0);
+  const hasRooms = rooms.length > 0;
+
+  const callAndInquiry = (
+    <div className="absolute inset-x-0 bottom-0 z-20 px-2 md:px-6 py-4 flex flex-row justify-end gap-3 pointer-events-none">
+      <a
+        href="tel:+38163383393"
+        aria-label="+381 63 383 393"
+        className="group relative inline-flex items-stretch flex-shrink-0 pointer-events-auto shadow-[0_6px_20px_rgba(26,25,21,0.28)]"
+      >
+        <span className="absolute inset-0 m-auto w-8 h-8 bg-accent/50 animate-ping [animation-duration:2.5s] pointer-events-none" />
+        <span className="relative inline-flex items-center justify-center px-4 bg-bg border border-accent text-accent transition-all duration-250 group-hover:bg-accent group-hover:text-white">
+          <LuPhone className="w-4 h-4" />
+        </span>
+      </a>
+      <Link
+        href={href('/contact')}
+        aria-label={t('offer.drawer.requestOffer')}
+        className="btn-primary justify-center pointer-events-auto shadow-[0_6px_20px_rgba(26,25,21,0.28)]"
+        onClick={onClose}
+      >
+        <LuMail className="w-4 h-4" />
+      </Link>
+    </div>
+  );
 
   const panel = active && (
           <>
@@ -282,82 +367,125 @@ export const ProjectDrawer = ({ project, onClose, inline = false }) => {
               )}
 
               <div className="flex-1 min-h-0 overflow-y-auto px-2 md:px-6 py-4 pb-24 flex flex-col gap-6">
-                {description && (
-                  <p className="text-text-muted font-light leading-relaxed whitespace-pre-line">{description}</p>
-                )}
-
-                {(subtitle || highlights.length > 0) && (
-                  <div className="flex flex-col gap-3">
-                    {subtitle && (
-                      <p
-                        className="text-text-muted text-[0.7rem] font-medium tracking-[0.15em] uppercase"
-                        style={{ fontFamily: 'var(--font-body)' }}
-                      >
-                        {subtitle}
-                      </p>
-                    )}
-                    {highlights.length > 0 && (
-                      <div className="grid grid-cols-2 gap-x-5 gap-y-2 auto-rows-fr">
-                        {highlights.map((h) => (
-                          <span key={h.id} className="flex items-center gap-2 text-sm font-light text-text-muted h-full">
-                            <Hl name={h.icon} className="w-4 h-4 text-accent flex-shrink-0" />
-                            {pick(h, 'label', locale)}{h.value ? ` ${h.value}` : ''}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {rooms.length > 0 && (
-                  <div className="flex flex-col gap-3">
-                    <p className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-accent">
-                      {t('projectPage.netSurfaceLabel')}
-                    </p>
-                    <table className="w-full text-sm border-collapse">
-                      <tbody>
-                        {rooms.map((row) => (
-                          <tr key={row.id} className="border-b border-border/50 last:border-0">
-                            <td className="py-2 font-light text-text">{pick(row, 'name', locale)}</td>
-                            <td className="py-2 text-right text-text-muted font-light">{row.area}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    {active.totalAreaM2 != null && (
-                      <div className="pt-3 border-t border-border flex justify-between items-center">
-                        <span className="text-sm font-medium text-text">{t('projectPage.total')}</span>
-                        <span className="text-accent font-medium">{active.totalAreaM2} m²</span>
-                      </div>
-                    )}
-                  </div>
-                )}
+                {descriptionBlock}
+                {roomsBlock}
               </div>
 
-              <div className="absolute inset-x-0 bottom-0 z-20 px-2 md:px-6 py-4 flex flex-row justify-end gap-3 pointer-events-none">
-                <a
-                  href="tel:+38163383393"
-                  aria-label="+381 63 383 393"
-                  className="group relative inline-flex items-stretch flex-shrink-0 pointer-events-auto shadow-[0_6px_20px_rgba(26,25,21,0.28)]"
-                >
-                  <span className="absolute inset-0 m-auto w-8 h-8 bg-accent/50 animate-ping [animation-duration:2.5s] pointer-events-none" />
-                  <span className="relative inline-flex items-center justify-center px-4 bg-bg border border-accent text-accent transition-all duration-250 group-hover:bg-accent group-hover:text-white">
-                    <LuPhone className="w-4 h-4" />
-                  </span>
-                </a>
-                <Link
-                  href={href('/contact')}
-                  aria-label={t('offer.drawer.requestOffer')}
-                  className="btn-primary justify-center pointer-events-auto shadow-[0_6px_20px_rgba(26,25,21,0.28)]"
-                  onClick={onClose}
-                >
-                  <LuMail className="w-4 h-4" />
-                </Link>
-              </div>
+              {callAndInquiry}
 
             </div>
           </>
         );
+
+  // Mobile drawer: no header bar — the photo goes edge to edge with the close
+  // button on top of it, and description / floor areas sit in sticky tabs, so
+  // the whole sheet scrolls as one instead of squeezing the text into a strip.
+  const tabs = [
+    hasDescription && { id: 'description', label: t('offer.drawer.tabDescription') },
+    hasRooms && { id: 'rooms', label: t('offer.drawer.tabRooms') },
+  ].filter(Boolean);
+  const currentTab = tabs.some((x) => x.id === tab) ? tab : tabs[0]?.id;
+
+  const mobilePanel = active && (
+    <div className="relative flex-1 min-h-0">
+      <div ref={scrollRef} className="absolute inset-0 overflow-y-auto overscroll-contain pb-24">
+        <div className="relative w-full aspect-[4/3] max-h-[60vh] bg-bg-alt">
+          {zoomImages.length > 0 && (
+            <button
+              onClick={() => {
+                if (swiped.current) { swiped.current = false; return; }
+                setZoom(activeImg);
+              }}
+              onPointerDown={onSwipeStart}
+              onPointerUp={onSwipeEnd}
+              style={{ touchAction: 'pan-y' }}
+              className="absolute inset-0 overflow-hidden select-none"
+              aria-label={zoomImages[activeImg]?.alt}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={zoomImages[activeImg].src}
+                alt={zoomImages[activeImg].alt}
+                className="w-full h-full object-cover"
+              />
+            </button>
+          )}
+          <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-bg-dark/45 to-transparent pointer-events-none" />
+          {badge && (
+            <span
+              className="absolute top-4 left-4 px-3 py-1 text-[0.62rem] font-medium tracking-[0.15em] uppercase text-white pointer-events-none"
+              style={{ backgroundColor: 'rgba(196,151,90,0.92)', fontFamily: 'var(--font-body)' }}
+            >
+              {badge}
+            </span>
+          )}
+          <button
+            onClick={onClose}
+            aria-label={t('offer.drawer.close')}
+            className="absolute top-3 right-3 w-10 h-10 flex items-center justify-center rounded-full bg-bg-dark/55 text-white backdrop-blur-sm"
+          >
+            <LuX className="w-5 h-5" />
+          </button>
+          {zoomImages.length > 1 && (
+            <span className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-bg-dark/55 text-white text-xs backdrop-blur-sm pointer-events-none tabular-nums">
+              {activeImg + 1} / {zoomImages.length}
+            </span>
+          )}
+          {zoomImages.length > 0 && (
+            <span className="absolute bottom-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-bg-dark/55 text-white backdrop-blur-sm pointer-events-none">
+              <LuZoomIn className="w-4 h-4" />
+            </span>
+          )}
+        </div>
+
+        <div className="flex items-end justify-between gap-4 px-4 pt-4 pb-3">
+          <h2
+            className="text-text min-w-0"
+            style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 400, lineHeight: 1.15 }}
+          >
+            {title}
+          </h2>
+          {active.totalAreaM2 != null && (
+            <span
+              className="text-accent whitespace-nowrap flex-shrink-0"
+              style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 400, lineHeight: 1 }}
+            >
+              {active.totalAreaM2}
+              <span className="text-text-muted text-sm"> m²</span>
+            </span>
+          )}
+        </div>
+
+        {tabs.length > 1 && (
+          <div role="tablist" className="sticky top-0 z-10 grid grid-cols-2 bg-bg/95 backdrop-blur-md border-b border-border">
+            {tabs.map((x) => (
+              <button
+                key={x.id}
+                type="button"
+                role="tab"
+                aria-selected={currentTab === x.id}
+                onClick={() => setTab(x.id)}
+                className={`py-3.5 text-[0.72rem] font-medium tracking-[0.14em] uppercase border-b-2 -mb-px transition-colors duration-150 ${
+                  currentTab === x.id ? 'border-accent text-text' : 'border-transparent text-text-muted'
+                }`}
+              >
+                {x.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div role="tabpanel" className="px-4 py-5 flex flex-col gap-6">
+          {currentTab === 'rooms' ? roomsBlock : descriptionBlock}
+          <p className="text-text-muted text-[0.68rem] font-light leading-snug">
+            {t('projectPage.mediaDisclaimer')}
+          </p>
+        </div>
+      </div>
+
+      {callAndInquiry}
+    </div>
+  );
 
   if (inline) {
     return (
@@ -388,7 +516,7 @@ export const ProjectDrawer = ({ project, onClose, inline = false }) => {
         aria-label={title}
         aria-hidden={!project}
       >
-        {panel}
+        {mobilePanel}
       </aside>
 
       <ZoomViewer images={zoomImages} index={zoom} onClose={() => setZoom(null)} onSetIndex={setZoom} />

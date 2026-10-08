@@ -413,7 +413,9 @@
     "drawer": {
       "plan": "Osnova",
       "close": "Zatvori meni",
-      "requestOffer": "Pošalji upit"
+      "requestOffer": "Pošalji upit",
+      "tabDescription": "Opis",
+      "tabRooms": "Kvadratura"
     },
     "sitePlan": {
       "eyebrow": "Interaktivni plan",
