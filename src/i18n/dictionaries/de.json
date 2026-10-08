@@ -238,7 +238,8 @@
       "message": "Nachricht",
       "send": "Nachricht senden"
     },
-    "errorToast": "Beim Senden Ihrer Nachricht ist ein Problem aufgetreten. Bitte versuchen Sie es erneut."
+    "errorToast": "Beim Senden Ihrer Nachricht ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.",
+    "spamToast": "Ihre Anfrage wurde nicht gesendet. Bitte warten Sie einige Sekunden und versuchen Sie es erneut."
   },
   "footer": {
     "tagline": "Ein geschlossener Komplex von Familienhäusern am Berg Avala — 20 Minuten von Belgrad.",
@@ -367,7 +368,8 @@
   "common": {
     "close": "Schließen",
     "prev": "Zurück",
-    "next": "Weiter"
+    "next": "Weiter",
+    "partners": "Unsere Partner"
   },
   "offer": {
     "title": "Hausangebot",
@@ -415,7 +417,8 @@
       "close": "Menü schließen",
       "requestOffer": "Angebot anfordern",
       "tabDescription": "Beschreibung",
-      "tabRooms": "Flächen"
+      "tabRooms": "Flächen",
+      "call": "Anrufen"
     },
     "sitePlan": {
       "eyebrow": "Interaktiver Plan",
@@ -429,5 +432,18 @@
     "titleEm": "Avala.",
     "caption": "Eine geschlossene Anlage von Häusern mit Pools, umgeben von Grün, mit Blick auf den Avala-Turm.",
     "alt": "Luftaufnahme der Anlage Avala Home Concept in der Dämmerung, im Hintergrund der Avala-Turm"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "text": "Die gesuchte Seite existiert nicht oder wurde verschoben. Sehen Sie sich unsere Häuser an oder kontaktieren Sie uns.",
+    "home": "Startseite",
+    "offer": "Hausangebot",
+    "contact": "Kontakt"
+  },
+  "error": {
+    "title": "Ein Fehler ist aufgetreten",
+    "text": "Beim Laden der Seite ist ein Problem aufgetreten. Bitte versuchen Sie es erneut oder kehren Sie zur Startseite zurück.",
+    "retry": "Erneut versuchen",
+    "home": "Startseite"
   }
 }

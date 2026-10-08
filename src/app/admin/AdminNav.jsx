@@ -2,12 +2,13 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { LuLayoutDashboard, LuImages, LuHouse, LuChartColumn, LuLogOut, LuExternalLink } from 'react-icons/lu';
+import { LuLayoutDashboard, LuImages, LuHouse, LuChartColumn, LuLogOut, LuExternalLink, LuInbox } from 'react-icons/lu';
 
 const LINKS = [
   { href: '/admin', label: 'Pregled', icon: LuLayoutDashboard, exact: true },
   { href: '/admin/gallery', label: 'Galerija', icon: LuImages },
   { href: '/admin/projects', label: 'Projekti', icon: LuHouse },
+  { href: '/admin/inquiries', label: 'Upiti', icon: LuInbox },
   { href: '/admin/metrics', label: 'Posete', icon: LuChartColumn },
 ];
 

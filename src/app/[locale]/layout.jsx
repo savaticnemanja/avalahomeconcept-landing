@@ -4,7 +4,8 @@ import { PageTracker } from '@/components/Analytics/PageTracker';
 import { ClickTracker } from '@/components/Analytics/ClickTracker';
 import { I18nProvider } from '@/i18n/I18nProvider';
 import { getDictionary } from '@/i18n/getDictionary';
-import { locales, SITE_URL } from '@/i18n/config';
+import { notFound } from 'next/navigation';
+import { isLocale, locales, SITE_URL } from '@/i18n/config';
 import { buildPageMetadata } from '@/i18n/seo';
 
 export function generateStaticParams() {
@@ -28,6 +29,9 @@ export async function generateMetadata({ params }) {
 
 export default async function LocaleLayout({ children, params }) {
   const { locale } = await params;
+  // Only the known locales are real pages; /xyz used to render the Serbian
+  // home page with a 200 (duplicate content).
+  if (!isLocale(locale)) notFound();
   const dict = await getDictionary(locale);
 
   const jsonLd = {

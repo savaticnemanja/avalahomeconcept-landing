@@ -238,7 +238,8 @@
       "message": "Poruka",
       "send": "Pošaljite poruku"
     },
-    "errorToast": "Problem sa slanjem poruke. Pokušajte ponovo."
+    "errorToast": "Problem sa slanjem poruke. Pokušajte ponovo.",
+    "spamToast": "Upit nije poslat. Sačekajte nekoliko sekundi i pokušajte ponovo."
   },
   "footer": {
     "tagline": "Zatvoren kompleks porodičnih kuća na Avalskoj planini — 20 minuta od Beograda.",
@@ -367,7 +368,8 @@
   "common": {
     "close": "Zatvori",
     "prev": "Prethodna",
-    "next": "Sledeća"
+    "next": "Sledeća",
+    "partners": "Naši partneri"
   },
   "offer": {
     "title": "Ponuda kuća",
@@ -415,7 +417,8 @@
       "close": "Zatvori meni",
       "requestOffer": "Pošalji upit",
       "tabDescription": "Opis",
-      "tabRooms": "Kvadratura"
+      "tabRooms": "Kvadratura",
+      "call": "Pozovi"
     },
     "sitePlan": {
       "eyebrow": "Interaktivni plan",
@@ -429,5 +432,18 @@
     "titleEm": "Avale.",
     "caption": "Zatvoren kompleks kuća sa bazenima, okružen zelenilom, sa pogledom na Avalski toranj.",
     "alt": "Pogled iz vazduha na kompleks Avala Home Concept u sumrak, sa Avalskim tornjem u pozadini"
+  },
+  "notFound": {
+    "title": "Stranica nije pronađena",
+    "text": "Stranica koju tražite ne postoji ili je premeštena. Pogledajte našu ponudu kuća ili nas kontaktirajte.",
+    "home": "Početna",
+    "offer": "Ponuda kuća",
+    "contact": "Kontakt"
+  },
+  "error": {
+    "title": "Došlo je do greške",
+    "text": "Nešto nije u redu sa učitavanjem stranice. Pokušajte ponovo ili se vratite na početnu.",
+    "retry": "Pokušaj ponovo",
+    "home": "Početna"
   }
 }

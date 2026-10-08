@@ -8,6 +8,7 @@ import { imageUrl, thumbUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
 
 const ZoomViewer = ({ images, index, onClose, onSetIndex }) => {
+  const { t } = useI18n();
   const [dragX, setDragX] = useState(0);
   const [dragging, setDragging] = useState(false);
   const draggingRef = useRef(false);
@@ -91,7 +92,7 @@ const ZoomViewer = ({ images, index, onClose, onSetIndex }) => {
       <button
         className="absolute top-4 right-4 z-10 text-text-light text-3xl leading-none hover:text-accent transition-colors"
         onClick={(e) => { e.stopPropagation(); onClose(); }}
-        aria-label="Zatvori"
+        aria-label={t('common.close')}
       >
         &#x2715;
       </button>
@@ -99,7 +100,7 @@ const ZoomViewer = ({ images, index, onClose, onSetIndex }) => {
         className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2 disabled:opacity-30"
         onClick={(e) => { e.stopPropagation(); prev(); }}
         disabled={index === 0}
-        aria-label="Prethodna"
+        aria-label={t('common.prev')}
       >
         &#8249;
       </button>
@@ -107,7 +108,7 @@ const ZoomViewer = ({ images, index, onClose, onSetIndex }) => {
         className="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2 disabled:opacity-30"
         onClick={(e) => { e.stopPropagation(); next(); }}
         disabled={index === images.length - 1}
-        aria-label="Sledeća"
+        aria-label={t('common.next')}
       >
         &#8250;
       </button>
@@ -255,21 +256,21 @@ export const ProjectDrawer = ({ project, onClose, inline = false }) => {
     <div className="absolute inset-x-0 bottom-0 z-20 px-2 md:px-6 py-4 flex flex-row justify-end gap-3 pointer-events-none">
       <a
         href="tel:+38163383393"
-        aria-label="+381 63 383 393"
         className="group relative inline-flex items-stretch flex-shrink-0 pointer-events-auto shadow-[0_6px_20px_rgba(26,25,21,0.28)]"
       >
         <span className="absolute inset-0 m-auto w-8 h-8 bg-accent/50 animate-ping [animation-duration:2.5s] pointer-events-none" />
-        <span className="relative inline-flex items-center justify-center px-4 bg-bg border border-accent text-accent transition-all duration-250 group-hover:bg-accent group-hover:text-white">
+        <span className="relative inline-flex items-center justify-center gap-2 px-4 bg-bg border border-accent text-accent text-[0.72rem] font-medium tracking-[0.12em] uppercase transition-all duration-250 group-hover:bg-accent group-hover:text-white">
           <LuPhone className="w-4 h-4" />
+          {t('offer.drawer.call')}
         </span>
       </a>
       <Link
         href={href('/contact')}
-        aria-label={t('offer.drawer.requestOffer')}
-        className="btn-primary justify-center pointer-events-auto shadow-[0_6px_20px_rgba(26,25,21,0.28)]"
+        className="btn-primary justify-center !px-5 pointer-events-auto shadow-[0_6px_20px_rgba(26,25,21,0.28)]"
         onClick={onClose}
       >
         <LuMail className="w-4 h-4" />
+        {t('offer.drawer.requestOffer')}
       </Link>
     </div>
   );

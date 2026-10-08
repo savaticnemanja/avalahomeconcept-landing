@@ -1,5 +1,5 @@
 'use client';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import emailjs from '@emailjs/browser';
 import { Bounce, toast } from 'react-toastify';
@@ -7,9 +7,15 @@ import { LuPhone, LuMessageSquare, LuMessageCircle, LuMail, LuSend } from 'react
 import { useI18n } from '@/i18n/I18nProvider';
 
 export const Contact = ({ headingTag: Heading = 'h2' } = {}) => {
-  const { t, href } = useI18n();
+  const { t, locale, href } = useI18n();
   const form = useRef();
   const router = useRouter();
+  const startedAt = useRef(0);
+  const [sending, setSending] = useState(false);
+
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
 
   const contactMethods = [
     {
@@ -38,19 +44,73 @@ export const Contact = ({ headingTag: Heading = 'h2' } = {}) => {
     },
   ];
 
-  const sendEmail = (e) => {
+  const toastError = (key) =>
+    toast.error(t(key), {
+      position: 'bottom-center',
+      autoClose: 5000,
+      theme: 'light',
+      transition: Bounce,
+    });
+
+  // 1. Save the inquiry server-side (spam checks + stored in the DB, listed in
+  //    /admin/inquiries), 2. send the EmailJS notification as before. If the
+  //    email fails but the inquiry was saved, it isn't lost, so still thank them.
+  const sendEmail = async (e) => {
     e.preventDefault();
-    emailjs
-      .sendForm('service_479xn4w', 'template_f65leyq', form.current, 'yXqwmaxm-PpofwIqK')
-      .then(
-        () => router.push(href('/thank-you')),
-        () => toast.error(t('contact.errorToast'), {
-          position: 'bottom-center',
-          autoClose: 5000,
-          theme: 'light',
-          transition: Bounce,
-        })
-      );
+    if (sending) return;
+    setSending(true);
+    const fd = new FormData(form.current);
+
+    let saved = null;
+    try {
+      const res = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: fd.get('firstName'),
+          phone: fd.get('contactNumber'),
+          email: fd.get('contactEmail'),
+          message: fd.get('message'),
+          website: fd.get('website'),
+          elapsedMs: Date.now() - startedAt.current,
+          locale,
+          page: window.location.pathname,
+        }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (json.spam) {
+        router.push(href('/thank-you'));
+        return;
+      }
+      if (res.status === 429) {
+        toastError('contact.spamToast');
+        setSending(false);
+        return;
+      }
+      if (res.ok && json.ok) saved = json.id;
+    } catch {
+      // API unreachable — fall through and still try the email.
+    }
+
+    try {
+      await emailjs.sendForm('service_479xn4w', 'template_f65leyq', form.current, 'yXqwmaxm-PpofwIqK');
+      if (saved) {
+        fetch('/api/inquiry', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: saved }),
+          keepalive: true,
+        }).catch(() => {});
+      }
+      router.push(href('/thank-you'));
+    } catch {
+      if (saved) {
+        router.push(href('/thank-you'));
+      } else {
+        toastError('contact.errorToast');
+        setSending(false);
+      }
+    }
   };
 
   return (
@@ -100,6 +160,11 @@ export const Contact = ({ headingTag: Heading = 'h2' } = {}) => {
           </div>
 
           <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-0" data-reveal>
+            {/* Honeypot: hidden from people and screen readers; bots fill it. */}
+            <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+              <label htmlFor="website">Website</label>
+              <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" defaultValue="" />
+            </div>
             <div className="border border-border p-4 md:p-8 flex flex-col gap-5 md:gap-7">
 
               <div className="flex flex-col gap-2">
@@ -157,7 +222,9 @@ export const Contact = ({ headingTag: Heading = 'h2' } = {}) => {
 
               <button
                 type="submit"
-                className="btn-primary group self-start mt-2"
+                disabled={sending}
+                aria-busy={sending}
+                className="btn-primary group self-start mt-2 disabled:opacity-60 disabled:cursor-wait"
               >
                 <LuSend className="w-4 h-4" />
                 {t('contact.form.send')}

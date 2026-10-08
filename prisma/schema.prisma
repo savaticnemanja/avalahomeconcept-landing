@@ -150,3 +150,20 @@ model PageView {
   @@index([createdAt])
   @@index([type])
 }
+
+// Contact-form inquiries, saved server-side before the EmailJS notification is
+// sent — so a message is never lost if the email step fails. Listed in
+// /admin/inquiries.
+model Inquiry {
+  id        Int      @id @default(autoincrement())
+  name      String
+  phone     String   @default("")
+  email     String   @default("")
+  message   String
+  locale    String   @default("")
+  page      String   @default("")
+  emailSent Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
