@@ -7,31 +7,25 @@ import heroVideo from '@/assets/slider/avala16_9.mp4';
 import promoVideo from '@/assets/promo/promo.mp4';
 import promoPoster from '@/assets/promo/promo-poster.webp';
 
+const MOBILE_MQ = '(max-width: 767px)';
+const GESTURES = ['touchstart', 'touchend', 'click', 'scroll'];
+
 const mobileCta =
   'flex items-center justify-start gap-2.5 min-h-[52px] px-4 py-3 bg-bg-dark text-text-light text-[0.68rem] font-medium tracking-[0.1em] uppercase text-left leading-tight';
 
 export const Slider = () => {
   const { t, href } = useI18n();
   const [videoOpen, setVideoOpen] = useState(false);
-  // On mobile the 16:9 hero leaves big letterbox bars, so use the portrait
-  // promo clip (the one behind "Pogledaj video") which fills a 9:16 screen.
-  const [isMobile, setIsMobile] = useState(false);
   const heroRef = useRef(null);
 
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)');
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-
-  // iOS/Android only autoplay when the element is muted *as an attribute*
-  // (React sets just the property), and Low Power Mode / data saver can still
-  // refuse — so retry on the first touch or when the tab becomes visible.
+  // The <video> is server-rendered once (no client-side swap — iOS Safari won't
+  // autoplay a video React recreates after hydration). If autoplay is still
+  // refused (Low Power Mode, data saver), retry on the first user gesture or
+  // when the tab becomes visible.
   useEffect(() => {
     const v = heroRef.current;
     if (!v) return;
+    if (window.matchMedia(MOBILE_MQ).matches) v.poster = promoPoster.src;
     v.muted = true;
     v.defaultMuted = true;
     v.setAttribute('muted', '');
@@ -41,16 +35,16 @@ export const Slider = () => {
     const onVisible = () => { if (document.visibilityState === 'visible') play(); };
     play();
     v.addEventListener('canplay', play);
-    window.addEventListener('touchstart', play, { passive: true });
-    window.addEventListener('scroll', play, { passive: true });
+    v.addEventListener('loadeddata', play);
+    for (const e of GESTURES) window.addEventListener(e, play, { passive: true });
     document.addEventListener('visibilitychange', onVisible);
     return () => {
       v.removeEventListener('canplay', play);
-      window.removeEventListener('touchstart', play);
-      window.removeEventListener('scroll', play);
+      v.removeEventListener('loadeddata', play);
+      for (const e of GESTURES) window.removeEventListener(e, play);
       document.removeEventListener('visibilitychange', onVisible);
     };
-  }, [isMobile]);
+  }, []);
 
   useEffect(() => {
     if (!videoOpen) return;
@@ -68,9 +62,6 @@ export const Slider = () => {
       <div className="relative flex-1 overflow-hidden">
       <video
         ref={heroRef}
-        key={isMobile ? 'mobile' : 'desktop'}
-        src={isMobile ? promoVideo : heroVideo}
-        poster={isMobile ? promoPoster.src : undefined}
         className="hero-video absolute inset-0 w-full h-full object-cover pointer-events-none"
         autoPlay
         muted
@@ -82,7 +73,12 @@ export const Slider = () => {
         preload="auto"
         aria-hidden="true"
         tabIndex={-1}
-      />
+      >
+        {/* On mobile the 16:9 hero leaves big letterbox bars, so use the portrait
+            promo clip (the one behind "Pogledaj video") which fills a 9:16 screen. */}
+        <source src={promoVideo} type="video/mp4" media={MOBILE_MQ} />
+        <source src={heroVideo} type="video/mp4" />
+      </video>
 
       <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/85 via-bg-dark/20 to-transparent" />
       <div className="absolute inset-0 bg-bg-dark/15" />
