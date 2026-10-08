@@ -5,7 +5,8 @@ import { ToastProvider } from '@/components/ToastProvider/ToastProvider';
 import { ScrollToTop } from '@/components/ScrollToTop/ScrollToTop';
 import { RevealObserver } from '@/components/RevealObserver/RevealObserver';
 import { SmoothScroll } from '@/components/SmoothScroll/SmoothScroll';
-import { defaultLocale, SITE_URL } from '@/i18n/config';
+import { headers } from 'next/headers';
+import { defaultLocale, locales, SITE_URL } from '@/i18n/config';
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -46,9 +47,12 @@ export const viewport = {
   initialScale: 1.0,
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const requested = (await headers()).get('x-locale');
+  const lang = locales.includes(requested) ? requested : defaultLocale;
+
   return (
-    <html lang={defaultLocale} className={`${notoSerif.variable} ${manrope.variable}`}>
+    <html lang={lang} className={`${notoSerif.variable} ${manrope.variable}`}>
       <head>
         {/* Meta Pixel Code */}
         <Script

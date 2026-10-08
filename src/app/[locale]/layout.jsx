@@ -18,7 +18,9 @@ export async function generateMetadata({ params }) {
   return {
     ...meta,
     title: {
-      default: dict.meta.home.title,
+      // `absolute`: the home title already contains the brand, so skip the root
+      // layout's "%s | Avala Home Concept" template (it was doubling the brand).
+      absolute: dict.meta.home.title,
       template: `%s | ${dict.meta.siteName}`,
     },
   };
