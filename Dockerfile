@@ -28,7 +28,8 @@ RUN apt-get update -y && apt-get install -y --no-install-recommends openssl && r
 
 # Copy the built app and its dependencies (incl. the Prisma CLI for migrations).
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/.next ./.next
+# .next must be writable by the runtime user (image/ISR cache in .next/cache).
+COPY --from=builder --chown=node:node /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
 # src is needed by the seed script (reads dictionaries); scripts holds the seed
@@ -39,6 +40,10 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/next.config.js ./next.config.js
 COPY docker-entrypoint.sh ./docker-entrypoint.sh
 RUN chmod +x ./docker-entrypoint.sh
+
+# Run as the image's unprivileged `node` user (uid 1000). The /data volume and
+# the uploads bind mount are owned by uid 1000 on the host.
+USER node
 
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
