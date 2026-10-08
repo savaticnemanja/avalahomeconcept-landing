@@ -413,7 +413,9 @@
     "drawer": {
       "plan": "Планировка",
       "close": "Закрыть меню",
-      "requestOffer": "Запросить предложение"
+      "requestOffer": "Запросить предложение",
+      "tabDescription": "Описание",
+      "tabRooms": "Площади"
     },
     "sitePlan": {
       "eyebrow": "Интерактивный план",

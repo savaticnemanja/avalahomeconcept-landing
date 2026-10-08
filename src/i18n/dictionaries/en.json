@@ -413,7 +413,9 @@
     "drawer": {
       "plan": "Floor plan",
       "close": "Close menu",
-      "requestOffer": "Request an offer"
+      "requestOffer": "Request an offer",
+      "tabDescription": "Description",
+      "tabRooms": "Floor areas"
     },
     "sitePlan": {
       "eyebrow": "Interactive plan",
