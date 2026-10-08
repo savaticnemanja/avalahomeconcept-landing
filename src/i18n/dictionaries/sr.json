@@ -420,7 +420,12 @@
       "title": "Plan kompleksa",
       "hint": "Kliknite na oznaku da vidite detalje kuće"
     }
+  },
+  "panorama": {
+    "eyebrow": "Kompleks",
+    "titleA": "U podnožju",
+    "titleEm": "Avale.",
+    "caption": "Zatvoren kompleks kuća sa bazenima, okružen zelenilom, sa pogledom na Avalski toranj.",
+    "alt": "Pogled iz vazduha na kompleks Avala Home Concept u sumrak, sa Avalskim tornjem u pozadini"
   }
 }
-
-

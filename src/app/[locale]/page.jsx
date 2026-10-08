@@ -6,6 +6,7 @@ import {
   Contact,
   GalleryPreview,
   Location,
+  Panorama,
   Partners,
   PaymentDynamic,
   ProjectShowcase,
@@ -51,6 +52,8 @@ export default async function HomePage({ params }) {
       <Slider />
 
       <ProjectShowcase projects={projects} />
+
+      <Panorama />
 
       <GalleryPreview images={galleryPreviewImages} />
 
