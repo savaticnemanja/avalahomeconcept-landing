@@ -7,8 +7,6 @@ import hero1 from '@/assets/slider/hero-1.webp';
 import hero1Mobile from '@/assets/slider/hero-1-mobile.webp';
 import hero2 from '@/assets/slider/hero-2.webp';
 import hero2Mobile from '@/assets/slider/hero-2-mobile.webp';
-import hero3 from '@/assets/slider/hero-3.webp';
-import hero3Mobile from '@/assets/slider/hero-3-mobile.webp';
 import hero4 from '@/assets/slider/hero-4.webp';
 import hero4Mobile from '@/assets/slider/hero-4-mobile.webp';
 import hero5 from '@/assets/slider/hero-5.webp';
@@ -24,9 +22,8 @@ const MOBILE_MQ = '(max-width: 767px)';
 const SLIDES = [
   { desktop: hero1, mobile: hero1Mobile, kb: 'hero-kb-1' },
   { desktop: hero2, mobile: hero2Mobile, kb: 'hero-kb-2' },
-  { desktop: hero3, mobile: hero3Mobile, kb: 'hero-kb-3' },
-  { desktop: hero4, mobile: hero4Mobile, kb: 'hero-kb-4' },
-  { desktop: hero5, mobile: hero5Mobile, kb: 'hero-kb-2' },
+  { desktop: hero4, mobile: hero4Mobile, kb: 'hero-kb-3' },
+  { desktop: hero5, mobile: hero5Mobile, kb: 'hero-kb-4' },
 ];
 const SLIDE_MS = 6500; // keep in sync with --hero-slide-ms in globals.css
 
