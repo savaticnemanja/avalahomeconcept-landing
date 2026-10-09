@@ -9,6 +9,7 @@ import {
   Partners,
   PaymentDynamic,
   ProjectShowcase,
+  PromoVideo,
   Showcase,
   Slider,
   Specifications,
@@ -16,7 +17,7 @@ import {
 import { getDictionary } from '@/i18n/getDictionary';
 import { withLocale } from '@/i18n/config';
 import { prisma } from '@/lib/db';
-import { thumbUrl } from '@/lib/imageUrl';
+import { imageUrl, thumbUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
 
 export const dynamic = 'force-dynamic';
@@ -50,9 +51,24 @@ export default async function HomePage({ params }) {
     }))
     .filter((img) => img.src);
 
+  // First video of the "Napredak radova" album plays in the promo strip under the hero.
+  const promoVideo = await prisma.galleryImage.findFirst({
+    where: { kind: 'video', category: { slug: 'progress' } },
+    orderBy: { order: 'asc' },
+  });
+
   return (
     <>
       <Slider />
+
+      <PromoVideo
+        video={promoVideo && {
+          src: imageUrl(promoVideo.filename),
+          poster: thumbUrl(promoVideo.poster, 960),
+          width: promoVideo.width,
+          height: promoVideo.height,
+        }}
+      />
 
       <ProjectShowcase projects={projects} />
 

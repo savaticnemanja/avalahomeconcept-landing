@@ -355,6 +355,12 @@
     "prev": "Prethodna",
     "next": "Sledeća"
   },
+  "promoVideo": {
+    "eyebrow": "Promo video",
+    "title": "Pogledajte promo video",
+    "text": "Upoznajte Avala Home Concept iz prve ruke — kratak video sa lica mesta.",
+    "cta": "Napredak radova"
+  },
   "galleryPreview": {
     "eyebrow": "Vizuelni prikaz",
     "title": "Pogledajte kako izgleda",
