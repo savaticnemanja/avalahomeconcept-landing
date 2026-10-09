@@ -3,15 +3,32 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { LuChevronRight, LuPhone, LuPlay, LuDownload, LuX, LuHardHat } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
-import heroVideo from '@/assets/slider/avala16_9.mp4';
-import heroMobileVideo from '@/assets/slider/hero-mobile.mp4';
-import heroPoster from '@/assets/slider/hero-poster.webp';
-import heroMobilePoster from '@/assets/slider/hero-mobile-poster.webp';
+import hero1 from '@/assets/slider/hero-1.webp';
+import hero1Mobile from '@/assets/slider/hero-1-mobile.webp';
+import hero2 from '@/assets/slider/hero-2.webp';
+import hero2Mobile from '@/assets/slider/hero-2-mobile.webp';
+import hero3 from '@/assets/slider/hero-3.webp';
+import hero3Mobile from '@/assets/slider/hero-3-mobile.webp';
+import hero4 from '@/assets/slider/hero-4.webp';
+import hero4Mobile from '@/assets/slider/hero-4-mobile.webp';
+import hero5 from '@/assets/slider/hero-5.webp';
+import hero5Mobile from '@/assets/slider/hero-5-mobile.webp';
 import promoVideo from '@/assets/promo/promo.mp4';
 import promoPoster from '@/assets/promo/promo-poster.webp';
 
 const MOBILE_MQ = '(max-width: 767px)';
-const GESTURES = ['touchstart', 'touchend', 'click', 'scroll'];
+
+// Mobile files are portrait crops around each render's focal point, so a phone
+// screen isn't just the middle third of a landscape image. `kb` picks the Ken
+// Burns move (see .hero-kb-* in globals.css), alternating zoom in / zoom out.
+const SLIDES = [
+  { desktop: hero1, mobile: hero1Mobile, kb: 'hero-kb-1' },
+  { desktop: hero2, mobile: hero2Mobile, kb: 'hero-kb-2' },
+  { desktop: hero3, mobile: hero3Mobile, kb: 'hero-kb-3' },
+  { desktop: hero4, mobile: hero4Mobile, kb: 'hero-kb-4' },
+  { desktop: hero5, mobile: hero5Mobile, kb: 'hero-kb-2' },
+];
+const SLIDE_MS = 6500; // keep in sync with --hero-slide-ms in globals.css
 
 const mobileCta =
   'flex items-center justify-start gap-2.5 min-h-[52px] px-4 py-3 bg-bg-dark text-text-light text-[0.68rem] font-medium tracking-[0.1em] uppercase text-left leading-tight';
@@ -19,34 +36,39 @@ const mobileCta =
 export const Slider = () => {
   const { t, href } = useI18n();
   const [videoOpen, setVideoOpen] = useState(false);
-  const heroRef = useRef(null);
+  const [active, setActive] = useState(0);
+  const [leaving, setLeaving] = useState(null);
+  // Only the first slide is in the server HTML (it is the LCP image); the rest
+  // mount after the page's load event so they never compete with it.
+  const [showAll, setShowAll] = useState(false);
+  const loaded = useRef(new Set([0]));
 
-  // The <video> is server-rendered once (no client-side swap — iOS Safari won't
-  // autoplay a video React recreates after hydration). If autoplay is still
-  // refused (Low Power Mode, data saver), retry on the first user gesture or
-  // when the tab becomes visible.
   useEffect(() => {
-    const v = heroRef.current;
-    if (!v) return;
-    v.muted = true;
-    v.defaultMuted = true;
-    v.setAttribute('muted', '');
-    v.setAttribute('playsinline', '');
-    v.setAttribute('webkit-playsinline', '');
-    const play = () => { if (v.paused) v.play().catch(() => {}); };
-    const onVisible = () => { if (document.visibilityState === 'visible') play(); };
-    play();
-    v.addEventListener('canplay', play);
-    v.addEventListener('loadeddata', play);
-    for (const e of GESTURES) window.addEventListener(e, play, { passive: true });
-    document.addEventListener('visibilitychange', onVisible);
-    return () => {
-      v.removeEventListener('canplay', play);
-      v.removeEventListener('loadeddata', play);
-      for (const e of GESTURES) window.removeEventListener(e, play);
-      document.removeEventListener('visibilitychange', onVisible);
-    };
+    const go = () => setShowAll(true);
+    if (document.readyState === 'complete') go();
+    else window.addEventListener('load', go, { once: true });
+    return () => window.removeEventListener('load', go);
   }, []);
+
+  const goTo = (i) => {
+    if (i === active) return;
+    setLeaving(active);
+    setActive(i);
+  };
+
+  useEffect(() => {
+    if (!showAll) return;
+    let timer;
+    const tick = () => {
+      const next = (active + 1) % SLIDES.length;
+      // Hold the current slide while the tab is hidden or the next image is
+      // still downloading, rather than fading to an empty frame.
+      if (document.hidden || !loaded.current.has(next)) timer = setTimeout(tick, 500);
+      else goTo(next);
+    };
+    timer = setTimeout(tick, SLIDE_MS);
+    return () => clearTimeout(timer);
+  }, [active, showAll]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!videoOpen) return;
@@ -62,46 +84,31 @@ export const Slider = () => {
   return (
     <div className="relative h-[100svh] md:h-screen min-h-[640px] flex flex-col bg-bg-dark">
       <div className="relative flex-1 overflow-hidden">
-      {/* First frame of each clip, painted before any JS or video bytes arrive.
-          It is the LCP element; the video covers it once its first frame decodes. */}
-      <picture>
-        <source srcSet={heroMobilePoster.src} media={MOBILE_MQ} />
-        <img
-          src={heroPoster.src}
-          alt=""
-          aria-hidden="true"
-          fetchPriority="high"
-          decoding="async"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      </picture>
-      <video
-        ref={heroRef}
-        className="hero-video absolute inset-0 w-full h-full object-cover pointer-events-none"
-        autoPlay
-        muted
-        loop
-        playsInline
-        disablePictureInPicture
-        disableRemotePlayback
-        controls={false}
-        preload="auto"
-        aria-hidden="true"
-        tabIndex={-1}
-      >
-        {/* On mobile the 16:9 hero leaves big letterbox bars, so use the portrait
-            promo clip (the one behind "Pogledaj video") which fills a 9:16 screen —
-            as a silent, lower-bitrate re-encode (1.7 MB vs 4.3 MB); the modal
-            below keeps the original with sound. */}
-        <source src={heroMobileVideo} type="video/mp4" media={MOBILE_MQ} />
-        <source src={heroVideo} type="video/mp4" />
-      </video>
+      {/* `isolate` keeps the slides' crossfade z-indexes below the overlays. */}
+      <div className="absolute inset-0 isolate">
+      {SLIDES.map((slide, i) => (i === 0 || showAll) && (
+        <picture
+          key={i}
+          className={`hero-slide ${slide.kb}${i === active ? ' is-active' : ''}${i === leaving ? ' is-leaving' : ''}`}
+        >
+          <source srcSet={slide.mobile.src} media={MOBILE_MQ} />
+          <img
+            src={slide.desktop.src}
+            alt=""
+            aria-hidden="true"
+            fetchPriority={i === 0 ? 'high' : 'low'}
+            decoding="async"
+            onLoad={() => loaded.current.add(i)}
+          />
+        </picture>
+      ))}
+      </div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/85 via-bg-dark/20 to-transparent" />
       <div className="absolute inset-0 bg-bg-dark/15" />
 
       <div
-        className="absolute inset-x-0 bottom-0 z-10 safe-zone pb-8 md:pb-32"
+        className="absolute inset-x-0 bottom-0 z-10 safe-zone pb-12 md:pb-32"
         style={{ animation: 'fade-up 0.8s ease both' }}
       >
         <p
@@ -152,9 +159,27 @@ export const Slider = () => {
         </div>
       </div>
 
+      <div className="absolute inset-x-0 bottom-2 md:bottom-12 z-10 safe-zone flex gap-1 md:gap-2">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => showAll && goTo(i)}
+            aria-label={`${t('slider.showSlide')} ${i + 1}`}
+            aria-current={i === active}
+            className="group py-3 px-0.5"
+          >
+            <span className="block relative h-[2px] w-8 md:w-12 overflow-hidden bg-text-light/30 transition-colors group-hover:bg-text-light/50">
+              {i === active && showAll && <span key={active} className="hero-progress absolute inset-0 bg-accent" />}
+              {i < active && <span className="absolute inset-0 bg-text-light/70" />}
+            </span>
+          </button>
+        ))}
       </div>
 
-      {/* Mobile: actions sit in a bar under the video instead of covering it. */}
+      </div>
+
+      {/* Mobile: actions sit in a bar under the slideshow instead of covering it. */}
       <div className="md:hidden grid grid-cols-2 gap-px bg-text-light/10 border-t border-text-light/10">
         <a href="tel:+38163383393" className={mobileCta}>
           <LuPhone className="w-4 h-4 flex-shrink-0 text-accent" />
