@@ -11,6 +11,10 @@ import hero4 from '@/assets/slider/hero-4.webp';
 import hero4Mobile from '@/assets/slider/hero-4-mobile.webp';
 import hero5 from '@/assets/slider/hero-5.webp';
 import hero5Mobile from '@/assets/slider/hero-5-mobile.webp';
+import hero6 from '@/assets/slider/hero-6.webp';
+import hero6Mobile from '@/assets/slider/hero-6-mobile.webp';
+import hero7 from '@/assets/slider/hero-7.webp';
+import hero7Mobile from '@/assets/slider/hero-7-mobile.webp';
 import promoVideo from '@/assets/promo/promo.mp4';
 import promoPoster from '@/assets/promo/promo-poster.webp';
 
@@ -23,7 +27,9 @@ const SLIDES = [
   { desktop: hero1, mobile: hero1Mobile, kb: 'hero-kb-1' },
   { desktop: hero2, mobile: hero2Mobile, kb: 'hero-kb-2' },
   { desktop: hero4, mobile: hero4Mobile, kb: 'hero-kb-3' },
-  { desktop: hero5, mobile: hero5Mobile, kb: 'hero-kb-4' },
+  { desktop: hero6, mobile: hero6Mobile, kb: 'hero-kb-4' },
+  { desktop: hero7, mobile: hero7Mobile, kb: 'hero-kb-1' },
+  { desktop: hero5, mobile: hero5Mobile, kb: 'hero-kb-2' },
 ];
 const SLIDE_MS = 6500; // keep in sync with --hero-slide-ms in globals.css
 
@@ -109,15 +115,22 @@ export const Slider = () => {
         style={{ animation: 'fade-up 0.8s ease both' }}
       >
         <p
-          className="text-accent text-[0.7rem] font-medium tracking-[0.25em] uppercase mb-5"
+          className="text-accent text-[0.7rem] font-medium tracking-[0.25em] uppercase mb-4"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           {t('slider.eyebrow')}
         </p>
-        {/* Not shown in the hero, but kept as the home page's only <h1> for
-            search engines and screen readers. */}
-        <h1 className="sr-only">
-          {t('slider.titleA')} {t('slider.titleEm')}
+        <h1
+          className="text-text-light mb-4 max-w-xl"
+          style={{
+            fontFamily: 'var(--font-heading)',
+            fontSize: 'clamp(1.9rem, 4vw, 3.4rem)',
+            fontWeight: 400,
+            lineHeight: 1.08,
+          }}
+        >
+          {t('slider.titleA')}{' '}
+          <em>{t('slider.titleEm')}</em>
         </h1>
         <p
           className="text-text-light/65 md:mb-10 font-light"
