@@ -1,120 +1,12 @@
 'use client';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { HighlightIcon as Hl } from '@/components/HighlightIcon/HighlightIcon';
 import { LuMail, LuX, LuZoomIn, LuPhone } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 import { imageUrl, thumbUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
-
-const ZoomViewer = ({ images, index, onClose, onSetIndex }) => {
-  const { t } = useI18n();
-  const [dragX, setDragX] = useState(0);
-  const [dragging, setDragging] = useState(false);
-  const draggingRef = useRef(false);
-  const startX = useRef(0);
-  const widthRef = useRef(1);
-  const movedRef = useRef(false);
-  const trackRef = useRef(null);
-
-  const clamp = useCallback((i) => Math.max(0, Math.min(images.length - 1, i)), [images.length]);
-  const prev = useCallback(() => onSetIndex((i) => clamp(i - 1)), [onSetIndex, clamp]);
-  const next = useCallback(() => onSetIndex((i) => clamp(i + 1)), [onSetIndex, clamp]);
-
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose, prev, next]);
-
-  if (index === null) return null;
-
-  const onDown = (e) => {
-    draggingRef.current = true;
-    setDragging(true);
-    movedRef.current = false;
-    startX.current = e.clientX;
-    widthRef.current = trackRef.current?.offsetWidth || window.innerWidth;
-    e.currentTarget.setPointerCapture?.(e.pointerId);
-  };
-  const onMove = (e) => {
-    if (!draggingRef.current) return;
-    const dx = e.clientX - startX.current;
-    if (Math.abs(dx) > 5) movedRef.current = true;
-    setDragX(dx);
-  };
-  const onUp = () => {
-    if (!draggingRef.current) return;
-    draggingRef.current = false;
-    setDragging(false);
-    const dx = dragX;
-    setDragX(0);
-    if (Math.abs(dx) > widthRef.current * 0.15) {
-      if (dx < 0) next(); else prev();
-    }
-  };
-
-  return (
-    <div
-      className="fixed inset-0 z-[80] bg-bg-dark/95 overflow-hidden"
-      onClick={() => { if (movedRef.current) { movedRef.current = false; return; } onClose(); }}
-    >
-      <div
-        ref={trackRef}
-        className="absolute inset-0 flex"
-        style={{
-          transform: `translateX(calc(${-index * 100}% + ${dragX}px))`,
-          transition: dragging ? 'none' : 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
-          touchAction: 'pan-y',
-        }}
-        onPointerDown={onDown}
-        onPointerMove={onMove}
-        onPointerUp={onUp}
-        onPointerCancel={onUp}
-      >
-        {images.map((im, i) => (
-          <div key={i} className="w-full flex-shrink-0 flex items-center justify-center px-4 select-none">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={im.src}
-              alt={im.alt}
-              className="max-h-[90vh] max-w-[90vw] object-contain rounded-[4px] pointer-events-none"
-              draggable={false}
-            />
-          </div>
-        ))}
-      </div>
-
-      <button
-        className="absolute top-4 right-4 z-10 text-text-light text-3xl leading-none hover:text-accent transition-colors"
-        onClick={(e) => { e.stopPropagation(); onClose(); }}
-        aria-label={t('common.close')}
-      >
-        &#x2715;
-      </button>
-      <button
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2 disabled:opacity-30"
-        onClick={(e) => { e.stopPropagation(); prev(); }}
-        disabled={index === 0}
-        aria-label={t('common.prev')}
-      >
-        &#8249;
-      </button>
-      <button
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2 disabled:opacity-30"
-        onClick={(e) => { e.stopPropagation(); next(); }}
-        disabled={index === images.length - 1}
-        aria-label={t('common.next')}
-      >
-        &#8250;
-      </button>
-    </div>
-  );
-};
+import { ZoomViewer } from '@/components/ZoomViewer/ZoomViewer';
 
 // `inline` renders the panel docked into the page layout (always open, no
 // backdrop/slide/close) for the desktop 3-column /offer view. Otherwise it is a
