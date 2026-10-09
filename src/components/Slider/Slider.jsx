@@ -114,17 +114,10 @@ export const Slider = () => {
         >
           {t('slider.eyebrow')}
         </p>
-        <h1
-          className="text-text-light mb-6 max-w-2xl"
-          style={{
-            fontFamily: 'var(--font-heading)',
-            fontSize: 'clamp(2.6rem, 6vw, 5.2rem)',
-            fontWeight: 400,
-            lineHeight: 1.04,
-          }}
-        >
-          {t('slider.titleA')}{' '}
-          <em>{t('slider.titleEm')}</em>
+        {/* Not shown in the hero, but kept as the home page's only <h1> for
+            search engines and screen readers. */}
+        <h1 className="sr-only">
+          {t('slider.titleA')} {t('slider.titleEm')}
         </h1>
         <p
           className="text-text-light/65 md:mb-10 font-light"
