@@ -31,7 +31,7 @@ export default async function ProjectPage({ params }) {
   const project = await getProject(slug);
   if (!project) notFound();
 
-  const url = `${SITE_URL}${withLocale(locale, `/offer/${slug}`)}/`;
+  const url = `${SITE_URL}${withLocale(locale, `/offer/${slug}`)}`;
   const cover =
     project.images.find((i) => i.filename === project.coverFilename) ?? project.images[0];
   const beds = project.highlights.find((h) => h.icon === 'LuBed')?.value;

@@ -54,10 +54,13 @@ export default async function RootLayout({ children }) {
   return (
     <html lang={lang} className={`${notoSerif.variable} ${manrope.variable}`}>
       <head>
+        {/* Meta Pixel + GTM load after the page is idle (lazyOnload) instead of
+            during hydration: together they blocked the main thread ~900 ms on
+            mobile (Lighthouse 2026-10-09). */}
         {/* Meta Pixel Code */}
         <Script
           id="facebook-pixel"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               !function(f,b,e,v,n,t,s)
@@ -76,7 +79,7 @@ export default async function RootLayout({ children }) {
         {/* Google Tag Manager */}
         <Script
           id="google-tag-manager"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

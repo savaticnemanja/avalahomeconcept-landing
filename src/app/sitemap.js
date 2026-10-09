@@ -17,12 +17,12 @@ export default function sitemap() {
   for (const route of indexable) {
     const languages = {};
     for (const l of locales) {
-      languages[hreflang[l]] = `${SITE_URL}${withLocale(l, route)}/`;
+      languages[hreflang[l]] = `${SITE_URL}${withLocale(l, route)}`;
     }
     const image = ROUTE_IMAGE[route];
     for (const locale of locales) {
       entries.push({
-        url: `${SITE_URL}${withLocale(locale, route)}/`,
+        url: `${SITE_URL}${withLocale(locale, route)}`,
         lastModified: new Date(),
         changeFrequency: route === '/' ? 'weekly' : 'monthly',
         priority: route === '/' ? 1 : 0.8,

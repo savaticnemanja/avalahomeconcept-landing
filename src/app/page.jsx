@@ -23,13 +23,13 @@ const pickLocale = () => {
 
 export default function RootRedirect() {
   useEffect(() => {
-    window.location.replace(`/${pickLocale()}/`);
+    window.location.replace(`/${pickLocale()}`);
   }, []);
 
   return (
     <>
       <noscript>
-        <meta httpEquiv="refresh" content={`0; url=/${defaultLocale}/`} />
+        <meta httpEquiv="refresh" content={`0; url=/${defaultLocale}`} />
       </noscript>
     </>
   );

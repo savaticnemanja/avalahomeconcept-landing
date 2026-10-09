@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Layout({ children, params }) {
   const { locale } = await params;
-  const baseUrl = `${SITE_URL}${withLocale(locale, '/offer')}/`;
+  const baseUrl = `${SITE_URL}${withLocale(locale, '/offer')}`;
 
   const projects = await prisma.project.findMany({
     orderBy: { order: 'asc' },
@@ -32,7 +32,7 @@ export default async function Layout({ children, params }) {
           name: pick(p, 'title', locale),
           description: pick(p, 'description', locale),
           ...(beds ? { numberOfRooms: Number(beds) || beds } : {}),
-          url: `${baseUrl}${p.slug}/`,
+          url: `${baseUrl}/${p.slug}`,
           ...(p.totalAreaM2
             ? { floorSize: { '@type': 'QuantitativeValue', value: p.totalAreaM2, unitCode: 'MTK' } }
             : {}),
