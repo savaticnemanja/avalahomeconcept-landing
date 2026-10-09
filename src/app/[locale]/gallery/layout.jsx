@@ -16,7 +16,7 @@ export default async function Layout({ children, params }) {
     '@type': 'ImageGallery',
     name: dict.meta.gallery.title,
     description: dict.meta.gallery.description,
-    url: `${SITE_URL}${withLocale(locale, '/gallery')}/`,
+    url: `${SITE_URL}${withLocale(locale, '/gallery')}`,
     image: `${SITE_URL}/og/gallery.jpg`,
   };
 

@@ -25,7 +25,7 @@ function clamp(str, max) {
 export async function buildPageMetadata({ locale, path, metaKey, robots }) {
   const dict = await getDictionary(locale);
   const m = dict.meta[metaKey];
-  const url = `${SITE_URL}${withLocale(locale, path)}/`;
+  const url = `${SITE_URL}${withLocale(locale, path)}`;
   const image = `${SITE_URL}${OG_IMAGE[path] ?? OG_IMAGE['/']}`;
   const fullTitle = path === '/' ? m.title : `${m.title} | ${dict.meta.siteName}`;
   const ogTitle = clamp(fullTitle, OG_TITLE_MAX);
@@ -61,7 +61,7 @@ export async function buildPageMetadata({ locale, path, metaKey, robots }) {
 export async function buildProjectMetadata({ locale, project }) {
   const dict = await getDictionary(locale);
   const path = `/offer/${project.slug}`;
-  const url = `${SITE_URL}${withLocale(locale, path)}/`;
+  const url = `${SITE_URL}${withLocale(locale, path)}`;
 
   const title = pick(project, 'title', locale);
   const subtitle = pick(project, 'subtitle', locale);

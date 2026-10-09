@@ -5,6 +5,8 @@ import { LuChevronRight, LuPhone, LuPlay, LuDownload, LuX, LuHardHat } from 'rea
 import { useI18n } from '@/i18n/I18nProvider';
 import heroVideo from '@/assets/slider/avala16_9.mp4';
 import heroMobileVideo from '@/assets/slider/hero-mobile.mp4';
+import heroPoster from '@/assets/slider/hero-poster.webp';
+import heroMobilePoster from '@/assets/slider/hero-mobile-poster.webp';
 import promoVideo from '@/assets/promo/promo.mp4';
 import promoPoster from '@/assets/promo/promo-poster.webp';
 
@@ -26,7 +28,6 @@ export const Slider = () => {
   useEffect(() => {
     const v = heroRef.current;
     if (!v) return;
-    if (window.matchMedia(MOBILE_MQ).matches) v.poster = promoPoster.src;
     v.muted = true;
     v.defaultMuted = true;
     v.setAttribute('muted', '');
@@ -61,6 +62,19 @@ export const Slider = () => {
   return (
     <div className="relative h-[100svh] md:h-screen min-h-[640px] flex flex-col bg-bg-dark">
       <div className="relative flex-1 overflow-hidden">
+      {/* First frame of each clip, painted before any JS or video bytes arrive.
+          It is the LCP element; the video covers it once its first frame decodes. */}
+      <picture>
+        <source srcSet={heroMobilePoster.src} media={MOBILE_MQ} />
+        <img
+          src={heroPoster.src}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </picture>
       <video
         ref={heroRef}
         className="hero-video absolute inset-0 w-full h-full object-cover pointer-events-none"

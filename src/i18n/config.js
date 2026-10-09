@@ -35,11 +35,11 @@ export const routes = [
 export const buildAlternates = (locale, path = '/') => {
   const languages = {};
   for (const l of locales) {
-    languages[hreflang[l]] = `${SITE_URL}${withLocale(l, path)}/`;
+    languages[hreflang[l]] = `${SITE_URL}${withLocale(l, path)}`;
   }
-  languages['x-default'] = `${SITE_URL}${withLocale(defaultLocale, path)}/`;
+  languages['x-default'] = `${SITE_URL}${withLocale(defaultLocale, path)}`;
   return {
-    canonical: `${SITE_URL}${withLocale(locale, path)}/`,
+    canonical: `${SITE_URL}${withLocale(locale, path)}`,
     languages,
   };
 };

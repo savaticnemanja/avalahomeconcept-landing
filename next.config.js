@@ -3,6 +3,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Next streams generateMetadata output after </head> for clients it doesn't
+  // treat as "HTML-limited bots" — and Googlebot isn't one, so About/Contact
+  // shipped title/description/canonical/hreflang in <body>, where Google
+  // ignores the canonical. Matching every UA keeps metadata in <head>.
+  htmlLimitedBots: /.*/,
   // ffmpeg-static resolves its binary path relative to its own files; bundling it
   // breaks that path, so keep it external to the server build.
   serverExternalPackages: ['ffmpeg-static'],
