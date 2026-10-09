@@ -376,6 +376,8 @@
     "close": "Close",
     "prev": "Previous",
     "next": "Next",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
     "partners": "Our partners"
   },
   "offer": {

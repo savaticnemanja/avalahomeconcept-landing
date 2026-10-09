@@ -1,52 +1,12 @@
 'use client';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { HighlightIcon as Hl } from '@/components/HighlightIcon/HighlightIcon';
 import { LuMail, LuArrowLeft, LuArrowRight, LuZoomIn, LuPhone } from 'react-icons/lu';
 import { useI18n } from '@/i18n/I18nProvider';
 import { imageUrl } from '@/lib/imageUrl';
 import { pick } from '@/lib/localize';
-
-const ZoomViewer = ({ images, index, onClose, onSetIndex }) => {
-  const { t } = useI18n();
-  const prev = useCallback(
-    () => onSetIndex((i) => (i - 1 + images.length) % images.length),
-    [images.length, onSetIndex]
-  );
-  const next = useCallback(
-    () => onSetIndex((i) => (i + 1) % images.length),
-    [images.length, onSetIndex]
-  );
-
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose, prev, next]);
-
-  if (index === null) return null;
-  const { src, alt } = images[index];
-
-  return (
-    <div className="fixed inset-0 z-[80] bg-bg-dark/95 flex items-center justify-center" onClick={onClose}>
-      <button className="absolute top-4 right-4 text-text-light text-3xl leading-none hover:text-accent transition-colors" onClick={onClose} aria-label={t('common.close')}>
-        &#x2715;
-      </button>
-      <button className="absolute left-4 top-1/2 -translate-y-1/2 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2" onClick={(e) => { e.stopPropagation(); prev(); }} aria-label={t('common.prev')}>
-        &#8249;
-      </button>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt} className="max-h-[90vh] max-w-[90vw] object-contain rounded-[4px]" onClick={(e) => e.stopPropagation()} />
-      <button className="absolute right-4 top-1/2 -translate-y-1/2 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2" onClick={(e) => { e.stopPropagation(); next(); }} aria-label={t('common.next')}>
-        &#8250;
-      </button>
-    </div>
-  );
-};
+import { ZoomViewer } from '@/components/ZoomViewer/ZoomViewer';
 
 export default function ProjectDetail({ project }) {
   const { t, locale, href } = useI18n();
