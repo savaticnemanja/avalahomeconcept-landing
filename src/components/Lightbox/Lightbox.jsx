@@ -19,12 +19,13 @@ export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === 'Escape') onClose();
+      if (images.length < 2) return;
       if (e.key === 'ArrowLeft') prev();
       if (e.key === 'ArrowRight') next();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [onClose, prev, next]);
+  }, [onClose, prev, next, images.length]);
 
   useEffect(() => {
     if (activeIndex === null) return;
@@ -40,6 +41,7 @@ export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
   const { src, alt, kind, poster } = images[activeIndex];
   const imgSrc = typeof src === 'string' ? src : src.src;
   const isVideo = kind === 'video';
+  const multiple = images.length > 1;
 
   return (
     <div
@@ -57,13 +59,15 @@ export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
       >
         &#x2715;
       </button>
-      <button
-        className="absolute left-4 top-1/2 -translate-y-1/2 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2"
-        onClick={(e) => { e.stopPropagation(); prev(); }}
-        aria-label={t('gallery.prev', 'Previous')}
-      >
-        &#8249;
-      </button>
+      {multiple && (
+        <button
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2"
+          onClick={(e) => { e.stopPropagation(); prev(); }}
+          aria-label={t('gallery.prev', 'Previous')}
+        >
+          &#8249;
+        </button>
+      )}
       {kind === 'youtube' ? (
         <div
           className="relative w-[90vw] max-w-5xl aspect-video"
@@ -98,13 +102,15 @@ export const Lightbox = ({ images, activeIndex, onClose, onSetIndex }) => {
           onClick={(e) => e.stopPropagation()}
         />
       )}
-      <button
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2"
-        onClick={(e) => { e.stopPropagation(); next(); }}
-        aria-label={t('gallery.next', 'Next')}
-      >
-        &#8250;
-      </button>
+      {multiple && (
+        <button
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-text-light text-5xl leading-none hover:text-accent transition-colors p-2"
+          onClick={(e) => { e.stopPropagation(); next(); }}
+          aria-label={t('gallery.next', 'Next')}
+        >
+          &#8250;
+        </button>
+      )}
     </div>
   );
 };
