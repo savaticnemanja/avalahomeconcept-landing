@@ -355,6 +355,12 @@
     "prev": "Zurück",
     "next": "Weiter"
   },
+  "promoVideo": {
+    "eyebrow": "Promo-Video",
+    "title": "Promo-Video ansehen",
+    "text": "Lernen Sie Avala Home Concept aus erster Hand kennen — ein kurzes Video direkt vor Ort.",
+    "cta": "Baufortschritt"
+  },
   "galleryPreview": {
     "eyebrow": "Visuelle Vorschau",
     "title": "Sehen Sie, wie es aussieht",

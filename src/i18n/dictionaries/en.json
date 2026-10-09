@@ -355,6 +355,12 @@
     "prev": "Previous",
     "next": "Next"
   },
+  "promoVideo": {
+    "eyebrow": "Promo video",
+    "title": "Watch the promo video",
+    "text": "Get to know Avala Home Concept first-hand — a short video from the site.",
+    "cta": "Work progress"
+  },
   "galleryPreview": {
     "eyebrow": "Visual preview",
     "title": "See how it looks",
