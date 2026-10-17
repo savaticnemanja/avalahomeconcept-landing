@@ -67,7 +67,10 @@
     "showSlide": "Bild anzeigen",
     "slideLabel": "Folie",
     "pause": "Diashow pausieren",
-    "play": "Diashow abspielen"
+    "play": "Diashow abspielen",
+    "priceLabel": "Sonderpreis",
+    "price": "2.300",
+    "priceUnit": "€/m²"
   },
   "homeCta": {
     "title": "Interesse am Komplex?",
@@ -447,5 +450,19 @@
     "text": "Beim Laden der Seite ist ein Problem aufgetreten. Bitte versuchen Sie es erneut oder kehren Sie zur Startseite zurück.",
     "retry": "Erneut versuchen",
     "home": "Startseite"
+  },
+  "tour": {
+    "button": "Besichtigung buchen",
+    "eyebrow": "Besichtigung",
+    "title": "Besichtigung buchen",
+    "subtitle": "Wählen Sie Tag und Uhrzeit Ihres Besuchs. Wir bestätigen telefonisch.",
+    "date": "Tag",
+    "time": "Uhrzeit",
+    "name": "Ihr Name",
+    "phone": "Telefonnummer",
+    "note": "Anmerkung (optional)",
+    "submit": "Termin buchen",
+    "close": "Schließen",
+    "pickSlot": "Bitte wählen Sie Tag und Uhrzeit."
   }
 }

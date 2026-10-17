@@ -67,7 +67,10 @@
     "showSlide": "Prikaži sliku",
     "slideLabel": "Slajd",
     "pause": "Pauziraj slajdšou",
-    "play": "Pokreni slajdšou"
+    "play": "Pokreni slajdšou",
+    "priceLabel": "Specijalna cena",
+    "price": "2.300",
+    "priceUnit": "€/m²"
   },
   "homeCta": {
     "title": "Zainteresovani za kompleks?",
@@ -447,5 +450,19 @@
     "text": "Nešto nije u redu sa učitavanjem stranice. Pokušajte ponovo ili se vratite na početnu.",
     "retry": "Pokušaj ponovo",
     "home": "Početna"
+  },
+  "tour": {
+    "button": "Zakažite obilazak",
+    "eyebrow": "Obilazak kompleksa",
+    "title": "Zakažite obilazak",
+    "subtitle": "Izaberite dan i vreme dolaska. Potvrdićemo termin telefonom.",
+    "date": "Dan",
+    "time": "Vreme",
+    "name": "Vaše ime",
+    "phone": "Broj telefona",
+    "note": "Napomena (opciono)",
+    "submit": "Zakažite termin",
+    "close": "Zatvori",
+    "pickSlot": "Izaberite dan i vreme."
   }
 }

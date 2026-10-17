@@ -17,6 +17,7 @@ import hero7 from '@/assets/slider/hero-7.webp';
 import hero7Mobile from '@/assets/slider/hero-7-mobile.webp';
 import promoVideo from '@/assets/promo/promo.mp4';
 import promoPoster from '@/assets/promo/promo-poster.webp';
+import { PriceBadge } from '@/components/PriceBadge/PriceBadge';
 
 const MOBILE_MQ = '(max-width: 767px)';
 
@@ -110,10 +111,8 @@ export const Slider = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-bg-dark/85 via-bg-dark/20 to-transparent" />
       <div className="absolute inset-0 bg-bg-dark/15" />
 
-      <div
-        className="absolute inset-x-0 bottom-0 z-10 safe-zone pb-12 md:pb-32"
-        style={{ animation: 'fade-up 0.8s ease both' }}
-      >
+      <div className="absolute inset-x-0 bottom-0 z-10 safe-zone pb-12 md:pb-32 md:flex md:items-end md:justify-between md:gap-10">
+      <div className="min-w-0" style={{ animation: 'fade-up 0.8s ease both' }}>
         <p
           className="text-accent text-[0.7rem] font-medium tracking-[0.25em] uppercase mb-4"
           style={{ fontFamily: 'var(--font-body)' }}
@@ -133,10 +132,16 @@ export const Slider = () => {
           <em>{t('slider.titleEm')}</em>
         </h1>
         <p
-          className="text-text-light/65 md:mb-10 font-light"
+          className="text-text-light/65 md:mb-10 font-light pr-[140px] md:pr-0"
           style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(1rem, 1.8vw, 1.15rem)' }}
         >
-          {t('slider.subtitle')}
+          {/* Mobile: one fact per line, so it wraps cleanly beside the price badge. */}
+          {t('slider.subtitle').split(' · ').map((part, i) => (
+            <span key={i}>
+              {i > 0 && <><br className="md:hidden" /><span className="hidden md:inline"> · </span></>}
+              {part}
+            </span>
+          ))}
         </p>
         <div className="hidden md:flex flex-wrap gap-4">
           <a href="tel:+38163383393" className="btn-primary group">
@@ -160,6 +165,9 @@ export const Slider = () => {
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
           </Link>
         </div>
+      </div>
+      {/* Mobile: pinned bottom-right beside the subtitle (which is padded to clear it). */}
+      <PriceBadge className="absolute right-3 bottom-3 md:relative md:right-auto md:bottom-auto md:flex-shrink-0 md:mb-1" />
       </div>
 
       <div className="absolute inset-x-0 bottom-2 md:bottom-12 z-10 safe-zone flex gap-1 md:gap-2">

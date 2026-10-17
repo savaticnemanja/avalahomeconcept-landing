@@ -14,6 +14,7 @@ import {
   Slider,
   Specifications,
 } from '@/components';
+import { TourBookingButton } from '@/components/TourBooking/TourBooking';
 import { getDictionary } from '@/i18n/getDictionary';
 import { withLocale } from '@/i18n/config';
 import { prisma } from '@/lib/db';
@@ -108,6 +109,7 @@ export default async function HomePage({ params }) {
               {dict.homeCta.requestOffer}
               <ArrowIcon />
             </Link>
+            <TourBookingButton className="btn-outline-light group" />
             <a href="tel:+38163383393" className="btn-outline-light group">
               {dict.homeCta.callNow}
             </a>

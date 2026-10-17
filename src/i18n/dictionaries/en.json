@@ -67,7 +67,10 @@
     "showSlide": "Show image",
     "slideLabel": "Slide",
     "pause": "Pause slideshow",
-    "play": "Play slideshow"
+    "play": "Play slideshow",
+    "priceLabel": "Special price",
+    "price": "2,300",
+    "priceUnit": "€/m²"
   },
   "homeCta": {
     "title": "Interested in the complex?",
@@ -447,5 +450,19 @@
     "text": "There was a problem loading this page. Please try again or go back to the home page.",
     "retry": "Try again",
     "home": "Home"
+  },
+  "tour": {
+    "button": "Book a tour",
+    "eyebrow": "Site visit",
+    "title": "Book a tour",
+    "subtitle": "Pick a day and time for your visit. We will confirm by phone.",
+    "date": "Day",
+    "time": "Time",
+    "name": "Your name",
+    "phone": "Phone number",
+    "note": "Note (optional)",
+    "submit": "Book the visit",
+    "close": "Close",
+    "pickSlot": "Please pick a day and time."
   }
 }
