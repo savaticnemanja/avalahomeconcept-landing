@@ -154,7 +154,7 @@ export const Slider = () => {
             {t('slider.watchVideo')}
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
           </button>
-          <a href="/brosura.pdf" download className="btn-outline-light group">
+          <a href="/brosura.pdf?v=2026-10" download className="btn-outline-light group">
             <LuDownload className="w-4 h-4" />
             {t('slider.brochure')}
             <span className="btn-arrow"><LuChevronRight className="w-4 h-4" /></span>
@@ -200,7 +200,7 @@ export const Slider = () => {
           <LuPlay className="w-4 h-4 flex-shrink-0 text-accent" />
           {t('slider.watchVideo')}
         </button>
-        <a href="/brosura.pdf" download className={mobileCta}>
+        <a href="/brosura.pdf?v=2026-10" download className={mobileCta}>
           <LuDownload className="w-4 h-4 flex-shrink-0 text-accent" />
           {t('slider.brochure')}
         </a>
