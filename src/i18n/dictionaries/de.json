@@ -69,6 +69,7 @@
     "pause": "Diashow pausieren",
     "play": "Diashow abspielen",
     "priceLabel": "Sonderpreis",
+    "priceFrom": "ab",
     "price": "2.300",
     "priceUnit": "€/m²"
   },

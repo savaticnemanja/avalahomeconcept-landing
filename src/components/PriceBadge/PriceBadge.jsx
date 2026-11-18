@@ -53,18 +53,22 @@ export const PriceBadge = ({ className = '' }) => {
           {t('slider.priceLabel')}
         </p>
         <span className="block w-[78%] h-px my-1.5 md:my-2.5" style={{ background: GOLD }} />
-        <p
-          className="text-[2rem] md:text-[3.5rem] font-bold leading-[0.95] tracking-tight"
-          style={{
-            fontFamily: 'var(--font-body)',
-            background: GOLD,
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            color: 'transparent',
-            filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.35))',
-          }}
-        >
-          {t('slider.price')}
+        <p className="flex items-baseline gap-1 md:gap-1.5 leading-[0.95]" style={{ fontFamily: 'var(--font-body)' }}>
+          <span className="text-[0.8rem] md:text-[1.25rem] font-semibold text-[#F4EBD6]">
+            {t('slider.priceFrom')}
+          </span>
+          <span
+            className="text-[1.75rem] md:text-[3rem] font-bold tracking-tight"
+            style={{
+              background: GOLD,
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+              filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.35))',
+            }}
+          >
+            {t('slider.price')}
+          </span>
         </p>
         <p
           className="text-[0.8rem] md:text-[1.25rem] font-semibold text-[#F4EBD6] leading-tight mt-0.5"
